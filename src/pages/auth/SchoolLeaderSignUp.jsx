@@ -6,6 +6,7 @@ import CustomInput from "@/components/common/CustomInput"
 import SchoolSelectDropdown from "@/components/auth/leader/SchoolSelectDropdown"
 import FileUploadBox from "@/components/auth/leader/FileUploadBox"
 import AddSchoolModal from "@/components/auth/leader/AddSchoolModal"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const SchoolLeaderSignUp = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -63,13 +64,13 @@ const SchoolLeaderSignUp = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
       <Title32 className="text-foreground">
         Create your school account
       </Title32>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
         {/* School Dropdown Selector */}
         <div className="space-y-1">
           <Controller
@@ -177,7 +178,7 @@ const SchoolLeaderSignUp = () => {
                 required: "You must confirm you are authorised to represent this school",
               })}
             />
-            <span className="text-xs text-foreground/80">
+            <span className="text-base text-[#1F1F21">
               I confirm that I am authorised to represent this school.
             </span>
           </label>
@@ -193,7 +194,7 @@ const SchoolLeaderSignUp = () => {
                 required: "You must agree to the Terms of Service & Privacy Policy",
               })}
             />
-            <span className="text-xs text-foreground/80">
+            <span className="text-base text-[#1F1F21">
               I agree to the{" "}
               <Link to="#" className="text-primary hover:underline font-medium">
                 Terms of Service
@@ -212,12 +213,9 @@ const SchoolLeaderSignUp = () => {
 
         {/* Submit Button */}
         <div className="pt-2">
-          <button
-            type="submit"
-            className="w-full h-12 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-          >
+          <AuthBtn type="submit">
             Create Account
-          </button>
+          </AuthBtn>
         </div>
 
         {/* Footer Link */}

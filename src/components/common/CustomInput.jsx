@@ -18,7 +18,7 @@ const CustomInput = ({
   const inputType = isPassword ? (showPassword ? "text" : "password") : type
 
   return (
-    <div className={`space-y-2 ${wrapperClassName}`}>
+    <div className={`space-y-[14px] ${wrapperClassName}`}>
       {label && (
         <label htmlFor={id} className="block">
           <Title18 className="text-foreground font-medium">{label}</Title18>

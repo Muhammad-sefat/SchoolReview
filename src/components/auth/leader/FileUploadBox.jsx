@@ -29,11 +29,11 @@ const FileUploadBox = ({ onFileSelect }) => {
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
         <div className="flex flex-col items-center justify-center space-y-1">
-          <UploadCloud className="h-7 w-7 text-primary/80 group-hover:scale-110 transition-transform" />
-          <p className="text-xs text-primary font-medium">
+          <UploadCloud className="h-7 w-7 text-[#5A5A5A]  group-hover:scale-110 transition-transform" />
+          <p className="text-[14px] text-primary font-medium">
             Optional: Upload a document to help verify your role.
           </p>
-          <span className="text-[11px] text-muted-foreground underline cursor-pointer">
+          <span className="text-[14px] text-[#5A5A5A] font-medium underline cursor-pointer">
             Choose files
           </span>
         </div>

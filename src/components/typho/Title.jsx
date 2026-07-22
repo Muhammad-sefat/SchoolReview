@@ -17,3 +17,7 @@ export const Title18 = ({ children, className }) => {
 export const Title16 = ({ children, className }) => {
     return <p className={`${className} text-[16px]  font-normal leading-6 `}> {children} </p>
 }
+
+export const Title20 = ({ children, className }) => {
+    return <p className={`${className} text-[20px]  font-normal leading-6 `}> {children} </p>
+}

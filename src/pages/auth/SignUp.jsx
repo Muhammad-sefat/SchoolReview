@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link, useNavigate, useOutletContext } from "react-router-dom"
 import { Title32, Title18 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const SignUp = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -41,13 +42,13 @@ const SignUp = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
       <Title32 className="text-foreground">
         Create your account
       </Title32>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
         {/* Email Field */}
         <CustomInput
           id="email"
@@ -104,7 +105,7 @@ const SignUp = () => {
                 required: "You must agree to the Terms of Service & Privacy Policy",
               })}
             />
-            <span className="text-xs text-foreground/80">
+            <span className="text-base text-[#1F1F21]">
               I agree to the{" "}
               <Link to="#" className="text-primary hover:underline font-medium">
                 Terms of Service
@@ -122,12 +123,11 @@ const SignUp = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full h-12 mt-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
-          Create Account
-        </button>
+        <div className="pt-2">
+          <AuthBtn type="submit">
+            Create Account
+          </AuthBtn>
+        </div>
 
         {/* Footer Link */}
         <div className="flex items-center justify-center gap-1.5 pt-4">

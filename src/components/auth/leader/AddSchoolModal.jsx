@@ -9,6 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import CustomInput from "@/components/common/CustomInput"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
   const [emailSent, setEmailSent] = useState(false)
@@ -71,7 +72,7 @@ const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[540px] p-6 sm:p-8 rounded-2xl bg-white shadow-2xl transition-all duration-200">
-        <DialogHeader className="space-y-1.5 text-left mb-4">
+        <DialogHeader className="space-y-1.5 text-left mb-2">
           <DialogTitle className="text-2xl font-bold text-foreground">
             Add a school
           </DialogTitle>
@@ -80,7 +81,7 @@ const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
           {/* School Name */}
           <CustomInput
             id="schoolName"
@@ -119,7 +120,7 @@ const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
               id="contactEmail"
               type="email"
               placeholder="Your email address"
-              className="w-full h-12 pl-4 pr-32 rounded-xl border border-border/80 bg-background text-[16px] text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+              className="w-full h-12 pl-4 pr-32 rounded-xl border border-border/80 bg-background text-[16px] text-foreground placeholder:text-[#5A5A5A] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
               {...register("contactEmail", {
                 required: "Email is required",
                 pattern: {
@@ -141,7 +142,7 @@ const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
           )}
 
           {/* Verification Code OTP section */}
-          <div className="space-y-2 pt-2">
+          <div className="space-y-2 pt-1">
             <div className="flex items-center justify-between">
               <label className="text-xs font-medium text-foreground">
                 Enter the verification code
@@ -172,13 +173,10 @@ const AddSchoolModal = ({ isOpen, onClose, onSchoolAdded }) => {
           </div>
 
           {/* Submit Button */}
-          <div className="pt-3">
-            <button
-              type="submit"
-              className="w-full h-12 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-            >
+          <div className="pt-2">
+            <AuthBtn type="submit">
               Submit School Request
-            </button>
+            </AuthBtn>
           </div>
         </form>
       </DialogContent>

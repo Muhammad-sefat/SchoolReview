@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link, useNavigate, useOutletContext } from "react-router-dom"
 import { Title32, Title18 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const Login = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -14,6 +15,7 @@ const Login = () => {
         title: "Welcome back",
         subtitle: "Enter your details to access your account.",
         extra: null,
+        backTo: null,
       })
     }
   }, [setAuthHeader])
@@ -41,7 +43,7 @@ const Login = () => {
         Log in
       </Title32>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
         {/* Email Field */}
         <CustomInput
           id="email"
@@ -87,12 +89,11 @@ const Login = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full h-12 mt-2 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
-          Sign in
-        </button>
+        <div className="pt-2">
+          <AuthBtn type="submit">
+            Sign in
+          </AuthBtn>
+        </div>
 
         {/* Footer Link */}
         <div className="flex items-center justify-center gap-1.5 pt-4">
