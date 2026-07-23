@@ -7,7 +7,7 @@
 @theme {
   /* font */
   --font-urbanist: "Urbanist", sans-serif;
-  --font-mono: "Geist Mono", monospace;
+
 
   /* color */
   --color-primary: var(--primary);
