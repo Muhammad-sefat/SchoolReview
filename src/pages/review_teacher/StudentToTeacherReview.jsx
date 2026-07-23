@@ -20,7 +20,7 @@ const StudentToTeacherReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const [formData, setFormData] = useState({
-    school: "Pioneer Swiss School",
+    school: "",
     email: "",
     verificationCode: "",
     teacherId: "t1",
