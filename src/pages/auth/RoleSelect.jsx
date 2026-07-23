@@ -127,7 +127,7 @@ const RoleSelect = () => {
               {/* Role Card Box */}
               <div
                 onClick={() => setSelectedRole(role.id)}
-                className={`relative p-6 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isSelected
+                className={`relative lg:p-5 p-4 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isSelected
                   ? "border-primary ring-1 ring-primary shadow-sm"
                   : "border-border/80 hover:border-border"
                   }`}
