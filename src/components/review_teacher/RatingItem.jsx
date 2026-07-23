@@ -56,7 +56,14 @@ const getRatingLabel = (stars) => {
   return "Select a Rating"
 }
 
-const RatingItem = ({ item, ratingData = {}, onUpdateRating, role = "student" }) => {
+const RatingItem = ({
+  item,
+  ratingData = {},
+  onUpdateRating,
+  role = "student",
+  isFirst = false,
+  showInstruction = isFirst,
+}) => {
   const IconComponent = getIconForMeaning(item.short_measure, item.meaning)
   const currentRating = ratingData.rating || 0
   const selectedTags = ratingData.selectedTags || []
@@ -160,9 +167,11 @@ const RatingItem = ({ item, ratingData = {}, onUpdateRating, role = "student" })
         {/* Tags selector when rated */}
         {currentRating > 0 && (
           <div className="md:w-[280px] shrink-0 bg-white p-0 space-y-2">
-            <p className="text-[12px] text-muted-foreground font-normal">
-              Choose one or more of these to continue:
-            </p>
+            {showInstruction && (
+              <p className="text-[12px] text-muted-foreground font-normal">
+                Choose one or more of these to continue:
+              </p>
+            )}
             <div className="flex flex-wrap gap-2">
               {availableTags.map((tagObj) => {
                 const isSelected = selectedTags.includes(tagObj.value)

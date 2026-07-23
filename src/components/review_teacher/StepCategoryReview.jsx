@@ -30,10 +30,11 @@ const StepCategoryReview = ({ categoryTitle, ratings, updateRating, role = "stud
 
       {/* Items List */}
       <div className="divide-y divide-border/40">
-        {categoryItems.map((item) => (
+        {categoryItems.map((item, index) => (
           <RatingItem
             key={item.id}
             item={item}
+            isFirst={index === 0}
             ratingData={ratings[item.id] || { rating: 0, selectedTags: [], details: "" }}
             onUpdateRating={updateRating}
             role={role}
