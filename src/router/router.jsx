@@ -16,8 +16,31 @@ import SchoolEvaluatorSignUp from "../pages/auth/SchoolEvaluatorSignUp"
 import VerifyEmail from "../pages/auth/VerifyEmail"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import ResetPassword from "../pages/auth/ResetPassword"
+import ReviewLayout from "../layout/ReviewLayout"
+import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview"
+import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
+import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
 
 const router = createBrowserRouter([
+  {
+    path: "/review-teacher",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "self", element: <TeacherSelfReview /> },
+      { path: "observer", element: <ObserverToTeacherReview /> },
+    ]
+  },
+  {
+    path: "/review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "teacher-self", element: <TeacherSelfReview /> },
+      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
+    ]
+  },
+
   {
     path: "/auth",
     element: <AuthLayout />,
