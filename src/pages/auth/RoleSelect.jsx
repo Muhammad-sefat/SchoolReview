@@ -86,7 +86,7 @@ const RoleSelect = () => {
       {/* Section 1: School Reviewer Box */}
       <div className="pt-2">
         <div className="mb-5">
-          <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-3.5 py-1 rounded-full inline-block">
+          <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-2 py-1.5 rounded-full inline-block">
             {FIRST_ROLE.badge}
           </span>
         </div>
@@ -118,7 +118,7 @@ const RoleSelect = () => {
               {/* Badge outside box if present */}
               {role.badge && (
                 <div className="mb-5">
-                  <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-3.5 py-1 rounded-full inline-block">
+                  <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-2 py-1.5 rounded-full inline-block">
                     {role.badge}
                   </span>
                 </div>
