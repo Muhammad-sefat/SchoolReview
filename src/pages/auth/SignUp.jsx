@@ -105,7 +105,7 @@ const SignUp = () => {
                 required: "You must agree to the Terms of Service & Privacy Policy",
               })}
             />
-            <span className="text-base text-[#1F1F21]">
+            <span className="lg:text-base text-sm text-[#1F1F21]">
               I agree to the{" "}
               <Link to="#" className="text-primary hover:underline font-medium">
                 Terms of Service

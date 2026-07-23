@@ -92,7 +92,7 @@ const RoleSelect = () => {
         </div>
         <div
           onClick={() => setSelectedRole(FIRST_ROLE.id)}
-          className={`relative p-6 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isFirstSelected
+          className={`relative lg:p-5 p-4 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isFirstSelected
             ? "border-primary ring-1 ring-primary shadow-sm"
             : "border-border/80 hover:border-border"
             }`}
