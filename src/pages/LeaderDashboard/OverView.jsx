@@ -4,6 +4,7 @@ import SchoolPerformPriorityPerform from "../../components/leaderDashboard/overv
 import KeyArea from "../../components/leaderDashboard/overview/KeyArea"
 import TeacherOverview from "../../components/leaderDashboard/overview/teacherOverview/TeacherOverview"
 import SafetyOverview from "../../components/leaderDashboard/overview/safety/SafetyOverview"
+import CommunityOverview from "../../components/leaderDashboard/overview/community/CommunityOverview"
 
 const OverView = () => {
   const [activeCategory, setActiveCategory] = useState("school")
@@ -21,6 +22,8 @@ const OverView = () => {
         <TeacherOverview />
       ) : activeCategory === "safety" ? (
         <SafetyOverview />
+      ) : activeCategory === "community" ? (
+        <CommunityOverview />
       ) : (
         <>
           {/* Middle Grid: School Performance Metrics Scatter Plot + Priority Areas */}

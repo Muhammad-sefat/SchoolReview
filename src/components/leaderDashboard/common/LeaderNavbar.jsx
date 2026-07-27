@@ -1,7 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
 import { Search, Bell, ChevronDown, Menu } from "lucide-react"
+import NotificationsPopover from "./NotificationsPopover"
 
 const LeaderNavbar = ({ open, setOpen }) => {
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(2)
+
+  const handleMarkAllRead = () => {
+    setUnreadCount(0)
+  }
+
   return (
     <header className="w-full bg-white border-b border-gray-100 px-4 md:px-8 py-3.5 flex items-center justify-between gap-4 sticky top-0 z-30">
       {/* Mobile Drawer Hamburger Button */}
@@ -27,7 +35,7 @@ const LeaderNavbar = ({ open, setOpen }) => {
       </div>
 
       {/* Right User Actions */}
-      <div className="flex items-center gap-4 md:gap-6">
+      <div className="flex items-center gap-4 md:gap-6 relative">
         {/* User Profile Dropdown Button */}
         <div className="flex items-center gap-2.5 cursor-pointer p-1 rounded-xl hover:bg-gray-50 transition-colors">
           {/* User Avatar */}
@@ -37,7 +45,6 @@ const LeaderNavbar = ({ open, setOpen }) => {
               alt="Alex Wilkerson"
               className="w-full h-full object-cover"
               onError={(e) => {
-                // Fallback avatar if image fails to load
                 e.currentTarget.style.display = "none"
                 e.currentTarget.parentElement.innerText = "AW"
                 e.currentTarget.parentElement.className =
@@ -57,15 +64,27 @@ const LeaderNavbar = ({ open, setOpen }) => {
         {/* Notification Bell Button */}
         <button
           type="button"
+          onClick={() => setShowNotifications(!showNotifications)}
           className="relative p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
           title="Notifications"
         >
-          <Bell className="w-8 h-8 text-[#038AF9] stroke-[1.75]" />
+          <Bell className="w-7 h-7 text-[#038AF9] stroke-[1.75]" />
           {/* Badge Dot */}
-          <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#038AF9] text-white text-[9px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">
-            1
-          </span>
+          {unreadCount > 0 && (
+            <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#038AF9] text-white text-[9px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">
+              {unreadCount}
+            </span>
+          )}
         </button>
+
+        {/* Standalone Notifications Popover Component */}
+        {showNotifications && (
+          <NotificationsPopover
+            onClose={() => setShowNotifications(false)}
+            unreadCount={unreadCount}
+            onMarkAllRead={handleMarkAllRead}
+          />
+        )}
       </div>
     </header>
   )

@@ -80,8 +80,8 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
         </button>
       </div>
 
-      {/* Right Score Badges (Hidden on Teacher Overview) */}
-      {currentTab !== "teacher" && (
+      {/* Right Score Badges (Shown ONLY on School Overview) */}
+      {currentTab === "school" && (
         <div className="flex flex-wrap items-center gap-3">
           {/* Overall School Score Badge */}
           <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full text-sm font-medium text-[#1F1F21] flex items-center gap-2 shadow-2xs">
