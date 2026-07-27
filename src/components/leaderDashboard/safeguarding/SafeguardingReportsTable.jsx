@@ -107,11 +107,10 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-                  activeTab === tab
+                className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${activeTab === tab
                     ? "bg-white text-[#1F1F21] shadow-2xs font-semibold"
                     : "text-[#5A5A5A] hover:text-[#1F1F21]"
-                }`}
+                  }`}
               >
                 {tab}
               </button>
@@ -169,7 +168,7 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                   }
                   onCheckedChange={handleSelectAll}
                   aria-label="Select all reports"
-                  className="w-5 h-5 rounded-md border-2 border-gray-300 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9]"
+
                 />
               </TableHead>
               <TableHead className="font-normal text-xs text-gray-400">
@@ -194,9 +193,8 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                 <TableRow
                   key={row.id}
                   onClick={() => onSelectReport && onSelectReport(row)}
-                  className={`hover:bg-gray-50/80 transition-colors cursor-pointer border-b border-gray-100/80 ${
-                    isSelected ? "bg-rose-50/40" : ""
-                  }`}
+                  className={`hover:bg-gray-50/80 transition-colors cursor-pointer border-b border-gray-100/80 ${isSelected ? "bg-rose-50/40" : ""
+                    }`}
                 >
                   <TableCell
                     className="px-4 py-4"
@@ -208,7 +206,7 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                         toggleSelectRow(row.id, !!checked)
                       }
                       aria-label={`Select report ${row.id}`}
-                      className="w-5 h-5 rounded-md border-2 border-gray-300 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9]"
+
                     />
                   </TableCell>
                   <TableCell className="px-4 py-4 whitespace-nowrap text-gray-700">
