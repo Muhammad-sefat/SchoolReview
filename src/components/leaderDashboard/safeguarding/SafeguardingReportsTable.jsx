@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Plus } from "lucide-react"
+import { CgDetailsMore } from "react-icons/cg"
 import {
   Table,
   TableBody,
@@ -168,6 +169,7 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                   }
                   onCheckedChange={handleSelectAll}
                   aria-label="Select all reports"
+                  className="w-5 h-5 rounded-md border-2 border-gray-300 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9]"
                 />
               </TableHead>
               <TableHead className="font-normal text-xs text-gray-400">
@@ -206,6 +208,7 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                         toggleSelectRow(row.id, !!checked)
                       }
                       aria-label={`Select report ${row.id}`}
+                      className="w-5 h-5 rounded-md border-2 border-gray-300 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9]"
                     />
                   </TableCell>
                   <TableCell className="px-4 py-4 whitespace-nowrap text-gray-700">
@@ -219,20 +222,31 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                   </TableCell>
                   <TableCell className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end">
+                      {/* Priority Square Badge displaying CgDetailsMore icon inside priority background */}
                       {row.priority ? (
-                        <div
-                          className={`w-5 h-5 rounded-full ${row.priority.color} flex items-center justify-center text-white shadow-xs`}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            onSelectReport && onSelectReport(row)
+                          }}
+                          className={`w-7 h-7 rounded-xl ${row.priority.color} text-white flex items-center justify-center shadow-xs transition-transform hover:scale-105 cursor-pointer`}
                           title={`Priority: ${row.priority.label}`}
                         >
-                          <span className="text-[10px] font-bold">!</span>
-                        </div>
+                          <CgDetailsMore className="w-4 h-4" />
+                        </button>
                       ) : (
-                        <div
-                          className="w-5 h-5 rounded-full border border-[#038AF9] text-[#038AF9] flex items-center justify-center hover:bg-[#038AF9]/10"
-                          title="Unassigned Priority"
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            onSelectReport && onSelectReport(row)
+                          }}
+                          className="w-7 h-7 rounded-xl border-2 border-[#038AF9] text-[#038AF9] flex items-center justify-center bg-[#038AF9]/5 hover:bg-[#038AF9]/15 transition-all cursor-pointer"
+                          title="Unassigned Priority (Add Priority)"
                         >
-                          <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-                        </div>
+                          <Plus className="w-4 h-4 stroke-[2.5]" />
+                        </button>
                       )}
                     </div>
                   </TableCell>
