@@ -49,10 +49,13 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
   const [tempTeacher, setTempTeacher] = useState("")
 
   const [responseText, setResponseText] = useState("")
-  const [attachments, setAttachments] = useState([
+  // Initial report attachments (static details)
+  const [reportAttachments] = useState([
     { name: "Image.png", type: "image", url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80" },
     { name: "Video.mp4", type: "video", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
   ])
+  // Newly added attachments for the response input box
+  const [responseAttachments, setResponseAttachments] = useState([])
 
   const [previewMedia, setPreviewMedia] = useState(null)
   const fileInputRef = useRef(null)
@@ -72,8 +75,12 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
         type,
         url: URL.createObjectURL(file),
       }
-      setAttachments((prev) => [...prev, newAtt])
+      setResponseAttachments((prev) => [...prev, newAtt])
     }
+  }
+
+  const handleRemoveResponseAttachment = (index) => {
+    setResponseAttachments((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleAssignSubmit = () => {
@@ -237,9 +244,9 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
               </p>
             </div>
 
-            {/* Attachments List Pills */}
+            {/* Original Report Attachments List Pills */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              {attachments.map((att, idx) => (
+              {reportAttachments.map((att, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -259,7 +266,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
 
           {/* Response Input Section (Image 5) */}
           <div className="space-y-3">
-            <div className="relative w-full border border-gray-200 rounded-2xl p-3 bg-white focus-within:border-[#038AF9] focus-within:ring-2 focus-within:ring-[#038AF9]/20 transition-all">
+            <div className="relative w-full border border-gray-200 rounded-2xl p-3 bg-white focus-within:border-[#038AF9] focus-within:ring-2 focus-within:ring-[#038AF9]/20 transition-all space-y-2">
               <div className="flex items-start gap-2">
                 {/* Paperclip File Upload Icon */}
                 <button
@@ -293,14 +300,47 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                 />
               </div>
 
+              {/* Newly Uploaded Response Attachments List Pills (Appears in Response Box) */}
+              {responseAttachments.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-100">
+                  {responseAttachments.map((att, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium text-[#1F1F21] flex items-center gap-2"
+                    >
+                      {att.type === "video" ? (
+                        <Video className="w-3.5 h-3.5 text-[#038AF9]" />
+                      ) : (
+                        <ImageIcon className="w-3.5 h-3.5 text-[#038AF9]" />
+                      )}
+                      <span
+                        onClick={() => setPreviewMedia(att)}
+                        className="cursor-pointer hover:underline"
+                      >
+                        {att.name}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveResponseAttachment(idx)}
+                        className="text-gray-400 hover:text-red-500 cursor-pointer"
+                        title="Remove file"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {/* Bottom Right Submit Button */}
               <div className="flex justify-end pt-2">
                 <Button
                   type="button"
                   onClick={() => {
-                    if (responseText) {
+                    if (responseText || responseAttachments.length > 0) {
                       alert("Response submitted successfully!")
                       setResponseText("")
+                      setResponseAttachments([])
                     }
                   }}
                   className="px-6 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-xs font-semibold transition-all shadow-xs cursor-pointer h-auto"
