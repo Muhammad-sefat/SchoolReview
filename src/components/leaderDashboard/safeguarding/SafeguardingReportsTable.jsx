@@ -1,5 +1,22 @@
 import React, { useState } from "react"
-import { ChevronDown, Plus, Download, ListFilter } from "lucide-react"
+import { Plus } from "lucide-react"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 
 const REPORTS_TABLE_DATA = [
   {
@@ -59,11 +76,18 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
     return true
   })
 
-  const toggleSelectRow = (id, e) => {
-    e.stopPropagation()
+  const toggleSelectRow = (id, checked) => {
     setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+      checked ? [...prev, id] : prev.filter((i) => i !== id)
     )
+  }
+
+  const handleSelectAll = (checked) => {
+    if (checked) {
+      setSelectedIds(filteredReports.map((r) => r.id))
+    } else {
+      setSelectedIds([])
+    }
   }
 
   return (
@@ -94,27 +118,36 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
           </div>
         </div>
 
-        {/* Right Actions: Export Button & Category Dropdown Filter */}
+        {/* Right Actions: Export Button & Shadcn Select Category Filter */}
         <div className="flex items-center gap-3">
-          <button
+          <Button
             type="button"
-            className="px-4 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-xs font-semibold transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-xs font-semibold transition-colors shadow-2xs cursor-pointer h-auto"
           >
-            <span>Export Reports</span>
-          </button>
+            Export Reports
+          </Button>
 
-          <div className="relative">
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-4 py-2 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#1F1F21] outline-none cursor-pointer focus:border-[#038AF9]"
-            >
-              <option value="All">All Categories</option>
-              <option value="Bullying & Harassment">Bullying & Harassment</option>
-              <option value="Mental Health & Wellbeing">Mental Health & Wellbeing</option>
-              <option value="Teaching & Fairness">Teaching & Fairness</option>
-              <option value="Safety & Environment">Safety & Environment</option>
-            </select>
+          <div className="w-48">
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger className="rounded-xl border-gray-200 text-xs font-semibold text-[#1F1F21]">
+                <SelectValue placeholder="All Categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Categories</SelectItem>
+                <SelectItem value="Bullying & Harassment">
+                  Bullying & Harassment
+                </SelectItem>
+                <SelectItem value="Mental Health & Wellbeing">
+                  Mental Health & Wellbeing
+                </SelectItem>
+                <SelectItem value="Teaching & Fairness">
+                  Teaching & Fairness
+                </SelectItem>
+                <SelectItem value="Safety & Environment">
+                  Safety & Environment
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
@@ -122,64 +155,69 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
       {/* Dotted Separator */}
       <div className="border-b border-dashed border-gray-200/80" />
 
-      {/* Table Container */}
+      {/* Shadcn UI Table Component Container */}
       <div className="w-full overflow-x-auto no-scrollbar">
-        <table className="w-full text-left border-collapse min-w-[700px]">
-          <thead>
-            <tr className="border-b border-gray-100 text-xs font-medium text-gray-400">
-              <th className="py-3 px-4 w-10">
-                <input
-                  type="checkbox"
-                  className="rounded border-gray-300 text-[#038AF9] focus:ring-0 cursor-pointer"
+        <Table className="min-w-[700px]">
+          <TableHeader>
+            <TableRow className="border-b border-gray-100 hover:bg-transparent">
+              <TableHead className="w-12 px-4">
+                <Checkbox
                   checked={
                     selectedIds.length === filteredReports.length &&
                     filteredReports.length > 0
                   }
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedIds(filteredReports.map((r) => r.id))
-                    } else {
-                      setSelectedIds([])
-                    }
-                  }}
+                  onCheckedChange={handleSelectAll}
+                  aria-label="Select all reports"
                 />
-              </th>
-              <th className="py-3 px-4 font-normal">Date</th>
-              <th className="py-3 px-4 font-normal">Category</th>
-              <th className="py-3 px-4 font-normal">Summary</th>
-              <th className="py-3 px-4 font-normal text-right">Priority</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100/80 text-xs sm:text-sm font-medium text-[#1F1F21]">
+              </TableHead>
+              <TableHead className="font-normal text-xs text-gray-400">
+                Date
+              </TableHead>
+              <TableHead className="font-normal text-xs text-gray-400">
+                Category
+              </TableHead>
+              <TableHead className="font-normal text-xs text-gray-400">
+                Summary
+              </TableHead>
+              <TableHead className="font-normal text-xs text-gray-400 text-right">
+                Priority
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody className="text-xs sm:text-sm font-medium text-[#1F1F21]">
             {filteredReports.map((row) => {
               const isSelected = selectedIds.includes(row.id)
 
               return (
-                <tr
+                <TableRow
                   key={row.id}
                   onClick={() => onSelectReport && onSelectReport(row)}
-                  className={`hover:bg-gray-50/80 transition-colors cursor-pointer ${
+                  className={`hover:bg-gray-50/80 transition-colors cursor-pointer border-b border-gray-100/80 ${
                     isSelected ? "bg-rose-50/40" : ""
                   }`}
                 >
-                  <td className="py-4 px-4">
-                    <input
-                      type="checkbox"
+                  <TableCell
+                    className="px-4 py-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Checkbox
                       checked={isSelected}
-                      onChange={(e) => toggleSelectRow(row.id, e)}
-                      className="rounded border-gray-300 text-[#038AF9] focus:ring-0 cursor-pointer"
+                      onCheckedChange={(checked) =>
+                        toggleSelectRow(row.id, !!checked)
+                      }
+                      aria-label={`Select report ${row.id}`}
                     />
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap text-gray-700">
+                  </TableCell>
+                  <TableCell className="px-4 py-4 whitespace-nowrap text-gray-700">
                     {row.date}
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap font-medium text-[#1F1F21]">
+                  </TableCell>
+                  <TableCell className="px-4 py-4 whitespace-nowrap font-medium text-[#1F1F21]">
                     {row.category}
-                  </td>
-                  <td className="py-4 px-4 text-gray-600 font-normal max-w-xs truncate">
+                  </TableCell>
+                  <TableCell className="px-4 py-4 text-gray-600 font-normal max-w-xs truncate">
                     {row.summary}
-                  </td>
-                  <td className="py-4 px-4 text-right">
+                  </TableCell>
+                  <TableCell className="px-4 py-4 text-right">
                     <div className="flex items-center justify-end">
                       {row.priority ? (
                         <div
@@ -197,12 +235,12 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                         </div>
                       )}
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               )
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

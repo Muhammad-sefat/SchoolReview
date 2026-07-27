@@ -1,5 +1,12 @@
 import React, { useState, useMemo } from "react"
-import { ChevronDown, ChevronUp, ArrowRight, X, Calendar } from "lucide-react"
+import { ChevronUp, ArrowRight, X } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const ALL_REVIEWS_DATA = [
   {
@@ -98,12 +105,10 @@ const CommunityReviewsList = ({
   selectedReviewId = 1,
   onSelectReview,
 }) => {
-  const [openDropdown, setOpenDropdown] = useState(null)
   const [roleFilter, setRoleFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
   const [recFilter, setRecFilter] = useState("All")
   const [dateFilter, setDateFilter] = useState("All")
-  const [customDatePicker, setCustomDatePicker] = useState("")
 
   // Filter logic
   const filteredReviews = useMemo(() => {
@@ -118,29 +123,15 @@ const CommunityReviewsList = ({
     })
   }, [reviews, roleFilter, ratingFilter, recFilter, dateFilter])
 
-  const toggleDropdown = (name) => {
-    setOpenDropdown(openDropdown === name ? null : name)
-  }
-
   const resetFilters = () => {
     setRoleFilter("All")
     setRatingFilter("All")
     setRecFilter("All")
     setDateFilter("All")
-    setCustomDatePicker("")
-    setOpenDropdown(null)
   }
 
   return (
     <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full relative">
-      {/* Click Backdrop to close open dropdown when clicking outside */}
-      {openDropdown !== null && (
-        <div
-          className="fixed inset-0 z-40 bg-transparent"
-          onClick={() => setOpenDropdown(null)}
-        />
-      )}
-
       <div>
         {/* Header with Title and Counter Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
@@ -168,201 +159,66 @@ const CommunityReviewsList = ({
           )}
         </div>
 
-        {/* Filter Pills Row - High Z-index container to prevent clipping */}
-        <div className="relative z-50 flex items-center gap-2 pb-3 flex-wrap">
-          {/* 1. Role Filter Pill */}
-          <div className="relative shrink-0">
-            <button
-              type="button"
-              onClick={() => toggleDropdown("Role")}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer border ${
-                roleFilter !== "All"
-                  ? "bg-[#038AF9]/10 text-[#038AF9] border-[#038AF9]"
-                  : "bg-white border-gray-200 hover:border-gray-300 text-[#1F1F21]"
-              }`}
-            >
-              <span>{roleFilter !== "All" ? `Role: ${roleFilter}` : "Role"}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
-            </button>
-
-            {openDropdown === "Role" && (
-              <div className="absolute top-10 left-0 z-50 bg-white border border-gray-200 rounded-2xl p-2 shadow-2xl w-40 space-y-1 text-xs animate-fadeIn">
-                {["All", "Parent", "Student", "Teacher", "Alumni"].map((role) => (
-                  <button
-                    key={role}
-                    type="button"
-                    onClick={() => {
-                      setRoleFilter(role)
-                      setOpenDropdown(null)
-                    }}
-                    className={`w-full text-left px-3 py-1.5 rounded-xl transition-colors cursor-pointer ${
-                      roleFilter === role
-                        ? "bg-[#038AF9] text-white font-semibold"
-                        : "hover:bg-gray-100 text-[#1F1F21]"
-                    }`}
-                  >
-                    {role}
-                  </button>
-                ))}
-              </div>
-            )}
+        {/* Filter Row with Shadcn Select Components */}
+        <div className="relative flex items-center gap-2 pb-3 flex-wrap">
+          {/* 1. Role Filter Shadcn Select */}
+          <div className="w-32">
+            <Select value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+                <SelectValue placeholder="Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">Role: All</SelectItem>
+                <SelectItem value="Parent">Parent</SelectItem>
+                <SelectItem value="Student">Student</SelectItem>
+                <SelectItem value="Teacher">Teacher</SelectItem>
+                <SelectItem value="Alumni">Alumni</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* 2. Rating Filter Pill */}
-          <div className="relative shrink-0">
-            <button
-              type="button"
-              onClick={() => toggleDropdown("Rating")}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer border ${
-                ratingFilter !== "All"
-                  ? "bg-[#038AF9]/10 text-[#038AF9] border-[#038AF9]"
-                  : "bg-white border-gray-200 hover:border-gray-300 text-[#1F1F21]"
-              }`}
-            >
-              <span>{ratingFilter !== "All" ? `Rating: ${ratingFilter}` : "Rating"}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
-            </button>
-
-            {openDropdown === "Rating" && (
-              <div className="absolute top-10 left-0 z-50 bg-white border border-gray-200 rounded-2xl p-2 shadow-2xl w-40 space-y-1 text-xs animate-fadeIn">
-                {["All", "4+ Stars", "3+ Stars"].map((rating) => (
-                  <button
-                    key={rating}
-                    type="button"
-                    onClick={() => {
-                      setRatingFilter(rating)
-                      setOpenDropdown(null)
-                    }}
-                    className={`w-full text-left px-3 py-1.5 rounded-xl transition-colors cursor-pointer ${
-                      ratingFilter === rating
-                        ? "bg-[#038AF9] text-white font-semibold"
-                        : "hover:bg-gray-100 text-[#1F1F21]"
-                    }`}
-                  >
-                    {rating}
-                  </button>
-                ))}
-              </div>
-            )}
+          {/* 2. Rating Filter Shadcn Select */}
+          <div className="w-32">
+            <Select value={ratingFilter} onValueChange={setRatingFilter}>
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+                <SelectValue placeholder="Rating" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">Rating: All</SelectItem>
+                <SelectItem value="4+ Stars">4+ Stars</SelectItem>
+                <SelectItem value="3+ Stars">3+ Stars</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* 3. Recommendation Filter Pill */}
-          <div className="relative shrink-0">
-            <button
-              type="button"
-              onClick={() => toggleDropdown("Recommendation")}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer border ${
-                recFilter !== "All"
-                  ? "bg-[#038AF9]/10 text-[#038AF9] border-[#038AF9]"
-                  : "bg-white border-gray-200 hover:border-gray-300 text-[#1F1F21]"
-              }`}
-            >
-              <span>{recFilter !== "All" ? recFilter : "Recommendation"}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
-            </button>
-
-            {openDropdown === "Recommendation" && (
-              <div className="absolute top-10 left-0 z-50 bg-white border border-gray-200 rounded-2xl p-2 shadow-2xl w-44 space-y-1 text-xs animate-fadeIn">
-                {["All", "Recommended", "Not Recommended"].map((rec) => (
-                  <button
-                    key={rec}
-                    type="button"
-                    onClick={() => {
-                      setRecFilter(rec)
-                      setOpenDropdown(null)
-                    }}
-                    className={`w-full text-left px-3 py-1.5 rounded-xl transition-colors cursor-pointer ${
-                      recFilter === rec
-                        ? "bg-[#038AF9] text-white font-semibold"
-                        : "hover:bg-gray-100 text-[#1F1F21]"
-                    }`}
-                  >
-                    {rec}
-                  </button>
-                ))}
-              </div>
-            )}
+          {/* 3. Recommendation Filter Shadcn Select */}
+          <div className="w-40">
+            <Select value={recFilter} onValueChange={setRecFilter}>
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+                <SelectValue placeholder="Recommendation" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">Recommendation: All</SelectItem>
+                <SelectItem value="Recommended">Recommended</SelectItem>
+                <SelectItem value="Not Recommended">Not Recommended</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* 4. Date Filter Pill & Interactive Date Picker Popup */}
-          <div className="relative shrink-0">
-            <button
-              type="button"
-              onClick={() => toggleDropdown("Date")}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer border ${
-                dateFilter !== "All" || customDatePicker
-                  ? "bg-[#038AF9]/10 text-[#038AF9] border-[#038AF9]"
-                  : "bg-white border-gray-200 hover:border-gray-300 text-[#1F1F21]"
-              }`}
-            >
-              <Calendar className="w-3.5 h-3.5 text-gray-500" />
-              <span>
-                {dateFilter !== "All"
-                  ? `Date: ${dateFilter}`
-                  : customDatePicker
-                  ? customDatePicker
-                  : "Date"}
-              </span>
-              <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
-            </button>
-
-            {/* Date Picker Dropdown Overlay */}
-            {openDropdown === "Date" && (
-              <div className="absolute top-10 right-0 sm:left-0 z-50 bg-white border border-gray-200 rounded-2xl p-3 shadow-2xl w-60 space-y-3 text-xs animate-fadeIn">
-                <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                  <span className="font-bold text-[#1F1F21]">Select Review Date</span>
-                  <button
-                    type="button"
-                    onClick={() => setOpenDropdown(null)}
-                    className="text-gray-400 hover:text-gray-600"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-
-                {/* Preset Months */}
-                <div className="space-y-1">
-                  <span className="text-[10px] font-semibold text-gray-400 uppercase">
-                    Presets
-                  </span>
-                  {["All", "Sept 2026", "Aug 2026", "Jul 2026", "Jun 2026"].map((dt) => (
-                    <button
-                      key={dt}
-                      type="button"
-                      onClick={() => {
-                        setDateFilter(dt)
-                        setCustomDatePicker("")
-                        setOpenDropdown(null)
-                      }}
-                      className={`w-full text-left px-3 py-1.5 rounded-xl transition-colors cursor-pointer ${
-                        dateFilter === dt
-                          ? "bg-[#038AF9] text-white font-semibold"
-                          : "hover:bg-gray-100 text-[#1F1F21]"
-                      }`}
-                    >
-                      {dt === "All" ? "All Dates" : dt}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Custom Date Input */}
-                <div className="pt-2 border-t border-gray-100 space-y-1">
-                  <span className="text-[10px] font-semibold text-gray-400 uppercase">
-                    Custom Date
-                  </span>
-                  <input
-                    type="date"
-                    value={customDatePicker}
-                    onChange={(e) => {
-                      setCustomDatePicker(e.target.value)
-                      setDateFilter("All")
-                      setOpenDropdown(null)
-                    }}
-                    className="w-full border border-gray-200 rounded-xl px-2.5 py-1.5 text-xs text-[#1F1F21] outline-none focus:border-[#038AF9]"
-                  />
-                </div>
-              </div>
-            )}
+          {/* 4. Date Filter Shadcn Select */}
+          <div className="w-36">
+            <Select value={dateFilter} onValueChange={setDateFilter}>
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+                <SelectValue placeholder="Date" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">Date: All</SelectItem>
+                <SelectItem value="Sept 2026">Sept 2026</SelectItem>
+                <SelectItem value="Aug 2026">Aug 2026</SelectItem>
+                <SelectItem value="Jul 2026">Jul 2026</SelectItem>
+                <SelectItem value="Jun 2026">Jun 2026</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
@@ -422,7 +278,7 @@ const CommunityReviewsList = ({
           className="w-7 h-7 rounded-full bg-[#038AF9] hover:bg-[#0274d4] text-white flex items-center justify-center shadow-xs transition-colors cursor-pointer"
           title="Next page"
         >
-          <ChevronDown className="w-4 h-4 stroke-[2.5]" />
+          <ChevronUp className="w-4 h-4 stroke-[2.5] rotate-180" />
         </button>
       </div>
     </div>
