@@ -23,6 +23,7 @@ import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherRe
 
 import LeaderDashboardLayout from "../layout/LeaderDashboard"
 import OverView from "../pages/LeaderDashboard/OverView"
+import SafeGuard from "../pages/LeaderDashboard/SafeGuard"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <OverView /> },
       { path: "overview", element: <OverView /> },
-      { path: "safeguarding", element: <OverView /> },
+      { path: "safeguarding", element: <SafeGuard /> },
       { path: "community", element: <OverView /> },
       { path: "teaching-insights", element: <OverView /> },
       { path: "reports", element: <OverView /> },
