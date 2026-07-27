@@ -21,7 +21,29 @@ import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherRevi
 import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
 import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
 
+import LeaderDashboardLayout from "../layout/LeaderDashboard"
+import OverView from "../pages/LeaderDashboard/OverView"
+import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
+
 const router = createBrowserRouter([
+  {
+    path: "/leader-dashboard",
+    element: <LeaderDashboardLayout />,
+    errorElement: <DashboardErrorBoundary />,
+    children: [
+      { path: "", element: <OverView /> },
+      { path: "overview", element: <OverView /> },
+      { path: "safeguarding", element: <OverView /> },
+      { path: "community", element: <OverView /> },
+      { path: "teaching-insights", element: <OverView /> },
+      { path: "reports", element: <OverView /> },
+      { path: "*", element: <Navigate to="/leader-dashboard" replace /> },
+    ],
+  },
+  {
+    path: "/leader",
+    element: <Navigate to="/leader-dashboard" replace />,
+  },
   {
     path: "/review-teacher",
     element: <ReviewLayout />,
