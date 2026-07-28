@@ -1,23 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import ScatterPlot from "../../../graphCharts/ScatterPlot"
 import PieChartComponent from "../../../graphCharts/PieChart"
 import PrioprityArea from "../PrioprityArea"
 import KeyMetricsCard from "../KeyMetricsCard"
 import StudentSafetySignals from "./StudentSafetySignals"
+import ScatterPlotModalTeacher from "../../modal/ScatterPlotModalTeacher"
 
 const TEACHER_SCATTER_DATA = [
-  { id: 1, name: "Kathryn Murphy", x: 0.5, y: 0.3, category: "low", overallScore: "2.5", lowestMetric: "Pace (1.8)", highestMetric: "Clarity (3.0)" },
-  { id: 2, name: "Robert Fox", x: 0.8, y: 0.7, category: "low", overallScore: "2.8", lowestMetric: "Feedback (2.0)", highestMetric: "Pace (3.2)" },
-  { id: 3, name: "Floyd Miles", x: 1.1, y: 0.4, category: "low", overallScore: "2.0", lowestMetric: "Homework (1.5)", highestMetric: "Clarity (2.5)" },
-  { id: 4, name: "Savannah Nguyen", x: 1.7, y: 1.7, category: "medium", overallScore: "1.8", lowestMetric: "Structure (1.2)", highestMetric: "Support (2.4)" },
-  { id: 5, name: "Ronald Richards", x: 2.4, y: 2.3, category: "neutral", overallScore: "3.0", lowestMetric: "Pace (2.5)", highestMetric: "Clarity (3.5)" },
-  { id: 6, name: "Esther Howard", x: 2.6, y: 2.7, category: "neutral", overallScore: "3.8", lowestMetric: "Support (3.2)", highestMetric: "Feedback (4.2)" },
-  { id: 7, name: "Wade Warren", x: 3.5, y: 3.5, category: "good", overallScore: "3.5", lowestMetric: "Pace (3.0)", highestMetric: "Clarity (4.0)" },
-  { id: 8, name: "Mr. Lukas Meier", x: 3.6, y: 3.8, category: "good", overallScore: "3.7", lowestMetric: "Pace (3.0)", highestMetric: "Clarity (5.0)" },
-  { id: 9, name: "Annette Black", x: 3.7, y: 3.4, category: "good", overallScore: "4.2", lowestMetric: "Feedback (3.8)", highestMetric: "Clarity (4.6)" },
-  { id: 10, name: "Bessie Cooper", x: 4.2, y: 3.7, category: "good", overallScore: "4.5", lowestMetric: "Support (4.0)", highestMetric: "Clarity (5.0)" },
-  { id: 11, name: "Jacob Jones", x: 4.5, y: 4.4, category: "best", overallScore: "4.5", lowestMetric: "Pace (4.2)", highestMetric: "Clarity (4.9)" },
-  { id: 12, name: "Albert Flores", x: 4.8, y: 4.5, category: "best", overallScore: "5.0", lowestMetric: "Support (4.8)", highestMetric: "Clarity (5.0)" },
+  { id: 1, name: "Kathryn Murphy", x: 0.5, y: 0.3, category: "low", overallScore: "2.5", lowestMetric: "Pace (1.8)", highestMetric: "Clarity (3.0)", overall: 2.5 },
+  { id: 2, name: "Robert Fox", x: 0.8, y: 0.7, category: "low", overallScore: "2.8", lowestMetric: "Feedback (2.0)", highestMetric: "Pace (3.2)", overall: 2.8 },
+  { id: 3, name: "Floyd Miles", x: 1.1, y: 0.4, category: "low", overallScore: "2.0", lowestMetric: "Homework (1.5)", highestMetric: "Clarity (2.5)", overall: 2.0 },
+  { id: 4, name: "Savannah Nguyen", x: 1.7, y: 1.7, category: "medium", overallScore: "1.8", lowestMetric: "Structure (1.2)", highestMetric: "Support (2.4)", overall: 1.8 },
+  { id: 5, name: "Ronald Richards", x: 2.4, y: 2.3, category: "neutral", overallScore: "3.0", lowestMetric: "Pace (2.5)", highestMetric: "Clarity (3.5)", overall: 3.0 },
+  { id: 6, name: "Esther Howard", x: 2.6, y: 2.7, category: "neutral", overallScore: "3.8", lowestMetric: "Support (3.2)", highestMetric: "Feedback (4.2)", overall: 3.8 },
+  { id: 7, name: "Wade Warren", x: 3.5, y: 3.5, category: "good", overallScore: "3.5", lowestMetric: "Pace (3.0)", highestMetric: "Clarity (4.0)", overall: 3.5 },
+  { id: 8, name: "Mr. Lukas Meier", x: 3.6, y: 3.8, category: "good", overallScore: "3.7", lowestMetric: "Pace (3.0)", highestMetric: "Clarity (5.0)", overall: 3.7 },
+  { id: 9, name: "Annette Black", x: 3.7, y: 3.4, category: "good", overallScore: "4.2", lowestMetric: "Feedback (3.8)", highestMetric: "Clarity (4.6)", overall: 4.2 },
+  { id: 10, name: "Bessie Cooper", x: 4.2, y: 3.7, category: "good", overallScore: "4.5", lowestMetric: "Support (4.0)", highestMetric: "Clarity (5.0)", overall: 4.5 },
+  { id: 11, name: "Jacob Jones", x: 4.5, y: 4.4, category: "best", overallScore: "4.5", lowestMetric: "Pace (4.2)", highestMetric: "Clarity (4.9)", overall: 4.5 },
+  { id: 12, name: "Albert Flores", x: 4.8, y: 4.5, category: "best", overallScore: "5.0", lowestMetric: "Support (4.8)", highestMetric: "Clarity (5.0)", overall: 1.5 },
 ]
 
 const TEACHER_PRIORITY_GROUPS = [
@@ -103,23 +104,26 @@ const TEACHER_KEY_METRICS = [
 ]
 
 const TeacherOverview = () => {
+  const [selectedTeacherMetric, setSelectedTeacherMetric] = useState(null)
+
   return (
     <div className="w-full space-y-6">
       {/* Top Section: Teacher Performance Scatter Plot + Priority Areas */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Left Scatter Plot Chart (No tabs for Teacher Performance) */}
-        <div className="lg:col-span-7 flex">
+        <div className="lg:col-span-8 flex">
           <ScatterPlot
             title="Teacher Performance"
             subtitle="Select a metric to view details."
             tabs={null}
             data={TEACHER_SCATTER_DATA}
             onExpand={() => console.log("Expand chart clicked")}
+            onMetricClick={(metric) => setSelectedTeacherMetric(metric)}
           />
         </div>
 
         {/* Right Priority Areas */}
-        <div className="lg:col-span-5 flex">
+        <div className="lg:col-span-4 flex">
           <PrioprityArea
             title="Priority Areas by Performance"
             groups={TEACHER_PRIORITY_GROUPS}
@@ -150,6 +154,13 @@ const TeacherOverview = () => {
           />
         </div>
       </div>
+
+      {/* Teacher ScatterPlot Modal Component */}
+      <ScatterPlotModalTeacher
+        isOpen={!!selectedTeacherMetric}
+        onClose={() => setSelectedTeacherMetric(null)}
+        metric={selectedTeacherMetric}
+      />
     </div>
   )
 }

@@ -62,7 +62,7 @@ const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
       <div className="absolute right-0 top-14 z-50 bg-white border border-gray-100 rounded-3xl shadow-2xl w-[340px] sm:w-[420px] p-5 sm:p-6 space-y-5 text-left animate-fadeIn max-h-[85vh] overflow-y-auto no-scrollbar">
         {/* Popover Header */}
         <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h3 className="font-urbanist text-xl font-bold text-[#080808]">
+          <h3 className="font-urbanist md:text-[24px] text-lg font-bold text-textPrimary">
             Notifications
           </h3>
           <button
@@ -76,7 +76,7 @@ const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
 
         {/* Section 1: TODAY */}
         <div className="space-y-4">
-          <p className="text-[11px] font-semibold text-gray-400 tracking-wider uppercase">
+          <p className="md:text-lg text-sm font-semibold text-[#BFBFBF] tracking-wider uppercase">
             TODAY
           </p>
 
@@ -84,20 +84,18 @@ const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
             {NOTIFICATIONS_DATA.today.map((item) => (
               <div
                 key={item.id}
-                className="border-b border-gray-100 pb-3.5 space-y-1"
+                className="border-b border-[#E0E0E0] pb-3.5 space-y-1"
               >
                 <div className="flex items-center gap-2">
-                  {item.isUnread && unreadCount > 0 && (
-                    <span className="w-2 h-2 rounded-full bg-[#FB8C00] shrink-0" />
-                  )}
-                  <h4 className="text-sm font-semibold text-[#1F1F21]">
+
+                  <h4 className="md:text-[20px] text-base font-medium text-textPrimary">
                     {item.title}
                   </h4>
                 </div>
-                <p className="text-xs text-gray-500 leading-normal pl-4">
+                <p className="text-base text-secondary leading-normal pl-1">
                   {item.desc}
                 </p>
-                <p className="text-[11px] text-gray-400 pl-4 pt-0.5">
+                <p className="text-sm text-secondary pl-1 pt-0.5">
                   {item.time}
                 </p>
               </div>
@@ -115,20 +113,18 @@ const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
             {NOTIFICATIONS_DATA.thisWeek.map((item) => (
               <div
                 key={item.id}
-                className="border-b border-gray-100 pb-3.5 space-y-1"
+                className="border-b border-[#E0E0E0] pb-3.5 space-y-1"
               >
                 <div className="flex items-center gap-2">
-                  {item.isUnread && unreadCount > 0 && (
-                    <span className="w-2 h-2 rounded-full bg-[#FB8C00] shrink-0" />
-                  )}
-                  <h4 className="text-sm font-semibold text-[#1F1F21]">
+
+                  <h4 className="md:text-[20px] text-base font-medium text-textPrimary">
                     {item.title}
                   </h4>
                 </div>
-                <p className="text-xs text-gray-500 leading-normal pl-4">
+                <p className="text-base text-secondary leading-normal pl-1">
                   {item.desc}
                 </p>
-                <p className="text-[11px] text-gray-400 pl-4 pt-0.5">
+                <p className="text-sm text-secondary pl-1 pt-0.55">
                   {item.time}
                 </p>
               </div>
@@ -137,11 +133,11 @@ const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
         </div>
 
         {/* Popover Footer Links */}
-        <div className="flex items-center justify-between pt-2 text-xs font-semibold border-t border-gray-100">
+        <div className="flex items-center justify-between pt-2 md:text-lg text-sm font-medium border-t border-gray-100">
           <button
             type="button"
             onClick={onMarkAllRead}
-            className="text-[#1F1F21] underline hover:text-[#038AF9] transition-colors cursor-pointer"
+            className="text-textPrimary underline hover:text-[#038AF9] transition-colors cursor-pointer"
           >
             Mark all as read
           </button>

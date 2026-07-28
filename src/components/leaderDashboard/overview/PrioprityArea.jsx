@@ -6,7 +6,7 @@ const PRIORITY_GROUPS = [
     title: "Needs Attention",
     borderColor: "border-[#E53935]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#E53935]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Facilities", score: "1.5" },
       { label: "Student Wellbeing", score: "2.5" },
@@ -21,7 +21,7 @@ const PRIORITY_GROUPS = [
     title: "Developing",
     borderColor: "border-[#E53935]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#FB8C00]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "School Communication", score: "3.2" },
       { label: "Leadership", score: "3.8" },
@@ -37,7 +37,7 @@ const PRIORITY_GROUPS = [
     title: "Performing Well",
     borderColor: "border-[#E53935]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#2E7D32]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Mostly connected", score: "4.0" },
       { label: "Learning Support", score: "4.8" },
@@ -54,7 +54,7 @@ const PrioprityArea = ({
   title = "Priority Areas by Performance",
 }) => {
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs space-y-5 h-full flex flex-col justify-between">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-4 md:p-5 shadow-xs space-y-5 h-full flex flex-col justify-between">
       {/* Header Title */}
       <div>
         <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808] leading-snug">
@@ -69,21 +69,21 @@ const PrioprityArea = ({
             {/* Category Pill Header */}
             <div>
               <span
-                className={`inline-block px-3.5 py-1 rounded-full border text-xs font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
+                className={`inline-block px-3.5 py-1 rounded-full border text-sm font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
               >
                 {group.title}
               </span>
             </div>
 
             {/* Chips List */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {group.items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-gray-200/90 rounded-full px-3 py-1 text-xs sm:text-sm font-normal text-[#1F1F21] flex items-center gap-1.5 shadow-2xs hover:border-gray-300 transition-colors cursor-default"
+                  className="bg-white border border-gray-200/90 rounded-full px-3 py-1 text-xs sm:text-sm font-normal text-textPrimary flex items-center gap-1.5 shadow-2xs hover:border-gray-300 transition-colors cursor-default"
                 >
                   <span>{item.label}</span>
-                  <span className="font-medium text-[#1F1F21]/80">
+                  <span className="font-medium text-textPrimary">
                     {item.score}
                   </span>
                 </div>

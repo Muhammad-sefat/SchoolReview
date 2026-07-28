@@ -21,11 +21,11 @@ const StudentSafetySignals = ({ enabled = false }) => {
   )
 
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-4 md:p-5 shadow-xs flex flex-col justify-between h-full">
       {/* Header with Title and Info Icon */}
       <div>
         <div className="flex items-center justify-between gap-3 pb-3">
-          <h3 className="font-urbanist text-lg sm:text-xl font-semibold text-[#080808]">
+          <h3 className="font-urbanist text-lg md:text-[24px] font-semibold text-[#080808]">
             Student Safety Signals
           </h3>
           <button
@@ -46,7 +46,7 @@ const StudentSafetySignals = ({ enabled = false }) => {
           <div className="w-12 h-12 rounded-2xl bg-gray-50 text-gray-400 flex items-center justify-center mb-1">
             <ShieldAlert className="w-6 h-6 stroke-[1.5]" />
           </div>
-          <p className="text-base font-semibold text-[#1F1F21]">
+          <p className="text-base font-semibold text-textPrimary">
             No safety data yet
           </p>
           <p className="text-xs sm:text-sm text-gray-500 max-w-[220px]">
@@ -56,7 +56,7 @@ const StudentSafetySignals = ({ enabled = false }) => {
           <button
             type="button"
             onClick={() => setIsSafetyEnabled(true)}
-            className="mt-2 px-5 py-2.5 rounded-full bg-gray-100 hover:bg-[#038AF9] hover:text-white text-[#1F1F21] text-xs font-semibold transition-colors cursor-pointer"
+            className="mt-2 px-5 py-2.5 rounded-full bg-gray-100 hover:bg-[#038AF9] hover:text-white text-textPrimary text-xs font-semibold transition-colors cursor-pointer"
           >
             Enable Safety Questions
           </button>
@@ -69,11 +69,11 @@ const StudentSafetySignals = ({ enabled = false }) => {
             {visibleData.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between gap-4 text-sm sm:text-base font-normal text-[#1F1F21]"
+                className="flex items-center justify-between gap-4 text-sm sm:text-base font-normal text-textPrimary"
               >
                 <span>{item.name}</span>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-semibold text-[#1F1F21]">
+                  <span className="font-semibold text-textPrimary">
                     {item.score}
                   </span>
                   <Star className="w-4 h-4 text-[#E53935] fill-[#E53935]" />
@@ -88,11 +88,10 @@ const StudentSafetySignals = ({ enabled = false }) => {
               type="button"
               disabled={page === 0}
               onClick={() => setPage((prev) => Math.max(0, prev - 1))}
-              className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-                page === 0
-                  ? "bg-gray-100 text-gray-300 cursor-not-allowed"
-                  : "bg-gray-100 hover:bg-gray-200 text-gray-600"
-              }`}
+              className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer ${page === 0
+                ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+                : "bg-gray-100 hover:bg-gray-200 text-gray-600"
+                }`}
               title="Previous"
             >
               <ChevronUp className="w-4 h-4 stroke-[2.5]" />
@@ -104,11 +103,10 @@ const StudentSafetySignals = ({ enabled = false }) => {
               onClick={() =>
                 setPage((prev) => Math.min(totalPages - 1, prev + 1))
               }
-              className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-                page >= totalPages - 1
-                  ? "bg-[#038AF9]/50 text-white cursor-not-allowed"
-                  : "bg-[#038AF9] hover:bg-[#0274d4] text-white shadow-xs"
-              }`}
+              className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer ${page >= totalPages - 1
+                ? "bg-[#038AF9]/50 text-white cursor-not-allowed"
+                : "bg-[#038AF9] hover:bg-[#0274d4] text-white shadow-xs"
+                }`}
               title="Next"
             >
               <ChevronDown className="w-4 h-4 stroke-[2.5]" />

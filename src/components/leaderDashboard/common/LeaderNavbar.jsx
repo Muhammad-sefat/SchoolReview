@@ -29,7 +29,7 @@ const LeaderNavbar = ({ open, setOpen }) => {
           <input
             type="text"
             placeholder="Search your school data"
-            className="w-full h-10 pl-10 pr-4 bg-white border border-gray-200/90 rounded-2xl text-xs sm:text-sm text-foreground placeholder:text-[#5A5A5A] focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all"
+            className="w-full h-10 pl-10 pr-4 bg-white border border-gray-200/90 rounded-[10px] text-xs sm:text-sm text-foreground placeholder:text-secondary focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all"
           />
         </div>
       </div>
@@ -54,11 +54,11 @@ const LeaderNavbar = ({ open, setOpen }) => {
           </div>
 
           {/* User Name */}
-          <span className="text-sm font-semibold text-[#1F1F21] hidden sm:inline-block">
+          <span className="text-base font-medium text-textPrimary hidden sm:inline-block">
             Alex Wilkerson
           </span>
 
-          <ChevronDown className="w-4 h-4 text-gray-400 stroke-[1.75]" />
+          <ChevronDown className="w-4 h-4 text-secondary text-base stroke-[1.75]" />
         </div>
 
         {/* Notification Bell Button */}

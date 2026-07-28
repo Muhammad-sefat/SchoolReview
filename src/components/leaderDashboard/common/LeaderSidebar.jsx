@@ -70,7 +70,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-64"
+        className={`fixed lg:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
           } ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           }`}
       >
@@ -78,8 +78,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         <div>
           <div
             className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-                ? "flex-col items-center justify-center gap-3 py-4 px-3"
-                : "flex-row items-center justify-between px-5 py-5"
+              ? "flex-col items-center justify-center gap-3 py-4 px-3"
+              : "flex-row items-center justify-between px-5 py-5"
               }`}
           >
             {/* Logo Badge */}
@@ -110,7 +110,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-1.5">
+          <nav className="px-3 py-4 space-y-4">
             {navItems.map((item) => {
               const active = isPathActive(item.path)
               const IconComp = item.icon
@@ -119,9 +119,9 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center gap-3.5 px-3.5 py-3 rounded-2xl text-sm font-medium transition-all duration-200 group ${active
-                    ? "bg-[#F0F8FF] text-[#038AF9] border border-[#BEE0FF]/60 font-semibold shadow-2xs"
-                    : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#1F1F21]"
+                  className={`flex items-center gap-3.5 px-3.5 py-2 rounded-2xl text-base  font-medium transition-all duration-200 group ${active
+                    ? "bg-[#F0F8FF] text-[#038AF9] border border-[#BEE0FF]/60  shadow-2xs"
+                    : "text-[#1F1F21] hover:bg-gray-50 "
                     } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? item.label : undefined}
                 >
@@ -156,12 +156,12 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium text-[#1F1F21] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
                 }`}
               title={collapsed ? "Settings" : undefined}
             >
               <div className="flex items-center gap-3.5">
-                <Settings className="w-5 h-5 text-[#5A5A5A] shrink-0 stroke-[1.75]" />
+                <Settings className="w-5 h-5 text-[#1F1F21] shrink-0 stroke-[1.75]" />
                 {!collapsed && <span>Settings</span>}
               </div>
               {!collapsed && (
@@ -177,13 +177,13 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               <div className="pl-9 pr-2 space-y-1 py-1">
                 <NavLink
                   to="/leader-dashboard/settings/profile"
-                  className="block text-xs font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
+                  className="block text-base font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
                 >
                   Profile Settings
                 </NavLink>
                 <NavLink
                   to="/leader-dashboard/settings/security"
-                  className="block text-xs font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
+                  className="block text-base font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
                 >
                   Security Credentials
                 </NavLink>
@@ -194,22 +194,22 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           {/* Get Help */}
           <button
             type="button"
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-[#1F1F21] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 text-[#5A5A5A] shrink-0 stroke-[1.75]" />
+            <HelpCircle className="w-5 h-5 text-[#1F1F21] shrink-0 stroke-[1.75]" />
             {!collapsed && <span>Get help</span>}
           </button>
 
           {/* Log Out */}
           <button
             type="button"
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-red-600 transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-textPrimary hover:bg-gray-50 hover:text-red-600 transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 text-[#5A5A5A] shrink-0 stroke-[1.75]" />
+            <LogOut className="w-5 h-5 text-textPrimary shrink-0 stroke-[1.75]" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>

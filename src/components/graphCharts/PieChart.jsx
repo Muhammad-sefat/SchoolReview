@@ -64,10 +64,10 @@ const PieChartComponent = ({
   data = DEFAULT_PIE_DATA,
 }) => {
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full min-w-0 overflow-hidden">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-4 md:p-5 shadow-xs flex flex-col justify-between h-full min-w-0 overflow-hidden">
       {/* Title with Dotted Separator */}
       <div className="border-b border-dashed border-gray-200/70 pb-3.5 mb-2 shrink-0">
-        <h3 className="font-urbanist text-lg sm:text-xl font-semibold text-[#080808]">
+        <h3 className="font-urbanist md:text-[24px] text-lg sm:text-xl font-semibold text-[#080808]">
           {title}
         </h3>
       </div>
@@ -77,7 +77,7 @@ const PieChartComponent = ({
         {/* Left Legend */}
         <div className="space-y-2.5 shrink-0 min-w-0 w-full xl:w-auto">
           {data.map((item, index) => (
-            <div key={index} className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-[#5A5A5A]">
+            <div key={index} className="flex items-center gap-2.5 text-xs sm:text-base font-medium text-[#5A5A5A]">
               <span
                 className="w-3.5 h-3.5 rounded-md shrink-0"
                 style={{ backgroundColor: item.color }}
@@ -90,7 +90,7 @@ const PieChartComponent = ({
         </div>
 
         {/* Right Pie Chart Container */}
-        <div className="w-full xl:w-[165px] h-[165px] relative shrink-0 min-w-0 flex items-center justify-center">
+        <div className="w-full xl:w-[184px] h-[184px] relative shrink-0 min-w-0 flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <RechartsPieChart>
               <Pie

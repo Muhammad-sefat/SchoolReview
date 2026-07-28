@@ -19,9 +19,9 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
         <button
           type="button"
           onClick={() => handleTabChange("school")}
-          className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "school"
+          className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-normal transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "school"
             ? "bg-[#038AF9] text-white shadow-xs"
-            : "bg-white border border-gray-200 text-[#1F1F21] hover:bg-gray-50"
+            : "bg-white border border-gray-200 text- hover:bg-gray-50"
             }`}
         >
           School Performance
@@ -31,9 +31,9 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
         <button
           type="button"
           onClick={() => handleTabChange("teacher")}
-          className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "teacher"
+          className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-normal transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "teacher"
             ? "bg-[#038AF9] text-white shadow-xs"
-            : "bg-white border border-gray-200 text-[#1F1F21] hover:bg-gray-50"
+            : "bg-white border border-gray-200 text-textPrimary hover:bg-gray-50"
             }`}
         >
           Teacher Performance
@@ -43,9 +43,9 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
         <button
           type="button"
           onClick={() => handleTabChange("safety")}
-          className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "safety"
+          className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-normal flex items-center gap-1.5 sm:gap-2 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "safety"
             ? "bg-[#038AF9] text-white shadow-xs"
-            : "bg-white border border-gray-200 text-[#1F1F21] hover:bg-gray-50"
+            : "bg-white border border-gray-200 text-textPrimary hover:bg-gray-50"
             }`}
         >
           <span>Safety</span>
@@ -63,9 +63,9 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
         <button
           type="button"
           onClick={() => handleTabChange("community")}
-          className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "community"
+          className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-normal flex items-center gap-1.5 sm:gap-2 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${currentTab === "community"
             ? "bg-[#038AF9] text-white shadow-xs"
-            : "bg-white border border-gray-200 text-[#1F1F21] hover:bg-gray-50"
+            : "bg-white border border-gray-200 text-textPrimary hover:bg-gray-50"
             }`}
         >
           <span>Community</span>
@@ -84,17 +84,17 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
       {currentTab === "school" && (
         <div className="flex flex-wrap items-center gap-3">
           {/* Overall School Score Badge */}
-          <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full text-sm font-medium text-[#1F1F21] flex items-center gap-2 shadow-2xs">
+          <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full sm:text-lg text-sm font-medium text-textPrimary flex items-center gap-2 shadow-2xs">
             <span>Overall School Score</span>
-            <span className="font-bold text-[#038AF9]">3.5</span>
-            <Star className="w-4 h-4 fill-[#038AF9] text-[#038AF9]" />
+            <span className="font-medium text-primary">3.5</span>
+            <Star className="w-4 h-4 fill-primary text-primary" />
           </div>
 
           {/* Would Recommend Badge */}
-          <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full text-sm font-medium text-[#1F1F21] flex items-center gap-2 shadow-2xs">
+          <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full sm:text-lg text-sm font-medium text-textPrimary flex items-center gap-2 shadow-2xs">
             <span>Would Recommend</span>
             <ArrowUpRight className="w-4 h-4 text-[#038AF9] stroke-[2.5]" />
-            <span className="font-bold text-[#038AF9]">80%</span>
+            <span className="font-medium text-primary">80%</span>
           </div>
         </div>
       )}
