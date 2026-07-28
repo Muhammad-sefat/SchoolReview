@@ -109,9 +109,9 @@ const TeacherOverview = () => {
   return (
     <div className="w-full space-y-6">
       {/* Top Section: Teacher Performance Scatter Plot + Priority Areas */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch">
         {/* Left Scatter Plot Chart (No tabs for Teacher Performance) */}
-        <div className="lg:col-span-8 flex">
+        <div className="xlg:col-span-8 flex">
           <ScatterPlot
             title="Teacher Performance"
             subtitle="Select a metric to view details."
@@ -123,7 +123,7 @@ const TeacherOverview = () => {
         </div>
 
         {/* Right Priority Areas */}
-        <div className="lg:col-span-4 flex">
+        <div className="xlg:col-span-4 flex">
           <PrioprityArea
             title="Priority Areas by Performance"
             groups={TEACHER_PRIORITY_GROUPS}

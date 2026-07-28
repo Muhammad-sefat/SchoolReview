@@ -46,9 +46,9 @@ const SafetyOverview = () => {
   return (
     <div className="w-full space-y-6">
       {/* Top Section: Safeguarding Reports Bubble Chart + Category Insights */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch">
         {/* Left Safeguarding Reports Timeline Bubble Chart (7 Cols) */}
-        <div className="lg:col-span-7 flex">
+        <div className="xlg:col-span-8 flex">
           <BubbleTimelineChart
             title="Safeguarding Reports"
             subtitle="Select a category to view details."
@@ -59,7 +59,7 @@ const SafetyOverview = () => {
         </div>
 
         {/* Right Selected Category Insights Panel (5 Cols) */}
-        <div className="lg:col-span-5 flex">
+        <div className="xlg:col-span-4 flex">
           <SafeguardingCategoryInsights
             selectedCategoryId={selectedCategory}
           />

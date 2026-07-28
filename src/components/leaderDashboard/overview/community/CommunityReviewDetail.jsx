@@ -8,7 +8,7 @@ const DetailStarRating = ({ rating = 4.5 }) => {
   for (let i = 1; i <= 5; i++) {
     if (i <= Math.floor(rating)) {
       stars.push(
-        <svg key={i} className="w-4 h-4 text-[#038AF9] fill-[#038AF9]" viewBox="0 0 24 24">
+        <svg key={i} className="w-5 h-5 text-[#038AF9] fill-[#038AF9]" viewBox="0 0 24 24">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       )
@@ -77,17 +77,17 @@ const CommunityReviewDetail = ({ selectedReview }) => {
         {/* Rating Score & Meta Header */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
           <div className="flex items-center gap-3">
-            <span className="font-bold text-[#1F1F21]">{review.rating}</span>
+            <span className="font-medium text-textPrimary">{review.rating}</span>
             <DetailStarRating rating={review.rating} />
 
             {/* Recommended Badge */}
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-700">
-              <CheckCircle2 className="w-4 h-4 text-[#8DC613] stroke-[2.5]" />
+            <div className="flex items-center gap-1.5 text-base font-normal text-gray-700">
+              <CheckCircle2 className="w-5 h-5 text-[#8DC613] stroke-[2.5]" />
               <span>Recommended</span>
             </div>
           </div>
 
-          <div className="text-gray-400 font-normal">
+          <div className="text-textPrimary text-base! font-normal">
             {review.role}, {review.date}
           </div>
         </div>
@@ -100,7 +100,7 @@ const CommunityReviewDetail = ({ selectedReview }) => {
           <button
             type="button"
             onClick={() => setShowFullReviewModal(!showFullReviewModal)}
-            className="px-4 py-2 rounded-xl border border-[#038AF9]  hover:bg-[#038AF9]/5 text-xs font-semibold transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl border border-[#038AF9]  hover:bg-[#038AF9]/5 text-base font-semibold transition-colors cursor-pointer"
           >
             {showFullReviewModal ? "Hide Full Review" : "Read Full Review"}
           </button>
@@ -108,7 +108,7 @@ const CommunityReviewDetail = ({ selectedReview }) => {
           <button
             type="button"
             onClick={handleGenerateAiResponse}
-            className="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-[#1F1F21] text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-[#FAFAFA] hover:bg-gray-200 text-textPrimary text-base font-medium transition-colors cursor-pointer flex items-center gap-1.5"
           >
 
             <span>Generate AI Summary</span>
@@ -142,7 +142,7 @@ const CommunityReviewDetail = ({ selectedReview }) => {
               value={responseText}
               onChange={(e) => setResponseText(e.target.value)}
               placeholder="Write your response to this review or use the Generate AI Response button."
-              className="w-full h-full bg-transparent border-none outline-none resize-none text-xs sm:text-sm text-[#1F1F21] placeholder-gray-400 focus:ring-0 p-0"
+              className="w-full h-full bg-transparent border-none outline-none resize-none text-sm sm:text-base text-textPrimary placeholder-gray-400 focus:ring-0 p-0"
               rows={4}
             />
           </div>

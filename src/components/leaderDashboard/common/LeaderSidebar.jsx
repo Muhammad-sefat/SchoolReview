@@ -60,18 +60,18 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
   return (
     <>
-      {/* Mobile Backdrop Overlay */}
+      {/* Mobile / Tablet Backdrop Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-black/40 z-40 xl:hidden backdrop-blur-xs transition-opacity"
           onClick={() => setOpen(false)}
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
-          } ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
+          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"
           }`}
       >
         {/* Top Header & Logo Area */}

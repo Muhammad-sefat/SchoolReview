@@ -79,7 +79,7 @@ const BubbleTimelineChart = ({
             {title}
           </h3>
           {subtitle && (
-            <p className="text-sm font-normal text-[#5A5A5A] mt-0.5">
+            <p className="text-sm font-normal text-secondary mt-0.5">
               {subtitle}
             </p>
           )}
@@ -87,15 +87,17 @@ const BubbleTimelineChart = ({
 
         {/* Right Badge Action */}
         <div className="flex items-center gap-2">
-          <div className="bg-gray-100 text-[#1F1F21] text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-            <span>20</span>
+          <div className="bg-[#F7F7F7] rounded-full text-textPrimary text-xs font-medium px-1.5 py-1.5 flex items-center gap-1.5">
+            <span className="p-1.5 text-[#E53935] text-xs bg-white rounded-full">20</span>
             <button
               type="button"
               onClick={onExpand}
               className="text-gray-600 hover:text-gray-900 cursor-pointer"
               title="Expand chart"
             >
-              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M12.0798 10.0355C12.0798 10.3343 11.8418 10.5612 11.5762 10.5612C11.305 10.5612 11.0781 10.3177 11.0781 10.0576V8.01009L11.1777 5.42578L10.2646 6.46061L4.76953 11.9502C4.66992 12.0553 4.54818 12.0996 4.4209 12.0996C4.14421 12.0996 3.90625 11.8506 3.90625 11.585C3.90625 11.4632 3.96159 11.3359 4.0612 11.2363L9.54525 5.74121L10.5745 4.83919L7.87402 4.92773H5.94824C5.68815 4.92773 5.4502 4.70085 5.4502 4.43522C5.4502 4.1696 5.66048 3.93164 5.97038 3.93164H11.5374C11.8695 3.93164 12.0742 4.15299 12.0742 4.46842L12.0798 10.0355Z" fill="#080808" />
+              </svg>
             </button>
           </div>
         </div>
@@ -114,11 +116,10 @@ const BubbleTimelineChart = ({
                   <button
                     type="button"
                     onClick={() => onSelectCategory && onSelectCategory(cat.id)}
-                    className={`text-left text-xs sm:text-sm font-medium transition-colors cursor-pointer leading-tight ${
-                      isSelected
-                        ? "text-[#038AF9] font-bold underline"
-                        : "text-[#5A5A5A] hover:text-[#1F1F21]"
-                    }`}
+                    className={`text-left text-xs sm:text-base font-normal transition-colors cursor-pointer leading-tight ${isSelected
+                      ? "text-primary  underline"
+                      : "text-secondary hover:text-textPrimary"
+                      }`}
                   >
                     {cat.name}
                   </button>
@@ -141,8 +142,8 @@ const BubbleTimelineChart = ({
                           className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full transition-transform hover:scale-125 cursor-pointer"
                           style={{
                             left: `${leftPercent}%`,
-                            width: `${b.size * 1.3}px`,
-                            height: `${b.size * 1.3}px`,
+                            width: `${b.size * 2}px`,
+                            height: `${b.size * 2}px`,
                             backgroundColor: cat.color,
                             opacity: 0.85,
                           }}
@@ -158,7 +159,7 @@ const BubbleTimelineChart = ({
 
           {/* Month Axis Labels Row */}
           <div className="flex items-center pl-36 pt-2">
-            <div className="w-full flex justify-between text-xs font-medium text-gray-400">
+            <div className="w-full flex justify-between text-base font-medium text-secondary">
               {MONTHS.map((month) => (
                 <span key={month} className="w-8 text-center">
                   {month}

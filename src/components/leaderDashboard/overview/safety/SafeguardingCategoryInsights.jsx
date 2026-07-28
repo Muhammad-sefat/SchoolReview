@@ -110,14 +110,14 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
         <div className="space-y-6">
           {/* Key Insights Section */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-[#1F1F21]">
+            <h4 className="text-lg font-semibold text-textPrimary">
               Key Insights
             </h4>
             <div className="space-y-2.5">
               {activeData.keyInsights.map((insight, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1" />
-                  <p className="text-xs sm:text-sm text-[#5A5A5A] leading-normal">
+                  <p className="text-xs sm:text-sm text-textPrimary leading-normal">
                     {insight}
                   </p>
                 </div>
@@ -127,14 +127,14 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
 
           {/* Suggested Approaches Section */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-[#1F1F21]">
+            <h4 className="text-lg font-semibold text-textPrimary">
               Suggested Approaches
             </h4>
             <div className="space-y-2.5">
               {activeData.suggestedApproaches.map((approach, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1" />
-                  <p className="text-xs sm:text-sm text-[#5A5A5A] leading-normal">
+                  <p className="text-xs sm:text-sm text-textPrimary leading-normal">
                     {approach}
                   </p>
                 </div>

@@ -56,11 +56,10 @@ const SafeGuard = () => {
         <button
           type="button"
           onClick={() => setActiveTab("overview")}
-          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-            activeTab === "overview"
-              ? "bg-[#038AF9] text-white shadow-xs font-semibold"
-              : "bg-white border border-gray-200 text-[#1F1F21] hover:border-gray-300"
-          }`}
+          className={`px-5 py-2.5 rounded-full text-sm sm:text-lg font-normal  transition-all cursor-pointer ${activeTab === "overview"
+            ? "bg-[#038AF9] text-white shadow-xs font-semibold"
+            : "bg-white border border-gray-200 text-textPrimary hover:border-gray-300"
+            }`}
         >
           Overview
         </button>
@@ -68,11 +67,10 @@ const SafeGuard = () => {
         <button
           type="button"
           onClick={() => setActiveTab("metrics")}
-          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-            activeTab === "metrics"
-              ? "bg-[#038AF9] text-white shadow-xs font-semibold"
-              : "bg-white border border-gray-200 text-[#1F1F21] hover:border-gray-300"
-          }`}
+          className={`px-5 py-2.5 rounded-full text-sm sm:text-lg font-normal  transition-all cursor-pointer ${activeTab === "metrics"
+            ? "bg-[#038AF9] text-white shadow-xs font-semibold"
+            : "bg-white border border-gray-200 text-textPrimary hover:border-gray-300"
+            }`}
         >
           Key Metrics
         </button>

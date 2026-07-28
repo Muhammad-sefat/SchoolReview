@@ -127,11 +127,10 @@ const ScatterPlot = ({
                 key={tab.id}
                 type="button"
                 onClick={() => onTabChange && onTabChange(tab.id)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${
-                  activeTab === tab.id
+                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
                     ? "bg-white text-textPrimary shadow-2xs font-semibold"
                     : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -141,7 +140,7 @@ const ScatterPlot = ({
 
         {/* Recharts Scatter Plot Area */}
         <div
-          className="w-full h-[440px] relative mt-2"
+          className="w-full xlg:h-[440px] h-[380px] relative mt-2"
           onMouseLeave={handleContainerMouseLeave}
         >
           <ResponsiveContainer width="100%" height="100%">

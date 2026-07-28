@@ -54,9 +54,9 @@ const CommunityOverview = () => {
   return (
     <div className="w-full space-y-6">
       {/* Top Section: Community Reviews List (5 Cols) + Review Detail & AI Response (7 Cols) */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch">
         {/* Left Reviews List */}
-        <div className="lg:col-span-5 flex flex-col min-w-0">
+        <div className="xlg:col-span-4 flex flex-col min-w-0">
           <CommunityReviewsList
             selectedReviewId={selectedReview ? selectedReview.id : 1}
             onSelectReview={setSelectedReview}
@@ -64,20 +64,20 @@ const CommunityOverview = () => {
         </div>
 
         {/* Right Review Detail & School Response */}
-        <div className="lg:col-span-7 flex flex-col min-w-0">
+        <div className="xlg:col-span-8 flex flex-col min-w-0">
           <CommunityReviewDetail selectedReview={selectedReview} />
         </div>
       </div>
 
       {/* Bottom Section: Discovery Call Requests (8 Cols) + Key Metrics (4 Cols) */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch min-w-0">
+      <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch min-w-0">
         {/* Left Discovery Call Requests Swiper */}
-        <div className="lg:col-span-8 flex flex-col min-w-0">
+        <div className="xlg:col-span-8 flex flex-col min-w-0">
           <DiscoveryCallRequests />
         </div>
 
         {/* Right Community Key Metrics */}
-        <div className="lg:col-span-4 flex flex-col min-w-0">
+        <div className="xlg:col-span-4 flex flex-col min-w-0">
           <KeyMetricsCard title="Key Metrics" metrics={COMMUNITY_KEY_METRICS} />
         </div>
       </div>

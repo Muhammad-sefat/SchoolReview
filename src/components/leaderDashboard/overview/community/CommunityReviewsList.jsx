@@ -59,7 +59,7 @@ const StarRating = ({ rating = 4.5 }) => {
       stars.push(
         <svg
           key={i}
-          className="w-4 h-4 text-[#038AF9] fill-[#038AF9]"
+          className="w-5 h-5 text-[#038AF9] fill-[#038AF9]"
           viewBox="0 0 24 24"
         >
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -148,15 +148,15 @@ const CommunityReviewsList = ({
             ratingFilter !== "All" ||
             recFilter !== "All" ||
             dateFilter !== "All") && (
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="text-xs font-medium text-[#038AF9] hover:underline flex items-center gap-1 cursor-pointer"
-            >
-              <X className="w-3 h-3" />
-              <span>Reset</span>
-            </button>
-          )}
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="text-xs font-medium text-[#038AF9] hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <X className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            )}
         </div>
 
         {/* Filter Row with Shadcn Select Components */}
@@ -164,7 +164,7 @@ const CommunityReviewsList = ({
           {/* 1. Role Filter Shadcn Select */}
           <div className="w-32">
             <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8">
                 <SelectValue placeholder="Role" />
               </SelectTrigger>
               <SelectContent>
@@ -180,7 +180,7 @@ const CommunityReviewsList = ({
           {/* 2. Rating Filter Shadcn Select */}
           <div className="w-32">
             <Select value={ratingFilter} onValueChange={setRatingFilter}>
-              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8">
                 <SelectValue placeholder="Rating" />
               </SelectTrigger>
               <SelectContent>
@@ -194,7 +194,7 @@ const CommunityReviewsList = ({
           {/* 3. Recommendation Filter Shadcn Select */}
           <div className="w-40">
             <Select value={recFilter} onValueChange={setRecFilter}>
-              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8">
                 <SelectValue placeholder="Recommendation" />
               </SelectTrigger>
               <SelectContent>
@@ -208,7 +208,7 @@ const CommunityReviewsList = ({
           {/* 4. Date Filter Shadcn Select */}
           <div className="w-36">
             <Select value={dateFilter} onValueChange={setDateFilter}>
-              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-[#1F1F21] bg-white h-8">
+              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8">
                 <SelectValue placeholder="Date" />
               </SelectTrigger>
               <SelectContent>
@@ -239,13 +239,12 @@ const CommunityReviewsList = ({
                 <div key={review.id} className="relative group">
                   <div
                     onClick={() => onSelectReview && onSelectReview(review)}
-                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2.5 ${
-                      isSelected
-                        ? "border-[#038AF9] bg-[#038AF9]/5 shadow-xs"
-                        : "border-gray-200/80 bg-white hover:border-gray-300"
-                    }`}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2.5 ${isSelected
+                      ? "border-[#038AF9] bg-[#038AF9]/5 shadow-xs"
+                      : "border-gray-200/80 bg-white hover:border-gray-300"
+                      }`}
                   >
-                    <p className="text-xs sm:text-sm font-semibold text-[#1F1F21] leading-snug">
+                    <p className="text-xs sm:text-base font-semibold text-textPrimary leading-snug">
                       {review.title}
                     </p>
                     <StarRating rating={review.rating} />

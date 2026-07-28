@@ -138,7 +138,7 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
         {showCalendarModal && (
           <div className="absolute top-16 right-6 z-30 bg-white border border-gray-200 rounded-2xl p-4 shadow-xl space-y-3 w-72 animate-fadeIn">
             <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-              <span className="text-xs font-bold text-[#1F1F21]">
+              <span className="text-xs font-bold text-textPrimary">
                 Select Call Date
               </span>
               <button
@@ -156,7 +156,7 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
                 setSelectedDate(e.target.value)
                 setShowCalendarModal(false)
               }}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs font-medium text-[#1F1F21] outline-none focus:border-[#038AF9]"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs font-medium text-textPrimary outline-none focus:border-[#038AF9]"
             />
           </div>
         )}
@@ -186,7 +186,7 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
                 <div className="bg-white border border-gray-200/80 rounded-2xl p-4 space-y-3 shadow-2xs hover:border-gray-300 transition-all h-full">
                   {/* Name & Status Badge */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-sm sm:text-base text-[#1F1F21]">
+                    <span className="font-semibold text-sm sm:text-lg text-textPrimary">
                       {call.name}
                     </span>
                     <span
@@ -197,13 +197,13 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
                   </div>
 
                   {/* Date & Time */}
-                  <p className="text-xs text-gray-500 font-normal">
+                  <p className="text-lg text-textPrimary font-normal">
                     {call.date} <span className="text-gray-300 mx-1">•</span>{" "}
                     {call.time}
                   </p>
 
                   {/* Duration */}
-                  <p className="text-xs text-gray-700 font-medium">
+                  <p className="text-base text-textPrimary font-medium">
                     {call.duration}
                   </p>
                 </div>

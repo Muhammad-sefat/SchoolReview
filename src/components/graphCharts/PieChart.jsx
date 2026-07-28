@@ -73,7 +73,7 @@ const PieChartComponent = ({
       </div>
 
       {/* Chart & Legend Grid */}
-      <div className="flex-1 flex flex-col xl:flex-row items-center justify-between gap-4 py-1 min-w-0">
+      <div className="flex-1 flex flex-col xl:flex-row items-center justify-between gap-4  min-w-0">
         {/* Left Legend */}
         <div className="space-y-2.5 shrink-0 min-w-0 w-full xl:w-auto">
           {data.map((item, index) => (
@@ -90,7 +90,7 @@ const PieChartComponent = ({
         </div>
 
         {/* Right Pie Chart Container */}
-        <div className="w-full xl:w-[184px] h-[184px] relative shrink-0 min-w-0 flex items-center justify-center">
+        <div className="w-full xl:w-[184px] h-[164px] relative shrink-0 min-w-0 flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <RechartsPieChart>
               <Pie

@@ -108,8 +108,8 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                 type="button"
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${activeTab === tab
-                    ? "bg-white text-[#1F1F21] shadow-2xs font-semibold"
-                    : "text-[#5A5A5A] hover:text-[#1F1F21]"
+                  ? "bg-white text-[#1F1F21] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] hover:text-[#1F1F21]"
                   }`}
               >
                 {tab}
@@ -122,14 +122,14 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
         <div className="flex items-center gap-3">
           <Button
             type="button"
-            className="px-4 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-xs font-semibold transition-colors shadow-2xs cursor-pointer h-auto"
+            className="px-4 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-base font-medium transition-colors shadow-2xs cursor-pointer h-auto"
           >
             Export Reports
           </Button>
 
           <div className="w-48">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="rounded-xl border-gray-200 text-xs font-semibold text-[#1F1F21]">
+              <SelectTrigger className="rounded-xl border-gray-200 text-base font-medium text-textPrimary">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
@@ -162,30 +162,30 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
             <TableRow className="border-b border-gray-100 hover:bg-transparent">
               <TableHead className="w-12 px-4">
                 <Checkbox
+                  className="!rounded-[4px] border-gray-400 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9] data-[state=checked]:text-white"
                   checked={
                     selectedIds.length === filteredReports.length &&
                     filteredReports.length > 0
                   }
                   onCheckedChange={handleSelectAll}
                   aria-label="Select all reports"
-
                 />
               </TableHead>
-              <TableHead className="font-normal text-xs text-gray-400">
+              <TableHead className="font-normal text-base text-secondary">
                 Date
               </TableHead>
-              <TableHead className="font-normal text-xs text-gray-400">
+              <TableHead className="font-normal text-base text-secondary">
                 Category
               </TableHead>
-              <TableHead className="font-normal text-xs text-gray-400">
+              <TableHead className="font-normal text-base text-secondary">
                 Summary
               </TableHead>
-              <TableHead className="font-normal text-xs text-gray-400 text-right">
+              <TableHead className="font-normal text-base text-secondary text-right">
                 Priority
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody className="text-xs sm:text-sm font-medium text-[#1F1F21]">
+          <TableBody className="text-base font-medium text-[#1F1F21]">
             {filteredReports.map((row) => {
               const isSelected = selectedIds.includes(row.id)
 
@@ -197,25 +197,25 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
                     }`}
                 >
                   <TableCell
-                    className="px-4 py-4"
+                    className="px-4 py-4 "
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Checkbox
                       checked={isSelected}
+                      className="!rounded-[4px] border-gray-400 data-[state=checked]:bg-[#038AF9] data-[state=checked]:border-[#038AF9] data-[state=checked]:text-white"
                       onCheckedChange={(checked) =>
                         toggleSelectRow(row.id, !!checked)
                       }
                       aria-label={`Select report ${row.id}`}
-
                     />
                   </TableCell>
-                  <TableCell className="px-4 py-4 whitespace-nowrap text-gray-700">
+                  <TableCell className="px-4 py-4 whitespace-nowrap text-textPrimary">
                     {row.date}
                   </TableCell>
-                  <TableCell className="px-4 py-4 whitespace-nowrap font-medium text-[#1F1F21]">
+                  <TableCell className="px-4 py-4 whitespace-nowrap font-medium text-textPrimary">
                     {row.category}
                   </TableCell>
-                  <TableCell className="px-4 py-4 text-gray-600 font-normal max-w-xs truncate">
+                  <TableCell className="px-4 py-4 text-textPrimary font-normal max-w-xs truncate">
                     {row.summary}
                   </TableCell>
                   <TableCell className="px-4 py-4 text-right">

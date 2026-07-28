@@ -12,7 +12,7 @@ const OverviewHeader = ({ activeCategory, setActiveCategory }) => {
   }
 
   return (
-    <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-1">
+    <div className="w-full flex flex-col xl:flex-row xl:items-center justify-between gap-4 py-1">
       {/* Left Filter Navigation Pills */}
       <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scrollbar-none flex-nowrap pb-1 max-w-full">
         {/* School Performance Tab */}

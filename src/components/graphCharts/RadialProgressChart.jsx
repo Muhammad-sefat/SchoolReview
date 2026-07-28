@@ -21,13 +21,13 @@ const RadialProgressChart = ({
     <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full min-w-0 overflow-hidden">
       {/* Title Header with Dotted Separator */}
       <div className="border-b border-dashed border-gray-200/80 pb-3 mb-2 shrink-0">
-        <h3 className="font-urbanist text-lg sm:text-xl font-semibold text-[#080808]">
+        <h3 className="font-urbanist text-lg sm:text-2xl font-semibold text-[#080808]">
           {title}
         </h3>
       </div>
 
       {/* Main Rings & Labels Section */}
-      <div className="flex-1 flex items-center justify-between gap-2 py-2 min-w-0">
+      <div className="flex-1 flex items-center gap-10 py-2 min-w-0">
         {/* Left Side: Legend Labels Column */}
         <div className="flex flex-col justify-start h-[145px] pt-1 text-[11px] sm:text-xs font-medium text-[#5A5A5A] text-right shrink-0 min-w-0">
           {data.map((ring, idx) => {
@@ -38,22 +38,20 @@ const RadialProgressChart = ({
                 key={idx}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
-                className={`flex items-center justify-end gap-1.5 cursor-pointer transition-all duration-200 h-[18px] ${
-                  isHovered
-                    ? "text-[#038AF9] font-bold translate-x-0.5"
-                    : hoveredIdx !== null
+                className={`flex items-center justify-end gap-1.5 cursor-pointer transition-all duration-200 h-[18px] ${isHovered
+                  ? "text-[#038AF9] font-bold translate-x-0.5"
+                  : hoveredIdx !== null
                     ? "opacity-40"
                     : ""
-                }`}
+                  }`}
                 title={`${ring.label}: ${ring.count} reports (${ring.percent}%)`}
               >
                 <span className="truncate max-w-[110px] sm:max-w-[140px]">
                   {ring.label}
                 </span>
                 <span
-                  className={`w-5 text-right font-semibold ${
-                    isHovered ? "text-[#038AF9]" : "text-[#1F1F21]"
-                  }`}
+                  className={`w-5 text-right font-semibold ${isHovered ? "text-[#038AF9]" : "text-[#1F1F21]"
+                    }`}
                 >
                   {ring.count}
                 </span>

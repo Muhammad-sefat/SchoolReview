@@ -40,9 +40,9 @@ const SchoolPerformPriorityPerform = () => {
   const currentChartData = activeTab === "parents" ? PARENT_STUDENT_DATA : TEACHER_DATA
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch">
       {/* Left Reusable Scatter Plot Chart Area */}
-      <div className="lg:col-span-8 flex">
+      <div className="xlg:col-span-8 flex">
         <ScatterPlot
           title="School Performance Metrics"
           subtitle="Select a metric to view details"
@@ -55,7 +55,7 @@ const SchoolPerformPriorityPerform = () => {
       </div>
 
       {/* Right Priority Areas */}
-      <div className="lg:col-span-4 flex">
+      <div className="xlg:col-span-4 flex">
         <PrioprityArea />
       </div>
     </div>

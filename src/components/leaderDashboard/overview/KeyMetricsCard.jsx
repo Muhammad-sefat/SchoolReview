@@ -60,7 +60,7 @@ const KeyMetricsCard = ({
             <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm min-w-0">
               {/* Metric Label */}
               <span
-                className="font-normal text-textPrimary text-xs sm:text-base truncate shrink-0 w-36 sm:w-48 md:w-52 pr-1"
+                className="font-normal text-textPrimary text-sm sm:text-base truncate shrink-0 w-36 sm:w-48 md:w-52 pr-1"
                 title={metric.label}
               >
                 {metric.label}
@@ -68,7 +68,7 @@ const KeyMetricsCard = ({
 
               {/* Metric Value & Trend */}
               <div className="flex items-center gap-2 sm:gap-2.5 flex-1 min-w-0 justify-end">
-                <span className="font-normal text-textPrimary text-xs sm:text-base w-7 sm:w-9 text-right shrink-0">
+                <span className="font-normal text-textPrimary text-sm sm:text-base w-7 sm:w-9 text-right shrink-0">
                   {metric.percentage}%
                 </span>
 

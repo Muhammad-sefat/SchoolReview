@@ -16,7 +16,7 @@ const LeaderNavbar = ({ open, setOpen }) => {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="lg:hidden p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
+        className="xl:hidden p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
         aria-label="Toggle menu"
       >
         <Menu className="w-6 h-6" />
