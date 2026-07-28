@@ -92,9 +92,9 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
 
   return (
     <Dialog open={!!report} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="relative max-w-4xl p-6 md:p-8 max-h-[90vh] overflow-y-auto no-scrollbar rounded-3xl border-none shadow-2xl">
+      <DialogContent className="relative max-w-[1200px] p-6 md:p-8 max-h-[90vh] overflow-y-auto no-scrollbar rounded-3xl border-none shadow-2xl">
         <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0">
-          <DialogTitle className="font-urbanist text-2xl font-bold text-[#080808]">
+          <DialogTitle className="font-urbanist text-2xl font-semibold text-[#080808]">
             Report details
           </DialogTitle>
         </DialogHeader>
@@ -104,7 +104,8 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
           <div className="border border-gray-100 rounded-3xl p-5 space-y-4 bg-gray-50/20 relative">
             <div className="flex flex-wrap items-center justify-between gap-4">
               {/* Left Control Pills */}
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Helper Dotted Plus Badge Component */}
                 {/* 1. Priority Pill Button */}
                 <div className="relative">
                   <button
@@ -112,25 +113,26 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                     onClick={() =>
                       setShowPriorityDropdown(!showPriorityDropdown)
                     }
-                    className={`px-3.5 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                      priority
-                        ? "border-gray-200 bg-white text-[#1F1F21]"
-                        : "border-[#038AF9] text-[#038AF9] hover:bg-[#038AF9]/5"
-                    }`}
+                    className="px-4 py-2 rounded-full border border-[#038AF9] bg-white text-sm font-normal text-textPrimary flex items-center gap-2 transition-colors cursor-pointer hover:bg-gray-50/80"
                   >
-                    <span>
-                      Priority: {priority ? priority.label : "(+)"}
-                    </span>
-                    {priority && (
-                      <span
-                        className={`w-2.5 h-2.5 rounded-full ${priority.color}`}
-                      />
+                    <span>Priority:</span>
+                    {priority ? (
+                      <span className="flex items-center gap-1.5 font-medium">
+                        <span>{priority.label}</span>
+                        <span
+                          className={`w-2.5 h-2.5 rounded-full ${priority.color}`}
+                        />
+                      </span>
+                    ) : (
+                      <span className="w-5 h-5 rounded-full border border-dashed border-[#038AF9] text-[#038AF9] flex items-center justify-center text-xs font-semibold shrink-0">
+                        +
+                      </span>
                     )}
                   </button>
 
                   {/* Priority Dropdown Options */}
                   {showPriorityDropdown && (
-                    <div className="absolute top-10 left-0 z-30 bg-white border border-gray-200 rounded-2xl p-2 shadow-xl w-36 space-y-1 text-xs animate-fadeIn">
+                    <div className="absolute top-12 left-0 z-30 bg-white border border-gray-200 rounded-2xl p-2 shadow-xl w-36 space-y-1 text-sm animate-fadeIn">
                       {PRIORITY_OPTIONS.map((opt) => (
                         <button
                           key={opt.id}
@@ -139,7 +141,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                             setPriority(opt)
                             setShowPriorityDropdown(false)
                           }}
-                          className="w-full text-left px-3 py-1.5 rounded-xl hover:bg-gray-100 flex items-center justify-between text-[#1F1F21] cursor-pointer"
+                          className="w-full text-left px-3 py-1.5 rounded-xl hover:bg-gray-100 flex items-center justify-between text-textPrimary cursor-pointer"
                         >
                           <span>{opt.label}</span>
                           <span
@@ -156,20 +158,23 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                   <button
                     type="button"
                     onClick={() => setShowAssignModal(!showAssignModal)}
-                    className={`px-3.5 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                      assignedTeacher
-                        ? "border-[#038AF9] bg-[#038AF9]/10 text-[#038AF9]"
-                        : "border-[#038AF9] text-[#038AF9] hover:bg-[#038AF9]/5"
-                    }`}
+                    className="px-4 py-2 rounded-full border border-[#038AF9] bg-white text-sm font-normal text-textPrimary flex items-center gap-2 transition-colors cursor-pointer hover:bg-gray-50/80"
                   >
-                    <span>Assign to: {assignedTeacher || "(+)"}</span>
+                    <span>Assign to:</span>
+                    {assignedTeacher ? (
+                      <span className="font-medium text-[#038AF9]">{assignedTeacher}</span>
+                    ) : (
+                      <span className="w-5 h-5 rounded-full border border-dashed border-[#038AF9] text-[#038AF9] flex items-center justify-center text-sm font-semibold shrink-0">
+                        +
+                      </span>
+                    )}
                   </button>
 
                   {/* Assign Teacher Modal Dropdown */}
                   {showAssignModal && (
-                    <div className="absolute top-10 left-0 z-40 bg-white border border-gray-200 rounded-2xl p-4 shadow-2xl w-64 space-y-3 animate-fadeIn">
+                    <div className="absolute top-12 left-0 z-40 bg-white border border-gray-200 rounded-2xl p-4 shadow-2xl w-64 space-y-3 animate-fadeIn">
                       <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                        <span className="text-xs font-bold text-[#1F1F21]">
+                        <span className="text-sm font-bold text-textPrimary">
                           Assign Teacher
                         </span>
                         <button
@@ -185,7 +190,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                         value={tempTeacher}
                         onValueChange={setTempTeacher}
                       >
-                        <SelectTrigger className="rounded-xl border-gray-200 text-xs font-medium text-[#1F1F21]">
+                        <SelectTrigger className="rounded-xl border-gray-200 text-sm font-medium text-textPrimary">
                           <SelectValue placeholder="Select a teacher" />
                         </SelectTrigger>
                         <SelectContent zIndex={100}>
@@ -209,10 +214,10 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                 </div>
 
                 {/* 3. Shadcn Status Select */}
-                <div className="w-36">
+                <div className="min-w-[150px]">
                   <Select value={status} onValueChange={setStatus}>
-                    <SelectTrigger className="rounded-full border-gray-200 bg-white text-xs font-semibold text-[#1F1F21] h-8">
-                      <SelectValue placeholder="Status: Open" />
+                    <SelectTrigger className="rounded-full border border-[#BDE3FF] bg-white text-sm font-normal text-textPrimary h-10 px-4">
+                      <SelectValue placeholder="Status : Open" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Open">Status : Open</SelectItem>
@@ -223,21 +228,21 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
               </div>
 
               {/* Right Metadata Badges */}
-              <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-gray-500">
-                <span className="bg-gray-100 px-3 py-1 rounded-full text-[#1F1F21]">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-medium ">
+                <span className="border-[#EAEAEA] border px-3 py-1 rounded-full text-secondary">
                   {report.category || "Bullying & Harassment"}
                 </span>
-                <span className="bg-gray-100 px-3 py-1 rounded-full text-[#1F1F21]">
+                <span className="border-[#EAEAEA] border px-3 py-1 rounded-full text-secondary">
                   Reported by: {report.reportedBy || "Anonymous"}
                 </span>
-                <span className="bg-gray-100 px-3 py-1 rounded-full text-gray-500">
+                <span className="border-[#EAEAEA] border px-3 py-1 rounded-full text-secondary">
                   {report.date || "Oct 11, 2025 at 2:30 PM"}
                 </span>
               </div>
             </div>
 
             {/* Report Content with Blue Left Line */}
-            <div className="border-l-2 border-[#038AF9] pl-4 py-1 text-xs sm:text-sm font-normal text-[#1F1F21] leading-relaxed">
+            <div className="border-l-2 border-[#038AF9] pl-4 py-1 text-sm sm:text-lg font-normal text-textPrimary leading-relaxed">
               <p>
                 {report.fullText ||
                   "A few classmates created a private group on Instagram where they post edited pictures of people from our class with mean captions. One of them is about me. They also shared the link in our group chat, so everyone saw it. I've blocked them, but new accounts keep tagging me. I don't want to say who I am, but please can someone look into it before it gets worse."}
@@ -251,7 +256,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                   key={idx}
                   type="button"
                   onClick={() => setPreviewMedia(att)}
-                  className="bg-white border border-gray-200 hover:border-gray-300 px-3.5 py-1.5 rounded-full text-xs font-medium text-[#1F1F21] flex items-center gap-2 shadow-2xs transition-colors cursor-pointer"
+                  className="bg-white border border-gray-200 hover:border-gray-300 px-3.5 py-1.5 rounded-full text-xs font-medium text-textPrimary flex items-center gap-2 shadow-2xs transition-colors cursor-pointer"
                 >
                   {att.type === "video" ? (
                     <Video className="w-3.5 h-3.5 text-[#038AF9]" />
@@ -296,7 +301,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                   value={responseText}
                   onChange={(e) => setResponseText(e.target.value)}
                   placeholder="Write a response..."
-                  className="w-full h-20 bg-transparent border-none outline-none resize-none text-xs sm:text-sm text-[#1F1F21] placeholder-gray-400 focus:ring-0 p-1"
+                  className="w-full h-20 bg-transparent border-none outline-none resize-none text-xs sm:text-base text-textPrimary placeholder-gray-400 focus:ring-0 p-1"
                 />
               </div>
 
@@ -306,7 +311,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
                   {responseAttachments.map((att, idx) => (
                     <div
                       key={idx}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium text-[#1F1F21] flex items-center gap-2"
+                      className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium text-textPrimary flex items-center gap-2"
                     >
                       {att.type === "video" ? (
                         <Video className="w-3.5 h-3.5 text-[#038AF9]" />
@@ -354,7 +359,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
           {/* History Thread Section (Image 2 & 5) */}
           <div className="border border-gray-100 rounded-3xl p-5 space-y-4 bg-gray-50/20">
             <div className="flex items-center justify-between">
-              <h4 className="font-semibold text-sm sm:text-base text-[#1F1F21]">
+              <h4 className="font-semibold text-sm sm:text-base text-textPrimary">
                 History
               </h4>
               <span className="text-xs text-gray-400">
@@ -363,7 +368,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
             </div>
 
             {/* Reporter Message Bubble */}
-            <div className="bg-white border border-gray-200/80 rounded-2xl p-4 text-xs sm:text-sm text-[#1F1F21] leading-relaxed max-w-2xl">
+            <div className="bg-white border border-gray-200/80 rounded-2xl p-4 text-xs sm:text-base text-textPrimary leading-relaxed max-w-2xl">
               <p>
                 A few classmates created a private group on Instagram where
                 they post edited pictures of people from our class with mean
@@ -373,8 +378,8 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
             </div>
 
             {/* School Response Message Bubble */}
-            <div className="ml-auto bg-[#038AF9]/5 border border-[#038AF9]/20 rounded-2xl p-4 text-xs sm:text-sm text-[#1F1F21] leading-relaxed max-w-2xl space-y-2">
-              <h5 className="font-bold text-[#1F1F21]">School response</h5>
+            <div className="ml-auto bg-[#038AF9]/5 border border-[#038AF9]/20 rounded-2xl p-4 text-xs sm:text-base text-textPrimary leading-relaxed max-w-2xl space-y-2">
+              <h5 className="font-bold text-textPrimary">School response</h5>
               <p className="text-gray-600">
                 Thank you for bringing this to our attention. We're sorry to
                 hear about what you've experienced. Your report has been
