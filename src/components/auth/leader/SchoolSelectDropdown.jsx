@@ -61,9 +61,8 @@ const SchoolSelectDropdown = ({ value, onChange, onRequestAddSchool, error }) =>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div
-            className={`w-full h-12 px-4 rounded-xl border border-border/80 bg-background flex items-center justify-between cursor-pointer transition-colors ${
-              open ? "border-primary ring-1 ring-primary" : "hover:border-border"
-            } ${error ? "border-destructive" : ""}`}
+            className={`w-full h-12 px-4 rounded-xl border border-border/80 bg-background flex items-center justify-between cursor-pointer transition-colors ${open ? "border-primary ring-1 ring-primary" : "hover:border-border"
+              } ${error ? "border-destructive" : ""}`}
           >
             <span className={selectedSchool ? "text-foreground text-[16px] font-medium" : "text-[#5A5A5A] text-[16px]"}>
               {selectedSchool ? selectedSchool.name : "Search for your school"}
@@ -97,9 +96,8 @@ const SchoolSelectDropdown = ({ value, onChange, onRequestAddSchool, error }) =>
                   <div
                     key={school.id}
                     onClick={() => handleSelect(school)}
-                    className={`flex items-center gap-3.5 p-3.5 cursor-pointer transition-colors ${
-                      isSelected ? "bg-muted/40" : "hover:bg-muted/30"
-                    }`}
+                    className={`flex items-center gap-3.5 p-3.5 cursor-pointer transition-colors ${isSelected ? "bg-muted/40" : "hover:bg-muted/30"
+                      }`}
                   >
                     {school.logoSvg}
                     <div className="flex-1 min-w-0">
@@ -114,7 +112,7 @@ const SchoolSelectDropdown = ({ value, onChange, onRequestAddSchool, error }) =>
           </div>
 
           {/* Bottom Footer: Request to Add School */}
-          <div className="p-3 border-t border-border/60 bg-muted/10 text-xs text-muted-foreground flex items-center justify-between">
+          <div className="p-3 border-t border-border/60 bg-muted/10 text-xs text-muted-foreground flex gap-2 items-center ">
             <span>Can't find your school?</span>
             <button
               type="button"

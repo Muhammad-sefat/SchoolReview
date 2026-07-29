@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate, useOutletContext } from "react-router-dom"
-import { Title32 } from "@/components/typho/Title"
+import { Title32, Title24, Title20 } from "@/components/typho/Title"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
-const ROLES = [
-  {
-    id: "school-reviewer",
-    badge: "Community Member",
-    title: "School Reviewer",
-    description: "Share your experience and leave feedback about your school.",
-  },
+const FIRST_ROLE = {
+  id: "school-reviewer",
+  badge: "Community Member",
+  title: "School Reviewer",
+  description: "Share your experience and leave feedback about your school.",
+}
+
+const OTHER_ROLES = [
   {
     id: "school-leader",
     badge: "Community Member",
@@ -66,44 +68,77 @@ const RoleSelect = () => {
     }
   }
 
+  const isFirstSelected = selectedRole === FIRST_ROLE.id
+
   return (
-    <div className="w-full relative space-y-6">
+    <div className="w-full relative space-y-[20px]">
       {/* Greeting Icon & Title */}
       <div className="space-y-2">
         <span className="text-2xl" role="img" aria-label="wave">👋</span>
         <Title32 className="text-foreground">
           Select your role
         </Title32>
-        <p className="text-muted-foreground text-sm">
+        <Title24 className="text-[#1F1F21] font-normal">
           We'll personalise your experience based on your role.
-        </p>
+        </Title24>
       </div>
 
-      {/* Role Options */}
-      <div className="space-y-4 pt-2">
-        {ROLES.map((role) => {
+      {/* Section 1: School Reviewer Box */}
+      <div className="pt-2">
+        <div className="mb-5">
+          <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-2 py-1.5 rounded-full inline-block">
+            {FIRST_ROLE.badge}
+          </span>
+        </div>
+        <div
+          onClick={() => setSelectedRole(FIRST_ROLE.id)}
+          className={`relative lg:p-5 p-4 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isFirstSelected
+            ? "border-primary ring-1 ring-primary shadow-sm"
+            : "border-border/80 hover:border-border"
+            }`}
+        >
+          <Title24 className="text-[#080808] font-semibold mb-1">
+            {FIRST_ROLE.title}
+          </Title24>
+          <Title20 className="text-[#080808] font-normal leading-relaxed">
+            {FIRST_ROLE.description}
+          </Title20>
+        </div>
+      </div>
+
+      {/* Subtle Section Divider */}
+      <div className="my-6 border-t border-border/40" />
+
+      {/* Section 2: Remaining Roles */}
+      <div className="space-y-5">
+        {OTHER_ROLES.map((role) => {
           const isSelected = selectedRole === role.id
           return (
-            <div
-              key={role.id}
-              onClick={() => setSelectedRole(role.id)}
-              className={`relative p-5 rounded-2xl border transition-all cursor-pointer ${
-                isSelected
-                  ? "border-primary bg-primary/[0.02] ring-1 ring-primary shadow-sm"
-                  : "border-border/80 hover:border-border bg-background"
-              }`}
-            >
+            <div key={role.id} className="w-full">
+              {/* Badge outside box if present */}
               {role.badge && (
-                <span className="text-[11px] font-medium text-primary bg-primary/10 px-2.5 py-0.5 rounded-full inline-block mb-2">
-                  {role.badge}
-                </span>
+                <div className="mb-5">
+                  <span className="text-xs font-medium text-primary bg-white border border-[#E6F3FE] px-2 py-1.5 rounded-full inline-block">
+                    {role.badge}
+                  </span>
+                </div>
               )}
-              <h3 className="font-bold text-foreground text-base mb-1">
-                {role.title}
-              </h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {role.description}
-              </p>
+
+              {/* Role Card Box */}
+              <div
+                onClick={() => setSelectedRole(role.id)}
+                className={`relative lg:p-5 p-4 rounded-2xl border transition-all cursor-pointer bg-[#FDFDFD] ${isSelected
+                  ? "border-primary ring-1 ring-primary shadow-sm"
+                  : "border-border/80 hover:border-border"
+                  }`}
+              >
+                <Title24 className="text-[#080808] font-semibold mb-1">
+                  {role.title}
+                </Title24>
+                <Title20 className="text-[#080808] font-normal leading-relaxed">
+                  {role.description}
+                </Title20>
+              </div>
             </div>
           )
         })}
@@ -111,13 +146,9 @@ const RoleSelect = () => {
 
       {/* Continue Button */}
       <div className="pt-4">
-        <button
-          type="button"
-          onClick={handleContinue}
-          className="w-full h-12 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
+        <AuthBtn onClick={handleContinue}>
           Continue
-        </button>
+        </AuthBtn>
       </div>
     </div>
   )

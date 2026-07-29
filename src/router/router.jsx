@@ -16,8 +16,57 @@ import SchoolEvaluatorSignUp from "../pages/auth/SchoolEvaluatorSignUp"
 import VerifyEmail from "../pages/auth/VerifyEmail"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import ResetPassword from "../pages/auth/ResetPassword"
+import ReviewLayout from "../layout/ReviewLayout"
+import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview"
+import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
+import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
+
+import LeaderDashboardLayout from "../layout/LeaderDashboard"
+import OverView from "../pages/LeaderDashboard/OverView"
+import SafeGuard from "../pages/LeaderDashboard/SafeGuard"
+import TeachingInsight from "../pages/LeaderDashboard/TeachingInsight"
+import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck"
+import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 const router = createBrowserRouter([
+  {
+    path: "/leader-dashboard",
+    element: <LeaderDashboardLayout />,
+    errorElement: <DashboardErrorBoundary />,
+    children: [
+      { path: "", element: <OverView /> },
+      { path: "overview", element: <OverView /> },
+      { path: "safeguarding", element: <SafeGuard /> },
+      { path: "community", element: <CommunityFeedbacck /> },
+      { path: "community-feedback", element: <CommunityFeedbacck /> },
+      { path: "teaching-insights", element: <TeachingInsight /> },
+      { path: "reports", element: <OverView /> },
+      { path: "*", element: <Navigate to="/leader-dashboard" replace /> },
+    ],
+  },
+  {
+    path: "/leader",
+    element: <Navigate to="/leader-dashboard" replace />,
+  },
+  {
+    path: "/review-teacher",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "self", element: <TeacherSelfReview /> },
+      { path: "observer", element: <ObserverToTeacherReview /> },
+    ]
+  },
+  {
+    path: "/review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "teacher-self", element: <TeacherSelfReview /> },
+      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
+    ]
+  },
+
   {
     path: "/auth",
     element: <AuthLayout />,

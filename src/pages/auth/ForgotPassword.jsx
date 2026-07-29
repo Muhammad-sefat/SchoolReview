@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link, useNavigate, useOutletContext } from "react-router-dom"
 import { Title32, Title18 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const ForgotPassword = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -35,7 +36,7 @@ const ForgotPassword = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
       <div className="space-y-2">
         <Title32 className="text-foreground">
@@ -46,7 +47,7 @@ const ForgotPassword = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pt-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px] pt-2">
         {/* Email Field */}
         <CustomInput
           id="email"
@@ -64,12 +65,11 @@ const ForgotPassword = () => {
         />
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full h-12 mt-2 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
-          Send Code
-        </button>
+        <div className="pt-2">
+          <AuthBtn type="submit">
+            Send Code
+          </AuthBtn>
+        </div>
 
         {/* Footer Link */}
         <div className="flex items-center justify-center gap-1.5 pt-4">

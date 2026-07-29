@@ -4,6 +4,7 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom"
 import { Title32, Title18 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
 import TeacherSchoolSelectDropdown from "@/components/auth/teacher/TeacherSchoolSelectDropdown"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const TeacherSignUp = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -46,13 +47,13 @@ const TeacherSignUp = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
       <Title32 className="text-foreground">
         Tell us about you
       </Title32>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
         {/* School Dropdown Selector (Teacher Version without Request Add School) */}
         <div className="space-y-1">
           <Controller
@@ -139,7 +140,7 @@ const TeacherSignUp = () => {
                 required: "You must agree to the Terms of Service & Privacy Policy",
               })}
             />
-            <span className="text-xs text-foreground/80">
+            <span className="lg:text-base text-base text-[#1F1F21">
               I agree to the{" "}
               <Link to="#" className="text-primary hover:underline font-medium">
                 Terms of Service
@@ -158,12 +159,9 @@ const TeacherSignUp = () => {
 
         {/* Submit Button */}
         <div className="pt-2">
-          <button
-            type="submit"
-            className="w-full h-12 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-          >
+          <AuthBtn type="submit">
             Create Account
-          </button>
+          </AuthBtn>
         </div>
 
         {/* Footer Link */}

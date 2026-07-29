@@ -4,6 +4,7 @@ import { useNavigate, useOutletContext } from "react-router-dom"
 import { CheckCircle2 } from "lucide-react"
 import { Title32 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const PASSWORD_REQUIREMENTS = [
   "Be at least 8 characters long",
@@ -57,13 +58,13 @@ const ResetPassword = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
-      <Title32 className="text-foreground mb-8">
+      <Title32 className="text-foreground mb-4">
         Set your new password
       </Title32>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
         {/* Password Field */}
         <CustomInput
           id="password"
@@ -95,12 +96,11 @@ const ResetPassword = () => {
         />
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full h-12 mt-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
-          Reset Password
-        </button>
+        <div className="pt-2">
+          <AuthBtn type="submit">
+            Reset Password
+          </AuthBtn>
+        </div>
       </form>
     </div>
   )

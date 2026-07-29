@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { Title32, Title18 } from "@/components/typho/Title"
+import AuthBtn from "@/components/common/button/AuthBtn"
 
 const VerifyEmail = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -79,7 +80,7 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-[20px]">
       {/* Title */}
       <div className="space-y-2">
         <Title32 className="text-foreground">
@@ -90,7 +91,7 @@ const VerifyEmail = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 pt-2">
+      <form onSubmit={handleSubmit} className="space-y-[20px] pt-2">
         {/* OTP Inputs */}
         <div className="flex items-center justify-between gap-2 max-w-[380px]">
           {otp.map((digit, index) => (
@@ -116,12 +117,11 @@ const VerifyEmail = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full h-12 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors shadow-sm cursor-pointer flex items-center justify-center text-base"
-        >
-          Verify your email
-        </button>
+        <div className="pt-2">
+          <AuthBtn type="submit">
+            Verify your email
+          </AuthBtn>
+        </div>
 
         {/* Footer Link */}
         <div className="flex items-center justify-center gap-1.5 pt-2">
