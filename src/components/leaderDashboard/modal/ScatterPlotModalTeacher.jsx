@@ -1,324 +1,448 @@
-import React from "react"
+import React, { useState } from "react"
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog"
-import { Star, ArrowUpRight, ArrowDownRight } from "lucide-react"
-import {
-    ResponsiveContainer,
-    AreaChart,
-    Area,
-    XAxis,
-    YAxis,
-} from "recharts"
+import { Star, Download } from "lucide-react"
+import OverviewTab from "./tabs/OverviewTab"
+import TeachingInsightsTab from "./tabs/TeachingInsightsTab"
 
-// Sample Teaching Quality trend chart data for Card 3
-const TEACHING_QUALITY_TREND = [
-    { year: "2022", score: 2.8 },
-    { year: "", score: 4.2 },
-    { year: "", score: 3.5 },
-    { year: "", score: 3.9 },
-    { year: "2023", score: 3.0 },
-    { year: "", score: 3.7 },
-    { year: "", score: 3.3 },
-    { year: "2024", score: 4.0 },
-    { year: "", score: 3.8 },
-    { year: "", score: 4.8 },
-    { year: "2025", score: 3.2 },
-    { year: "", score: 4.1 },
-    { year: "2026", score: 3.0 },
+// Standard 3 Legends (Student, Teacher, Observer)
+const THREE_LEGENDS = [
+  { name: "Student", color: "#723CEB", key: "student" },
+  { name: "Teacher", color: "#C7B0F7", key: "teacher" },
+  { name: "Observer", color: "#8DC613", key: "observer" },
 ]
 
-// 4-Segmented Semi-circle gauge with 100% clean angular gaps and zero color overlap
-const SemiCircleGauge = ({ value = 72, label = "Good" }) => {
-    const polarToCartesian = (cx, cy, r, angleInDegrees) => {
-        const angleInRadians = ((angleInDegrees - 180) * Math.PI) / 180
-        return {
-            x: cx + r * Math.cos(angleInRadians),
-            y: cy + r * Math.sin(angleInRadians),
-        }
-    }
+// Professional Practice 2 Legends (Teacher, Observer)
+const TWO_LEGENDS = [
+  { name: "Teacher", color: "#C7B0F7", key: "teacher" },
+  { name: "Observer", color: "#8DC613", key: "observer" },
+]
 
-    const describeArc = (cx, cy, r, startAngle, endAngle) => {
-        const start = polarToCartesian(cx, cy, r, endAngle)
-        const end = polarToCartesian(cx, cy, r, startAngle)
-        const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1"
-        return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" ")
-    }
+// Radar Datasets
+const RADAR_DATA_MAP = {
+  "Teaching Quality": [
+    { subject: "Clarity", student: 4.5, teacher: 4.0, observer: 3.2, iconColor: "#FB8C00" },
+    { subject: "Purpose", student: 4.8, teacher: 3.8, observer: 3.5, iconColor: "#E53935" },
+    { subject: "Progression", student: 4.2, teacher: 4.5, observer: 3.8, iconColor: "#66BB6A" },
+    { subject: "Challenge", student: 4.9, teacher: 4.8, observer: 3.9, iconColor: "#66BB6A" },
+    { subject: "Engagement", student: 4.3, teacher: 4.1, observer: 3.7, iconColor: "#E53935" },
+    { subject: "Feedback", student: 4.6, teacher: 4.2, observer: 3.8, iconColor: "#66BB6A" },
+  ],
+  "Learning Environment": [
+    { subject: "Pace", student: 4.8, teacher: 4.0, observer: 3.5, iconColor: "#FB8C00" },
+    { subject: "Support", student: 4.5, teacher: 3.8, observer: 3.2, iconColor: "#E53935" },
+    { subject: "Dialogue", student: 4.2, teacher: 4.5, observer: 3.8, iconColor: "#66BB6A" },
+    { subject: "Fairness", student: 4.9, teacher: 4.8, observer: 3.9, iconColor: "#66BB6A" },
+    { subject: "Inclusion", student: 4.3, teacher: 4.1, observer: 3.7, iconColor: "#E53935" },
+    { subject: "Behavior", student: 4.6, teacher: 4.2, observer: 3.8, iconColor: "#66BB6A" },
+  ],
+  "Professional Practice": [
+    { subject: "Lesson Coherence", teacher: 3.2, observer: 2.8, iconColor: "#FB8C00" },
+    { subject: "Meaningful Assessment", teacher: 4.0, observer: 4.5, iconColor: "#66BB6A" },
+    { subject: "Adaptive Teaching", teacher: 3.5, observer: 4.2, iconColor: "#66BB6A" },
+    { subject: "Ongoing Improvement", teacher: 4.8, observer: 4.0, iconColor: "#E53935" },
+  ],
+}
 
-    // 4 distinct color segments with subtle hairline 2.5-degree gaps
-    const segments = [
-        { start: 2, end: 43.5, color: "#D8EDFF" },
-        { start: 46, end: 88.5, color: "#46A9FF" },
-        { start: 91, end: 133.5, color: "#038AF9" },
-        { start: 136, end: 178, color: "#0062C4" },
-    ]
-
-    // Value 72 maps to angle inside Segment 3
-    const clampedValue = Math.min(Math.max(value, 0), 100)
-    const pointerAngle = (clampedValue / 100) * 176 + 2
-    const pointerPos = polarToCartesian(70, 68, 44, pointerAngle)
-
-    // Outer cap circles at 0° and 180° for smooth rounded ends
-    const capStart = polarToCartesian(70, 68, 50, 2)
-    const capEnd = polarToCartesian(70, 68, 50, 178)
-
-    return (
-        <div className="relative flex flex-col items-center justify-center py-2 font-urbanist">
-            <svg className="w-44 h-24 overflow-visible" viewBox="0 0 140 75">
-                {/* Rounded End Cap Circles for 0° and 180° */}
-                <circle cx={capStart.x} cy={capStart.y} r="6" fill="#D8EDFF" />
-                <circle cx={capEnd.x} cy={capEnd.y} r="6" fill="#0062C4" />
-
-                {/* 4 Colored Arc Segments with subtle hairline gaps */}
-                {segments.map((seg, idx) => (
-                    <path
-                        key={idx}
-                        d={describeArc(70, 68, 50, seg.start, seg.end)}
-                        fill="none"
-                        stroke={seg.color}
-                        strokeWidth="12"
-                        strokeLinecap="butt"
-                    />
-                ))}
-
-                {/* Dynamic Pointer Arrow: Solid blue triangle cleanly inside segment 3 */}
-                {/* <g transform={`translate(${pointerPos.x}, ${pointerPos.y}) rotate(${180 - pointerAngle - 90})`}>
-                    <polygon
-                        points="0,-5.5 4.5,3.5 -4.5,3.5"
-                        fill="#038AF9"
-                        stroke="#ffffff"
-                        strokeWidth="1.2"
-                        strokeLinejoin="round"
-                    />
-                </g> */}
-            </svg>
-
-            {/* Gauge Center Text */}
-            <div className="absolute bottom-2 flex flex-col items-center justify-center text-center pointer-events-none">
-                <span className="text-2xl font-bold text-[#080808] leading-none">
-                    {clampedValue}
-                </span>
-                <span className="text-xs font-medium text-gray-500 mt-1">
-                    {label}
-                </span>
-            </div>
-        </div>
-    )
+// Table Insights Data Map
+const CATEGORY_INSIGHTS_DATA_MAP = {
+  "Classroom Climate": [
+    {
+      metric: "Classroom Safety",
+      insightText:
+        "Most students feel safe and comfortable in class. However, this becomes less consistent during transitions, where noise and loss of focus create moments of instability.",
+      tags: [{ label: "Sometimes feel uncomfortable", percentage: "48%" }],
+      suggestedApproach:
+        "Introduce and practise a simple transition routine (pause → clear instruction → countdown → move → reset).",
+      score: 4.5,
+      trend: "9%",
+      iconType: "lightbulb",
+    },
+    {
+      metric: "Student Wellbeing",
+      insightText:
+        "Students generally feel positive in class. However, when behaviour is corrected loudly, some students feel unsettled or anxious, which can affect their confidence and ability to stay focused.",
+      tags: [{ label: "Usually feel good", percentage: "80%" }],
+      suggestedApproach:
+        "Use calm, consistent behaviour responses (e.g. pause, proximity, clear expectation, follow-up if needed). Establish a predictable approach so students know what to expect.",
+      score: 4.5,
+      trend: "9%",
+      iconType: "lightbulb",
+    },
+  ],
+  "Teaching Quality": [
+    {
+      metric: "Clarity",
+      insightText:
+        "Students understand explanations but struggle to begin independent work confidently.",
+      tags: [
+        { label: "Rarely checks understanding", percentage: "48%" },
+        { label: "Instructions unclear", percentage: "20%" },
+        { label: "Few examples", percentage: "18%" },
+      ],
+      suggestedApproach:
+        "Use frequent checks for understanding before independent work (e.g. hinge questions, mini whiteboards). Add a short 'We Do' step to model how to begin tasks.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Purpose",
+      insightText:
+        "Students complete tasks but are not always clear on why they are learning them.",
+      tags: [
+        { label: "Don't know why", percentage: "48%" },
+        { label: "Not clear how it's used", percentage: "39%" },
+      ],
+      suggestedApproach:
+        "Clearly state the learning goal at the start and revisit it during the lesson. Ask students to explain the purpose in their own words.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Progression",
+      insightText:
+        "Learning does not always feel connected, making it harder for students to follow.",
+      tags: [
+        { label: "Doesn't connect to last lesson", percentage: "48%" },
+        { label: "Hard to follow", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Start lessons with retrieval practice and explicitly link prior learning to new content. Make progression visible during the lesson.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Challenge",
+      insightText:
+        "Tasks do not consistently promote deeper thinking or challenge all students.",
+      tags: [
+        { label: "Too easy", percentage: "48%" },
+        { label: "Not much thinking required", percentage: "33%" },
+      ],
+      suggestedApproach:
+        "Add at least one higher-order thinking task each lesson (e.g. 'Explain why...'). Build in structured reasoning or explanation.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Engagement",
+      insightText:
+        "Participation is uneven, with many students remaining passive.",
+      tags: [
+        { label: "Few chances to participate", percentage: "48%" },
+        { label: "Hard to focus", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Use structured participation (e.g. cold call, think-pair-share, wait time) to ensure all students contribute.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Feedback",
+      insightText:
+        "Students receive feedback but are not always clear on how to improve.",
+      tags: [
+        { label: "No clear next steps", percentage: "48%" },
+        { label: "Feedback not clear", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Give one clear next step and provide time in the lesson for students to apply it immediately.",
+      score: 4.5,
+      trend: "9%",
+    },
+  ],
+  "Learning Environment": [
+    {
+      metric: "Pace",
+      insightText: "Lesson pacing is not consistently matched to student understanding.",
+      tags: [
+        { label: "Hard to keep up", percentage: "48%" },
+        { label: "Sometimes rushed", percentage: "20%" },
+        { label: "Not enough thinking time", percentage: "18%" },
+      ],
+      suggestedApproach:
+        "Build in short pause points during lessons to check readiness (e.g. quick questions, mini whiteboards). Adjust pacing based on responses before moving on.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Support",
+      insightText: "Students do not always receive timely help when they struggle.",
+      tags: [
+        { label: "Hard to get help", percentage: "48%" },
+        { label: "Questions not answered", percentage: "48%" },
+        { label: "Explanations unclear", percentage: "39%" },
+      ],
+      suggestedApproach:
+        "Use structured support strategies (e.g. check-in points, help signals, targeted circulation) to ensure struggling students are identified and supported quickly.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Dialogue",
+      insightText: "Opportunities for students to explain ideas and engage in discussion are inconsistent.",
+      tags: [
+        { label: "Few chances to share", percentage: "48%" },
+        { label: "Same students speak", percentage: "20%" },
+        { label: "Ideas not fully explored", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Use structured discussion routines (e.g. think-pair-share, cold call, sentence stems) to ensure all students explain their thinking.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Fairness",
+      insightText: "Students do not always perceive classroom interactions as consistently fair.",
+      tags: [
+        { label: "Students treated differently", percentage: "48%" },
+        { label: "Decisions not explained", percentage: "33%" },
+        { label: "Not always respectful", percentage: "33%" },
+      ],
+      suggestedApproach:
+        "Make behaviour expectations explicit and consistently applied. Briefly explain decisions to reinforce fairness and transparency.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Inclusion",
+      insightText: "Not all students consistently feel a strong sense of belonging in the classroom.",
+      tags: [
+        { label: "Often feel left out", percentage: "48%" },
+        { label: "Sometimes feel left out", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Use inclusive strategies (e.g. targeted questioning, group roles, positive recognition) to ensure all students feel seen and involved.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Behavior",
+      insightText: "Behaviour expectations are not always consistently applied, affecting classroom climate.",
+      tags: [
+        { label: "Rules unclear", percentage: "48%" },
+        { label: "Not always fair", percentage: "20%" },
+        { label: "Inconsistency in application", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Re-teach and reinforce clear routines and expectations. Apply them consistently to build predictability and a stable classroom environment.",
+      score: 4.5,
+      trend: "9%",
+    },
+  ],
+  "Professional Practice": [
+    {
+      metric: "Lesson Coherence",
+      insightText: "Lesson components are aligned, but this alignment is not always made explicit during the lesson.",
+      suggestedApproach:
+        "Consider making the alignment more visible to students (e.g. briefly referencing how each task connects to the learning goal and assessment).",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Meaningful Assessment",
+      insightText: "Assessment is aligned with learning goals, but is not consistently used during learning to inform teaching.",
+      suggestedApproach:
+        "You might try using short in-lesson checks (e.g. hinge questions, mini tasks) to use assessment as a live tool for adjusting teaching.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Adaptive Teaching",
+      insightText: "Teaching is responsive, but adjustments are not always consistently visible across the lesson.",
+      suggestedApproach:
+        "It could help to build in more frequent check points to guide when and how to adjust instruction in real time.",
+      score: 4.5,
+      trend: "9%",
+    },
+    {
+      metric: "Ongoing Improvement",
+      insightText: "Reflection is evident, though it is not always clearly translated into specific next steps.",
+      suggestedApproach:
+        "You might focus reflection on one specific moment from a lesson and define a small, testable change for next time.",
+      score: 4.5,
+      trend: "9%",
+    },
+  ],
+  "Learning Impact": [
+    {
+      metric: "Understanding",
+      insightText: "Students understand explanations but struggle to begin independent work confidently.",
+      tags: [
+        { label: "Often confused", percentage: "48%" },
+        { label: "Not always clear", percentage: "20%" },
+        { label: "Few examples", percentage: "18%" },
+      ],
+      suggestedApproach:
+        "Break explanations into smaller chunks and check understanding frequently (e.g. hinge questions, mini whiteboards). Re-explain key points before moving on.",
+      score: 4.5,
+      trend: "9%",
+      iconType: "lightbulb",
+    },
+    {
+      metric: "Progress",
+      insightText: "Students are not always confident that they are making progress.",
+      tags: [
+        { label: "Don't see progress", percentage: "48%" },
+        { label: "Progress not always clear", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Make progress visible by sharing success criteria and showing examples of improvement. Build in moments where students reflect on progress.",
+      score: 4.5,
+      trend: "9%",
+      iconType: "lightbulb",
+    },
+    {
+      metric: "Confidence",
+      insightText: "Students do not consistently feel confident in their ability to succeed.",
+      tags: [
+        { label: "Feel stuck · can't do it", percentage: "40%" },
+        { label: "Need a lot of help", percentage: "20%" },
+      ],
+      suggestedApproach:
+        "Build confidence through scaffolded tasks and gradual release (I Do → We Do → You Do). Provide early success opportunities and encourage independent attempts.",
+      score: 4.5,
+      trend: "9%",
+      iconType: "lightbulb",
+    },
+  ],
 }
 
 const ScatterPlotModalTeacher = ({ isOpen, onClose, metric }) => {
-    const teacherName = metric?.name || "Albert Flores"
-    const score = metric?.overall !== undefined ? (metric.overall % 1 === 0 ? metric.overall.toFixed(0) : metric.overall.toFixed(1)) : "1.5"
+  const [mainTab, setMainTab] = useState("overview")
+  const [activeSubTab, setActiveSubTab] = useState("Classroom Climate")
 
-    const strengths = metric?.strengths || [
-        "The teacher creates a supportive classroom climate where students feel comfortable participating.",
-        "Lessons are generally engaging and students respond positively to the teaching approach.",
-        "Students report clear explanations that help them understand lesson content.",
-    ]
+  const teacherName = metric?.name || "Albert Flores"
+  const score =
+    metric?.overall !== undefined
+      ? metric.overall % 1 === 0
+        ? metric.overall.toFixed(0)
+        : metric.overall.toFixed(1)
+      : "1.5"
 
-    const developmentAreas = metric?.developmentAreas || [
-        "Provide more structured feedback to help students improve their work.",
-        "Encourage more student participation through discussion or collaborative activities.",
-        "Use regular formative checks (short quizzes or quick reviews) to monitor understanding.",
-    ]
+  const strengths = metric?.strengths || [
+    "The teacher creates a supportive classroom climate where students feel comfortable participating.",
+    "Lessons are generally engaging and students respond positively to the teaching approach.",
+    "Students report clear explanations that help them understand lesson content.",
+  ]
 
-    const keyMetrics = metric?.keyMetrics || [
-        { label: "Classroom Climate", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
-        { label: "Teaching Quality", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
-        { label: "Learning Environment", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
-        { label: "Professional Practice", percentage: 40, isUp: false, trend: "9%", color: "bg-[#E53935]" },
-        { label: "Learning Impact", percentage: 40, isUp: false, trend: "9%", color: "bg-[#E53935]" },
-    ]
+  const developmentAreas = metric?.developmentAreas || [
+    "Provide more structured feedback to help students improve their work.",
+    "Encourage more student participation through discussion or collaborative activities.",
+    "Use regular formative checks (short quizzes or quick reviews) to monitor understanding.",
+  ]
 
-    const learningImpactMetrics = [
-        { label: "Understanding", percentage: 80, isUp: true, trend: "9%" },
-        { label: "Progress", percentage: 80, isUp: true, trend: "9%" },
-        { label: "Confidence", percentage: 80, isUp: true, trend: "9%" },
-    ]
+  const keyMetrics = metric?.keyMetrics || [
+    { label: "Classroom Climate", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
+    { label: "Teaching Quality", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
+    { label: "Learning Environment", percentage: 80, isUp: true, trend: "9%", color: "bg-[#038AF9]" },
+    { label: "Professional Practice", percentage: 40, isUp: false, trend: "9%", color: "bg-[#E53935]" },
+    { label: "Learning Impact", percentage: 40, isUp: false, trend: "9%", color: "bg-[#E53935]" },
+  ]
 
-    return (
-        <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-            <DialogContent className="max-w-[1220px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl space-y-5 font-urbanist max-h-[92vh] overflow-y-auto">
-                {/* Modal Header */}
-                <DialogHeader className="space-y-0 text-left">
-                    <div className="flex items-start justify-between gap-4 pr-6">
-                        <div className="space-y-1">
-                            <div className="flex items-center gap-2.5 flex-wrap">
-                                <DialogTitle className="text-[24px] font-semibold text-[#080808] font-urbanist leading-tight">
-                                    {teacherName}
-                                </DialogTitle>
-                                <span className="bg-[#038AF9] text-white px-2.5 py-0.5 rounded-full text-xs font-semibold inline-flex items-center gap-1 shrink-0">
-                                    {score}
-                                    <Star className="w-3 h-3 fill-white text-white" />
-                                </span>
-                            </div>
+  const learningImpactMetrics = [
+    { label: "Understanding", percentage: 80, isUp: true, trend: "9%" },
+    { label: "Progress", percentage: 80, isUp: true, trend: "9%" },
+    { label: "Confidence", percentage: 80, isUp: true, trend: "9%" },
+  ]
 
-                            <DialogDescription className="text-[14px] font-normal text-[#5A5A5A] font-urbanist">
-                                Based on 30 student reviews
-                            </DialogDescription>
-                        </div>
-                    </div>
-                </DialogHeader>
+  const currentRadarData = RADAR_DATA_MAP[activeSubTab] || null
+  const currentLegends = activeSubTab === "Professional Practice" ? TWO_LEGENDS : THREE_LEGENDS
+  const currentRows = CATEGORY_INSIGHTS_DATA_MAP[activeSubTab] || CATEGORY_INSIGHTS_DATA_MAP["Classroom Climate"]
 
-                {/* Faint Dotted Divider Line */}
-                <div className="border-b border-dashed border-gray-200 my-6" />
-
-                {/* Top Grid: Strengths & Development Areas */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* Card 1: Strengths */}
-                    <div className="bg-white border border-gray-200/80 rounded-2xl p-5 space-y-3.5 shadow-2xs">
-                        <h4 className="text-[18px] md:text-[24px] font-semibold text-[#080808] font-urbanist">
-                            Strengths
-                        </h4>
-                        <ul className="space-y-3">
-                            {strengths.map((item, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-[14px] md:text-lg text-textPrimary leading-relaxed">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-gray-200 mt-1.5 shrink-0" />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Card 2: Development Areas */}
-                    <div className="bg-white border border-gray-200/80 rounded-2xl p-5 space-y-3.5 shadow-2xs">
-                        <h4 className="text-[18px] md:text-[24px] font-semibold text-[#080808] font-urbanist">
-                            Development Areas
-                        </h4>
-                        <ul className="space-y-3">
-                            {developmentAreas.map((item, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-[14px] md:text-lg text-textPrimary leading-relaxed">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-gray-200 mt-1.5 shrink-0" />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
+      <DialogContent className="max-w-[1440px] w-[95%] sm:w-full rounded-3xl bg-white p-0 border border-gray-100 shadow-2xl font-urbanist overflow-hidden">
+        {/* Inner Scrollable Container with Generous Bottom Padding (pb-8 sm:pb-10) */}
+        <div className="p-4 max-h-[88vh] overflow-y-auto space-y-5 no-scrollbar">
+          {/* Modal Top Header */}
+          <DialogHeader className="space-y-0 text-left">
+            <div className="flex items-start justify-between gap-4 pr-6">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2.5 flex-wrap">
+                  <DialogTitle className="text-[24px] font-semibold text-[#080808] font-urbanist leading-tight">
+                    {teacherName}
+                  </DialogTitle>
+                  <span className="bg-[#038AF9] text-white px-2.5 py-0.5 rounded-full text-xs font-semibold inline-flex items-center gap-1 shrink-0">
+                    {score}
+                    <Star className="w-3 h-3 fill-white text-white" />
+                  </span>
                 </div>
 
-                {/* Bottom Grid: 3 Side-by-Side Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch pt-1">
-                    {/* Card 1: Key Metrics */}
-                    <div className="bg-white border border-gray-200/80 rounded-2xl p-5 space-y-3.5 flex flex-col justify-between shadow-2xs">
-                        <h4 className="text-[18px] md:text-[24px] font-semibold text-[#080808] font-urbanist">
-                            Key Metrics
-                        </h4>
+                <DialogDescription className="text-[14px] font-normal text-[#5A5A5A] font-urbanist">
+                  Based on 30 student reviews
+                </DialogDescription>
+              </div>
+            </div>
+          </DialogHeader>
 
-                        <div className="space-y-3 flex-1 flex flex-col justify-around">
-                            {keyMetrics.map((item, idx) => (
-                                <div key={idx} className="flex items-center justify-between text-xs sm:text-base gap-2">
-                                    <span className="text-textPrimary font-medium ">
-                                        {item.label}
-                                    </span>
-                                    <div className="flex items-center gap-2 shrink-0">
-                                        <span className="text-gray-500 font-medium text-sm">
-                                            {item.percentage}%
-                                        </span>
-                                        <div className="w-14 sm:w-16 h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                                            <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.percentage}%` }} />
-                                        </div>
-                                        <span className={`text-sm font-semibold flex items-center gap-0.5 min-w-[32px] justify-end ${item.isUp ? "text-[#2E7D32]" : "text-[#E53935]"}`}>
-                                            {item.isUp ? <ArrowUpRight className="w-3 h-3 stroke-[2.5]" /> : <ArrowDownRight className="w-3 h-3 stroke-[2.5]" />}
-                                            {item.trend}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+          {/* Top Navigation Row: Main Tabs (Overview | Teaching Insights) & Download Button */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setMainTab("overview")}
+                className={`px-5 py-2.5 rounded-full text-[18px] font-normal transition-all cursor-pointer ${mainTab === "overview"
+                  ? "bg-[#038AF9] text-white font-medium shadow-xs"
+                  : "border border-gray-200/90 bg-white text-[#5A5A5A] hover:text-[#080808]"
+                  }`}
+              >
+                Overview
+              </button>
 
-                    {/* Card 2: Learning Impact */}
-                    <div className="bg-white border border-gray-200/80 rounded-2xl p-5 space-y-3 flex flex-col justify-between shadow-2xs">
-                        <h4 className="text-[18px] md:text-[24px] font-semibold text-[#080808] font-urbanist">
-                            Learning Impact
-                        </h4>
+              <button
+                type="button"
+                onClick={() => setMainTab("insights")}
+                className={`px-5 py-2.5 rounded-full text-[18px] font-normal transition-all cursor-pointer ${mainTab === "insights"
+                  ? "bg-[#038AF9] text-white font-medium shadow-xs"
+                  : "border border-gray-200/90 bg-white text-[#5A5A5A] hover:text-[#080808]"
+                  }`}
+              >
+                Teaching Insights
+              </button>
+            </div>
 
-                        {/* Dynamic gauge matching image */}
-                        <SemiCircleGauge value={72} label="Good" />
+            <button
+              type="button"
+              className="bg-[#038AF9] hover:bg-[#0274d4] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-2 shadow-xs shrink-0"
+            >
+              <Download className="w-4 h-4 stroke-[2]" />
+              <span>Download Report</span>
+            </button>
+          </div>
 
-                        {/* Metrics List */}
-                        <div className="space-y-2.5 pt-1">
-                            {learningImpactMetrics.map((item, idx) => (
-                                <div key={idx} className="flex items-center justify-between text-xs sm:text-base gap-2">
-                                    <span className="text-textPrimary font-medium">
-                                        {item.label}
-                                    </span>
-                                    <div className="flex items-center gap-2 shrink-0">
-                                        <span className="text-gray-500 font-normal text-sm">
-                                            {item.percentage}%
-                                        </span>
-                                        <div className="w-14 sm:w-16 h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                                            <div className="h-full rounded-full bg-[#038AF9]" style={{ width: `${item.percentage}%` }} />
-                                        </div>
-                                        <span className="text-[#2E7D32] text-sm font-semibold flex items-center gap-0.5 min-w-[32px] justify-end">
-                                            <ArrowUpRight className="w-3 h-3 stroke-[2.5]" />
-                                            {item.trend}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+          {/* Faint Dotted Divider Line */}
+          <div className="border-b border-dashed border-gray-200 my-4" />
 
-                    {/* Card 3: Teaching Quality Trend Chart */}
-                    <div className="bg-white border border-gray-200/80 rounded-2xl p-5 space-y-2 flex flex-col justify-between shadow-2xs">
-                        <div className="flex items-center justify-between">
-                            <h4 className="text-[18px] md:text-[24px] font-semibold text-[#080808] font-urbanist">
-                                Teaching Quality
-                            </h4>
-                            <span className="text-[#2E7D32] text-xs font-semibold flex items-center gap-0.5">
-                                <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                                9%
-                            </span>
-                        </div>
+          {/* MAIN TAB 1: OVERVIEW */}
+          {mainTab === "overview" && (
+            <OverviewTab
+              strengths={strengths}
+              developmentAreas={developmentAreas}
+              keyMetrics={keyMetrics}
+              learningImpactMetrics={learningImpactMetrics}
+            />
+          )}
 
-                        {/* Area Chart */}
-                        <div className="w-full h-48 pt-2">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart data={TEACHING_QUALITY_TREND} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
-                                    <defs>
-                                        <linearGradient id="teacherQualityGrad" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#038AF9" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#038AF9" stopOpacity={0.0} />
-                                        </linearGradient>
-                                    </defs>
-                                    <YAxis
-                                        domain={[1, 5]}
-                                        ticks={[1, 2, 3, 4, 5]}
-                                        stroke="#5A5A5A"
-                                        tick={{ fill: "#5A5A5A", fontSize: 14 }}
-                                        tickLine={false}
-                                        axisLine={false}
-                                        width={30}
-                                    />
-                                    <XAxis
-                                        dataKey="year"
-                                        stroke="#5A5A5A"
-                                        tick={{ fill: "#5A5A5A", fontSize: 14 }}
-                                        tickLine={false}
-                                        axisLine={false}
-                                        dy={4}
-                                    />
-                                    <Area
-                                        type="monotone"
-                                        dataKey="score"
-                                        stroke="#038AF9"
-                                        strokeWidth={2}
-                                        fillOpacity={1}
-                                        fill="url(#teacherQualityGrad)"
-                                    />
-                                </AreaChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </div>
-                </div>
-            </DialogContent>
-        </Dialog>
-    )
+          {/* MAIN TAB 2: TEACHING INSIGHTS */}
+          {mainTab === "insights" && (
+            <TeachingInsightsTab
+              activeSubTab={activeSubTab}
+              setActiveSubTab={setActiveSubTab}
+              currentRadarData={currentRadarData}
+              currentLegends={currentLegends}
+              currentRows={currentRows}
+            />
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
 }
 
 export default ScatterPlotModalTeacher

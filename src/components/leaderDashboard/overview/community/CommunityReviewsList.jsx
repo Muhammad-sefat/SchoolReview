@@ -7,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { DatePicker } from "@/components/ui/date-picker"
+import { format } from "date-fns"
 
 const ALL_REVIEWS_DATA = [
   {
@@ -108,7 +110,7 @@ const CommunityReviewsList = ({
   const [roleFilter, setRoleFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
   const [recFilter, setRecFilter] = useState("All")
-  const [dateFilter, setDateFilter] = useState("All")
+  const [selectedDate, setSelectedDate] = useState(undefined)
 
   // Filter logic
   const filteredReviews = useMemo(() => {
@@ -118,16 +120,19 @@ const CommunityReviewsList = ({
       if (ratingFilter === "3+ Stars" && item.rating < 3.0) return false
       if (recFilter === "Recommended" && !item.isRecommended) return false
       if (recFilter === "Not Recommended" && item.isRecommended) return false
-      if (dateFilter !== "All" && item.date !== dateFilter) return false
+      if (selectedDate) {
+        const formattedFilterDate = format(selectedDate, "MMM yyyy")
+        if (item.date.toLowerCase() !== formattedFilterDate.toLowerCase()) return false
+      }
       return true
     })
-  }, [reviews, roleFilter, ratingFilter, recFilter, dateFilter])
+  }, [reviews, roleFilter, ratingFilter, recFilter, selectedDate])
 
   const resetFilters = () => {
     setRoleFilter("All")
     setRatingFilter("All")
     setRecFilter("All")
-    setDateFilter("All")
+    setSelectedDate(undefined)
   }
 
   return (
@@ -147,7 +152,7 @@ const CommunityReviewsList = ({
           {(roleFilter !== "All" ||
             ratingFilter !== "All" ||
             recFilter !== "All" ||
-            dateFilter !== "All") && (
+            selectedDate !== undefined) && (
               <button
                 type="button"
                 onClick={resetFilters}
@@ -159,7 +164,7 @@ const CommunityReviewsList = ({
             )}
         </div>
 
-        {/* Filter Row with Shadcn Select Components */}
+        {/* Filter Row with Shadcn Select Components & DatePicker */}
         <div className="relative flex items-center gap-2 pb-3 flex-wrap">
           {/* 1. Role Filter Shadcn Select */}
           <div className="w-32">
@@ -205,20 +210,14 @@ const CommunityReviewsList = ({
             </Select>
           </div>
 
-          {/* 4. Date Filter Shadcn Select */}
+          {/* 4. Date Picker Shadcn Component */}
           <div className="w-36">
-            <Select value={dateFilter} onValueChange={setDateFilter}>
-              <SelectTrigger className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8">
-                <SelectValue placeholder="Date" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="All">Date: All</SelectItem>
-                <SelectItem value="Sept 2026">Sept 2026</SelectItem>
-                <SelectItem value="Aug 2026">Aug 2026</SelectItem>
-                <SelectItem value="Jul 2026">Jul 2026</SelectItem>
-                <SelectItem value="Jun 2026">Jun 2026</SelectItem>
-              </SelectContent>
-            </Select>
+            <DatePicker
+              value={selectedDate}
+              onChange={setSelectedDate}
+              placeholder="Date"
+              className="rounded-full border-gray-200 text-xs font-medium text-textPrimary bg-white h-8 px-3"
+            />
           </div>
         </div>
 
@@ -239,46 +238,34 @@ const CommunityReviewsList = ({
                 <div key={review.id} className="relative group">
                   <div
                     onClick={() => onSelectReview && onSelectReview(review)}
-                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2.5 ${isSelected
-                      ? "border-[#038AF9] bg-[#038AF9]/5 shadow-xs"
-                      : "border-gray-200/80 bg-white hover:border-gray-300"
-                      }`}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2 relative ${
+                      isSelected
+                        ? "border-[#038AF9] bg-white shadow-2xs"
+                        : "border-gray-200/80 bg-white hover:border-gray-300"
+                    }`}
                   >
-                    <p className="text-xs sm:text-base font-semibold text-textPrimary leading-snug">
+                    <h4 className="font-urbanist text-sm sm:text-base font-semibold text-[#080808] line-clamp-1 pr-6">
                       {review.title}
-                    </p>
-                    <StarRating rating={review.rating} />
-                  </div>
+                    </h4>
 
-                  {/* Right Arrow Connector Badge for Selected Card */}
-                  {isSelected && (
-                    <div className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-[#038AF9] text-white flex items-center justify-center shadow-md z-10 hidden lg:flex">
-                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                    <div className="flex items-center gap-2">
+                      <StarRating rating={review.rating} />
                     </div>
-                  )}
+
+                    {/* Active Selected Blue Arrow Badge */}
+                    {isSelected && (
+                      <div className="absolute right-[-14px] top-1/2 -translate-y-1/2 z-10">
+                        <div className="w-7 h-7 rounded-full bg-[#038AF9] text-white flex items-center justify-center shadow-md">
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )
             })
           )}
         </div>
-      </div>
-
-      {/* Bottom Pagination Controls */}
-      <div className="flex items-center justify-center gap-3 pt-5">
-        <button
-          type="button"
-          className="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center transition-colors cursor-pointer"
-          title="Previous page"
-        >
-          <ChevronUp className="w-4 h-4 stroke-[2.5]" />
-        </button>
-        <button
-          type="button"
-          className="w-7 h-7 rounded-full bg-[#038AF9] hover:bg-[#0274d4] text-white flex items-center justify-center shadow-xs transition-colors cursor-pointer"
-          title="Next page"
-        >
-          <ChevronUp className="w-4 h-4 stroke-[2.5] rotate-180" />
-        </button>
       </div>
     </div>
   )

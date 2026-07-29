@@ -24,6 +24,8 @@ import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherRe
 import LeaderDashboardLayout from "../layout/LeaderDashboard"
 import OverView from "../pages/LeaderDashboard/OverView"
 import SafeGuard from "../pages/LeaderDashboard/SafeGuard"
+import TeachingInsight from "../pages/LeaderDashboard/TeachingInsight"
+import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 const router = createBrowserRouter([
@@ -35,8 +37,9 @@ const router = createBrowserRouter([
       { path: "", element: <OverView /> },
       { path: "overview", element: <OverView /> },
       { path: "safeguarding", element: <SafeGuard /> },
-      { path: "community", element: <OverView /> },
-      { path: "teaching-insights", element: <OverView /> },
+      { path: "community", element: <CommunityFeedbacck /> },
+      { path: "community-feedback", element: <CommunityFeedbacck /> },
+      { path: "teaching-insights", element: <TeachingInsight /> },
       { path: "reports", element: <OverView /> },
       { path: "*", element: <Navigate to="/leader-dashboard" replace /> },
     ],

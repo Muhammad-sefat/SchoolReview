@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { CheckCircle2, Sparkles } from "lucide-react"
 import VoiceInputButton from "../../../common/VoiceInputButton"
+import FullReviewModal from "../../communityFeedback/FullReviewModal"
 
 // Star rating display
 const DetailStarRating = ({ rating = 4.5 }) => {
@@ -66,7 +67,7 @@ const CommunityReviewDetail = ({ selectedReview }) => {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full space-y-6">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full space-y-6 font-urbanist">
       {/* Top Review Info Card Container */}
       <div className="border border-gray-100 rounded-3xl p-5 space-y-4 bg-gray-50/30">
         {/* Title */}
@@ -99,10 +100,10 @@ const CommunityReviewDetail = ({ selectedReview }) => {
         <div className="flex items-center gap-3 pt-1">
           <button
             type="button"
-            onClick={() => setShowFullReviewModal(!showFullReviewModal)}
-            className="px-4 py-2 rounded-xl border border-[#038AF9]  hover:bg-[#038AF9]/5 text-base font-semibold transition-colors cursor-pointer"
+            onClick={() => setShowFullReviewModal(true)}
+            className="px-4 py-2 rounded-xl border border-[#038AF9] hover:bg-[#038AF9]/5 text-base font-semibold transition-colors cursor-pointer"
           >
-            {showFullReviewModal ? "Hide Full Review" : "Read Full Review"}
+            Read Full Review
           </button>
 
           <button
@@ -110,19 +111,17 @@ const CommunityReviewDetail = ({ selectedReview }) => {
             onClick={handleGenerateAiResponse}
             className="px-4 py-2 rounded-xl bg-[#FAFAFA] hover:bg-gray-200 text-textPrimary text-base font-medium transition-colors cursor-pointer flex items-center gap-1.5"
           >
-
             <span>Generate AI Summary</span>
           </button>
         </div>
-
-        {/* Full Review Content Dropdown */}
-        {showFullReviewModal && (
-          <div className="mt-3 p-4 bg-white border border-gray-200/80 rounded-2xl text-xs sm:text-sm text-[#5A5A5A] leading-relaxed animate-fadeIn">
-            <p className="font-medium text-[#1F1F21] mb-1">Full Review:</p>
-            <p>{review.fullReview}</p>
-          </div>
-        )}
       </div>
+
+      {/* Full Review Modal Trigger */}
+      <FullReviewModal
+        isOpen={showFullReviewModal}
+        onClose={() => setShowFullReviewModal(false)}
+        review={review}
+      />
 
       {/* School Response Section */}
       <div className="space-y-3.5 flex-1 flex flex-col justify-between">
