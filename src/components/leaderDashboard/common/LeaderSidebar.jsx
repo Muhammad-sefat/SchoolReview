@@ -151,22 +151,22 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
         {/* Bottom Menu Items */}
         <div className="px-3 py-4 border-t border-gray-100 space-y-1">
-          {/* Settings Collapsible Dropdown */}
-          <div className="space-y-1">
+          {/* Settings Collapsible Dropdown matching Screenshot 2 */}
+          <div className="space-y-2">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium text-[#1F1F21] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl border border-gray-200 bg-white text-base font-medium text-[#038AF9] hover:bg-gray-50 transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
                 }`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
-                <Settings className="w-5 h-5 text-[#1F1F21] shrink-0 stroke-[1.75]" />
-                {!collapsed && <span>Settings</span>}
+              <div className="flex items-center gap-3">
+                <Settings className="w-5 h-5 text-[#038AF9] shrink-0 stroke-[2]" />
+                {!collapsed && <span className="text-[17px] font-medium text-[#038AF9]">Settings</span>}
               </div>
               {!collapsed && (
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${settingsOpen ? "rotate-180" : ""
+                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${settingsOpen ? "rotate-180" : ""
                     }`}
                 />
               )}
@@ -174,18 +174,48 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Settings Sub-links */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-1 py-1">
+              <div className="pl-6 pr-2 space-y-3 py-2 animate-fadeIn">
                 <NavLink
-                  to="/leader-dashboard/settings/profile"
-                  className="block text-base font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
+                  to="/leader-dashboard/setting/branding-profile"
+                  className={({ isActive }) =>
+                    `block text-[16px] font-normal transition-colors ${
+                      isActive || location.pathname.includes("/branding-profile") || location.pathname === "/leader-dashboard/setting"
+                        ? "text-[#080808] font-medium"
+                        : "text-[#5A5A5A] hover:text-[#080808]"
+                    }`
+                  }
                 >
-                  Profile Settings
+                  School Branding Profile
                 </NavLink>
                 <NavLink
-                  to="/leader-dashboard/settings/security"
-                  className="block text-base font-medium text-[#5A5A5A] hover:text-[#038AF9] py-1.5 transition-colors"
+                  to="/leader-dashboard/setting/user-admin"
+                  className={({ isActive }) =>
+                    `block text-[16px] font-normal transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    }`
+                  }
                 >
-                  Security Credentials
+                  User Administration
+                </NavLink>
+                <NavLink
+                  to="/leader-dashboard/setting/general"
+                  className={({ isActive }) =>
+                    `block text-[16px] font-normal transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    }`
+                  }
+                >
+                  General
+                </NavLink>
+                <NavLink
+                  to="/leader-dashboard/setting/followed-schools"
+                  className={({ isActive }) =>
+                    `block text-[16px] font-normal transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    }`
+                  }
+                >
+                  Followed Schools
                 </NavLink>
               </div>
             )}

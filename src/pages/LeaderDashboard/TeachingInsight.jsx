@@ -7,6 +7,7 @@ import StudentSafetySignals from "@/components/leaderDashboard/overview/teacherO
 import ScatterPlotModalTeacher from "@/components/leaderDashboard/modal/ScatterPlotModalTeacher"
 import LatestTeacherObservationTable from "@/components/leaderDashboard/teachingInsight/LatestTeacherObservationTable"
 import CreateObservationModal from "@/components/leaderDashboard/teachingInsight/modal/CreateObservationModal"
+import { Title32 } from "../../components/typho/Title"
 
 const TEACHER_SCATTER_DATA = [
   { id: 1, name: "Kathryn Murphy", x: 0.5, y: 0.3, category: "low", overallScore: "2.5", lowestMetric: "Pace (1.8)", highestMetric: "Clarity (3.0)", overall: 2.5 },
@@ -112,9 +113,9 @@ const TeachingInsight = () => {
   return (
     <div className="w-full space-y-6 font-urbanist pb-10">
       {/* Top Page Title */}
-      <h1 className="text-[32px] font-semibold text-[#080808] leading-tight">
+      <Title32 className=" text-[#080808] leading-tight">
         Teaching Insights
-      </h1>
+      </Title32>
 
       {/* Row 1: Top 3 Cards Grid */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch min-w-0">
