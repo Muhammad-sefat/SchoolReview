@@ -29,6 +29,7 @@ import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck"
 import ReportLeader from "../pages/LeaderDashboard/ReportLeader"
 import SchoolBrandingProfile from "../pages/LeaderDashboard/setting/SchoolBrandingProfile"
 import UserManagement from "../pages/LeaderDashboard/setting/UserManagement"
+import General from "../pages/LeaderDashboard/setting/General"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 const router = createBrowserRouter([
@@ -44,10 +45,10 @@ const router = createBrowserRouter([
       { path: "community-feedback", element: <CommunityFeedbacck /> },
       { path: "teaching-insights", element: <TeachingInsight /> },
       { path: "reports", element: <ReportLeader /> },
-      { path: "setting", element: <SchoolBrandingProfile /> },
+      { path: "setting", element: <General /> },
       { path: "setting/branding-profile", element: <SchoolBrandingProfile /> },
       { path: "setting/user-admin", element: <UserManagement /> },
-      { path: "setting/general", element: <SchoolBrandingProfile /> },
+      { path: "setting/general", element: <General /> },
       { path: "setting/followed-schools", element: <SchoolBrandingProfile /> },
       { path: "*", element: <Navigate to="/leader-dashboard" replace /> },
     ],
