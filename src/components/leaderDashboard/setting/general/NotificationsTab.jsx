@@ -1,33 +1,117 @@
 import React, { useState } from "react"
 import { Switch } from "@/components/ui/switch"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const NotificationsTab = () => {
-  const [emailAlerts, setEmailAlerts] = useState(true)
-  const [weeklyDigest, setWeeklyDigest] = useState(true)
+  const [generalNotifications, setGeneralNotifications] = useState(true)
+  const [emailNotifications, setEmailNotifications] = useState(true)
+  const [escalateDays, setEscalateDays] = useState("3")
+  const [backupContact, setBackupContact] = useState("")
+
+  const handleToggleGeneral = (val) => {
+    setGeneralNotifications(val)
+    console.log("Notifications General Toggle:", val)
+  }
+
+  const handleToggleEmail = (val) => {
+    setEmailNotifications(val)
+    console.log("Notifications Email Toggle:", val)
+  }
 
   return (
-    <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6 font-urbanist">
-      <h3 className="text-[20px] font-semibold text-[#080808]">Notification Preferences</h3>
-
-      <div className="space-y-6">
-        <div className="flex items-center justify-between gap-6 pb-4 border-b border-gray-100">
-          <div className="space-y-2">
-            <h4 className="text-[18px] font-medium text-[#080808]">Email Request Alerts</h4>
+    <div className="space-y-4 font-urbanist">
+      {/* Card 1: Notifications & Email Notifications */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4">
+        {/* Row 1: Notifications */}
+        <div className="flex items-center justify-between gap-6 ">
+          <div className="space-y-1">
+            <h3 className="text-[20px] font-semibold text-[#080808]">Notifications</h3>
             <p className="text-[16px] font-normal text-[#5A5A5A]">
-              Receive instant email notifications when evaluators or observers submit access requests.
+              Stay informed about reviews, approvals, and important updates.
             </p>
           </div>
-          <Switch checked={emailAlerts} onCheckedChange={setEmailAlerts} className="data-[state=checked]:bg-[#038AF9]" />
+
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="text-[16px] font-normal text-[#080808]">Enable</span>
+            <Switch
+              checked={generalNotifications}
+              onCheckedChange={handleToggleGeneral}
+              className="data-[state=checked]:bg-[#038AF9]"
+            />
+          </div>
         </div>
 
-        <div className="flex items-center justify-between gap-6">
-          <div className="space-y-2">
-            <h4 className="text-[18px] font-medium text-[#080808]">Weekly Review Digest</h4>
+        {/* Row 2: Email Notifications */}
+        <div className="border-t border-dashed border-gray-200 pt-6 flex items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h3 className="text-[20px] font-semibold text-[#080808]">Email Notifications</h3>
             <p className="text-[16px] font-normal text-[#5A5A5A]">
-              Receive a weekly summary email of new teacher reviews and response rates.
+              Receive important email updates about reviews, approvals, reports, and account activity.
             </p>
           </div>
-          <Switch checked={weeklyDigest} onCheckedChange={setWeeklyDigest} className="data-[state=checked]:bg-[#038AF9]" />
+
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="text-[16px] font-normal text-[#080808]">Enable</span>
+            <Switch
+              checked={emailNotifications}
+              onCheckedChange={handleToggleEmail}
+              className="data-[state=checked]:bg-[#038AF9]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Card 2: Safeguarding Notifications */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6">
+        <div className="space-y-1">
+          <h3 className="text-[20px] font-semibold text-[#080808]">Safeguarding Notifications</h3>
+          <p className="text-[16px] font-normal text-[#5A5A5A]">
+            Configure how safeguarding reports are escalated if no action is taken.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Field 1: Escalate After (days) */}
+          <div className="space-y-3">
+            <label className="text-[18px] font-medium text-[#080808] block">Escalate After (days)</label>
+            <input
+              type="number"
+              value={escalateDays}
+              onChange={(e) => {
+                setEscalateDays(e.target.value)
+                console.log("Escalate After (days):", e.target.value)
+              }}
+              min={1}
+              className="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-[#038AF9] outline-none text-[16px] font-normal text-[#080808] bg-white shadow-2xs"
+            />
+          </div>
+
+          {/* Field 2: Backup Contact */}
+          <div className="space-y-3">
+            <label className="text-[18px] font-medium text-[#080808] block">Backup Contact</label>
+            <Select
+              value={backupContact}
+              onValueChange={(val) => {
+                setBackupContact(val)
+                console.log("Selected Backup Contact:", val)
+              }}
+            >
+              <SelectTrigger className="w-full h-12 px-4 rounded-xl border-gray-200 text-[16px] font-normal text-[#080808] bg-white shadow-2xs">
+                <SelectValue placeholder="Select backup contact" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="john_doe">John Doe (Head of Safeguarding)</SelectItem>
+                <SelectItem value="sarah_smith">Sarah Smith (Deputy Head)</SelectItem>
+                <SelectItem value="admin_team">School Admin Team</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
     </div>

@@ -21,11 +21,10 @@ const UserManagement = () => {
             key={tab.id}
             type="button"
             onClick={() => setActiveUserTab(tab.id)}
-            className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${
-              activeUserTab === tab.id
+            className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${activeUserTab === tab.id
                 ? "bg-[#038AF9] text-white font-medium shadow-xs"
-                : "border border-gray-200/90 bg-white text-[#5A5A5A] font-normal hover:text-[#080808]"
-            }`}
+                : "border border-gray-200/90 bg-white text-textPrimary font-normal hover:text-[#080808]"
+              }`}
           >
             {tab.label}
           </button>

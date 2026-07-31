@@ -41,7 +41,7 @@ const TeacherReviewSettingsTab = () => {
                 <span className="text-[18px] font-semibold text-[#080808]">School Email Verification</span>
                 <span className="text-[14px] font-medium text-[#038AF9]">(Best for Most Schools)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A] leading-relaxed">
+              <p className="text-[16px] font-normal text-textPrimary leading-relaxed">
                 Only users with a verified school email domain can submit reviews. Quick setup with moderate control. Does not verify teacher assignment.
               </p>
 
@@ -77,7 +77,7 @@ const TeacherReviewSettingsTab = () => {
                 <span className="text-[18px] font-semibold text-[#080808]">Anyone</span>
                 <span className="text-[14px] font-normal text-gray-500">(Public Access)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A] leading-relaxed">
+              <p className="text-[16px] font-normal text-textPrimary leading-relaxed">
                 Anyone can submit reviews. AI moderation helps reduce harmful or abusive content.
               </p>
             </div>
@@ -100,7 +100,7 @@ const TeacherReviewSettingsTab = () => {
                 <span className="text-[18px] font-semibold text-[#080808]">Assigned Students Only</span>
                 <span className="text-[14px] font-normal text-gray-500">(Maximum Control)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A] leading-relaxed">
+              <p className="text-[16px] font-normal text-textPrimary leading-relaxed">
                 Only students assigned to a teacher can submit reviews. Requires teacher and class assignments to be configured in User Administration.
               </p>
             </div>

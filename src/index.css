@@ -105,7 +105,7 @@
   --primary: #038AF9;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: #5A5A5A;
-  --textPrimary:#1F1F21;
+  --textPrimary: #1F1F21;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -187,4 +187,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.section-padding-x {
+  @apply px-4 sm:px-6 md:px-10 lg:px-[220px] w-full;
 }

@@ -86,8 +86,8 @@ const SchoolBrandingProfile = () => {
                     type="button"
                     onClick={() => setActiveTab("general")}
                     className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${activeTab === "general"
-                            ? "bg-[#038AF9] text-white font-medium shadow-xs"
-                            : "border border-gray-200/90 bg-white text-[#5A5A5A] font-normal hover:text-[#080808]"
+                        ? "bg-[#038AF9] text-white font-medium shadow-xs"
+                        : "border border-gray-200/90 bg-white text-textPrimary font-normal hover:text-[#080808]"
                         }`}
                 >
                     General
@@ -97,8 +97,8 @@ const SchoolBrandingProfile = () => {
                     type="button"
                     onClick={() => setActiveTab("media")}
                     className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${activeTab === "media"
-                            ? "bg-[#038AF9] text-white font-medium shadow-xs"
-                            : "border border-gray-200/90 bg-white text-[#5A5A5A] font-normal hover:text-[#080808]"
+                        ? "bg-[#038AF9] text-white font-medium shadow-xs"
+                        : "border border-gray-200/90 bg-white text-textPrimary font-normal hover:text-[#080808]"
                         }`}
                 >
                     Media
@@ -108,8 +108,8 @@ const SchoolBrandingProfile = () => {
                     type="button"
                     onClick={() => setActiveTab("career")}
                     className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${activeTab === "career"
-                            ? "bg-[#038AF9] text-white font-medium shadow-xs"
-                            : "border border-gray-200/90 bg-white text-[#5A5A5A] font-normal hover:text-[#080808]"
+                        ? "bg-[#038AF9] text-white font-medium shadow-xs"
+                        : "border border-gray-200/90 bg-white text-textPrimary font-normal hover:text-[#080808]"
                         }`}
                 >
                     Career

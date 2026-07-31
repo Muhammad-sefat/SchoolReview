@@ -1,13 +1,28 @@
-import React, { useState } from "react"
-import { NavLink, useLocation } from "react-router-dom"
-import { ChevronDown, PanelLeftClose, PanelLeft, Settings, HelpCircle, LogOut } from "lucide-react"
+import React, { useState, useEffect } from "react"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { ChevronDown, Settings, HelpCircle, LogOut } from "lucide-react"
 import { OverviewIcon, SafeGuard, CommunityFeedback, TeachingInsight, Reports } from "./LeaderIcons"
-import { DashboardLogo, LogoOne } from "../../icons/Logo/AllLogo"
-import { TbLayoutSidebarRightExpand } from "react-icons/tb";
-import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
+import { DashboardLogo } from "../../icons/Logo/AllLogo"
+import { TbLayoutSidebarRightExpand, TbLayoutSidebarLeftExpand } from "react-icons/tb"
+import GetHelpModal from "@/components/leaderDashboard/setting/GetHelpModal"
+import LogoutModal from "@/components/leaderDashboard/setting/LogoutModal"
+
 const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
   const location = useLocation()
-  const [settingsOpen, setSettingsOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const isSettingsActive = location.pathname.includes("/leader-dashboard/setting")
+  const [settingsOpen, setSettingsOpen] = useState(isSettingsActive)
+
+  const [isHelpOpen, setIsHelpOpen] = useState(false)
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false)
+
+  // Automatically close settings dropdown & reset active state when navigating away to other routes
+  useEffect(() => {
+    if (!location.pathname.includes("/leader-dashboard/setting")) {
+      setSettingsOpen(false)
+    }
+  }, [location.pathname])
 
   const navItems = [
     {
@@ -58,6 +73,10 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
     return location.pathname.startsWith(itemPath)
   }
 
+  const handleLogoutConfirm = () => {
+    navigate("/auth/login")
+  }
+
   return (
     <>
       {/* Mobile / Tablet Backdrop Overlay */}
@@ -70,17 +89,18 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
-          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"
-          }`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
+          collapsed ? "w-20" : "w-72"
+        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-              ? "flex-col items-center justify-center gap-3 py-4 px-3"
-              : "flex-row items-center justify-between px-5 py-5"
-              }`}
+            className={`flex border-b border-gray-50 transition-all duration-300 ${
+              collapsed
+                ? "flex-col items-center justify-center gap-3 py-4 px-3"
+                : "flex-row items-center justify-between px-5 py-5"
+            }`}
           >
             {/* Logo Badge */}
             <div className="flex items-center gap-3">
@@ -110,7 +130,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-4">
+          <nav className="px-3 py-4 space-y-4 font-urbanist">
             {navItems.map((item) => {
               const active = isPathActive(item.path)
               const IconComp = item.icon
@@ -119,27 +139,25 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center gap-3.5 px-3.5 py-2 rounded-2xl text-base  font-medium transition-all duration-200 group ${active
-                    ? "bg-[#F0F8FF] text-[#038AF9] border border-[#BEE0FF]/60  shadow-2xs"
-                    : "text-[#1F1F21] hover:bg-gray-50 "
-                    } ${collapsed ? "justify-center px-0" : ""}`}
+                  className={`flex items-center gap-3.5 px-3.5 py-2 rounded-2xl text-base font-medium transition-all duration-200 group ${
+                    active
+                      ? "bg-[#F0F8FF] text-[#038AF9] border border-[#BEE0FF]/60 shadow-2xs"
+                      : "text-[#1F1F21] hover:bg-gray-50"
+                  } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? item.label : undefined}
                 >
                   <div className="shrink-0 flex items-center justify-center">
                     <IconComp
-                      className={`w-5 h-5 transition-colors ${active ? "text-[#038AF9]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                        }`}
+                      className={`w-5 h-5 transition-colors ${
+                        active ? "text-[#038AF9]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      }`}
                     />
                   </div>
 
-                  {!collapsed && (
-                    <span className="flex-1 truncate">{item.label}</span>
-                  )}
+                  {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
 
                   {!collapsed && item.badge && (
-                    <span
-                      className={`px-2 py-0.5 text-xs font-bold rounded-full ${item.badge.color}`}
-                    >
+                    <span className={`px-2 py-0.5 text-xs font-bold rounded-full ${item.badge.color}`}>
                       {item.badge.text}
                     </span>
                   )}
@@ -150,24 +168,40 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Menu Items */}
-        <div className="px-3 py-4 border-t border-gray-100 space-y-1">
-          {/* Settings Collapsible Dropdown matching Screenshot 2 */}
-          <div className="space-y-2">
+        <div className="px-3 py-4 border-t border-gray-100 space-y-1 font-urbanist">
+          {/* Settings Collapsible Dropdown */}
+          <div className="space-y-1">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl border border-gray-200 bg-white text-base font-medium text-[#038AF9] hover:bg-gray-50 transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
-                }`}
+              className={`w-full flex items-center justify-between transition-all cursor-pointer ${
+                settingsOpen && isSettingsActive
+                  ? "px-4 py-3 rounded-2xl border-2 border-[#038AF9] bg-[#F0F8FF]/30 text-[#038AF9] shadow-2xs"
+                  : "px-3.5 py-2.5 rounded-xl text-[#1F1F21] hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
               <div className="flex items-center gap-3">
-                <Settings className="w-5 h-5 text-[#038AF9] shrink-0 stroke-[2]" />
-                {!collapsed && <span className="text-[17px] font-medium text-[#038AF9]">Settings</span>}
+                <Settings
+                  className={`w-5 h-5 shrink-0 ${
+                    settingsOpen && isSettingsActive ? "text-[#038AF9] stroke-[2]" : "text-[#1F1F21] stroke-[1.75]"
+                  }`}
+                />
+                {!collapsed && (
+                  <span
+                    className={`text-base font-medium ${
+                      settingsOpen && isSettingsActive ? "text-[#038AF9]" : "text-[#1F1F21]"
+                    }`}
+                  >
+                    Settings
+                  </span>
+                )}
               </div>
               {!collapsed && (
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${settingsOpen ? "rotate-180" : ""
-                    }`}
+                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                    settingsOpen ? "rotate-180 text-[#038AF9]" : ""
+                  }`}
                 />
               )}
             </button>
@@ -178,10 +212,10 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/leader-dashboard/setting/branding-profile"
                   className={({ isActive }) =>
-                    `block text-[16px] font-normal transition-colors ${
-                      isActive || location.pathname.includes("/branding-profile") || location.pathname === "/leader-dashboard/setting"
+                    `block text-[16px] transition-colors ${
+                      isActive || location.pathname === "/leader-dashboard/setting"
                         ? "text-[#080808] font-medium"
-                        : "text-[#5A5A5A] hover:text-[#080808]"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -190,8 +224,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/leader-dashboard/setting/user-admin"
                   className={({ isActive }) =>
-                    `block text-[16px] font-normal transition-colors ${
-                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    `block text-[16px] transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -200,8 +234,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/leader-dashboard/setting/general"
                   className={({ isActive }) =>
-                    `block text-[16px] font-normal transition-colors ${
-                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    `block text-[16px] transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -210,8 +244,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/leader-dashboard/setting/followed-schools"
                   className={({ isActive }) =>
-                    `block text-[16px] font-normal transition-colors ${
-                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] hover:text-[#080808]"
+                    `block text-[16px] transition-colors ${
+                      isActive ? "text-[#080808] font-medium" : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -221,22 +255,26 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             )}
           </div>
 
-          {/* Get Help */}
+          {/* Get Help Button */}
           <button
             type="button"
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-[#1F1F21] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            onClick={() => setIsHelpOpen(true)}
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-[#1F1F21] hover:bg-gray-50 hover:text-[#1F1F21] transition-colors cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Get help" : undefined}
           >
             <HelpCircle className="w-5 h-5 text-[#1F1F21] shrink-0 stroke-[1.75]" />
             {!collapsed && <span>Get help</span>}
           </button>
 
-          {/* Log Out */}
+          {/* Log Out Button */}
           <button
             type="button"
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-textPrimary hover:bg-gray-50 hover:text-red-600 transition-colors cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            onClick={() => setIsLogoutOpen(true)}
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-base font-medium text-textPrimary hover:bg-gray-50 hover:text-red-600 transition-colors cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Log out" : undefined}
           >
             <LogOut className="w-5 h-5 text-textPrimary shrink-0 stroke-[1.75]" />
@@ -244,6 +282,10 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           </button>
         </div>
       </aside>
+
+      {/* Modals */}
+      <GetHelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+      <LogoutModal isOpen={isLogoutOpen} onClose={() => setIsLogoutOpen(false)} onLogoutConfirm={handleLogoutConfirm} />
     </>
   )
 }

@@ -18,7 +18,7 @@ const AdditionalReviewModulesTab = () => {
     <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6 font-urbanist">
       <div>
         <h3 className="text-[20px] font-semibold text-[#080808]">Additional Review Modules</h3>
-        <p className="text-[16px] font-normal text-[#5A5A5A] mt-2 leading-relaxed max-w-4xl">
+        <p className="text-[16px] font-normal text-textPrimary mt-2 leading-relaxed max-w-4xl">
           Select optional review modules to collect additional feedback. These questions are added to the core review and provide deeper insights into specific areas. Keep in mind that longer reviews may reduce response rates.
         </p>
       </div>
@@ -49,10 +49,10 @@ const AdditionalReviewModulesTab = () => {
                 </span>
                 <span className="text-[16px] font-normal text-gray-500">(Student Reviews Only)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A]">
+              <p className="text-[16px] font-normal text-textPrimary">
                 Understand how safe, supported, and included students feel in the classroom.
               </p>
-              <ul className="space-y-1 text-[16px] font-normal text-[#5A5A5A] pl-1">
+              <ul className="space-y-1 text-[16px] font-normal text-textPrimary pl-1">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
                   <span>Classroom Safety</span>
@@ -91,10 +91,10 @@ const AdditionalReviewModulesTab = () => {
                 </span>
                 <span className="text-[16px] font-normal text-gray-500">(Students Only)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A]">
+              <p className="text-[16px] font-normal text-textPrimary">
                 Measure how students perceive their learning, progress, and confidence.
               </p>
-              <ul className="space-y-1 text-[16px] font-normal text-[#5A5A5A] pl-1">
+              <ul className="space-y-1 text-[16px] font-normal text-textPrimary pl-1">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
                   <span>Understanding</span>
@@ -137,10 +137,10 @@ const AdditionalReviewModulesTab = () => {
                 </span>
                 <span className="text-[16px] font-normal text-gray-500">(Teachers & Observers Only)</span>
               </div>
-              <p className="text-[16px] font-normal text-[#5A5A5A]">
+              <p className="text-[16px] font-normal text-textPrimary">
                 Collect structured feedback on instructional practice and professional growth from teachers and observers.
               </p>
-              <ul className="space-y-1 text-[16px] font-normal text-[#5A5A5A] pl-1">
+              <ul className="space-y-1 text-[16px] font-normal text-textPrimary pl-1">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
                   <span>Lesson Coherence</span>
