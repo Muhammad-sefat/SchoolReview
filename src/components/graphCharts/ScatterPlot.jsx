@@ -21,12 +21,14 @@ const DEFAULT_COLOR_MAP = {
   best: "#2E7D32",
 }
 
+// Generate smooth curve line points from (0,0) -> (2.5, 1.35) -> (5,5)
 const CURVE_POINTS = Array.from({ length: 30 }, (_, i) => {
   const x = (i / 29) * 5
   const y = 0.184 * x * x + 0.08 * x
   return { x, y }
 })
 
+// Custom Square Dot Shape for Recharts
 const SquareShape = (props) => {
   const { cx, cy, fill, payload, onDotHover, onMetricClick } = props
   if (!cx || !cy) return null
@@ -63,6 +65,13 @@ const ScatterPlot = ({
   colorMap = DEFAULT_COLOR_MAP,
   onExpand,
   onMetricClick,
+  xAxisLabel = "Improvement Since Last Year",
+  yAxisLabel = "Overall Satisfaction",
+  showReferenceLine = true,
+  showBottomCaption = false,
+  bottomCaptionTitle = null,
+  bottomCaptionDesc = "Lower satisfaction (left) highlights greater opportunity for improvement; higher satisfaction (right) reflects stronger performance.",
+  overallRatingLabel = "Overall Rating",
 }) => {
   const [selectedMetric, setSelectedMetric] = useState(null)
   const [activeHoverMetric, setActiveHoverMetric] = useState(null)
@@ -117,7 +126,7 @@ const ScatterPlot = ({
           )}
         </div>
 
-        {/* Dynamic Tabs (Hidden if hideTabs is true) */}
+        {/* Dynamic Tabs */}
         {!hideTabs && tabs && tabs.length > 0 && (
           <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1 rounded-2xl w-fit">
             {tabs.map((tab) => (
@@ -143,26 +152,33 @@ const ScatterPlot = ({
           onMouseLeave={handleContainerMouseLeave}
         >
           <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart margin={{ top: 15, right: 20, bottom: 15, left: 15 }}>
+            <ScatterChart margin={{ top: 15, right: 20, bottom: 25, left: 15 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
 
               <XAxis
                 type="number"
                 dataKey="x"
+                name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
                 stroke="#94A3B8"
                 fontSize={11}
                 fontWeight={500}
                 tickLine={false}
-                height={30}
+                height={40}
                 tick={{ fontSize: 16 }}
+                label={{
+                  value: xAxisLabel,
+                  position: "insideBottom",
+                  offset: -5,
+                  style: { textAnchor: "middle", fontSize: 16, fontWeight: 400, fill: "#1F1F21" },
+                }}
               />
 
               <YAxis
                 type="number"
                 dataKey="y"
-                name="Overall Satisfaction"
+                name={yAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
                 tickFormatter={(val) => (val === 0 ? "" : val)}
@@ -173,7 +189,7 @@ const ScatterPlot = ({
                 tick={{ fontSize: 16 }}
                 width={45}
                 label={{
-                  value: "Overall Satisfaction",
+                  value: yAxisLabel,
                   angle: -90,
                   position: "insideLeft",
                   offset: 0,
@@ -192,8 +208,10 @@ const ScatterPlot = ({
                 isAnimationActive={false}
               />
 
-              {/* Dotted Vertical Reference Line at 2.5 */}
-              <ReferenceLine x={2.5} stroke="#038AF9" strokeDasharray="3 3" strokeWidth={1.5} />
+              {/* Dotted Vertical Reference Line at 2.5 (Rendered ONLY when showReferenceLine is true) */}
+              {showReferenceLine && (
+                <ReferenceLine x={2.5} stroke="#038AF9" strokeDasharray="3 3" strokeWidth={1.5} />
+              )}
 
               <Scatter
                 data={data}
@@ -238,7 +256,7 @@ const ScatterPlot = ({
 
               <div className="space-y-1.5 text-[14px] font-normal text-textPrimary leading-[20px] font-urbanist">
                 <div className="flex justify-between items-center gap-4">
-                  <span className="text-textPrimary font-normal">Overall Score</span>
+                  <span className="text-textPrimary font-normal">{overallRatingLabel}</span>
                   <span className="font-normal text-textPrimary">
                     : {activeHoverMetric.overall !== undefined ? (activeHoverMetric.overall % 1 === 0 ? activeHoverMetric.overall.toFixed(0) : activeHoverMetric.overall.toFixed(1)) : "1"}
                   </span>
@@ -262,13 +280,19 @@ const ScatterPlot = ({
           )}
         </div>
 
-        {/* Bottom Explanatory Caption matching Image 2 reference */}
-        <div className="text-center space-y-1 mt-4 pt-1">
-          <p className="text-[16px] font-normal text-textPrimary">Opportunity for Improvement</p>
-          <p className="text-[14px] font-normal text-[#5A5A5A]">
-            Lower satisfaction (left) highlights greater opportunity for improvement; higher satisfaction (right) reflects stronger performance.
-          </p>
-        </div>
+        {/* Bottom Explanatory Caption (Rendered ONLY when showBottomCaption is true) */}
+        {showBottomCaption && (
+          <div className="text-center mt-2">
+            {bottomCaptionTitle && bottomCaptionTitle !== xAxisLabel && (
+              <p className="text-[16px] font-normal text-textPrimary mb-1">{bottomCaptionTitle}</p>
+            )}
+            {bottomCaptionDesc && (
+              <p className="text-[14px] font-normal text-[#5A5A5A]">
+                {bottomCaptionDesc}
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ScatterPlotModal component */}

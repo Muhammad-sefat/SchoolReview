@@ -168,6 +168,9 @@ const SchoolPerformanceSection = () => {
               title="Student & Parent Experience"
               subtitle=""
               hideTabs={true}
+              xAxisLabel="Opportunity for Improvement"
+              showReferenceLine={false}
+              showBottomCaption={true}
               data={PARENT_STUDENT_DATA}
             />
           </div>
