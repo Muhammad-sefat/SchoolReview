@@ -71,7 +71,7 @@ const BubbleTimelineChart = ({
   onExpand,
 }) => {
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-[586px]">
       {/* Header Area */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
@@ -105,7 +105,7 @@ const BubbleTimelineChart = ({
 
       {/* Main Timeline Grid */}
       <div className="flex-1 w-full overflow-x-auto no-scrollbar py-2">
-        <div className="min-w-[620px] space-y-6">
+        <div className="min-w-[620px] space-y-10 justify-between">
           {categories.map((cat) => {
             const isSelected = selectedCategory === cat.id
 

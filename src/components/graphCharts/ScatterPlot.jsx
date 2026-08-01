@@ -100,11 +100,11 @@ const ScatterPlot = ({
 
   return (
     <>
-      <div className="w-full bg-white rounded-2xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist h-full">
+      <div className="w-full bg-white rounded-2xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist h-[670px]">
         {/* Header Area */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>
-            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808] leading-snug">
+            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-textBlack leading-snug">
               {title}
             </h3>
             {subtitle && (
@@ -121,7 +121,9 @@ const ScatterPlot = ({
               className="w-8 h-8 rounded-full bg-[#F7F7F7] hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-colors cursor-pointer shrink-0"
               title="Expand chart"
             >
-              <ArrowUpRight className="w-4 h-4 text-[#080808] stroke-[2.5]" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15.1075 12.5439C15.1075 12.9174 14.8101 13.201 14.478 13.201C14.1391 13.201 13.8555 12.8966 13.8555 12.5715V10.0121L13.98 6.78174L12.8386 8.07528L5.96973 14.9373C5.84521 15.0687 5.69303 15.124 5.53394 15.124C5.18807 15.124 4.89062 14.8127 4.89062 14.4807C4.89062 14.3285 4.9598 14.1694 5.08431 14.0449L11.9394 7.17603L13.226 6.0485L9.85034 6.15918H7.44312C7.118 6.15918 6.82056 5.87557 6.82056 5.54354C6.82056 5.21151 7.08341 4.91406 7.47078 4.91406H14.4296C14.8446 4.91406 15.1006 5.19076 15.1006 5.58504L15.1075 12.5439Z" fill="#080808" />
+              </svg>
             </button>
           )}
         </div>
@@ -134,11 +136,10 @@ const ScatterPlot = ({
                 key={tab.id}
                 type="button"
                 onClick={() => onTabChange && onTabChange(tab.id)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-white text-textPrimary shadow-2xs font-semibold"
-                    : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
-                }`}
+                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
+                  ? "bg-white text-textPrimary shadow-2xs font-medium"
+                  : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
+                  }`}
               >
                 {tab.label}
               </button>
@@ -161,6 +162,7 @@ const ScatterPlot = ({
                 name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
+                tickFormatter={(val) => (val === 0 ? 0 : "")}
                 stroke="#94A3B8"
                 fontSize={11}
                 fontWeight={500}
@@ -284,10 +286,10 @@ const ScatterPlot = ({
         {showBottomCaption && (
           <div className="text-center mt-2">
             {bottomCaptionTitle && bottomCaptionTitle !== xAxisLabel && (
-              <p className="text-[16px] font-normal text-textPrimary mb-1">{bottomCaptionTitle}</p>
+              <p className="text-[16px] font-normal text-[#080808] mb-1">{bottomCaptionTitle}</p>
             )}
             {bottomCaptionDesc && (
-              <p className="text-[14px] font-normal text-[#5A5A5A]">
+              <p className="text-[14px] font-normal text-[#080808]">
                 {bottomCaptionDesc}
               </p>
             )}

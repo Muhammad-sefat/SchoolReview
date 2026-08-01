@@ -86,11 +86,10 @@ const VoiceInputButton = ({ onTranscript, className = "" }) => {
       type="button"
       onClick={toggleListening}
       title={isListening ? "Stop Voice Input" : "Start Voice Input"}
-      className={`p-1.5 rounded-full transition-all cursor-pointer flex items-center justify-center ${
-        isListening
+      className={`p-1.5 rounded-full transition-all cursor-pointer flex items-center justify-center ${isListening
           ? "bg-red-500 text-white animate-pulse"
           : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
-      } ${className}`}
+        } ${className}`}
     >
       {isListening ? (
         <MicOff className="w-4 h-4" />

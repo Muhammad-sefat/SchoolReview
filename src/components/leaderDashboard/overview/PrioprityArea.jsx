@@ -19,9 +19,9 @@ const PRIORITY_GROUPS = [
   {
     id: "developing",
     title: "Developing",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#FB8C00]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#FAFAFA]",
+    bgColor: "bg-[#FAFAFA",
     items: [
       { label: "School Communication", score: "3.2" },
       { label: "Leadership", score: "3.8" },
@@ -35,7 +35,7 @@ const PRIORITY_GROUPS = [
   {
     id: "performing-well",
     title: "Performing Well",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#66BB6A]",
     textColor: "text-[#080808]",
     bgColor: "bg-[#FAFAFA]",
     items: [
@@ -65,11 +65,11 @@ const PrioprityArea = ({
       {/* Priority Category Groups */}
       <div className="space-y-6 flex-1 flex flex-col justify-start pt-2">
         {groups.map((group) => (
-          <div key={group.id} className="space-y-2.5">
+          <div key={group.id} className="space-y-4">
             {/* Category Pill Header */}
             <div>
               <span
-                className={`inline-block px-3.5 py-1 rounded-full border text-sm font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
+                className={`inline-block px-3 py-2 rounded-full border text-sm font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
               >
                 {group.title}
               </span>
@@ -80,7 +80,7 @@ const PrioprityArea = ({
               {group.items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-gray-200/90 rounded-full px-3 py-1 text-xs sm:text-sm font-normal text-textPrimary flex items-center gap-1.5 shadow-2xs hover:border-gray-300 transition-colors cursor-default"
+                  className="bg-white border border-[#EAEAEA] rounded-full px-3 py-2 text-xs sm:text-sm font-normal text-textPrimary flex items-center gap-2.5 shadow-2xs hover:border-gray-300 transition-colors cursor-default"
                 >
                   <span>{item.label}</span>
                   <span className="font-medium text-textPrimary">
