@@ -169,7 +169,7 @@ const TeacherTableSection = () => {
                     className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-gray-200/80 transition-colors cursor-pointer"
                     title="Edit Teacher"
                   >
-                    <Pencil className="w-3.5 h-3.5" />
+                    <Pencil className="w-4 h-4" />
                   </button>
                   <button
                     type="button"
@@ -177,7 +177,7 @@ const TeacherTableSection = () => {
                     className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors cursor-pointer"
                     title="Delete Teacher"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </TableCell>

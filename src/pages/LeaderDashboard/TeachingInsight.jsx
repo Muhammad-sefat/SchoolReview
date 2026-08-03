@@ -30,7 +30,7 @@ const TEACHER_PRIORITY_GROUPS = [
     title: "Needs Support",
     borderColor: "border-[#E53935]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#E53935]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Kathryn Murphy", score: "2.5" },
       { label: "Robert Fox", score: "2.8" },
@@ -41,9 +41,9 @@ const TEACHER_PRIORITY_GROUPS = [
   {
     id: "developing",
     title: "Developing",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#FB8C00]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#FB8C00]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Ronald Richards", score: "3.0" },
       { label: "Esther Howard", score: "3.8" },
@@ -53,9 +53,9 @@ const TEACHER_PRIORITY_GROUPS = [
   {
     id: "effective",
     title: "Effective",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#66BB6A]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#2E7D32]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Bessie Cooper", score: "4.5" },
       { label: "Annette Black", score: "4.2" },

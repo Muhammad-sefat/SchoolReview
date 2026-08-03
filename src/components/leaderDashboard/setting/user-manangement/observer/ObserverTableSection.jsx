@@ -24,12 +24,12 @@ import DeleteObserverModal from "./DeleteObserverModal"
 const ApproveIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
     <g clipPath="url(#clip0_10795_143898)">
-      <path d="M11.3359 2.22489C10.3553 1.65765 9.21687 1.33301 8.0026 1.33301C4.3207 1.33301 1.33594 4.31777 1.33594 7.99968C1.33594 11.6815 4.3207 14.6663 8.0026 14.6663C11.6845 14.6663 14.6693 11.6815 14.6693 7.99968C14.6693 7.54308 14.6233 7.09714 14.5359 6.66634" stroke="#1F1F21" strokeLinecap="round"/>
-      <path d="M5.33594 8.33301C5.33594 8.33301 6.33594 8.33301 7.66927 10.6663C7.66927 10.6663 11.3751 4.55523 14.6693 3.33301" stroke="#1F1F21" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M11.3359 2.22489C10.3553 1.65765 9.21687 1.33301 8.0026 1.33301C4.3207 1.33301 1.33594 4.31777 1.33594 7.99968C1.33594 11.6815 4.3207 14.6663 8.0026 14.6663C11.6845 14.6663 14.6693 11.6815 14.6693 7.99968C14.6693 7.54308 14.6233 7.09714 14.5359 6.66634" stroke="#1F1F21" strokeLinecap="round" />
+      <path d="M5.33594 8.33301C5.33594 8.33301 6.33594 8.33301 7.66927 10.6663C7.66927 10.6663 11.3751 4.55523 14.6693 3.33301" stroke="#1F1F21" strokeLinecap="round" strokeLinejoin="round" />
     </g>
     <defs>
       <clipPath id="clip0_10795_143898">
-        <rect width="16" height="16" fill="white"/>
+        <rect width="20" height="20" fill="white" />
       </clipPath>
     </defs>
   </svg>
@@ -181,7 +181,7 @@ const ObserverTableSection = () => {
                     className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-gray-200/80 transition-colors cursor-pointer"
                     title="View Observer Details"
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-4 h-4" />
                   </button>
 
                   {/* Actions depending on status */}
@@ -193,7 +193,7 @@ const ObserverTableSection = () => {
                         className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
                         title="Approve Observer"
                       >
-                        <ApproveIcon />
+                        <ApproveIcon className="w-4 h-4" />
                       </button>
                       <button
                         type="button"
@@ -201,7 +201,7 @@ const ObserverTableSection = () => {
                         className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-colors cursor-pointer"
                         title="Decline Observer"
                       >
-                        <XCircle className="w-3.5 h-3.5" />
+                        <XCircle className="w-4 h-4" />
                       </button>
                     </>
                   ) : (
@@ -211,7 +211,7 @@ const ObserverTableSection = () => {
                       className="w-7 h-7 rounded-full bg-[rgba(8,8,8,0.04)] flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors cursor-pointer"
                       title="Delete Observer"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   )}
                 </div>
