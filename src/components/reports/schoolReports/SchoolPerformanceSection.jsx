@@ -110,18 +110,18 @@ const SchoolPerformanceSection = () => {
       <Title48 className="text-[#038AF9] font-bold">School Performance</Title48>
 
       {/* Top Rating Summary Badges */}
-      <div className="flex flex-wrap items-center gap-5">
+      <div className="flex flex-wrap items-center gap-4 sm:gap-5">
         {/* School Rating Pill with 5-Segment Rating Distribution Bar */}
-        <div className="bg-white border border-gray-200/80 px-6 py-3 rounded-full flex flex-wrap items-center gap-4 shadow-2xs">
-          <span className="text-[24px] font-medium text-[#080808]">School Rating</span>
-          <span className="bg-[#038AF9] text-white text-[21px] font-medium px-3.5 py-1 rounded-full flex items-center gap-1.5">
+        <div className="bg-white border border-gray-200/80 px-4 sm:px-6 py-3 rounded-3xl sm:rounded-full flex flex-wrap items-center gap-3 sm:gap-4 shadow-2xs max-w-full">
+          <span className="text-[20px] sm:text-[24px] font-medium text-[#080808]">School Rating</span>
+          <span className="bg-[#038AF9] text-white text-[18px] sm:text-[21px] font-medium px-3.5 py-1 rounded-full flex items-center gap-1.5 shrink-0">
             <span>4.5</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
               <path fillRule="evenodd" clipRule="evenodd" d="M9.34255 2.5851C9.91559 1.47163 11.5219 1.47163 12.0949 2.5851L14.0256 6.33704C14.0577 6.39929 14.1179 6.44262 14.1875 6.45361L18.3843 7.11554C19.629 7.31187 20.1251 8.82245 19.2349 9.70637L16.2305 12.6897C16.1808 12.7391 16.1578 12.809 16.1689 12.878L16.8311 17.0417C17.0273 18.2757 15.728 19.2097 14.6042 18.6427L10.8189 16.733C10.756 16.7012 10.6815 16.7012 10.6186 16.733L6.83334 18.6427C5.70942 19.2097 4.41021 18.2757 4.60646 17.0417L5.26867 12.878C5.27964 12.809 5.2567 12.7391 5.20694 12.6897L2.20253 9.70637C1.31244 8.82245 1.80846 7.31187 3.05323 7.11554L7.24996 6.45361C7.31964 6.44262 7.37981 6.39929 7.41185 6.33704L9.34255 2.5851Z" fill="white" />
             </svg>
           </span>
 
-          <div className="w-52 sm:w-64 flex items-center gap-0.5 h-7 rounded-full overflow-hidden p-0.5 bg-gray-50 border border-gray-100 shrink-0">
+          <div className="w-48 sm:w-60 md:w-64 flex items-center gap-0.5 h-7 rounded-full overflow-hidden p-0.5 bg-gray-50 border border-gray-100 shrink-0">
             <div style={{ width: "60%" }} className="h-full bg-[#E53935] text-white text-[11px] font-bold flex items-center justify-center rounded-l-full">
               8%
             </div>
@@ -139,16 +139,16 @@ const SchoolPerformanceSection = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 text-[21px] font-medium text-[#66BB6A]">
+          <div className="flex items-center gap-1 text-[18px] sm:text-[21px] font-medium text-[#66BB6A] shrink-0">
             <UpTrendArrowSmall />
             <span>9%</span>
           </div>
         </div>
 
         {/* Recommendation Pill */}
-        <div className="bg-white border border-gray-200/80 px-7 py-3 rounded-full flex items-center gap-4 shadow-2xs">
-          <span className="text-[24px] font-medium text-[#080808]">Recommendation</span>
-          <div className="flex items-center gap-1 text-[24px] font-medium text-[#66BB6A]">
+        <div className="bg-white border border-gray-200/80 px-5 sm:px-7 py-3 rounded-full flex items-center gap-3 sm:gap-4 shadow-2xs shrink-0">
+          <span className="text-[20px] sm:text-[24px] font-medium text-[#080808]">Recommendation</span>
+          <div className="flex items-center gap-1 text-[20px] sm:text-[24px] font-medium text-[#66BB6A]">
             <UpTrendArrowBig />
             <span>80%</span>
           </div>
@@ -156,8 +156,8 @@ const SchoolPerformanceSection = () => {
       </div>
 
       {/* Row 1: Outer Container for Key Metrics & Performance Over Time */}
-      <div className="bg-[#F6F6F6] p-2 rounded-[32px] border border-gray-200/60">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+      <div className="bg-[#F6F6F6] p-2 sm:p-3 rounded-3xl sm:rounded-4xl border border-gray-200/60">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-stretch">
           <div className="md:col-span-5 flex">
             <KeyMetricsCard />
           </div>
@@ -167,10 +167,10 @@ const SchoolPerformanceSection = () => {
         </div>
       </div>
 
-      {/* Row 2: Separate Outer Container for Scatter Plot (Col 8) & Priority Areas (Col 4) stretching full height */}
-      <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60">
+      {/* Row 2: Separate Outer Container for Scatter Plot & Priority Areas */}
+      <div className="bg-[#F6F6F6] p-2 sm:p-3 rounded-3xl sm:rounded-4xl border border-gray-200/60">
         <div className="grid grid-cols-12 gap-4 items-stretch">
-          <div className="col-span-12 xlg:col-span-8 flex flex-col">
+          <div className="col-span-12 lg:col-span-8 flex flex-col">
             <ScatterPlot
               title="Student & Parent Experience"
               subtitle=""
@@ -179,10 +179,10 @@ const SchoolPerformanceSection = () => {
               showReferenceLine={false}
               showBottomCaption={true}
               data={PARENT_STUDENT_DATA}
-              className="h-full!"
+              className="h-full"
             />
           </div>
-          <div className="col-span-12 xlg:col-span-4 flex flex-col">
+          <div className="col-span-12 lg:col-span-4 flex flex-col">
             <PrioprityArea />
           </div>
         </div>

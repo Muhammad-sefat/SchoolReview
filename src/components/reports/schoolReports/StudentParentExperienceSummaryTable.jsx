@@ -179,16 +179,16 @@ const SUMMARY_DATA = [
 
 const StudentParentExperienceSummaryTable = () => {
   return (
-    <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60 font-urbanist">
-      <div className="w-full bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6 font-urbanist">
+    <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60 font-urbanist w-full max-w-full">
+      <div className="w-full bg-white border border-gray-100 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xs space-y-6 font-urbanist">
         {/* Title 24px semibold */}
         <Title24 className="text-[#080808] font-semibold">Student & Parent Experience Summary</Title24>
 
-        {/* Responsive Table */}
-        <div className="overflow-x-auto">
+        {/* Responsive Table with overflow-x-auto and min-w-[850px] */}
+        <div className="overflow-x-auto w-full">
           <Table
-            containerClassName="border-0 border-none bg-transparent shadow-none rounded-none"
-            className="w-full text-left border-collapse border-0 border-none"
+            containerClassName="border-0 border-none bg-transparent shadow-none rounded-none w-full"
+            className="w-full min-w-[850px] text-left border-collapse border-0 border-none"
           >
             <TableHeader className="bg-[#F9FAFB]">
               <TableRow className="border-b border-gray-100 hover:bg-transparent">
@@ -242,8 +242,9 @@ const StudentParentExperienceSummaryTable = () => {
                       {/* Trend */}
                       <TableCell className="text-[16px] font-normal py-4 align-top text-right pr-4 bg-white border-0 border-none">
                         <div
-                          className={`inline-flex items-center justify-end gap-1 text-[16px] font-medium ${row.isUp ? "text-[#66BB6A]" : "text-[#E53935]"
-                            }`}
+                          className={`inline-flex items-center justify-end gap-1 text-[16px] font-medium ${
+                            row.isUp ? "text-[#66BB6A]" : "text-[#E53935]"
+                          }`}
                         >
                           {row.isUp ? <UpTrendArrow /> : <DownTrendArrow />}
                           <span>{row.trend}</span>
