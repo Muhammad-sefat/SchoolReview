@@ -169,8 +169,8 @@ const SchoolPerformanceSection = () => {
 
       {/* Row 2: Separate Outer Container for Scatter Plot (Col 8) & Priority Areas (Col 4) stretching full height */}
       <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60">
-        <div className="grid grid-cols-12 gap-6 items-stretch">
-          <div className="col-span-12 lg:col-span-8 flex flex-col">
+        <div className="grid grid-cols-12 gap-4 items-stretch">
+          <div className="col-span-12 xlg:col-span-8 flex flex-col">
             <ScatterPlot
               title="Student & Parent Experience"
               subtitle=""
@@ -182,7 +182,7 @@ const SchoolPerformanceSection = () => {
               className="h-full!"
             />
           </div>
-          <div className="col-span-12 lg:col-span-4 flex flex-col">
+          <div className="col-span-12 xlg:col-span-4 flex flex-col">
             <PrioprityArea />
           </div>
         </div>

@@ -3,6 +3,8 @@ import ReportBanner from "@/components/reports/common/ReportBanner"
 import ExecutiveSummarySection from "@/components/reports/schoolReports/ExecutiveSummarySection"
 import SchoolPerformanceSection from "@/components/reports/schoolReports/SchoolPerformanceSection"
 import StudentParentExperienceSummaryTable from "@/components/reports/schoolReports/StudentParentExperienceSummaryTable"
+import TeacherExperience from "@/components/reports/schoolReports/TeacherExperience"
+import TeacherExpSummary from "@/components/reports/schoolReports/TeacherExpSummary"
 
 const SchoolReport = () => {
   return (
@@ -17,7 +19,7 @@ const SchoolReport = () => {
       />
 
       {/* Main Content Body with section-padding-x and 40px section gap */}
-      <div className="section-padding-x py-10 space-y-[40px]  ">
+      <div className="section-padding-x py-10 space-y-[40px]">
         {/* Section 1: Executive Summary */}
         <ExecutiveSummarySection />
 
@@ -26,6 +28,12 @@ const SchoolReport = () => {
 
         {/* Section 3: Student & Parent Experience Summary Table */}
         <StudentParentExperienceSummaryTable />
+
+        {/* Section 4: Teacher Experience */}
+        <TeacherExperience />
+
+        {/* Section 5: Teacher Experience Summary Table */}
+        <TeacherExpSummary />
       </div>
     </div>
   )
