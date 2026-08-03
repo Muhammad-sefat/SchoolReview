@@ -208,6 +208,7 @@ const SafeGuarding = () => {
                     <BubbleTimelineChart
                         title="Anonymous Reporting Trends"
                         subtitle=""
+                        showRightBadge={false}
                     />
                 </div>
 
