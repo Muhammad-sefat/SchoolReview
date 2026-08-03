@@ -5,6 +5,8 @@ import SchoolPerformanceSection from "@/components/reports/schoolReports/SchoolP
 import StudentParentExperienceSummaryTable from "@/components/reports/schoolReports/StudentParentExperienceSummaryTable"
 import TeacherExperience from "@/components/reports/schoolReports/TeacherExperience"
 import TeacherExpSummary from "@/components/reports/schoolReports/TeacherExpSummary"
+import PerceptionAlignment from "@/components/reports/schoolReports/PerceptionAlignment"
+import SafeGuarding from "@/components/reports/schoolReports/SafeGuarding"
 
 const SchoolReport = () => {
   return (
@@ -34,6 +36,12 @@ const SchoolReport = () => {
 
         {/* Section 5: Teacher Experience Summary Table */}
         <TeacherExpSummary />
+
+        {/* Section 6: Perception Alignment Across Stakeholders */}
+        <PerceptionAlignment />
+
+        {/* Section 7: Safeguarding */}
+        <SafeGuarding />
       </div>
     </div>
   )
