@@ -1,5 +1,6 @@
 import React from "react"
 import ReportBanner from "@/components/reports/common/ReportBanner"
+import ReportFooter from "@/components/reports/common/ReportFooter"
 import ExecutiveSummarySection from "@/components/reports/schoolReports/ExecutiveSummarySection"
 import SchoolPerformanceSection from "@/components/reports/schoolReports/SchoolPerformanceSection"
 import StudentParentExperienceSummaryTable from "@/components/reports/schoolReports/StudentParentExperienceSummaryTable"
@@ -8,10 +9,13 @@ import TeacherExpSummary from "@/components/reports/schoolReports/TeacherExpSumm
 import PerceptionAlignment from "@/components/reports/schoolReports/PerceptionAlignment"
 import SafeGuarding from "@/components/reports/schoolReports/SafeGuarding"
 import TeacherEffectiveness from "@/components/reports/schoolReports/TeacherEffectiveness"
+import PriorityImprovement from "@/components/reports/schoolReports/PriorityImprovement"
+import CategoryOverview from "@/components/reports/schoolReports/CategoryOverview"
+import CategoryOverviewTeacher from "@/components/reports/schoolReports/CategoryOverviewTeacher"
 
 const SchoolReport = () => {
   return (
-    <div className="w-full min-h-screen font-urbanist pb-16">
+    <div className="w-full min-h-screen font-urbanist pb-0">
       {/* Top Common Reusable Report Banner */}
       <ReportBanner
         title="School Report (2026)"
@@ -21,8 +25,8 @@ const SchoolReport = () => {
         breakdownText="Students: 210 • Parents: 92 • Teachers: 40"
       />
 
-      {/* Main Content Body with section-padding-x and 40px section gap */}
-      <div className="section-padding-x py-10 space-y-[40px]">
+      {/* Main Content Body with section-padding-x and 64px section gap */}
+      <div className="section-padding-x py-12 space-y-[64px]">
         {/* Section 1: Executive Summary */}
         <ExecutiveSummarySection />
 
@@ -46,7 +50,19 @@ const SchoolReport = () => {
 
         {/* Section 8: Teaching Effectiveness */}
         <TeacherEffectiveness />
+
+        {/* Section 9: Priority Improvement Areas */}
+        <PriorityImprovement />
+
+        {/* Section 10: Category Overview (Student & Teacher) */}
+        <CategoryOverview />
+
+        {/* Section 11: Category Overview (Teacher) */}
+        <CategoryOverviewTeacher />
       </div>
+
+      {/* Reusable Report Footer */}
+      <ReportFooter />
     </div>
   )
 }
