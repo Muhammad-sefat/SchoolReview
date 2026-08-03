@@ -7,6 +7,7 @@ import TeacherExperience from "@/components/reports/schoolReports/TeacherExperie
 import TeacherExpSummary from "@/components/reports/schoolReports/TeacherExpSummary"
 import PerceptionAlignment from "@/components/reports/schoolReports/PerceptionAlignment"
 import SafeGuarding from "@/components/reports/schoolReports/SafeGuarding"
+import TeacherEffectiveness from "@/components/reports/schoolReports/TeacherEffectiveness"
 
 const SchoolReport = () => {
   return (
@@ -42,6 +43,9 @@ const SchoolReport = () => {
 
         {/* Section 7: Safeguarding */}
         <SafeGuarding />
+
+        {/* Section 8: Teaching Effectiveness */}
+        <TeacherEffectiveness />
       </div>
     </div>
   )
