@@ -9,8 +9,8 @@ const PrivacyDataTab = () => {
     permissions: false,
   })
 
-  // Accordion state for "Learn More About Your Data"
-  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(true)
+  // Accordion state for "Learn More About Your Data" (Default: false / collapsed)
+  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
 
   const toggleDownloadOption = (key) => {
     setDownloadOptions((prev) => ({ ...prev, [key]: !prev[key] }))
@@ -54,10 +54,11 @@ const PrivacyDataTab = () => {
                 className="flex items-center gap-3 cursor-pointer select-none w-fit"
               >
                 <div
-                  className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${downloadOptions[item.id]
-                    ? "bg-[#038AF9] border-[#038AF9] text-white"
-                    : "border-gray-300 bg-white"
-                    }`}
+                  className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${
+                    downloadOptions[item.id]
+                      ? "bg-[#038AF9] border-[#038AF9] text-white"
+                      : "border-gray-300 bg-white"
+                  }`}
                 >
                   {downloadOptions[item.id] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
@@ -114,8 +115,8 @@ const PrivacyDataTab = () => {
         </button>
       </div>
 
-      {/* Card 4: Learn More About Your Data (Accordion) */}
-      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs">
+      {/* Card 4: Learn More About Your Data (Accordion Header with Left Blue Chevron Icon) */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs transition-all">
         <button
           type="button"
           onClick={() => setIsLearnMoreOpen(!isLearnMoreOpen)}
@@ -124,7 +125,7 @@ const PrivacyDataTab = () => {
           {isLearnMoreOpen ? (
             <ChevronUp className="w-5 h-5 text-[#038AF9] shrink-0 mt-1" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-gray-400 shrink-0 mt-1" />
+            <ChevronDown className="w-5 h-5 text-[#038AF9] shrink-0 mt-1" />
           )}
           <div className="space-y-1">
             <h3 className="text-[20px] font-semibold text-[#080808]">Learn More About Your Data</h3>
@@ -133,88 +134,93 @@ const PrivacyDataTab = () => {
             </p>
           </div>
         </button>
-      </div>
 
-      {/* Card 5: Data Retention */}
-      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6">
-        <div className="space-y-1">
-          <h3 className="text-[20px] font-semibold text-[#080808]">Data Retention</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
-            We aim to retain personal data only for as long as necessary to provide platform services, maintain security, and meet legal obligations.
-          </p>
-        </div>
+        {/* Expandable Content Container: Includes Data Retention, AI & Data Processing, and Hosting & Security */}
+        {isLearnMoreOpen && (
+          <div className="pt-6 space-y-8 border-t border-gray-100 mt-6">
+            {/* 1. Data Retention */}
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <h4 className="text-[18px] font-semibold text-[#080808]">Data Retention</h4>
+                <p className="text-[16px] font-normal text-[#5A5A5A]">
+                  We aim to retain personal data only for as long as necessary to provide platform services, maintain security, and meet legal obligations.
+                </p>
+              </div>
 
-        {/* Data Retention Table */}
-        <div className="border border-gray-200/80 rounded-2xl overflow-hidden">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-gray-200/80 bg-white">
-                <th className="py-4 px-6 text-[16px] font-semibold text-[#080808] w-1/3">Data Type</th>
-                <th className="py-4 px-6 text-[16px] font-semibold text-[#080808]">Retention</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 bg-white">
-              <tr>
-                <td className="py-4 px-6 text-[16px] font-medium text-[#080808]">Account data</td>
-                <td className="py-4 px-6 text-[16px] font-normal text-[#5A5A5A]">Deleted 30 days after account deletion request</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 text-[16px] font-medium text-[#080808]">Reviews & feedback</td>
-                <td className="py-4 px-6 text-[16px] font-normal text-[#5A5A5A]">Deleted or anonymised after deletion request where technically possible</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 text-[16px] font-medium text-[#080808]">Survey responses</td>
-                <td className="py-4 px-6 text-[16px] font-normal text-[#5A5A5A]">May be retained in anonymised form for benchmarking and reporting</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 text-[16px] font-medium text-[#080808]">Audit & security logs</td>
-                <td className="py-4 px-6 text-[16px] font-normal text-[#5A5A5A]">Retained for up to 12 months</td>
-              </tr>
-              <tr>
-                <td className="py-4 px-6 text-[16px] font-medium text-[#080808]">Inactive accounts</td>
-                <td className="py-4 px-6 text-[16px] font-normal text-[#5A5A5A]">May be deleted after 24 months of inactivity</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+              {/* Data Retention Table */}
+              <div className="border border-gray-200/80 rounded-2xl overflow-hidden">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-gray-200/80 bg-gray-50/60">
+                      <th className="py-3.5 px-6 text-[16px] font-semibold text-[#080808] w-1/3">Data Type</th>
+                      <th className="py-3.5 px-6 text-[16px] font-semibold text-[#080808]">Retention</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 bg-white">
+                    <tr>
+                      <td className="py-3.5 px-6 text-[16px] font-medium text-[#080808]">Account data</td>
+                      <td className="py-3.5 px-6 text-[16px] font-normal text-[#5A5A5A]">Deleted 30 days after account deletion request</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-6 text-[16px] font-medium text-[#080808]">Reviews & feedback</td>
+                      <td className="py-3.5 px-6 text-[16px] font-normal text-[#5A5A5A]">Deleted or anonymised after deletion request where technically possible</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-6 text-[16px] font-medium text-[#080808]">Survey responses</td>
+                      <td className="py-3.5 px-6 text-[16px] font-normal text-[#5A5A5A]">May be retained in anonymised form for benchmarking and reporting</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-6 text-[16px] font-medium text-[#080808]">Audit & security logs</td>
+                      <td className="py-3.5 px-6 text-[16px] font-normal text-[#5A5A5A]">Retained for up to 12 months</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-6 text-[16px] font-medium text-[#080808]">Inactive accounts</td>
+                      <td className="py-3.5 px-6 text-[16px] font-normal text-[#5A5A5A]">May be deleted after 24 months of inactivity</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
-      {/* Card 6: AI & Data Processing */}
-      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4">
-        <h3 className="text-[20px] font-semibold text-[#080808]">AI & Data Processing</h3>
-        <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimary">•</span>
-            <span>Your personal data is not used to train public AI models.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimary">•</span>
-            <span>AI is used only to provide platform features and insights.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimary">•</span>
-            <span>Access to your data is restricted based on your role and permissions.</span>
-          </li>
-        </ul>
-      </div>
+            {/* 2. AI & Data Processing */}
+            <div className="space-y-3 border-t border-gray-100 pt-6">
+              <h4 className="text-[18px] font-semibold text-[#080808]">AI & Data Processing</h4>
+              <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>Your personal data is not used to train public AI models.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>AI is used only to provide platform features and insights.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>Access to your data is restricted based on your role and permissions.</span>
+                </li>
+              </ul>
+            </div>
 
-      {/* Card 7: Hosting & Security */}
-      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4">
-        <h3 className="text-[20px] font-semibold text-[#080808]">Hosting & Security</h3>
-        <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimary">•</span>
-            <span>Data is hosted using Swiss and/or GDPR-compliant infrastructure.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimayr">•</span>
-            <span>Access to sensitive information is restricted based on user roles and permissions.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-textPrimary">•</span>
-            <span>Where possible, identifying information is removed before aggregated analysis or benchmarking.</span>
-          </li>
-        </ul>
+            {/* 3. Hosting & Security */}
+            <div className="space-y-3 border-t border-gray-100 pt-6">
+              <h4 className="text-[18px] font-semibold text-[#080808]">Hosting & Security</h4>
+              <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>Data is hosted using Swiss and/or GDPR-compliant infrastructure.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>Access to sensitive information is restricted based on user roles and permissions.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-textPrimary">•</span>
+                  <span>Where possible, identifying information is removed before aggregated analysis or benchmarking.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

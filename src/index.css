@@ -192,5 +192,5 @@ html {
 }
 
 .section-padding-x {
-  @apply px-4 sm:px-6 md:px-10 lg:px-[220px] w-full;
+  @apply px-4 sm:px-6 md:px-10 lg:px-[200px] w-full;
 }

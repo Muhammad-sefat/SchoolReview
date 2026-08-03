@@ -3,11 +3,16 @@ import { Title48 } from "@/components/typho/Title"
 import KeyMetricsCard from "@/components/leaderDashboard/overview/KeyMetricsCard"
 import ScatterPlot from "@/components/graphCharts/ScatterPlot"
 import PrioprityArea from "@/components/leaderDashboard/overview/PrioprityArea"
-import { Star } from "lucide-react"
 
-const UpTrendArrow = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
-    <path d="M14.5846 12.4993V5.41602H7.5013M14.2274 5.77318L5.41797 14.5827" stroke="#66BB6A" strokeWidth="1.25" strokeLinecap="square" />
+const UpTrendArrowSmall = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="shrink-0">
+    <path d="M17.5 15V7.5H10M17.07 7.93L6.5 18.5" stroke="#66BB6A" strokeWidth="2" strokeLinecap="square" />
+  </svg>
+)
+
+const UpTrendArrowBig = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none" className="shrink-0">
+    <path d="M21.875 18.75V8.125H11.25M21.3392 8.66075L8.125 21.875" stroke="#66BB6A" strokeWidth="1.875" strokeLinecap="square" />
   </svg>
 )
 
@@ -105,51 +110,53 @@ const SchoolPerformanceSection = () => {
       <Title48 className="text-[#038AF9] font-bold">School Performance</Title48>
 
       {/* Top Rating Summary Badges */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-5">
         {/* School Rating Pill with 5-Segment Rating Distribution Bar */}
-        <div className="bg-white border border-gray-200/80 px-4 py-2 rounded-full flex flex-wrap items-center gap-3 shadow-2xs">
-          <span className="text-[17px] font-medium text-[#080808]">School Rating</span>
-          <span className="bg-[#038AF9] text-white text-sm font-semibold px-2.5 py-0.5 rounded-md flex items-center gap-1">
+        <div className="bg-white border border-gray-200/80 px-6 py-3 rounded-full flex flex-wrap items-center gap-4 shadow-2xs">
+          <span className="text-[24px] font-medium text-[#080808]">School Rating</span>
+          <span className="bg-[#038AF9] text-white text-[21px] font-medium px-3.5 py-1 rounded-full flex items-center gap-1.5">
             <span>4.5</span>
-            <Star className="w-3.5 h-3.5 fill-white text-white" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+              <path fillRule="evenodd" clipRule="evenodd" d="M9.34255 2.5851C9.91559 1.47163 11.5219 1.47163 12.0949 2.5851L14.0256 6.33704C14.0577 6.39929 14.1179 6.44262 14.1875 6.45361L18.3843 7.11554C19.629 7.31187 20.1251 8.82245 19.2349 9.70637L16.2305 12.6897C16.1808 12.7391 16.1578 12.809 16.1689 12.878L16.8311 17.0417C17.0273 18.2757 15.728 19.2097 14.6042 18.6427L10.8189 16.733C10.756 16.7012 10.6815 16.7012 10.6186 16.733L6.83334 18.6427C5.70942 19.2097 4.41021 18.2757 4.60646 17.0417L5.26867 12.878C5.27964 12.809 5.2567 12.7391 5.20694 12.6897L2.20253 9.70637C1.31244 8.82245 1.80846 7.31187 3.05323 7.11554L7.24996 6.45361C7.31964 6.44262 7.37981 6.39929 7.41185 6.33704L9.34255 2.5851Z" fill="white" />
+            </svg>
           </span>
 
-          <div className="w-36 sm:w-44 flex items-center gap-0.5 h-6 rounded-full overflow-hidden p-0.5 bg-gray-50 border border-gray-100 shrink-0">
-            <div style={{ width: "8%" }} className="h-full bg-[#E53935] text-white text-[9px] font-bold flex items-center justify-center rounded-l-full">
+          <div className="w-52 sm:w-64 flex items-center gap-0.5 h-7 rounded-full overflow-hidden p-0.5 bg-gray-50 border border-gray-100 shrink-0">
+            <div style={{ width: "60%" }} className="h-full bg-[#E53935] text-white text-[11px] font-bold flex items-center justify-center rounded-l-full">
               8%
             </div>
-            <div style={{ width: "10%" }} className="h-full bg-[#FB8C00] text-white text-[9px] font-bold flex items-center justify-center">
+            <div style={{ width: "60%" }} className="h-full bg-[#FB8C00] text-white text-[11px] font-bold flex items-center justify-center">
               10%
             </div>
-            <div style={{ width: "20%" }} className="h-full bg-[#90A4AE] text-white text-[9px] font-bold flex items-center justify-center">
+            <div style={{ width: "60%" }} className="h-full bg-[#90A4AE] text-white text-[11px] font-bold flex items-center justify-center">
               20%
             </div>
-            <div style={{ width: "25%" }} className="h-full bg-[#66BB6A] text-white text-[9px] font-bold flex items-center justify-center">
+            <div style={{ width: "60%" }} className="h-full bg-[#66BB6A] text-white text-[11px] font-bold flex items-center justify-center">
               25%
             </div>
-            <div style={{ width: "37%" }} className="h-full bg-[#2E7D32] text-white text-[9px] font-bold flex items-center justify-center rounded-r-full">
+            <div style={{ width: "60%" }} className="h-full bg-[#2E7D32] text-white text-[11px] font-bold flex items-center justify-center rounded-r-full">
               37%
             </div>
           </div>
 
-          <div className="flex items-center gap-1 text-[16px] font-medium text-[#66BB6A]">
-            <UpTrendArrow />
+          <div className="flex items-center gap-1 text-[21px] font-medium text-[#66BB6A]">
+            <UpTrendArrowSmall />
             <span>9%</span>
           </div>
         </div>
 
         {/* Recommendation Pill */}
-        <div className="bg-white border border-gray-200/80 px-5 py-2.5 rounded-full flex items-center gap-3 shadow-2xs">
-          <span className="text-[17px] font-medium text-[#080808]">Recommendation</span>
-          <div className="flex items-center gap-1 text-[16px] font-medium text-[#66BB6A]">
-            <UpTrendArrow />
+        <div className="bg-white border border-gray-200/80 px-7 py-3 rounded-full flex items-center gap-4 shadow-2xs">
+          <span className="text-[24px] font-medium text-[#080808]">Recommendation</span>
+          <div className="flex items-center gap-1 text-[24px] font-medium text-[#66BB6A]">
+            <UpTrendArrowBig />
             <span>80%</span>
           </div>
         </div>
       </div>
 
       {/* Row 1: Outer Container for Key Metrics & Performance Over Time */}
-      <div className="bg-[#F6F6F6] p-3 sm:p-4 rounded-[32px] border border-gray-200/60">
+      <div className="bg-[#F6F6F6] p-2 rounded-[32px] border border-gray-200/60">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
           <div className="md:col-span-5 flex">
             <KeyMetricsCard />
@@ -160,10 +167,10 @@ const SchoolPerformanceSection = () => {
         </div>
       </div>
 
-      {/* Row 2: Separate Outer Container for Scatter Plot (Col 8) & Priority Areas (Col 4) with White Gap */}
-      <div className="bg-[#F6F6F6] p-3 sm:p-4 rounded-[32px] border border-gray-200/60">
+      {/* Row 2: Separate Outer Container for Scatter Plot (Col 8) & Priority Areas (Col 4) stretching full height */}
+      <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60">
         <div className="grid grid-cols-12 gap-6 items-stretch">
-          <div className="col-span-12 lg:col-span-8 flex">
+          <div className="col-span-12 lg:col-span-8 flex flex-col">
             <ScatterPlot
               title="Student & Parent Experience"
               subtitle=""
@@ -172,9 +179,10 @@ const SchoolPerformanceSection = () => {
               showReferenceLine={false}
               showBottomCaption={true}
               data={PARENT_STUDENT_DATA}
+              className="h-full!"
             />
           </div>
-          <div className="col-span-12 lg:col-span-4 flex">
+          <div className="col-span-12 lg:col-span-4 flex flex-col">
             <PrioprityArea />
           </div>
         </div>

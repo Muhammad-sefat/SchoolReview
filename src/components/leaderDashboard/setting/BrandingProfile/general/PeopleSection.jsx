@@ -4,7 +4,7 @@ import CustomSlider from "@/components/ui/slider"
 import { Title18 } from "@/components/typho/Title"
 
 const PeopleSection = ({ register }) => {
-  const [peopleOpen, setPeopleOpen] = useState(true)
+  const [peopleOpen, setPeopleOpen] = useState(false)
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start border-b border-gray-100 pb-8">

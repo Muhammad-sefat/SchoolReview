@@ -60,18 +60,24 @@ const PreviousSchoolReportsTable = ({ onOpenModal }) => {
                       <button
                         type="button"
                         onClick={onOpenModal}
-                        className="w-8 h-8 rounded-full border border-gray-200/90 text-gray-500 hover:text-[#080808] hover:border-gray-300 flex items-center justify-center transition-colors cursor-pointer"
+                        className="w-8 h-8 rounded-full bg-[rgba(8,8,8,0.04)] text-gray-500 flex items-center justify-center transition-colors cursor-pointer"
                         title="Create Report"
                       >
-                        <Plus className="w-4 h-4 stroke-[2]" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                          <path d="M8.10938 3.37964V12.8439" stroke="#1F1F21" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M12.8471 8.1123H3.38281" stroke="#1F1F21" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                       </button>
                     ) : (
                       <button
                         type="button"
-                        className="w-8 h-8 rounded-full border border-gray-200/90 text-gray-500 hover:text-[#080808] hover:border-gray-300 flex items-center justify-center transition-colors cursor-pointer"
+                        className="w-8 h-8 rounded-full bg-[rgba(8,8,8,0.04)] text-gray-500 hover:text-[#080808] hover:border-gray-300 flex items-center justify-center transition-colors cursor-pointer"
                         title="Download Report"
                       >
-                        <Download className="w-4 h-4 stroke-[2]" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                          <path d="M2.03125 11.4907C2.03125 12.1193 2.03125 12.4336 2.10035 12.6915C2.28785 13.3912 2.83443 13.9378 3.53421 14.1253C3.79207 14.1944 4.10636 14.1944 4.73495 14.1944H11.4942C12.1228 14.1944 12.4371 14.1944 12.695 14.1253C13.3947 13.9378 13.9413 13.3912 14.1288 12.6915C14.1979 12.4336 14.1979 12.1193 14.1979 11.4907" stroke="#1F1F21" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M11.1537 7.77323C11.1537 7.77323 8.91352 10.8149 8.11194 10.8149C7.31043 10.8149 5.07031 7.77323 5.07031 7.77323M8.11194 10.139V2.02783" stroke="#1F1F21" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                       </button>
                     )}
                   </div>

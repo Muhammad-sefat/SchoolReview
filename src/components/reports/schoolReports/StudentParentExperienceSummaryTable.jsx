@@ -179,14 +179,17 @@ const SUMMARY_DATA = [
 
 const StudentParentExperienceSummaryTable = () => {
   return (
-    <div className="bg-[#F6F6F6] p-3 sm:p-4 rounded-[32px] border border-gray-200/60 font-urbanist">
+    <div className="bg-[#F6F6F6] p-2 rounded-4xl border border-gray-200/60 font-urbanist">
       <div className="w-full bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6 font-urbanist">
         {/* Title 24px semibold */}
         <Title24 className="text-[#080808] font-semibold">Student & Parent Experience Summary</Title24>
 
         {/* Responsive Table */}
         <div className="overflow-x-auto">
-          <Table className="w-full text-left border-collapse">
+          <Table
+            containerClassName="border-0 border-none bg-transparent shadow-none rounded-none"
+            className="w-full text-left border-collapse border-0 border-none"
+          >
             <TableHeader className="bg-[#F9FAFB]">
               <TableRow className="border-b border-gray-100 hover:bg-transparent">
                 <TableHead className="w-[140px] text-[16px] font-normal text-secondary py-3.5 pl-4">Area</TableHead>
@@ -198,50 +201,49 @@ const StudentParentExperienceSummaryTable = () => {
               </TableRow>
             </TableHeader>
 
-            <TableBody className="bg-white">
+            <TableBody className="bg-white border-0 border-none">
               {SUMMARY_DATA.map((group) => (
                 <React.Fragment key={group.area}>
                   {group.rows.map((row, idx) => (
                     <TableRow
                       key={`${group.area}-${row.metric}`}
-                      className="border-b border-gray-100/80 bg-white hover:bg-gray-50/50 transition-colors"
+                      className="border-0 border-none hover:bg-gray-50/40 transition-colors"
                     >
-                      {/* Area Name rendered ONLY on first row of each group with pure white background */}
+                      {/* Area Name rendered ONLY on first row of each group */}
                       {idx === 0 ? (
                         <TableCell
                           rowSpan={group.rows.length}
-                          className="align-top text-[16px] font-medium text-textPrimary py-4 pl-4 pr-4 bg-white border-r border-gray-50"
+                          className="align-top text-[16px] font-medium text-textPrimary py-4 pl-4 pr-4 bg-white border-0 border-none"
                         >
                           {group.area}
                         </TableCell>
                       ) : null}
 
                       {/* Metric */}
-                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top bg-white">
+                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top bg-white border-0 border-none">
                         {row.metric}
                       </TableCell>
 
                       {/* Key Insight */}
-                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top leading-relaxed max-w-sm bg-white">
+                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top leading-relaxed max-w-sm bg-white border-0 border-none">
                         {row.keyInsight}
                       </TableCell>
 
                       {/* Suggested Approach */}
-                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top leading-relaxed max-w-sm bg-white">
+                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 pr-4 align-top leading-relaxed max-w-sm bg-white border-0 border-none">
                         {row.suggestedApproach}
                       </TableCell>
 
                       {/* Satisfaction */}
-                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 align-top text-right font-medium bg-white">
+                      <TableCell className="text-[16px] font-normal text-textPrimary py-4 align-top text-right font-medium bg-white border-0 border-none">
                         {row.satisfaction}
                       </TableCell>
 
                       {/* Trend */}
-                      <TableCell className="text-[16px] font-normal py-4 align-top text-right pr-4 bg-white">
+                      <TableCell className="text-[16px] font-normal py-4 align-top text-right pr-4 bg-white border-0 border-none">
                         <div
-                          className={`inline-flex items-center justify-end gap-1 text-[16px] font-medium ${
-                            row.isUp ? "text-[#66BB6A]" : "text-[#E53935]"
-                          }`}
+                          className={`inline-flex items-center justify-end gap-1 text-[16px] font-medium ${row.isUp ? "text-[#66BB6A]" : "text-[#E53935]"
+                            }`}
                         >
                           {row.isUp ? <UpTrendArrow /> : <DownTrendArrow />}
                           <span>{row.trend}</span>

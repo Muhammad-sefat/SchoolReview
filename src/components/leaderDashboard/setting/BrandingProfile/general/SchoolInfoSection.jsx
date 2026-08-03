@@ -5,7 +5,7 @@ import CustomMultiSelect from "@/components/ui/CustomMultiSelect"
 import { Title18 } from "@/components/typho/Title"
 
 const SchoolInfoSection = ({ register, setValue }) => {
-  const [schoolInfoOpen, setSchoolInfoOpen] = useState(true)
+  const [schoolInfoOpen, setSchoolInfoOpen] = useState(false)
 
   const [selectedSchoolType, setSelectedSchoolType] = useState([])
   const [selectedUniformPolicy, setSelectedUniformPolicy] = useState([])

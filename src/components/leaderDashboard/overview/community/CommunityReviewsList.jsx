@@ -84,12 +84,15 @@ const StarRating = ({ rating = 4.5 }) => {
 const CommunityReviewsList = ({
   reviews = ALL_REVIEWS_DATA,
   selectedReviewId = 1,
+  selectedReview,
   onSelectReview,
 }) => {
   const [roleFilter, setRoleFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
   const [recFilter, setRecFilter] = useState("All")
   const [selectedDate, setSelectedDate] = useState(undefined)
+
+  const activeId = selectedReview?.id ?? selectedReviewId ?? 1
 
   // Filter logic
   const filteredReviews = useMemo(() => {
@@ -211,7 +214,7 @@ const CommunityReviewsList = ({
             </div>
           ) : (
             filteredReviews.map((review) => {
-              const isSelected = selectedReviewId === review.id
+              const isSelected = activeId === review.id
 
               return (
                 <div key={review.id} className="relative group">

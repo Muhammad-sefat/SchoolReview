@@ -4,7 +4,7 @@ import CustomMultiSelect from "@/components/ui/CustomMultiSelect"
 import { Title18 } from "@/components/typho/Title"
 
 const CurriculumSection = ({ setValue }) => {
-  const [curriculumOpen, setCurriculumOpen] = useState(true)
+  const [curriculumOpen, setCurriculumOpen] = useState(false)
 
   const [selectedAccreditation, setSelectedAccreditation] = useState([])
   const [selectedCurriculum, setSelectedCurriculum] = useState([])

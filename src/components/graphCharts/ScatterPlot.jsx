@@ -60,6 +60,7 @@ const ScatterPlot = ({
   ],
   activeTab = "parents",
   onTabChange,
+  className,
   hideTabs = false,
   data = [],
   colorMap = DEFAULT_COLOR_MAP,
@@ -100,7 +101,7 @@ const ScatterPlot = ({
 
   return (
     <>
-      <div className="w-full bg-white rounded-2xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist h-[670px]">
+      <div className={`${className} w-full bg-white rounded-2xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist h-[670px]`}>
         {/* Header Area */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>

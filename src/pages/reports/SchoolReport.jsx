@@ -17,7 +17,7 @@ const SchoolReport = () => {
       />
 
       {/* Main Content Body with section-padding-x and 40px section gap */}
-      <div className="section-padding-x py-10 space-y-[40px] max-w-full overflow-hidden">
+      <div className="section-padding-x py-10 space-y-[40px]  ">
         {/* Section 1: Executive Summary */}
         <ExecutiveSummarySection />
 
