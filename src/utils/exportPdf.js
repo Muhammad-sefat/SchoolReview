@@ -28,32 +28,33 @@ export const generatePdfFromReport = async (reportContainerRef, setExportingStat
 
     await new Promise((resolve) => setTimeout(resolve, 300))
 
-    // Measure DOM element bounding boxes relative to container BEFORE snapshot
     const containerRect = container.getBoundingClientRect()
+
+    // Select block elements
     const blockEls = Array.from(
-      container.querySelectorAll(".bg-\\[\\#F6F6F6\\], .bg-white, tr, .card-container")
+      container.querySelectorAll(
+        "h1, h2, h3, h4, h5, tr, .bg-\\[\\#F6F6F6\\], .bg-white, .card-container, section"
+      )
     )
 
-    // 3. Capture continuous full report image at 2x retina sharpness
+    // 3. Capture report image at 2x retina sharpness
     const pixelRatio = 2
     const dataUrl = await toJpeg(container, {
-      quality: 0.90,
+      quality: 0.95,
       pixelRatio: pixelRatio,
       backgroundColor: "#ffffff",
       cacheBust: false,
-      filter: (node) => {
-        return !(node.classList && node.classList.contains("no-print"))
-      },
+      filter: (node) => !(node.classList && node.classList.contains("no-print")),
     })
 
-    const img = new Image()
-    img.src = dataUrl
+    const loadedImg = new Image()
+    loadedImg.src = dataUrl
     await new Promise((resolve, reject) => {
-      img.onload = resolve
-      img.onerror = (err) => reject(new Error("Image decode failed: " + err))
+      loadedImg.onload = resolve
+      loadedImg.onerror = (err) => reject(new Error("Image decode failed: " + err))
     })
 
-    // 4. Calculate A4 page dimensions & smart non-breaking block boundaries
+    // 4. PDF Setup
     const pdf = new jsPDF({
       unit: "mm",
       format: "a4",
@@ -68,68 +69,95 @@ export const generatePdfFromReport = async (reportContainerRef, setExportingStat
     const usablePageHeightMm = pdfHeight - margin * 2 // 285mm
     const pxToMm = renderWidth / containerRect.width
 
-    // Map DOM element blocks to MM coordinates relative to container top
+    // Calculate block coordinates in MM
     const blocks = blockEls
       .map((el) => {
         const r = el.getBoundingClientRect()
         const top = (r.top - containerRect.top) * pxToMm
         const bottom = (r.bottom - containerRect.top) * pxToMm
         const height = r.height * pxToMm
-        return { top, bottom, height }
+        const isHeading = /^H[1-5]$/i.test(el.tagName)
+        return { top, bottom, height, isHeading }
       })
-      .filter((b) => b.height > 5 && b.height < usablePageHeightMm)
+      .filter((b) => b.height > 1 && b.height < usablePageHeightMm)
       .sort((a, b) => a.top - b.top)
 
-    const totalRenderHeightMm = (img.height * renderWidth) / img.width
+    const totalRenderHeightMm = (loadedImg.height * renderWidth) / loadedImg.width
+    const mmToCanvasPx = loadedImg.height / totalRenderHeightMm
 
     let currentY = 0
     let pageCount = 0
 
-    while (currentY < totalRenderHeightMm - 2) {
+    while (currentY < totalRenderHeightMm - 1) {
       if (pageCount > 0) {
         pdf.addPage("a4", "portrait")
       }
 
       let targetY = currentY + usablePageHeightMm
 
-      // If near the end of the document, capture remaining content
       if (targetY >= totalRenderHeightMm) {
         targetY = totalRenderHeightMm
       } else {
-        // Check if any card, chart, or table-row block straddles the page break line
-        const straddlingBlock = blocks.find(
-          (b) => b.top < targetY - 2 && b.bottom > targetY + 2 && b.top > currentY + 15
-        )
+        // Smart Break with 3mm Safety Gap
+        const straddlingBlock = blocks.find((b) => {
+          const isSpanning = b.top < targetY && b.bottom > targetY
+          const isTooClose = b.top < targetY && b.top > targetY - 15
+          return (isSpanning || isTooClose) && b.top > currentY + 12
+        })
 
         if (straddlingBlock) {
-          // Smart Break: Push page break line UP to top edge of straddling block
-          targetY = straddlingBlock.top
+          // Push break point 3mm ABOVE the block start to avoid hitting text/borders
+          const safeTop = straddlingBlock.top - 3
+          targetY = Math.max(currentY + 10, safeTop)
         }
       }
 
-      // Add image slice to PDF page
+      const sliceHeightMm = targetY - currentY
+
+      // ================================================================
+      // STRICT CROP: Crop image precisely to canvas
+      // ================================================================
+      const cropCanvas = document.createElement("canvas")
+      cropCanvas.width = loadedImg.width
+      cropCanvas.height = Math.round(sliceHeightMm * mmToCanvasPx)
+
+      const ctx = cropCanvas.getContext("2d")
+
+      ctx.fillStyle = "#ffffff"
+      ctx.fillRect(0, 0, cropCanvas.width, cropCanvas.height)
+
+      ctx.drawImage(
+        loadedImg,
+        0,
+        Math.round(currentY * mmToCanvasPx),
+        loadedImg.width,
+        cropCanvas.height,
+        0,
+        0,
+        cropCanvas.width,
+        cropCanvas.height
+      )
+
+      const slicedImageDataUrl = cropCanvas.toDataURL("image/jpeg", 0.95)
+
       pdf.addImage(
-        dataUrl,
+        slicedImageDataUrl,
         "JPEG",
         margin,
-        margin - currentY,
+        margin,
         renderWidth,
-        totalRenderHeightMm,
+        sliceHeightMm,
         undefined,
         "FAST"
       )
 
-      // -------------------------------------------------------------
-      // FIX: Mask the overflown cut-off portion at the bottom of page
-      // -------------------------------------------------------------
-      const printedHeightOnThisPage = targetY - currentY
-      const maskTopY = margin + printedHeightOnThisPage
-
-      if (maskTopY < pdfHeight) {
-        pdf.setFillColor(255, 255, 255)
-        // Cover bottom area with white rectangle up to page boundary
-        pdf.rect(0, maskTopY, pdfWidth, pdfHeight - maskTopY, "F")
-      }
+      // ================================================================
+      // MASKING FIX: Cover bottom margin completely to wipe off bleeds
+      // ================================================================
+      const currentPrintedY = margin + sliceHeightMm
+      pdf.setFillColor(255, 255, 255)
+      // Cover from cut line to bottom of page
+      pdf.rect(0, currentPrintedY, pdfWidth, pdfHeight - currentPrintedY, "F")
 
       currentY = targetY
       pageCount++
