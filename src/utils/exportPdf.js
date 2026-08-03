@@ -14,7 +14,7 @@ export const generatePdfFromReport = async (reportContainerRef, setExportingStat
       await document.fonts.ready
     }
 
-    // 2. Preload all images (including ReportFooter assets)
+    // 2. Preload all images
     const images = Array.from(container.querySelectorAll("img"))
     await Promise.all(
       images.map((img) => {
@@ -77,7 +77,7 @@ export const generatePdfFromReport = async (reportContainerRef, setExportingStat
         const height = r.height * pxToMm
         return { top, bottom, height }
       })
-      .filter((b) => b.height > 5 && b.height < usablePageHeightMm) // Fitable blocks
+      .filter((b) => b.height > 5 && b.height < usablePageHeightMm)
       .sort((a, b) => a.top - b.top)
 
     const totalRenderHeightMm = (img.height * renderWidth) / img.width
@@ -118,6 +118,18 @@ export const generatePdfFromReport = async (reportContainerRef, setExportingStat
         undefined,
         "FAST"
       )
+
+      // -------------------------------------------------------------
+      // FIX: Mask the overflown cut-off portion at the bottom of page
+      // -------------------------------------------------------------
+      const printedHeightOnThisPage = targetY - currentY
+      const maskTopY = margin + printedHeightOnThisPage
+
+      if (maskTopY < pdfHeight) {
+        pdf.setFillColor(255, 255, 255)
+        // Cover bottom area with white rectangle up to page boundary
+        pdf.rect(0, maskTopY, pdfWidth, pdfHeight - maskTopY, "F")
+      }
 
       currentY = targetY
       pageCount++
