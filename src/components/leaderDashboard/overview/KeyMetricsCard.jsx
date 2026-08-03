@@ -73,7 +73,7 @@ const KeyMetricsCard = ({
                 </span>
 
                 {/* Progress Bar Container */}
-                <div className="w-full flex-1 h-3 bg-gray-100 rounded-full overflow-hidden min-w-[100px]">
+                <div className="w-full flex-1 h-3 bg-gray-100 rounded-full overflow-hidden max-w-[100px]">
                   <div
                     className={`h-full rounded-full transition-all text-sm font-normal duration-500 ${metric.barColor}`}
                     style={{ width: `${metric.percentage}%` }}
@@ -82,13 +82,17 @@ const KeyMetricsCard = ({
 
                 {/* Trend Indicator */}
                 <div
-                  className={`flex items-center gap-0.5 text-xs font-semibold shrink-0 min-w-[36px] justify-end ${metric.isUp ? "text-[#2E7D32]" : "text-[#E53935]"
+                  className={`flex items-center gap-0.5 text-sm font-medium shrink-0 min-w-[36px] justify-end ${metric.isUp ? "text-[#2E7D32]" : "text-[#E53935]"
                     }`}
                 >
                   {metric.isUp ? (
-                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M11.6693 9.9987V4.33203H6.0026M11.3835 4.61776L4.33594 11.6654" stroke="#66BB6A" stroke-linecap="square" />
+                    </svg>
                   ) : (
-                    <ArrowDownRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M6.75 13.1269H13.125V6.75195M12.8036 12.8055L4.875 4.87695" stroke="#E53935" stroke-width="1.125" stroke-linecap="square" />
+                    </svg>
                   )}
                   <span>{metric.trend}</span>
                 </div>

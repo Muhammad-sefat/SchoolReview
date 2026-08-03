@@ -26,7 +26,16 @@ import OverView from "../pages/LeaderDashboard/OverView"
 import SafeGuard from "../pages/LeaderDashboard/SafeGuard"
 import TeachingInsight from "../pages/LeaderDashboard/TeachingInsight"
 import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck"
+import ReportLeader from "../pages/LeaderDashboard/ReportLeader"
+import SchoolBrandingProfile from "../pages/LeaderDashboard/setting/SchoolBrandingProfile"
+import UserManagement from "../pages/LeaderDashboard/setting/UserManagement"
+import General from "../pages/LeaderDashboard/setting/General"
+import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
+
+import SchoolReport from "../pages/reports/SchoolReport"
+
+import ReportLayout from "../layout/ReportLayout"
 
 const router = createBrowserRouter([
   {
@@ -40,7 +49,13 @@ const router = createBrowserRouter([
       { path: "community", element: <CommunityFeedbacck /> },
       { path: "community-feedback", element: <CommunityFeedbacck /> },
       { path: "teaching-insights", element: <TeachingInsight /> },
-      { path: "reports", element: <OverView /> },
+      { path: "reports", element: <ReportLeader /> },
+
+      { path: "setting", element: <General /> },
+      { path: "setting/branding-profile", element: <SchoolBrandingProfile /> },
+      { path: "setting/user-admin", element: <UserManagement /> },
+      { path: "setting/general", element: <General /> },
+      { path: "setting/followed-schools", element: <FollowedSchool /> },
       { path: "*", element: <Navigate to="/leader-dashboard" replace /> },
     ],
   },
@@ -64,6 +79,14 @@ const router = createBrowserRouter([
       { path: "student-to-teacher", element: <StudentToTeacherReview /> },
       { path: "teacher-self", element: <TeacherSelfReview /> },
       { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
+    ]
+  },
+  {
+    path: "/reports",
+    element: <ReportLayout />,
+    children: [
+      { path: "school", element: <SchoolReport /> },
+      { path: "school-report", element: <SchoolReport /> },
     ]
   },
 

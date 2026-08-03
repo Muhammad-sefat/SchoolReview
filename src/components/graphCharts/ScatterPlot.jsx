@@ -13,7 +13,6 @@ import {
 import { ArrowUpRight } from "lucide-react"
 import ScatterPlotModal from "@/components/leaderDashboard/modal/ScatterPlotModal"
 
-// Default Color Mapping:
 const DEFAULT_COLOR_MAP = {
   low: "#E53935",
   medium: "#FB8C00",
@@ -25,12 +24,11 @@ const DEFAULT_COLOR_MAP = {
 // Generate smooth curve line points from (0,0) -> (2.5, 1.35) -> (5,5)
 const CURVE_POINTS = Array.from({ length: 30 }, (_, i) => {
   const x = (i / 29) * 5
-  // Quadratic curve: y = 0.184*x^2 + 0.08*x
   const y = 0.184 * x * x + 0.08 * x
   return { x, y }
 })
 
-// Custom Square Dot Shape for Recharts passing exact SVG pixel coordinates (cx, cy)
+// Custom Square Dot Shape for Recharts
 const SquareShape = (props) => {
   const { cx, cy, fill, payload, onDotHover, onMetricClick } = props
   if (!cx || !cy) return null
@@ -62,10 +60,19 @@ const ScatterPlot = ({
   ],
   activeTab = "parents",
   onTabChange,
+  className,
+  hideTabs = false,
   data = [],
   colorMap = DEFAULT_COLOR_MAP,
   onExpand,
   onMetricClick,
+  xAxisLabel = "Improvement Since Last Year",
+  yAxisLabel = "Overall Satisfaction",
+  showReferenceLine = true,
+  showBottomCaption = false,
+  bottomCaptionTitle = null,
+  bottomCaptionDesc = "Lower satisfaction (left) highlights greater opportunity for improvement; higher satisfaction (right) reflects stronger performance.",
+  overallRatingLabel = "Overall Rating",
 }) => {
   const [selectedMetric, setSelectedMetric] = useState(null)
   const [activeHoverMetric, setActiveHoverMetric] = useState(null)
@@ -94,11 +101,11 @@ const ScatterPlot = ({
 
   return (
     <>
-      <div className="w-full bg-white rounded-3xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist">
+      <div className={`${className} w-full bg-white rounded-2xl border border-gray-100 md:p-5 p-4 shadow-xs flex flex-col justify-between font-urbanist h-[670px]`}>
         {/* Header Area */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>
-            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808] leading-snug">
+            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-textBlack leading-snug">
               {title}
             </h3>
             {subtitle && (
@@ -108,19 +115,22 @@ const ScatterPlot = ({
             )}
           </div>
 
-          {/* Expand Action Button */}
-          <button
-            type="button"
-            onClick={onExpand}
-            className="w-8 h-8 rounded-full bg-[#F7F7F7] hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-colors cursor-pointer shrink-0"
-            title="Expand chart"
-          >
-            <ArrowUpRight className="w-4 h-4 text-[#080808] stroke-[2.5]" />
-          </button>
+          {onExpand && (
+            <button
+              type="button"
+              onClick={onExpand}
+              className="w-8 h-8 rounded-full bg-[#F7F7F7] hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-colors cursor-pointer shrink-0"
+              title="Expand chart"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15.1075 12.5439C15.1075 12.9174 14.8101 13.201 14.478 13.201C14.1391 13.201 13.8555 12.8966 13.8555 12.5715V10.0121L13.98 6.78174L12.8386 8.07528L5.96973 14.9373C5.84521 15.0687 5.69303 15.124 5.53394 15.124C5.18807 15.124 4.89062 14.8127 4.89062 14.4807C4.89062 14.3285 4.9598 14.1694 5.08431 14.0449L11.9394 7.17603L13.226 6.0485L9.85034 6.15918H7.44312C7.118 6.15918 6.82056 5.87557 6.82056 5.54354C6.82056 5.21151 7.08341 4.91406 7.47078 4.91406H14.4296C14.8446 4.91406 15.1006 5.19076 15.1006 5.58504L15.1075 12.5439Z" fill="#080808" />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Dynamic Tabs */}
-        {tabs && tabs.length > 0 && (
+        {!hideTabs && tabs && tabs.length > 0 && (
           <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1 rounded-2xl w-fit">
             {tabs.map((tab) => (
               <button
@@ -128,8 +138,8 @@ const ScatterPlot = ({
                 type="button"
                 onClick={() => onTabChange && onTabChange(tab.id)}
                 className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
-                    ? "bg-white text-textPrimary shadow-2xs font-semibold"
-                    : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
+                  ? "bg-white text-textPrimary shadow-2xs font-medium"
+                  : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
                   }`}
               >
                 {tab.label}
@@ -140,7 +150,7 @@ const ScatterPlot = ({
 
         {/* Recharts Scatter Plot Area */}
         <div
-          className="w-full xlg:h-[440px] h-[380px] relative mt-2"
+          className="w-full flex-1 min-h-[340px] relative mt-2"
           onMouseLeave={handleContainerMouseLeave}
         >
           <ResponsiveContainer width="100%" height="100%">
@@ -150,9 +160,10 @@ const ScatterPlot = ({
               <XAxis
                 type="number"
                 dataKey="x"
-                name="Improvement Since Last Year"
+                name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
+                tickFormatter={(val) => (val === 0 ? 0 : "")}
                 stroke="#94A3B8"
                 fontSize={11}
                 fontWeight={500}
@@ -160,7 +171,7 @@ const ScatterPlot = ({
                 height={40}
                 tick={{ fontSize: 16 }}
                 label={{
-                  value: "Improvement Since Last Year",
+                  value: xAxisLabel,
                   position: "insideBottom",
                   offset: -5,
                   style: { textAnchor: "middle", fontSize: 16, fontWeight: 400, fill: "#1F1F21" },
@@ -170,7 +181,7 @@ const ScatterPlot = ({
               <YAxis
                 type="number"
                 dataKey="y"
-                name="Overall Satisfaction"
+                name={yAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
                 tickFormatter={(val) => (val === 0 ? "" : val)}
@@ -181,7 +192,7 @@ const ScatterPlot = ({
                 tick={{ fontSize: 16 }}
                 width={45}
                 label={{
-                  value: "Overall Satisfaction",
+                  value: yAxisLabel,
                   angle: -90,
                   position: "insideLeft",
                   offset: 0,
@@ -200,8 +211,10 @@ const ScatterPlot = ({
                 isAnimationActive={false}
               />
 
-              {/* Dotted Vertical Reference Line at 2.5 */}
-              <ReferenceLine x={2.5} stroke="#038AF9" strokeDasharray="3 3" strokeWidth={1.5} />
+              {/* Dotted Vertical Reference Line at 2.5 (Rendered ONLY when showReferenceLine is true) */}
+              {showReferenceLine && (
+                <ReferenceLine x={2.5} stroke="#038AF9" strokeDasharray="3 3" strokeWidth={1.5} />
+              )}
 
               <Scatter
                 data={data}
@@ -220,7 +233,7 @@ const ScatterPlot = ({
             </ScatterChart>
           </ResponsiveContainer>
 
-          {/* Floating Hover Box placed with exact pixel offsets above/below the dot so it NEVER overlaps the point */}
+          {/* Floating Hover Box */}
           {activeHoverMetric && activeHoverMetric.cx !== undefined && (
             <div
               onMouseEnter={() => setIsHoveringBox(true)}
@@ -238,18 +251,15 @@ const ScatterPlot = ({
                     : `${activeHoverMetric.cy - 165}px`,
               }}
             >
-              {/* Title: 16px, font-medium, 24px line-height, #1F1F21 */}
               <p className="text-[16px] font-medium text-textPrimary leading-[24px] font-urbanist">
                 {activeHoverMetric.name}
               </p>
 
-              {/* Faint Dotted Divider Line */}
               <div className="border-b border-dashed border-gray-200" />
 
-              {/* Subtitle options: 14px, font-normal, 20px line-height, #1F1F21 */}
               <div className="space-y-1.5 text-[14px] font-normal text-textPrimary leading-[20px] font-urbanist">
                 <div className="flex justify-between items-center gap-4">
-                  <span className="text-textPrimary font-normal">Overall Score</span>
+                  <span className="text-textPrimary font-normal">{overallRatingLabel}</span>
                   <span className="font-normal text-textPrimary">
                     : {activeHoverMetric.overall !== undefined ? (activeHoverMetric.overall % 1 === 0 ? activeHoverMetric.overall.toFixed(0) : activeHoverMetric.overall.toFixed(1)) : "1"}
                   </span>
@@ -272,6 +282,20 @@ const ScatterPlot = ({
             </div>
           )}
         </div>
+
+        {/* Bottom Explanatory Caption (Rendered ONLY when showBottomCaption is true) */}
+        {showBottomCaption && (
+          <div className="text-center mt-2">
+            {bottomCaptionTitle && bottomCaptionTitle !== xAxisLabel && (
+              <p className="text-[16px] font-normal text-[#080808] mb-1">{bottomCaptionTitle}</p>
+            )}
+            {bottomCaptionDesc && (
+              <p className="text-[14px] font-normal text-[#080808]">
+                {bottomCaptionDesc}
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ScatterPlotModal component */}

@@ -357,7 +357,7 @@ const ScatterPlotModalTeacher = ({ isOpen, onClose, metric }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-      <DialogContent className="max-w-[1440px] w-[95%] sm:w-full rounded-3xl bg-white p-0 border border-gray-100 shadow-2xl font-urbanist overflow-hidden">
+      <DialogContent className="max-w-[1440px] w-[95%] sm:w-full rounded-3xl bg-white p-4 border border-gray-100 shadow-2xl font-urbanist overflow-hidden">
         {/* Inner Scrollable Container with Generous Bottom Padding (pb-8 sm:pb-10) */}
         <div className="p-4 max-h-[88vh] overflow-y-auto space-y-5 no-scrollbar">
           {/* Modal Top Header */}
@@ -368,9 +368,11 @@ const ScatterPlotModalTeacher = ({ isOpen, onClose, metric }) => {
                   <DialogTitle className="text-[24px] font-semibold text-[#080808] font-urbanist leading-tight">
                     {teacherName}
                   </DialogTitle>
-                  <span className="bg-[#038AF9] text-white px-2.5 py-0.5 rounded-full text-xs font-semibold inline-flex items-center gap-1 shrink-0">
+                  <span className="bg-[#038AF9] text-white px-2.5 py-1.5 rounded-full text-sm font-normal inline-flex items-center gap-1 shrink-0">
                     {score}
-                    <Star className="w-3 h-3 fill-white text-white" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22576 1.72336C6.60779 0.981049 7.67867 0.981049 8.06069 1.72336L9.34782 4.22465C9.36917 4.26615 9.4093 4.29504 9.45574 4.30237L12.2536 4.74365C13.0834 4.87454 13.4141 5.88159 12.8207 6.47087L10.8178 8.45975C10.7846 8.49271 10.7693 8.53932 10.7766 8.58528L11.2181 11.3611C11.3489 12.1837 10.4828 12.8064 9.73352 12.4284L7.21002 11.1553C7.16808 11.1341 7.11838 11.1341 7.07644 11.1553L4.55295 12.4284C3.80367 12.8064 2.93754 12.1837 3.06837 11.3611L3.50984 8.58528C3.51715 8.53932 3.50186 8.49271 3.46869 8.45975L1.46575 6.47087C0.872354 5.88159 1.20303 4.87454 2.03288 4.74365L4.8307 4.30237C4.87715 4.29504 4.91727 4.26615 4.93863 4.22465L6.22576 1.72336Z" fill="white" />
+                    </svg>
                   </span>
                 </div>
 
@@ -409,9 +411,9 @@ const ScatterPlotModalTeacher = ({ isOpen, onClose, metric }) => {
 
             <button
               type="button"
-              className="bg-[#038AF9] hover:bg-[#0274d4] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-2 shadow-xs shrink-0"
+              className="bg-[#038AF9] hover:bg-[#0274d4] text-white px-5 py-2.5 rounded-xl text-base font-medium transition-colors cursor-pointer inline-flex items-center gap-2 shadow-xs shrink-0"
             >
-              <Download className="w-4 h-4 stroke-[2]" />
+              <Download className="w-5 h-5 stroke-[2]" />
               <span>Download Report</span>
             </button>
           </div>

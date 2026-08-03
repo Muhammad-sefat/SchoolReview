@@ -8,6 +8,19 @@ const LeaderDashboard = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const location = useLocation()
 
+  // Lock outer viewport scrolling when dashboard layout is active, restore on unmount
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    const preventWindowScroll = () => { window.scrollTo(0, 0); };
+    window.addEventListener("scroll", preventWindowScroll);
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("scroll", preventWindowScroll);
+    };
+  }, []);
+
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -16,7 +29,7 @@ const LeaderDashboard = () => {
   return (
     <>
       <ScrollRestoration />
-      <div className="flex h-screen w-screen overflow-hidden bg-[#F8FAFC] text-foreground font-urbanist">
+      <div className="flex h-screen w-full max-w-full overflow-hidden bg-[#F8FAFC] text-foreground font-urbanist">
         {/* Leader Sidebar */}
         <LeaderSidebar
           open={sidebarOpen}

@@ -49,8 +49,8 @@ const KeyImprovementAreas = () => {
         <button
           type="button"
           onClick={() => setActiveTab("parents")}
-          className={`pb-2.5 text-sm sm:text-lg font-medium transition-all cursor-pointer relative ${activeTab === "parents"
-            ? "text-[#038AF9] font-semibold"
+          className={`pb-2.5 text-sm sm:text-lg font-normal transition-all cursor-pointer relative ${activeTab === "parents"
+            ? "text-[#038AF9] font-medium"
             : "text-textPrimary hover:text-[#1F1F21]"
             }`}
         >
@@ -63,8 +63,8 @@ const KeyImprovementAreas = () => {
         <button
           type="button"
           onClick={() => setActiveTab("teachers")}
-          className={`pb-2.5 text-sm sm:text-lg font-medium transition-all cursor-pointer relative ${activeTab === "teachers"
-            ? "text-[#038AF9] font-semibold"
+          className={`pb-2.5 text-sm sm:text-lg font-normal transition-all cursor-pointer relative ${activeTab === "teachers"
+            ? "text-[#038AF9] font-medium"
             : "text-textPrimary hover:text-[#1F1F21]"
             }`}
         >
@@ -77,8 +77,8 @@ const KeyImprovementAreas = () => {
         <button
           type="button"
           onClick={() => setActiveTab("students")}
-          className={`pb-2.5 text-sm sm:text-lg font-medium transition-all cursor-pointer relative ${activeTab === "students"
-            ? "text-[#038AF9] font-semibold"
+          className={`pb-2.5 text-sm sm:text-lg font-normal transition-all cursor-pointer relative ${activeTab === "students"
+            ? "text-[#038AF9] font-medium"
             : "text-textPrimary hover:text-[#1F1F21]"
             }`}
         >

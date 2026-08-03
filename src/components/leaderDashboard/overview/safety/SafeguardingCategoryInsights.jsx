@@ -92,13 +92,15 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
             <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808]">
               {activeData.title}
             </h3>
-            <p className="text-xs sm:text-sm font-medium text-gray-500 mt-1">
+            <p className="text-xs sm:text-sm font-medium text-secondary mt-1">
               total last year: {activeData.totalLastYear}
             </p>
           </div>
 
-          <div className="flex items-center gap-1 text-xs font-semibold text-[#2E7D32] bg-emerald-50 px-2.5 py-1 rounded-full shrink-0">
-            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+          <div className="flex items-center gap-1 text-base font-medium text-[#66BB6A]  px-2.5 py-1 rounded-full shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M14.5807 12.5V5.41663H7.4974M14.2235 5.77379L5.41406 14.5833" stroke="#66BB6A" stroke-width="1.25" stroke-linecap="square" />
+            </svg>
             <span>{activeData.trend}</span>
           </div>
         </div>
@@ -113,11 +115,11 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
             <h4 className="text-lg font-semibold text-textPrimary">
               Key Insights
             </h4>
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 md:text-base text-sm">
               {activeData.keyInsights.map((insight, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1" />
-                  <p className="text-xs sm:text-sm text-textPrimary leading-normal">
+                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-2" />
+                  <p className=" text-textPrimary leading-normal">
                     {insight}
                   </p>
                 </div>
@@ -130,11 +132,11 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
             <h4 className="text-lg font-semibold text-textPrimary">
               Suggested Approaches
             </h4>
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 md:text-base text-sm">
               {activeData.suggestedApproaches.map((approach, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1" />
-                  <p className="text-xs sm:text-sm text-textPrimary leading-normal">
+                  <p className="text-textPrimary leading-normal">
                     {approach}
                   </p>
                 </div>

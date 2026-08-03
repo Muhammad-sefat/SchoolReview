@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import ExploreFeedbackCard from "@/components/leaderDashboard/communityFeedback/ExploreFeedbackCard"
 import CommunityReviewsList from "@/components/leaderDashboard/overview/community/CommunityReviewsList"
 import CommunityReviewDetail from "@/components/leaderDashboard/overview/community/CommunityReviewDetail"
+import { Title32 } from "../../components/typho/Title"
 
 const CommunityFeedbacck = () => {
     const [selectedReview, setSelectedReview] = useState(null)
@@ -9,9 +10,9 @@ const CommunityFeedbacck = () => {
     return (
         <div className="w-full space-y-6 font-urbanist  bg-gray-50/20 min-h-screen">
             {/* Page Title (32px font-semibold) */}
-            <h1 className="text-[32px] font-semibold text-[#080808] leading-tight">
+            <Title32 className=" text-[#080808] leading-tight">
                 Community Feedback
-            </h1>
+            </Title32>
 
             {/* Top Card: Explore Feedback by Category */}
             <ExploreFeedbackCard />

@@ -88,15 +88,15 @@ const ExploreFeedbackCard = () => {
       </h3>
 
       {/* Row 1: Sub-Tabs + Category Select */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        {/* User Type Sub-Tabs */}
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center  gap-4">
+        {/* User Type Sub-Tabs Box */}
+        <div className="bg-[rgba(3,138,249,0.10)] p-1 rounded-2xl flex items-center gap-1.5">
           <button
             type="button"
             onClick={() => setUserType("parent")}
-            className={`px-5 py-2 rounded-full text-[16px] font-normal transition-all cursor-pointer ${userType === "parent"
-                ? "bg-[#038AF9] text-white shadow-xs"
-                : "border border-gray-200 bg-white text-[#5A5A5A] hover:text-[#080808]"
+            className={`px-5 py-2.5 rounded-xl text-base font-medium transition-all cursor-pointer ${userType === "parent"
+              ? "bg-[#038AF9] text-white shadow-xs"
+              : "bg-white text-[#080808] hover:text-[#038AF9]"
               }`}
           >
             Parent & Student Feedback
@@ -105,35 +105,34 @@ const ExploreFeedbackCard = () => {
           <button
             type="button"
             onClick={() => setUserType("teacher")}
-            className={`px-5 py-2 rounded-full text-[16px] font-normal transition-all cursor-pointer ${userType === "teacher"
-                ? "bg-[#038AF9] text-white shadow-xs"
-                : "border border-gray-200 bg-white text-[#5A5A5A] hover:text-[#080808]"
+            className={`px-5 py-2.5 rounded-xl text-base font-medium transition-all cursor-pointer ${userType === "teacher"
+              ? "bg-[#038AF9] text-white shadow-xs"
+              : "bg-white text-[#080808] hover:text-[#038AF9]"
               }`}
           >
             Teacher Feedback
           </button>
-          <div className="w-64">
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full h-11 rounded-2xl border-[#038AF9] text-[16px] font-normal text-textPrimary bg-white focus:ring-1 focus:ring-[#038AF9]">
-                <SelectValue placeholder="Select Category" />
-              </SelectTrigger>
-              <SelectContent className="rounded-2xl border-gray-200 shadow-lg">
-                {FEEDBACK_CATEGORIES.map((cat, idx) => (
-                  <SelectItem
-                    key={idx}
-                    value={cat}
-                    className="text-[16px] font-normal py-2.5 focus:bg-gray-50 cursor-pointer"
-                  >
-                    {cat}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
         </div>
 
         {/* Category Shadcn Select */}
-
+        <div className="w-64">
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-full h-12 rounded-2xl border-[#038AF9] text-[16px] font-normal text-textPrimary bg-white focus:ring-1 focus:ring-[#038AF9]">
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent className="rounded-2xl border-gray-200 shadow-lg">
+              {FEEDBACK_CATEGORIES.map((cat, idx) => (
+                <SelectItem
+                  key={idx}
+                  value={cat}
+                  className="text-[16px] font-normal py-2.5 focus:bg-gray-50 cursor-pointer"
+                >
+                  {cat}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Inner AI Summary Card */}
@@ -144,12 +143,12 @@ const ExploreFeedbackCard = () => {
         </h4>
 
         {/* Subtitle (16px normal secondary) */}
-        <p className="text-[16px] font-normal text-secondary">
+        <p className="md:text-lg text-base font-normal text-secondary">
           {summary.subtitle}
         </p>
 
         {/* Content (16px normal textPrimary) */}
-        <p className="text-[16px] font-normal text-textPrimary leading-relaxed pt-1">
+        <p className="md:text-lg text-base font-normal text-textPrimary leading-relaxed pt-1">
           {summary.description}
         </p>
       </div>

@@ -7,6 +7,7 @@ import StudentSafetySignals from "@/components/leaderDashboard/overview/teacherO
 import ScatterPlotModalTeacher from "@/components/leaderDashboard/modal/ScatterPlotModalTeacher"
 import LatestTeacherObservationTable from "@/components/leaderDashboard/teachingInsight/LatestTeacherObservationTable"
 import CreateObservationModal from "@/components/leaderDashboard/teachingInsight/modal/CreateObservationModal"
+import { Title32 } from "../../components/typho/Title"
 
 const TEACHER_SCATTER_DATA = [
   { id: 1, name: "Kathryn Murphy", x: 0.5, y: 0.3, category: "low", overallScore: "2.5", lowestMetric: "Pace (1.8)", highestMetric: "Clarity (3.0)", overall: 2.5 },
@@ -29,7 +30,7 @@ const TEACHER_PRIORITY_GROUPS = [
     title: "Needs Support",
     borderColor: "border-[#E53935]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#E53935]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Kathryn Murphy", score: "2.5" },
       { label: "Robert Fox", score: "2.8" },
@@ -40,9 +41,9 @@ const TEACHER_PRIORITY_GROUPS = [
   {
     id: "developing",
     title: "Developing",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#FB8C00]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#FB8C00]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Ronald Richards", score: "3.0" },
       { label: "Esther Howard", score: "3.8" },
@@ -52,9 +53,9 @@ const TEACHER_PRIORITY_GROUPS = [
   {
     id: "effective",
     title: "Effective",
-    borderColor: "border-[#E53935]",
+    borderColor: "border-[#66BB6A]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#2E7D32]/5",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "Bessie Cooper", score: "4.5" },
       { label: "Annette Black", score: "4.2" },
@@ -112,9 +113,9 @@ const TeachingInsight = () => {
   return (
     <div className="w-full space-y-6 font-urbanist pb-10">
       {/* Top Page Title */}
-      <h1 className="text-[32px] font-semibold text-[#080808] leading-tight">
+      <Title32 className=" text-[#080808] leading-tight">
         Teaching Insights
-      </h1>
+      </Title32>
 
       {/* Row 1: Top 3 Cards Grid */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch min-w-0">
