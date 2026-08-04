@@ -82,7 +82,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
       {/* Mobile / Tablet Backdrop Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 xl:hidden backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-black/40 z-40 xl:hidden backdrop-blur-sm transition-opacity"
           onClick={() => setOpen(false)}
         />
       )}
@@ -139,17 +139,17 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center gap-3.5 px-3.5 py-2 rounded-2xl text-base font-medium transition-all duration-200 group ${
+                  className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${
                     active
-                      ? "bg-[#F0F8FF] text-[#038AF9] border border-[#BEE0FF]/60 shadow-2xs"
-                      : "text-[#1F1F21] hover:bg-gray-50"
+                      ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                      : "text-[#5A5A5A] font-medium hover:bg-gray-50"
                   } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? item.label : undefined}
                 >
                   <div className="shrink-0 flex items-center justify-center">
                     <IconComp
                       className={`w-5 h-5 transition-colors ${
-                        active ? "text-[#038AF9]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                        active ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                       }`}
                     />
                   </div>

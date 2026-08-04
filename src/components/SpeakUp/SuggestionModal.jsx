@@ -27,7 +27,7 @@ const SuggestionModal = ({ open, onOpenChange, onContinue }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[580px] p-6 rounded-[24px] bg-white border border-border/60 shadow-2xl space-y-5 font-urbanist">
+      <DialogContent className="max-w-[580px] p-6 rounded-[32px] bg-white border border-border/60 shadow-2xl space-y-5 font-urbanist">
         {/* Title */}
         <div className="flex items-center gap-3">
           <CheckCircle2 className="w-6 h-6 text-foreground stroke-[2]" />

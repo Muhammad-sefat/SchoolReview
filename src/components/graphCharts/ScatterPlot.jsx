@@ -131,15 +131,15 @@ const ScatterPlot = ({
 
         {/* Dynamic Tabs */}
         {!hideTabs && tabs && tabs.length > 0 && (
-          <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1 rounded-2xl w-fit">
+          <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1.5 rounded-full w-fit">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => onTabChange && onTabChange(tab.id)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
-                  ? "bg-white text-textPrimary shadow-2xs font-medium"
-                  : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
+                  ? "bg-white text-gray-900 shadow-xs"
+                  : "text-gray-500 hover:text-gray-900"
                   }`}
               >
                 {tab.label}

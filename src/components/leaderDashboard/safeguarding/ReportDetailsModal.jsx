@@ -92,16 +92,14 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
 
   return (
     <Dialog open={!!report} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="relative max-w-[1200px] p-0 overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-2xl font-urbanist">
-        {/* Inner Scroll Container to prevent scrollbar clipping rounded corners */}
-        <div className="p-4 max-h-[88vh] overflow-y-auto space-y-6 no-scrollbar">
-          <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0">
-            <DialogTitle className="font-urbanist text-2xl font-semibold text-[#080808]">
-              Report details
-            </DialogTitle>
-          </DialogHeader>
+      <DialogContent className="max-w-[1200px] w-[95vw] p-6 rounded-3xl bg-white border border-gray-100 shadow-2xl font-urbanist space-y-6">
+        <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0">
+          <DialogTitle className="font-urbanist text-2xl font-semibold text-[#080808]">
+            Report details
+          </DialogTitle>
+        </DialogHeader>
 
-          <div className="space-y-6 pt-2">
+        <div className="space-y-6">
             {/* Controls Bar & Metadata Card */}
             <div className="border border-gray-100 rounded-3xl p-5 space-y-4 bg-gray-50/20 relative">
               <div className="flex flex-wrap items-center justify-between gap-4">
@@ -411,7 +409,6 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport }) => {
               </div>
             </div>
           </div>
-        </div>
 
         {/* Media Preview Modal Overlay inside DialogContent */}
         {previewMedia && (

@@ -20,7 +20,7 @@ const GreenSuccessCheckIcon = () => (
 const ThankTeacherSuccessModal = ({ open, onOpenChange, onClose }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[480px] p-6 rounded-[24px] bg-white border border-border/60 shadow-2xl space-y-5 text-center font-urbanist">
+      <DialogContent className="max-w-[480px] p-6 rounded-[32px] bg-white border border-border/60 shadow-2xl space-y-5 text-center font-urbanist">
         {/* Top Icon Container */}
         <div className="flex justify-center">
           <GreenSuccessCheckIcon />
