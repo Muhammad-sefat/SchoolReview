@@ -64,7 +64,7 @@ const GetHelpModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-xl w-[95vw] rounded-3xl p-8 space-y-4 bg-white border border-gray-200 shadow-2xl font-urbanist">
+      <DialogContent className="max-w-xl w-[95vw] rounded-3xl p-6 space-y-4 bg-white border border-gray-200 shadow-2xl font-urbanist">
         <DialogHeader className="p-0 space-y-1 text-left pb-3 border-b border-gray-100">
           <DialogTitle asChild>
             <Title24 className="text-[#080808] font-semibold">Get Help</Title24>

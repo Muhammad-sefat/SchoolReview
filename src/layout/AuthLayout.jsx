@@ -13,7 +13,7 @@ const AuthLayout = () => {
     })
 
     return (
-        <>
+        <div className="max-w-[1920px] mx-auto">
             <ScrollRestoration />
             <div className="flex min-h-screen w-full bg-background font-sans">
                 {/* Left side - Common Auth Branding Panel */}
@@ -66,7 +66,7 @@ const AuthLayout = () => {
                 </div>
             </div>
 
-        </>
+        </div>
     )
 }
 

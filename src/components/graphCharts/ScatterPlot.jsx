@@ -163,7 +163,7 @@ const ScatterPlot = ({
                 name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
-                tickFormatter={(val) => (val === 0 ? 0 : "")}
+                tickFormatter={(val) => val}
                 stroke="#94A3B8"
                 fontSize={11}
                 fontWeight={500}
