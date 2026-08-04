@@ -1,5 +1,4 @@
 import React from "react"
-import { ArrowUpRight } from "lucide-react"
 
 const INSIGHTS_BY_CATEGORY = {
   bullying: {
@@ -84,12 +83,12 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
     INSIGHTS_BY_CATEGORY[selectedCategoryId] || INSIGHTS_BY_CATEGORY.bullying
 
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs flex flex-col justify-between h-full font-urbanist">
       <div>
         {/* Header Title & Trend */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808]">
+            <h3 className="text-[24px] font-semibold text-[#080808]">
               {activeData.title}
             </h3>
             <p className="text-xs sm:text-sm font-medium text-secondary mt-1">
@@ -97,9 +96,10 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
             </p>
           </div>
 
-          <div className="flex items-center gap-1 text-base font-medium text-[#66BB6A]  px-2.5 py-1 rounded-full shrink-0">
+          {/* Trend Pill */}
+          <div className="flex items-center gap-1.5 text-base font-normal text-[#66BB6A] shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M14.5807 12.5V5.41663H7.4974M14.2235 5.77379L5.41406 14.5833" stroke="#66BB6A" stroke-width="1.25" stroke-linecap="square" />
+              <path d="M14.5807 12.5V5.41663H7.4974M14.2235 5.77379L5.41406 14.5833" stroke="#66BB6A" strokeWidth="1.25" strokeLinecap="square" />
             </svg>
             <span>{activeData.trend}</span>
           </div>
@@ -112,14 +112,14 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
         <div className="space-y-6">
           {/* Key Insights Section */}
           <div className="space-y-3">
-            <h4 className="text-lg font-semibold text-textPrimary">
+            <h4 className="text-[18px] font-medium text-textPrimary">
               Key Insights
             </h4>
-            <div className="space-y-2.5 md:text-base text-sm">
+            <div className="space-y-2.5 text-base">
               {activeData.keyInsights.map((insight, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-2" />
-                  <p className=" text-textPrimary leading-normal">
+                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1.5" />
+                  <p className="text-textPrimary font-normal leading-normal">
                     {insight}
                   </p>
                 </div>
@@ -129,14 +129,14 @@ const SafeguardingCategoryInsights = ({ selectedCategoryId = "bullying" }) => {
 
           {/* Suggested Approaches Section */}
           <div className="space-y-3">
-            <h4 className="text-lg font-semibold text-textPrimary">
+            <h4 className="text-[18px] font-medium text-textPrimary">
               Suggested Approaches
             </h4>
-            <div className="space-y-2.5 md:text-base text-sm">
+            <div className="space-y-2.5 text-base">
               {activeData.suggestedApproaches.map((approach, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1" />
-                  <p className="text-textPrimary leading-normal">
+                  <span className="w-2.5 h-2.5 rounded-sm bg-gray-200 shrink-0 mt-1.5" />
+                  <p className="text-textPrimary font-normal leading-normal">
                     {approach}
                   </p>
                 </div>

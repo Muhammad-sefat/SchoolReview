@@ -87,7 +87,7 @@ const SafeGuard = () => {
                 subtitle="Select a category to view details."
                 selectedCategory={selectedCategory}
                 onSelectCategory={setSelectedCategory}
-                onExpand={() => console.log("Expand chart clicked")}
+                showRightBadge={false}
               />
             </div>
 

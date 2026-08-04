@@ -109,7 +109,7 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
             </DialogTitle>
 
             {/* Meta Header Row */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-sm sm:text-base">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 text-sm sm:text-base">
               <div className="flex items-center gap-3">
                 <span className="font-medium text-textPrimary text-[16px]">{rating}</span>
                 <DetailStarRating rating={rating} />
@@ -132,8 +132,8 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
 
           {/* Main Grid: Equal Height Layout with Min-Height for single-item tabs */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
-            {/* Left Sub-Tabs Column */}
-            <div className="md:col-span-3 border border-gray-200/60 rounded-2xl p-3 bg-white space-y-2 flex flex-row md:flex-col justify-center overflow-x-auto no-scrollbar h-full min-h-[280px]">
+            {/* Left Sub-Tabs Column (Reduced width) */}
+            <div className="md:col-span-2 border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-row md:flex-col justify-center overflow-x-auto no-scrollbar h-full min-h-[280px]">
               {MODAL_SUB_TABS.map((tab) => {
                 const isActive = activeSubTab === tab
                 return (
@@ -141,7 +141,7 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
                     key={tab}
                     type="button"
                     onClick={() => setActiveSubTab(tab)}
-                    className={`w-full text-center px-4 py-2 rounded-full text-[15px] transition-all cursor-pointer whitespace-nowrap ${isActive
+                    className={`w-full text-center px-3 py-2 rounded-full text-[14px] transition-all cursor-pointer whitespace-nowrap ${isActive
                       ? "bg-[#038AF9] text-white font-medium shadow-2xs"
                       : "bg-[#FAFAFA] border border-gray-200/60 text-[#5A5A5A] font-normal"
                       }`}
@@ -152,8 +152,8 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
               })}
             </div>
 
-            {/* Right Content Box with min-h-[280px] to prevent height collapse when a tab has only 1 item */}
-            <div className="md:col-span-9 bg-white border border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden h-full flex flex-col justify-between min-h-[280px]">
+            {/* Right Content Box (Expanded width) */}
+            <div className="md:col-span-10 bg-white border border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden h-full flex flex-col justify-between min-h-[280px]">
               <div>
                 {/* Header Bar with Bottom Border */}
                 <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-between bg-white">

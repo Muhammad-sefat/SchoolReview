@@ -178,7 +178,17 @@ const CommunityReviewsList = ({
             </Select>
           </div>
 
-          {/* 3. Recommendation Filter Shadcn Select */}
+          {/* 3. Date Picker Shadcn Component */}
+          <div className="w-36">
+            <DatePicker
+              value={selectedDate}
+              onChange={setSelectedDate}
+              placeholder="Date"
+              className="rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white h-8 px-3"
+            />
+          </div>
+
+          {/* 4. Recommendation Filter Shadcn Select */}
           <div className="w-40">
             <Select value={recFilter} onValueChange={setRecFilter}>
               <SelectTrigger className="rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white h-8">
@@ -190,16 +200,6 @@ const CommunityReviewsList = ({
                 <SelectItem value="Not Recommended">Not Recommended</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-
-          {/* 4. Date Picker Shadcn Component */}
-          <div className="w-36">
-            <DatePicker
-              value={selectedDate}
-              onChange={setSelectedDate}
-              placeholder="Date"
-              className="rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white h-8 px-3"
-            />
           </div>
         </div>
 
