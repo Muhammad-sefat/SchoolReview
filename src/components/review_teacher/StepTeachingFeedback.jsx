@@ -44,7 +44,7 @@ const StepTeachingFeedback = ({ feedbackData = {}, updateFeedback, role = "stude
           </Title16>
         </div>
 
-        <p className="text-sm font-medium text-foreground">
+        <p className="text-lg md:text-[20px] font-medium text-[#080808]">
           {workingWellQuestion}
         </p>
 
@@ -72,7 +72,7 @@ const StepTeachingFeedback = ({ feedbackData = {}, updateFeedback, role = "stude
           </Title16>
         </div>
 
-        <p className="text-sm font-medium text-foreground">
+        <p className="text-lg md:text-[20px] font-medium text-[#080808]">
           {couldBeImprovedQuestion}
         </p>
 

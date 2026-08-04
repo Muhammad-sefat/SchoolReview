@@ -20,6 +20,11 @@ import ReviewLayout from "../layout/ReviewLayout"
 import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview"
 import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
 import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
+import SpeakUp from "../pages/speakUp/SpeakUp"
+import ReportTrack from "../pages/reportTrack/ReportTrack"
+import StudentSchoolReview from "../pages/schoolReview/StudentSchoolReview"
+import SchoolLeaderReview from "../pages/schoolReview/SchoolLeaderReview"
+import ThankTeacher from "../pages/schoolReview/ThankTeacher"
 
 import LeaderDashboardLayout from "../layout/LeaderDashboard"
 import OverView from "../pages/LeaderDashboard/OverView"
@@ -34,10 +39,63 @@ import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 import SchoolReport from "../pages/reports/SchoolReport"
-
 import ReportLayout from "../layout/ReportLayout"
 
 const router = createBrowserRouter([
+  // 1. Review & Feedback Forms
+  {
+    path: "/speak-up",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <SpeakUp /> }],
+  },
+  {
+    path: "/report-track",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <ReportTrack /> }],
+  },
+  {
+    path: "/school-review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "", element: <StudentSchoolReview /> },
+      { path: "student", element: <StudentSchoolReview /> },
+      { path: "leader", element: <SchoolLeaderReview /> },
+      { path: "thank-teacher", element: <ThankTeacher /> },
+    ],
+  },
+  {
+    path: "/school-leader-review",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <SchoolLeaderReview /> }],
+  },
+  {
+    path: "/thank-teacher",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <ThankTeacher /> }],
+  },
+
+
+  {
+    path: "/review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "teacher-self", element: <TeacherSelfReview /> },
+      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
+    ],
+  },
+
+  // 2. Reports
+  {
+    path: "/reports",
+    element: <ReportLayout />,
+    children: [
+      { path: "school", element: <SchoolReport /> },
+      { path: "school-report", element: <SchoolReport /> },
+    ],
+  },
+
+  // 3. Leader Dashboard
   {
     path: "/leader-dashboard",
     element: <LeaderDashboardLayout />,
@@ -50,7 +108,6 @@ const router = createBrowserRouter([
       { path: "community-feedback", element: <CommunityFeedbacck /> },
       { path: "teaching-insights", element: <TeachingInsight /> },
       { path: "reports", element: <ReportLeader /> },
-
       { path: "setting", element: <General /> },
       { path: "setting/branding-profile", element: <SchoolBrandingProfile /> },
       { path: "setting/user-admin", element: <UserManagement /> },
@@ -63,77 +120,38 @@ const router = createBrowserRouter([
     path: "/leader",
     element: <Navigate to="/leader-dashboard" replace />,
   },
-  {
-    path: "/review-teacher",
-    element: <ReviewLayout />,
-    children: [
-      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
-      { path: "self", element: <TeacherSelfReview /> },
-      { path: "observer", element: <ObserverToTeacherReview /> },
-    ]
-  },
-  {
-    path: "/review",
-    element: <ReviewLayout />,
-    children: [
-      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
-      { path: "teacher-self", element: <TeacherSelfReview /> },
-      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
-    ]
-  },
-  {
-    path: "/reports",
-    element: <ReportLayout />,
-    children: [
-      { path: "school", element: <SchoolReport /> },
-      { path: "school-report", element: <SchoolReport /> },
-    ]
-  },
 
+  // 4. Auth Pages
   {
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      { path: "/auth", element: <Navigate to="/auth/login" replace /> },
-      { path: "/auth/login", element: <Login /> },
+      { path: "", element: <Navigate to="/auth/login" replace /> },
       { path: "login", element: <Login /> },
-      { path: "/auth/select-role", element: <RoleSelect /> },
       { path: "select-role", element: <RoleSelect /> },
-      { path: "/auth/signup", element: <SignUp /> },
       { path: "signup", element: <SignUp /> },
-      { path: "/auth/signup/school-leader", element: <SchoolLeaderSignUp /> },
       { path: "signup/school-leader", element: <SchoolLeaderSignUp /> },
-      { path: "/auth/signup/teacher", element: <TeacherSignUp /> },
       { path: "signup/teacher", element: <TeacherSignUp /> },
-      { path: "/auth/signup/teacher/plan", element: <TeacherPlanSelect /> },
       { path: "signup/teacher/plan", element: <TeacherPlanSelect /> },
-      { path: "/auth/signup/school-evaluator", element: <SchoolEvaluatorSignUp /> },
       { path: "signup/school-evaluator", element: <SchoolEvaluatorSignUp /> },
-      { path: "/auth/verify-email", element: <VerifyEmail /> },
       { path: "verify-email", element: <VerifyEmail /> },
-      { path: "/auth/forgot-password", element: <ForgotPassword /> },
       { path: "forgot-password", element: <ForgotPassword /> },
-      { path: "/auth/reset-password", element: <ResetPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
     ],
   },
+
+  // 5. Main Site & Admin Dashboard
   {
     path: "/",
     element: <Layout />,
-    children: [
-      { path: "/", element: <Home /> },
-    ],
+    children: [{ path: "", element: <Home /> }],
   },
   {
     path: "/dashboard",
     element: <AdminLayout />,
     children: [
-      { path: "/dashboard", element: <Dashboard /> },
-
-      // Components Showcase route
-      { path: "/dashboard/showcase", element: <ComponentsShowcase /> },
-
-      // Redirect any mismatch in dashboard to dashboard root
+      { path: "", element: <Dashboard /> },
+      { path: "showcase", element: <ComponentsShowcase /> },
       { path: "*", element: <Navigate to="/dashboard" replace /> },
     ],
   },
