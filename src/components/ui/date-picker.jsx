@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
+import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, addMonths, subMonths, startOfWeek, endOfWeek } from "date-fns"
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -10,6 +10,8 @@ export function DatePicker({
   onChange,
   placeholder = "Pick a date",
   className,
+  showIcon = true,
+  showChevron = false,
 }) {
   const [open, setOpen] = React.useState(false)
   const [currentMonth, setCurrentMonth] = React.useState(value || new Date())
@@ -38,16 +40,19 @@ export function DatePicker({
         <Button
           variant="outline"
           className={cn(
-            "w-full justify-start text-left font-normal h-9 border-input bg-transparent text-foreground",
-            !value && "text-muted-foreground",
+            "w-full justify-between text-left font-normal h-8 rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white px-3 cursor-pointer shadow-2xs hover:bg-gray-50 flex items-center gap-1.5",
+            !value && "text-textPrimary",
             className
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4 opacity-50" />
-          {value ? format(value, "PPP") : <span>{placeholder}</span>}
+          <div className="flex items-center gap-1.5 truncate">
+            {showIcon && <CalendarIcon className="mr-1 h-4 w-4 opacity-50 shrink-0" />}
+            <span>{value ? format(value, "MMM yyyy") : placeholder}</span>
+          </div>
+          {showChevron && <ChevronDown className="h-4 w-4 opacity-50 shrink-0 ml-1" />}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-3" align="start">
+      <PopoverContent className="w-auto p-3 bg-white rounded-2xl border border-gray-100 shadow-xl font-urbanist" align="start">
         <div className="space-y-4">
           {/* Header */}
           <div className="flex items-center justify-between">
@@ -57,14 +62,14 @@ export function DatePicker({
             <div className="flex gap-1">
               <Button
                 variant="outline"
-                className="h-7 w-7 p-0 flex items-center justify-center"
+                className="h-7 w-7 p-0 flex items-center justify-center rounded-lg"
                 onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               <Button
                 variant="outline"
-                className="h-7 w-7 p-0 flex items-center justify-center"
+                className="h-7 w-7 p-0 flex items-center justify-center rounded-lg"
                 onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
               >
                 <ChevronRight className="h-4 w-4" />
@@ -73,30 +78,25 @@ export function DatePicker({
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-7 gap-1 text-center">
-            {/* Weekdays */}
-            {weekDays.map((wd) => (
-              <span key={wd} className="text-[11px] font-medium text-muted-foreground uppercase py-1">
-                {wd}
-              </span>
+          <div className="grid grid-cols-7 gap-1 text-center text-xs">
+            {weekDays.map((day) => (
+              <div key={day} className="font-medium text-muted-foreground py-1">
+                {day}
+              </div>
             ))}
-
-            {/* Days */}
-            {days.map((day) => {
-              const isSelected = value ? isSameDay(day, value) : false
+            {days.map((day, idx) => {
+              const isSelected = value && isSameDay(day, value)
               const isCurrentMonth = day.getMonth() === currentMonth.getMonth()
-              
               return (
                 <button
-                  key={day.toString()}
+                  key={idx}
                   onClick={() => handleSelect(day)}
                   className={cn(
-                    "h-8 w-8 rounded-md text-xs font-normal transition-colors flex items-center justify-center cursor-pointer",
-                    !isCurrentMonth && "text-muted-foreground/30",
-                    isCurrentMonth && "text-foreground",
-                    isToday(day) && !isSelected && "bg-accent/40 font-bold border border-primary/25",
-                    isSelected && "bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/95",
-                    isCurrentMonth && !isSelected && "hover:bg-accent hover:text-accent-foreground"
+                    "h-8 w-8 text-xs rounded-full flex items-center justify-center transition-colors cursor-pointer",
+                    !isCurrentMonth && "text-muted-foreground/40",
+                    isCurrentMonth && !isSelected && "hover:bg-accent text-foreground",
+                    isToday(day) && !isSelected && "border border-primary text-primary font-bold",
+                    isSelected && "bg-[#038AF9] text-white font-bold"
                   )}
                 >
                   {format(day, "d")}

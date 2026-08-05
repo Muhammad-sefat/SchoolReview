@@ -73,6 +73,7 @@ const ScatterPlot = ({
   bottomCaptionTitle = null,
   bottomCaptionDesc = "Lower satisfaction (left) highlights greater opportunity for improvement; higher satisfaction (right) reflects stronger performance.",
   overallRatingLabel = "Overall Rating",
+  hideBottomBars = false,
 }) => {
   const [selectedMetric, setSelectedMetric] = useState(null)
   const [activeHoverMetric, setActiveHoverMetric] = useState(null)
@@ -203,13 +204,13 @@ const ScatterPlot = ({
               <ZAxis type="number" range={[100, 100]} />
 
               {/* Blue Dashed Curve Line */}
-              <Scatter
+              {/* <Scatter
                 data={CURVE_POINTS}
                 line={{ stroke: "#038AF9", strokeDasharray: "3 3", strokeWidth: 1.5 }}
                 lineType="joint"
                 shape={() => null}
                 isAnimationActive={false}
-              />
+              /> */}
 
               {/* Dotted Vertical Reference Line at 2.5 (Rendered ONLY when showReferenceLine is true) */}
               {showReferenceLine && (
@@ -303,6 +304,7 @@ const ScatterPlot = ({
         isOpen={!!selectedMetric}
         onClose={() => setSelectedMetric(null)}
         metric={selectedMetric}
+        hideBottomBars={hideBottomBars}
       />
     </>
   )

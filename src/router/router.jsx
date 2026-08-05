@@ -41,6 +41,12 @@ import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 import SchoolReport from "../pages/reports/SchoolReport"
 import ReportLayout from "../layout/ReportLayout"
 
+import InternalTeacherLayout from "../layout/InternalTeacherLayout"
+import TeachingInsightTeacher from "../pages/internalTeacher/TeachingInsight"
+import StudentFeedbackTeacher from "../pages/internalTeacher/StudentFeedback"
+import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask"
+import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
+
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
   {
@@ -119,6 +125,29 @@ const router = createBrowserRouter([
   {
     path: "/leader",
     element: <Navigate to="/leader-dashboard" replace />,
+  },
+
+  // 4. Internal Teacher Dashboard
+  {
+    path: "/internal-teacher",
+    element: <InternalTeacherLayout />,
+    errorElement: <DashboardErrorBoundary />,
+    children: [
+      { path: "", element: <TeachingInsightTeacher /> },
+      { path: "teaching-insights", element: <TeachingInsightTeacher /> },
+      { path: "student-feedback", element: <StudentFeedbackTeacher /> },
+      { path: "my-work", element: <ActivityTaskTeacher /> },
+      { path: "my-work/activity-task", element: <ActivityTaskTeacher /> },
+      { path: "my-work/my-activity", element: <MyActivityTeacher /> },
+      { path: "setting", element: <General /> },
+      { path: "setting/general", element: <General /> },
+      { path: "setting/followed-schools", element: <FollowedSchool /> },
+      { path: "*", element: <Navigate to="/internal-teacher" replace /> },
+    ],
+  },
+  {
+    path: "/teacher",
+    element: <Navigate to="/internal-teacher" replace />,
   },
 
   // 4. Auth Pages

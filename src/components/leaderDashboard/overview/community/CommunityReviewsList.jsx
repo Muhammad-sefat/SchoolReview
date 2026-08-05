@@ -179,11 +179,13 @@ const CommunityReviewsList = ({
           </div>
 
           {/* 3. Date Picker Shadcn Component */}
-          <div className="w-36">
+          <div className="w-32">
             <DatePicker
               value={selectedDate}
               onChange={setSelectedDate}
               placeholder="Date"
+              showIcon={false}
+              showChevron={true}
               className="rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white h-8 px-3"
             />
           </div>
