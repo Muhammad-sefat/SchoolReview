@@ -48,15 +48,17 @@ const InternalTeacherReport = () => {
           <TeacherEffectivenessSection />
         </div>
 
+        {/* Section 5: Student Impact */}
+        <div data-report-page className="w-full">
+          <StudentImpactSection />
+        </div>
+
         {/* Section 4: Your Classroom Insights (All 5 Categories sequentially with outer containers) */}
         <div data-report-page className="w-full">
           <ClassroomInsightsReportSection />
         </div>
 
-        {/* Section 5: Student Impact */}
-        <div data-report-page className="w-full">
-          <StudentImpactSection />
-        </div>
+
       </div>
 
       {/* Footer Component */}
