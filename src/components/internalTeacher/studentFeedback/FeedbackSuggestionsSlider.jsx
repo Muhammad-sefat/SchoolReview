@@ -68,7 +68,7 @@ const FeedbackSuggestionsSlider = () => {
             <button
               ref={prevRef}
               type="button"
-              className="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-all cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
               title="Previous"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -76,7 +76,7 @@ const FeedbackSuggestionsSlider = () => {
             <button
               ref={nextRef}
               type="button"
-              className="w-7 h-7 rounded-full bg-[#038AF9] hover:bg-blue-600 text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-6 h-6 rounded-full bg-[#038AF9] hover:bg-blue-600 text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs disabled:opacity-80 disabled:cursor-not-allowed"
               title="Next"
             >
               <ChevronRight className="w-4 h-4" />
@@ -117,11 +117,10 @@ const FeedbackSuggestionsSlider = () => {
               <SwiperSlide key={card.id} className="!h-auto flex">
                 <div
                   onClick={() => setActiveCardId(card.id)}
-                  className={`w-full rounded-[24px] border transition-all p-6 bg-white flex flex-col justify-between space-y-8 cursor-pointer ${
-                    isSelected
-                      ? "border-[#038AF9] shadow-2xs"
-                      : "border-[var(--Gray-Stroke,#E0E0E0)] hover:border-gray-300"
-                  }`}
+                  className={`w-full rounded-[24px] border transition-all p-6 bg-white flex flex-col justify-between space-y-8 cursor-pointer ${isSelected
+                    ? "border-[#038AF9] shadow-2xs"
+                    : "border-[var(--Gray-Stroke,#E0E0E0)] hover:border-gray-300"
+                    }`}
                 >
                   {/* Top Section */}
                   <div className="space-y-4">
@@ -133,11 +132,10 @@ const FeedbackSuggestionsSlider = () => {
                           e.stopPropagation()
                           handleTabChange(card.id, "feedback")
                         }}
-                        className={`text-[18px] transition-all cursor-pointer pb-1 ${
-                          currentTab === "feedback"
-                            ? "text-[#038AF9] font-medium border-b-2 border-[#038AF9]"
-                            : "text-textPrimary font-normal hover:text-[#080808]"
-                        }`}
+                        className={`text-[18px] transition-all cursor-pointer pb-1 ${currentTab === "feedback"
+                          ? "text-[#038AF9] font-medium border-b-2 border-[#038AF9]"
+                          : "text-textPrimary font-normal hover:text-[#080808]"
+                          }`}
                       >
                         Student Feedback
                       </button>
@@ -148,11 +146,10 @@ const FeedbackSuggestionsSlider = () => {
                           e.stopPropagation()
                           handleTabChange(card.id, "approach")
                         }}
-                        className={`text-[18px] transition-all cursor-pointer pb-1 ${
-                          currentTab === "approach"
-                            ? "text-[#038AF9] font-medium border-b-2 border-[#038AF9]"
-                            : "text-textPrimary font-normal hover:text-[#080808]"
-                        }`}
+                        className={`text-[18px] transition-all cursor-pointer pb-1 ${currentTab === "approach"
+                          ? "text-[#038AF9] font-medium border-b-2 border-[#038AF9]"
+                          : "text-textPrimary font-normal hover:text-[#080808]"
+                          }`}
                       >
                         Suggested Approach
                       </button>

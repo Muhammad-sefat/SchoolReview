@@ -67,7 +67,7 @@ const StudentRecognitionSlider = () => {
             <button
               ref={prevRef}
               type="button"
-              className="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-all cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
               title="Previous"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -75,7 +75,7 @@ const StudentRecognitionSlider = () => {
             <button
               ref={nextRef}
               type="button"
-              className="w-7 h-7 rounded-full bg-[#038AF9] hover:bg-blue-600 text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-6 h-6 rounded-full bg-[#038AF9] hover:bg-blue-600 text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs disabled:opacity-80 disabled:cursor-not-allowed"
               title="Next"
             >
               <ChevronRight className="w-4 h-4" />
@@ -83,7 +83,7 @@ const StudentRecognitionSlider = () => {
           </div>
         </div>
 
-        <p className="text-[16px] font-normal text-textPrimary">
+        <p className="text-[16px] font-normal text-textPrimary mt-1">
           Click to mark this feedback as read.
         </p>
       </div>
@@ -116,8 +116,8 @@ const StudentRecognitionSlider = () => {
                 <div
                   onClick={() => setActiveCardId(card.id)}
                   className={`w-full rounded-[24px] border transition-all p-6 bg-white flex flex-col justify-between space-y-8 cursor-pointer ${isSelected
-                      ? "border-[#038AF9] shadow-2xs"
-                      : "border-[var(--Gray-Stroke,#E0E0E0)] hover:border-gray-300"
+                    ? "border-[#038AF9] shadow-2xs"
+                    : "border-[var(--Gray-Stroke,#E0E0E0)] hover:border-gray-300"
                     }`}
                 >
                   {/* Top Section */}

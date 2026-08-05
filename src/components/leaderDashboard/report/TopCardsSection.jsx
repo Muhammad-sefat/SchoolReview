@@ -12,7 +12,6 @@ const PERFORMANCE_DATA = [
   { year: "2022", score: 2.8 },
   { year: "", score: 4.2 },
   { year: "", score: 3.5 },
-  { year: "", score: 3.9 },
   { year: "2023", score: 3.0 },
   { year: "", score: 3.7 },
   { year: "", score: 3.3 },
@@ -21,6 +20,7 @@ const PERFORMANCE_DATA = [
   { year: "", score: 4.8 },
   { year: "2025", score: 3.2 },
   { year: "", score: 4.1 },
+  { year: "", score: 3.6 },
   { year: "2026", score: 3.0 },
 ]
 
@@ -87,7 +87,7 @@ const TopCardsSection = ({ onOpenModal }) => {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={PERFORMANCE_DATA}
-              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+              margin={{ top: 10, right: 10, left: -5, bottom: 15 }}
             >
               <defs>
                 <linearGradient
@@ -116,7 +116,7 @@ const TopCardsSection = ({ onOpenModal }) => {
                 tick={{ fill: "#5A5A5A", fontSize: 14 }}
                 tickLine={false}
                 axisLine={false}
-                width={25}
+                width={30}
               />
               <XAxis
                 dataKey="year"
@@ -124,7 +124,7 @@ const TopCardsSection = ({ onOpenModal }) => {
                 tick={{ fill: "#5A5A5A", fontSize: 14 }}
                 tickLine={false}
                 axisLine={false}
-                dy={4}
+                dy={14}
               />
               <Area
                 type="monotone"

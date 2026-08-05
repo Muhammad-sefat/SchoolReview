@@ -97,18 +97,16 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
-          collapsed ? "w-20" : "w-72"
-        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
+          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${
-              collapsed
-                ? "flex-col items-center justify-center gap-3 p-3.5"
-                : "items-center justify-between px-6 py-4.5"
-            }`}
+            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
+              ? "flex-col items-center justify-center gap-3 p-3.5"
+              : "items-center justify-between px-6 py-4.5"
+              }`}
           >
             <NavLink to="/internal-teacher" className="flex items-center gap-3">
               <DashboardLogo />
@@ -138,20 +136,18 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* 1. Teaching Insights */}
             <NavLink
               to="/internal-teacher/teaching-insights"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${
-                isPathActive("/internal-teacher/teaching-insights")
-                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-              } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${isPathActive("/internal-teacher/teaching-insights")
+                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+                } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Teaching Insights" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <TeachingInsightsIcon
-                  className={`w-5 h-5 transition-colors ${
-                    isPathActive("/internal-teacher/teaching-insights")
-                      ? "text-[#080808]"
-                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                  }`}
+                  className={`w-5 h-5 transition-colors ${isPathActive("/internal-teacher/teaching-insights")
+                    ? "text-[#080808]"
+                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                    }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">Teaching Insights</span>}
@@ -160,20 +156,18 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* 2. Student Feedback */}
             <NavLink
               to="/internal-teacher/student-feedback"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${
-                location.pathname.includes("/internal-teacher/student-feedback")
-                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-              } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${location.pathname.includes("/internal-teacher/student-feedback")
+                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+                } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Student Feedback" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <StudentFeedbackIcon
-                  className={`w-5 h-5 transition-colors ${
-                    location.pathname.includes("/internal-teacher/student-feedback")
-                      ? "text-[#080808]"
-                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                  }`}
+                  className={`w-5 h-5 transition-colors ${location.pathname.includes("/internal-teacher/student-feedback")
+                    ? "text-[#080808]"
+                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                    }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">Student Feedback</span>}
@@ -189,18 +183,16 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               <button
                 type="button"
                 onClick={() => setMyWorkOpen(!myWorkOpen)}
-                className={`w-full flex items-center justify-between transition-all cursor-pointer ${
-                  myWorkOpen && isMyWorkActive
-                    ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                    : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+                className={`w-full flex items-center justify-between transition-all cursor-pointer ${myWorkOpen && isMyWorkActive
+                  ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                  : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
+                  } ${collapsed ? "justify-center px-0" : ""}`}
                 title={collapsed ? "My Work" : undefined}
               >
                 <div className="flex items-center gap-3.5">
                   <MyWorkIcon
-                    className={`w-5 h-5 shrink-0 ${
-                      myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                    }`}
+                    className={`w-5 h-5 shrink-0 ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
+                      }`}
                   />
                   {!collapsed && (
                     <span className="text-base font-medium">My Work</span>
@@ -212,9 +204,8 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                       1
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                        myWorkOpen ? "rotate-180 text-[#080808]" : ""
-                      }`}
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${myWorkOpen ? "rotate-180 text-[#080808]" : ""
+                        }`}
                     />
                   </div>
                 )}
@@ -226,10 +217,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   <NavLink
                     to="/internal-teacher/my-work/activity-task"
                     className={({ isActive }) =>
-                      `block text-[15px] transition-colors ${
-                        isActive
-                          ? "text-[#080808] font-semibold"
-                          : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                      `block text-[16px] transition-colors ${isActive
+                        ? "text-[#080808] font-semibold"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
                   >
@@ -239,10 +229,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   <NavLink
                     to="/internal-teacher/my-work/my-activity"
                     className={({ isActive }) =>
-                      `block text-[15px] transition-colors ${
-                        isActive
-                          ? "text-[#080808] font-semibold"
-                          : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                      `block text-[16px] transition-colors ${isActive
+                        ? "text-[#080808] font-semibold"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
                   >
@@ -261,24 +250,21 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between transition-all cursor-pointer ${
-                settingsOpen && isSettingsActive
-                  ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                  : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
-              } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`w-full flex items-center justify-between transition-all cursor-pointer ${settingsOpen && isSettingsActive
+                ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
+                } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
               <div className="flex items-center gap-3.5">
                 <Settings
-                  className={`w-5 h-5 shrink-0 ${
-                    settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
-                  }`}
+                  className={`w-5 h-5 shrink-0 ${settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
+                    }`}
                 />
                 {!collapsed && (
                   <span
-                    className={`text-base font-medium ${
-                      settingsOpen && isSettingsActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                    }`}
+                    className={`text-base font-medium ${settingsOpen && isSettingsActive ? "text-[#080808]" : "text-[#5A5A5A]"
+                      }`}
                   >
                     Settings
                   </span>
@@ -286,9 +272,8 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               </div>
               {!collapsed && (
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                    settingsOpen ? "rotate-180 text-[#080808]" : ""
-                  }`}
+                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${settingsOpen ? "rotate-180 text-[#080808]" : ""
+                    }`}
                 />
               )}
             </button>
@@ -299,10 +284,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/internal-teacher/setting/general"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${
-                      isActive
-                        ? "text-[#080808] font-semibold"
-                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${isActive
+                      ? "text-[#080808] font-semibold"
+                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -312,10 +296,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/internal-teacher/setting/followed-schools"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${
-                      isActive
-                        ? "text-[#080808] font-semibold"
-                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${isActive
+                      ? "text-[#080808] font-semibold"
+                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -329,9 +312,8 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${
-              collapsed ? "justify-center px-0" : ""
-            }`}
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              }`}
             title={collapsed ? "Get help" : undefined}
           >
             <HelpCircle className="w-5 h-5 shrink-0 stroke-[1.75]" />
@@ -342,9 +324,8 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${
-              collapsed ? "justify-center px-0" : ""
-            }`}
+            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              }`}
             title={collapsed ? "Log out" : undefined}
           >
             <LogOut className="w-5 h-5 shrink-0 stroke-[1.75]" />

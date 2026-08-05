@@ -19,7 +19,7 @@ const TeacherInsightHeader = ({ activeTab, onTabChange, selectedYear, onYearChan
     <div className="w-full border-b border-dashed border-[#BFBFBF] pb-4 font-urbanist">
       <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 py-1">
         {/* Left Navigation Tabs (Overview, Classroom Insights, Review Insights, Reports) */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scrollbar-none flex-nowrap pb-1 max-w-full">
           {TEACHING_INSIGHT_TABS.map((tab) => {
             const isActive = activeTab === tab.id
             return (
@@ -27,10 +27,10 @@ const TeacherInsightHeader = ({ activeTab, onTabChange, selectedYear, onYearChan
                 key={tab.id}
                 type="button"
                 onClick={() => onTabChange(tab.id)}
-                className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-medium transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-normal transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
                   isActive
                     ? "bg-[#038AF9] text-white shadow-xs"
-                    : "bg-white border border-gray-200 text-[#5A5A5A] hover:border-gray-300 hover:text-[#080808]"
+                    : "bg-white border border-gray-200 text-textPrimary hover:bg-gray-50"
                 }`}
               >
                 {tab.label}

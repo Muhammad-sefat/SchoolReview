@@ -66,13 +66,19 @@ const REPORTS_TABLE_DATA = [
   },
 ]
 
-const SafeguardingReportsTable = ({ onSelectReport }) => {
+const SafeguardingReportsTable = ({
+  onSelectReport,
+  title = "Reports",
+  subtitle = null,
+  showStatusTabs = true,
+  exportBtnColor = "bg-[#70C1FF]",
+}) => {
   const [activeTab, setActiveTab] = useState("Open")
   const [categoryFilter, setCategoryFilter] = useState("All")
   const [selectedIds, setSelectedIds] = useState([])
 
   const filteredReports = REPORTS_TABLE_DATA.filter((rep) => {
-    if (rep.status !== activeTab) return false
+    if (showStatusTabs && rep.status !== activeTab) return false
     if (categoryFilter !== "All" && rep.category !== categoryFilter) return false
     return true
   })
@@ -92,37 +98,48 @@ const SafeguardingReportsTable = ({ onSelectReport }) => {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs space-y-5">
+    <div className="w-full bg-white rounded-3xl border border-gray-100 p-5 md:p-6 shadow-xs space-y-5 font-urbanist">
       {/* Table Card Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         {/* Left Title & Open/Closed Tab Pills */}
-        <div className="flex items-center gap-4">
-          <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808]">
-            Reports
-          </h3>
+        <div className="space-y-0.5">
+          <div className="flex items-center gap-4">
+            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808]">
+              {title}
+            </h3>
 
-          <div className="flex items-center gap-1 bg-gray-100/70 p-1 rounded-2xl">
-            {["Open", "Closed"].map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${activeTab === tab
-                  ? "bg-white text-[#1F1F21] shadow-2xs font-semibold"
-                  : "text-[#5A5A5A] hover:text-[#1F1F21]"
-                  }`}
-              >
-                {tab}
-              </button>
-            ))}
+            {showStatusTabs && (
+              <div className="flex items-center gap-1 bg-gray-100/70 p-1 rounded-2xl">
+                {["Open", "Closed"].map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                      activeTab === tab
+                        ? "bg-white text-[#1F1F21] shadow-2xs font-semibold"
+                        : "text-[#5A5A5A] hover:text-[#1F1F21]"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+
+          {subtitle && (
+            <p className="text-[16px] font-normal text-secondary">
+              {subtitle}
+            </p>
+          )}
         </div>
 
         {/* Right Actions: Export Button & Shadcn Select Category Filter */}
         <div className="flex items-center gap-3">
           <Button
             type="button"
-            className="px-4 py-2 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-base font-medium transition-colors shadow-2xs cursor-pointer h-auto"
+            className={`px-4 py-2 rounded-xl ${exportBtnColor} hover:opacity-90 text-white text-base font-medium transition-colors shadow-2xs cursor-pointer h-auto border-none`}
           >
             Export Reports
           </Button>

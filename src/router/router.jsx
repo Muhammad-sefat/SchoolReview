@@ -46,6 +46,8 @@ import TeachingInsightTeacher from "../pages/internalTeacher/TeachingInsight"
 import StudentFeedbackTeacher from "../pages/internalTeacher/StudentFeedback"
 import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask"
 import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
+import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral"
+import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -139,9 +141,9 @@ const router = createBrowserRouter([
       { path: "my-work", element: <ActivityTaskTeacher /> },
       { path: "my-work/activity-task", element: <ActivityTaskTeacher /> },
       { path: "my-work/my-activity", element: <MyActivityTeacher /> },
-      { path: "setting", element: <General /> },
-      { path: "setting/general", element: <General /> },
-      { path: "setting/followed-schools", element: <FollowedSchool /> },
+      { path: "setting", element: <TeacherGeneral /> },
+      { path: "setting/general", element: <TeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
       { path: "*", element: <Navigate to="/internal-teacher" replace /> },
     ],
   },
