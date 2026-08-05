@@ -107,11 +107,6 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
                 <DashboardLogo />
               </div>
-              {!collapsed && (
-                <span className="font-urbanist text-lg font-bold text-[#1F1F21] tracking-tight">
-                  Graham
-                </span>
-              )}
             </div>
 
             {/* Sidebar Toggle Expand/Collapse Button */}

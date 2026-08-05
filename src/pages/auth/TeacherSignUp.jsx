@@ -5,6 +5,7 @@ import { Title32, Title18 } from "@/components/typho/Title"
 import CustomInput from "@/components/common/CustomInput"
 import TeacherSchoolSelectDropdown from "@/components/auth/teacher/TeacherSchoolSelectDropdown"
 import AuthBtn from "@/components/common/button/AuthBtn"
+import { DashboardLogo } from "@/components/icons/Logo/AllLogo"
 
 const TeacherSignUp = () => {
   const { setAuthHeader } = useOutletContext() || {}
@@ -48,6 +49,11 @@ const TeacherSignUp = () => {
 
   return (
     <div className="w-full space-y-[20px]">
+      {/* Logo Badge (Matching LeaderSidebar logo) */}
+      <div className="w-12 h-12 rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+        <DashboardLogo />
+      </div>
+
       {/* Title */}
       <Title32 className="text-foreground">
         Tell us about you

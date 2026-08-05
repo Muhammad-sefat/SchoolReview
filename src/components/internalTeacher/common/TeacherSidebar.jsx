@@ -109,12 +109,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               }`}
           >
             <NavLink to="/internal-teacher" className="flex items-center gap-3">
-              <DashboardLogo />
-              {!collapsed && (
-                <span className="font-urbanist text-xl font-bold text-textPrimary tracking-tight">
-                  Graham
-                </span>
-              )}
+              <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+                <DashboardLogo />
+              </div>
             </NavLink>
 
             <button
