@@ -39,6 +39,7 @@ import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 import SchoolReport from "../pages/reports/SchoolReport"
+import InternalTeacherReport from "../pages/reports/InternalTeacherReport"
 import ReportLayout from "../layout/ReportLayout"
 
 import InternalTeacherLayout from "../layout/InternalTeacherLayout"
@@ -100,6 +101,9 @@ const router = createBrowserRouter([
     children: [
       { path: "school", element: <SchoolReport /> },
       { path: "school-report", element: <SchoolReport /> },
+      { path: "teacher", element: <InternalTeacherReport /> },
+      { path: "teacher-report", element: <InternalTeacherReport /> },
+      { path: "internal-teacher", element: <InternalTeacherReport /> },
     ],
   },
 

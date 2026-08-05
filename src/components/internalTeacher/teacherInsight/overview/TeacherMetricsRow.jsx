@@ -97,7 +97,7 @@ const SemiCircleGauge = ({ value = 72, label = "Good" }) => {
 
 const TeacherMetricsRow = () => {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch font-urbanist">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch font-urbanist">
       {/* Card 1: Key Metrics (Expanding progress bar dynamically across full remaining width like Image 1) */}
       <div className="bg-white border border-gray-100 rounded-3xl p-5 md:p-6 space-y-4 flex flex-col justify-between shadow-xs">
         <h4 className="text-xl sm:text-2xl font-semibold text-[#080808]">

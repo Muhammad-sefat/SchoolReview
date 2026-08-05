@@ -74,7 +74,7 @@ const TeacherPerformanceScatter = () => {
   }
 
   return (
-    <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch font-urbanist">
+    <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-4 items-stretch font-urbanist">
       {/* Left Scatter Plot (No tabs for Teacher Performance) */}
       <div className="xlg:col-span-8 flex">
         <ScatterPlot
