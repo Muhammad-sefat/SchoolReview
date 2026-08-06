@@ -27,7 +27,7 @@ const StepThreeInviteObservers = () => {
       {/* Main Content Area Box */}
       <div
         style={{ borderRadius: "20px" }}
-        className="bg-white border border-[#EAEAEA] p-6 md:p-8 space-y-4 shadow-xs"
+        className="bg-white border border-[#EAEAEA] p-5  space-y-4 shadow-xs"
       >
         {/* Existing Observers List */}
         {observers.map((email, idx) => (

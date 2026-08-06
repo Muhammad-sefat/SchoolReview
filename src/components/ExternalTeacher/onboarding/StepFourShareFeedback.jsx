@@ -25,8 +25,9 @@ const ClockIconSVG = () => (
 )
 
 const DownloadIconSVG = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15" fill="none">
-    <path d="M9.75004 9.25004C9.75004 9.25004 6.43584 13.75 5.24994 13.75C4.06414 13.75 0.75 9.25004 0.75 9.25004M5.24994 12.75V0.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M3 17C3 17.93 3 18.395 3.10223 18.7765C3.37963 19.8117 4.18827 20.6204 5.22355 20.8978C5.60505 21 6.07003 21 7 21H17C17.93 21 18.395 21 18.7765 20.8978C19.8117 20.6204 20.6204 19.8117 20.8978 18.7765C21 18.395 21 17.93 21 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M16.5 11.5C16.5 11.5 13.1858 16 11.9999 16C10.8141 16 7.5 11.5 7.5 11.5M11.9999 15V3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
 
@@ -54,10 +55,18 @@ const EditHoverIconSVG = () => (
   </svg>
 )
 
-const StepFourShareFeedback = ({ onOpenEditModal }) => {
+import EditTeachingCardModal from "./EditTeachingCardModal"
+
+const StepFourShareFeedback = () => {
   const [inviteStudents, setInviteStudents] = useState(true)
   const [inviteObservers, setInviteObservers] = useState(true)
   const [copied, setCopied] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [teacherCard, setTeacherCard] = useState({
+    name: "jenny Wilson",
+    subject: "Mathematics",
+  })
+
   const feedbackLink = "https://schoolreview.ch/feedback/Arlene McCoy"
 
   const handleCopy = () => {
@@ -139,85 +148,88 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
             <h2 className="text-[24px] font-semibold text-[#080808]">
               Share your feedback link
             </h2>
-            <p className="text-lg font-normal text-[#080808]">
+            <p className="text-base sm:text-lg font-normal text-textPrimary">
               Use your personal feedback link to collect responses anytime.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start pt-2">
 
-            {/* Left Personal Card Preview ("How's my teaching?") with Hover Blur & Edit Button */}
-            <div className="lg:col-span-7">
+            {/* Left Personal Card Preview ("How's my teaching?") - 50% Width */}
+            <div className="w-full">
               <div
-                style={{ borderRadius: "20px", border: "1px solid #B1DBFD", background: "#FFFFFF" }}
-                className="p-6 relative group overflow-hidden shadow-xs border transition-all"
+                style={{ borderRadius: "24px", border: "1.5px solid #038AF9", background: "#FFFFFF" }}
+                className="p-6 sm:p-8 relative group overflow-hidden shadow-xs transition-all"
               >
-                <div className="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+                <div className="flex items-start justify-between gap-4 pb-6">
                   <div>
-                    <h3 className="text-[24px] font-semibold text-[#080808]">
+                    <h3 className="text-[28px] font-semibold text-[#080808] tracking-tight">
                       How's my teaching?
                     </h3>
-                    <p className="text-[14px] sm:text-[16px] font-normal text-textPrimary">
+                    <p className="text-base font-normal text-textPrimary mt-1">
                       Your feedback helps improve my teaching
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-[#038AF9] p-2 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#038AF9] p-2.5 flex items-center justify-center shrink-0 shadow-xs">
                     <ExternalLogoIcon className="w-full h-full text-white" />
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                   {/* Teacher Info */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3.5">
                       <img
-                        src={externalAvatar}
-                        alt="jenny Wilson"
-                        className="w-12 h-12 rounded-full object-cover shrink-0"
+                        src={teacherCard.avatar || externalAvatar}
+                        alt={teacherCard.name}
+                        className="w-14 h-14 rounded-2xl object-cover shrink-0"
                       />
                       <div>
-                        <h4 className="text-[20px] font-normal text-[#080808]">
-                          jenny Wilson
+                        <h4 className="text-[20px] font-semibold text-[#080808]">
+                          {teacherCard.name}
                         </h4>
-                        <p className="text-sm font-normal text-secondary">
-                          Mathematics <span className="text-gray-300">•</span> Zurich International School
+                        <p className="text-sm font-normal text-textPrimary flex items-center gap-2 mt-0.5">
+                          <span>{teacherCard.subject}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+                          <span>Zurich International School</span>
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 text-[14px] font-normal pt-1">
-                      <div className="flex items-center gap-1.5 text-[#038AF9]">
+                    <div className="flex items-center gap-3 text-sm font-normal text-[#080808] pt-1">
+                      <div className="flex items-center gap-1.5 text-[#080808]">
                         <AnonymousIconSVG />
                         <span>100% Anonymous</span>
                       </div>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
                       <div className="flex items-center gap-1.5 text-[#080808]">
                         <ClockIconSVG />
                         <span>5 min</span>
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#038AF9] pt-1">
-                      schoolreview.ch/jenny Wilson
+                    <p className="text-sm text-[#038AF9] font-normal pt-4">
+                      schoolreview.ch/{teacherCard.name}
                     </p>
                   </div>
 
                   {/* QR Code graphic */}
-                  <div className="shrink-0 flex items-center justify-center">
-                    <QrScan className="w-24 h-24 text-[#080808]" />
+                  <div className="shrink-0 flex items-center justify-center pb-1">
+                    <QrScan className="w-36 h-36 text-[#080808]" />
                   </div>
                 </div>
 
                 {/* Hover Blur Overlay with Middle Edit Button */}
-                <div className="absolute inset-0 bg-white/75 backdrop-blur-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <button
                     type="button"
-                    onClick={onOpenEditModal}
+                    onClick={() => setIsEditModalOpen(true)}
                     style={{
                       borderRadius: "80px",
                       background: "#FFFFFF",
-                      border: "1px solid #038AF9",
+                      border: "1.5px solid #038AF9",
                     }}
-                    className="p-3 shadow-md hover:scale-105 transition-all cursor-pointer flex items-center justify-center"
+                    className="p-4 shadow-md hover:scale-105 transition-all cursor-pointer flex items-center justify-center"
                     title="Edit feedback card"
                   >
                     <EditHoverIconSVG />
@@ -226,12 +238,12 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
               </div>
             </div>
 
-            {/* Right Action Box: Download, Share, Copy Link */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="flex items-center gap-3">
+            {/* Right Action Box: Download, Share, Copy Link - 50% Width */}
+            <div className="w-full space-y-4 pt-2">
+              <div className="flex items-center gap-3 flex-wrap">
                 <button
                   type="button"
-                  className="bg-[#038AF9] hover:bg-[#0270ce] text-white text-lg font-semibold px-5 py-2.5 rounded-xl flex items-center gap-2 transition-colors cursor-pointer shrink-0"
+                  className="bg-[#038AF9] hover:bg-[#0270ce] text-white text-base font-semibold px-6 py-3 rounded-xl flex items-center gap-2 transition-colors cursor-pointer shrink-0 shadow-xs"
                 >
                   <DownloadIconSVG />
                   <span>Download QR Card</span>
@@ -239,7 +251,7 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
 
                 <button
                   type="button"
-                  className="bg-[#FAFAFA] border border-gray-200 text-[#080808] text-lg font-medium px-5 py-2.5 rounded-xl flex items-center gap-2 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
+                  className="bg-[#FAFAFA] border border-gray-200 text-[#080808] text-base font-medium px-5 py-3 rounded-xl flex items-center gap-2 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
                 >
                   <ShareIconSVG />
                   <span>Share</span>
@@ -247,11 +259,11 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
               </div>
 
               {/* Copy Link Row */}
-              <div className="flex items-center gap-2 pt-2">
+              <div className="flex items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="bg-[#FAFAFA] border border-[#E6F3FE] text-[#080808] text-base font-medium px-4 py-2.5 rounded-xl flex items-center gap-2 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
+                  className="bg-[#FAFAFA] border border-gray-200 text-[#080808] text-base font-medium px-5 py-3 rounded-xl flex items-center gap-2 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
                 >
                   <CopyLinkIconSVG />
                   <span>{copied ? "Copied!" : "Copy Link"}</span>
@@ -260,14 +272,8 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
                 <input
                   type="text"
                   readOnly
-                  value={feedbackLink}
-                  style={{
-                    borderRadius: "10px",
-                    border: "1px solid #E6F3FE",
-                    background: "#FAFAFA",
-                    color: "#3A3A3A",
-                  }}
-                  className="px-4 py-2.5 text-[18px] font-normal leading-[28px] w-full focus:outline-hidden"
+                  value="https://schoolreview.com/feedback/Arlene McCoy"
+                  className="bg-[#FAFAFA] border border-gray-200/80 rounded-xl px-4 py-3 text-base text-[#5A5A5A] w-full focus:outline-hidden font-normal"
                 />
               </div>
             </div>
@@ -277,6 +283,14 @@ const StepFourShareFeedback = ({ onOpenEditModal }) => {
         </div>
 
       </div>
+
+      {/* Edit Teaching Card Modal */}
+      <EditTeachingCardModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        initialData={teacherCard}
+        onSave={setTeacherCard}
+      />
     </div>
   )
 }

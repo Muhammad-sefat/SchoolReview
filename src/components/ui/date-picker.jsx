@@ -12,6 +12,9 @@ export function DatePicker({
   className,
   showIcon = true,
   showChevron = false,
+  customIcon = null,
+  iconPosition = "left",
+  formatPattern = "dd MMM yyyy",
 }) {
   const [open, setOpen] = React.useState(false)
   const [currentMonth, setCurrentMonth] = React.useState(value || new Date())
@@ -34,21 +37,28 @@ export function DatePicker({
     setOpen(false)
   }
 
+  const renderIcon = () => {
+    if (customIcon) return customIcon
+    if (showIcon) return <CalendarIcon className="mr-1 h-4 w-4 opacity-50 shrink-0" />
+    return null
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
           className={cn(
-            "w-full justify-between text-left font-normal h-8 rounded-full border-gray-200 text-sm font-medium text-textPrimary bg-white px-3 cursor-pointer shadow-2xs hover:bg-gray-50 flex items-center gap-1.5",
-            !value && "text-textPrimary",
+            "w-full justify-between text-left font-normal h-12 rounded-2xl border-gray-200 text-base text-[#080808] bg-white px-4 cursor-pointer shadow-2xs hover:bg-gray-50 flex items-center gap-2",
+            !value && "text-gray-400",
             className
           )}
         >
-          <div className="flex items-center gap-1.5 truncate">
-            {showIcon && <CalendarIcon className="mr-1 h-4 w-4 opacity-50 shrink-0" />}
-            <span>{value ? format(value, "MMM yyyy") : placeholder}</span>
+          <div className="flex items-center gap-2 truncate">
+            {iconPosition === "left" && renderIcon()}
+            <span>{value ? format(value, formatPattern) : placeholder}</span>
           </div>
+          {iconPosition === "right" && renderIcon()}
           {showChevron && <ChevronDown className="h-4 w-4 opacity-50 shrink-0 ml-1" />}
         </Button>
       </PopoverTrigger>

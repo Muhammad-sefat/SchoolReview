@@ -4,6 +4,8 @@ import StepOneTeachingAreas from "@/components/ExternalTeacher/onboarding/StepOn
 import StepTwoStudentFeedback from "@/components/ExternalTeacher/onboarding/StepTwoStudentFeedback"
 import StepThreeInviteObservers from "@/components/ExternalTeacher/onboarding/StepThreeInviteObservers"
 import StepFourShareFeedback from "@/components/ExternalTeacher/onboarding/StepFourShareFeedback"
+import StartSelfReviewModal from "@/components/ExternalTeacher/onboarding/StartSelfReviewModal"
+import RemindMeLaterModal from "@/components/ExternalTeacher/onboarding/RemindMeLaterModal"
 
 const BackArrowIconSVG = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -15,14 +17,17 @@ const TOTAL_STEPS = 4
 
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(1)
+  const [isStartSelfReviewOpen, setIsStartSelfReviewOpen] = useState(false)
+  const [isRemindMeLaterOpen, setIsRemindMeLaterOpen] = useState(false)
+
   const navigate = useNavigate()
 
   const handleNext = () => {
     if (currentStep < TOTAL_STEPS) {
       setCurrentStep((prev) => prev + 1)
     } else {
-      // Finish onboarding flow
-      navigate("/external-teacher")
+      // Step 4 Finish clicked -> Open Start Your Self-Review modal
+      setIsStartSelfReviewOpen(true)
     }
   }
 
@@ -37,7 +42,7 @@ const Onboarding = () => {
   return (
     <div className="w-full min-h-screen bg-[#F6F6F6] p-4 sm:p-6 md:p-10 font-urbanist flex flex-col justify-center items-center">
       <div className="max-w-[1500px] w-full mx-auto space-y-6">
-        
+
         {/* Main Onboarding Container Box */}
         <div
           style={{ borderRadius: "32px" }}
@@ -47,7 +52,7 @@ const Onboarding = () => {
           <div className="w-full space-y-2">
             <div className="flex items-center justify-between gap-4">
               <span className="text-base font-normal text-[#080808] shrink-0">Quick Setup</span>
-              <div className="flex-1 mx-4 bg-gray-100 rounded-full h-2 overflow-hidden">
+              <div className="flex-1 mx-4 bg-gray-100 rounded-full h-3 overflow-hidden">
                 <div
                   className="bg-[#038AF9] h-full transition-all duration-300 rounded-full"
                   style={{ width: `${progressPercent}%` }}
@@ -96,6 +101,30 @@ const Onboarding = () => {
         </div>
 
       </div>
+
+      {/* Modal 2: Start Your Self-Review? */}
+      <StartSelfReviewModal
+        isOpen={isStartSelfReviewOpen}
+        onClose={() => setIsStartSelfReviewOpen(false)}
+        onStartNow={() => {
+          setIsStartSelfReviewOpen(false)
+          navigate("/external-teacher")
+        }}
+        onRemindMeLater={() => {
+          setIsStartSelfReviewOpen(false)
+          setIsRemindMeLaterOpen(true)
+        }}
+      />
+
+      {/* Modal 3: When Should We Remind You? */}
+      <RemindMeLaterModal
+        isOpen={isRemindMeLaterOpen}
+        onClose={() => setIsRemindMeLaterOpen(false)}
+        onSetReminder={() => {
+          setIsRemindMeLaterOpen(false)
+          navigate("/external-teacher")
+        }}
+      />
     </div>
   )
 }
