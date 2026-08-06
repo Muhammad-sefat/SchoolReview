@@ -49,6 +49,7 @@ import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask"
 import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
 import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral"
 import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool"
+import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -154,6 +155,19 @@ const router = createBrowserRouter([
   {
     path: "/teacher",
     element: <Navigate to="/internal-teacher" replace />,
+  },
+
+  // 5. External Teacher Onboarding
+  {
+    path: "/external-teacher",
+    children: [
+      { path: "", element: <ExternalTeacherOnboarding /> },
+      { path: "onboarding", element: <ExternalTeacherOnboarding /> },
+    ],
+  },
+  {
+    path: "/onboarding-external-teacher",
+    element: <ExternalTeacherOnboarding />,
   },
 
   // 4. Auth Pages
