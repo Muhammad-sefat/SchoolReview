@@ -34,9 +34,9 @@ const StepOneTeachingAreas = () => {
   }
 
   return (
-    <div className="space-y-6 font-urbanist">
+    <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[32px] md:text-[40px] font-semibold text-[#080808] leading-tight">
+      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
         Choose Teaching Areas
       </h1>
 
@@ -47,17 +47,15 @@ const StepOneTeachingAreas = () => {
           border: "1px solid #B1DBFD",
           background: "rgba(3, 138, 249, 0.04)",
         }}
-        className="px-4 py-2.5 flex items-center gap-2.5 w-fit max-w-full"
+        className="px-3.5 py-2.5 flex items-center gap-2.5 w-fit max-w-full"
       >
         <InfoIconSVG />
         <span
           style={{
             color: "#080808",
-            fontSize: "18px",
             fontWeight: 400,
-            lineHeight: "28px",
           }}
-          className="font-urbanist"
+          className="font-urbanist text-sm sm:text-base lg:text-[18px] leading-snug sm:leading-[28px]"
         >
           If multiple areas are selected, questions are rotated to reduce student workload.
         </span>
@@ -66,10 +64,10 @@ const StepOneTeachingAreas = () => {
       {/* Main Content Area Box */}
       <div
         style={{ borderRadius: "20px" }}
-        className="bg-white border border-[#EAEAEA] p-4 sm:p-6 space-y-2 shadow-xs"
+        className="bg-white border border-[#EAEAEA] p-2 sm:p-4 lg:p-6 space-y-1 sm:space-y-2 shadow-xs"
       >
         {/* Row 1: Classroom Climate */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
           <div className="md:col-span-5 flex items-center gap-3">
             <Checkbox
               id="classroomClimate"
@@ -79,7 +77,7 @@ const StepOneTeachingAreas = () => {
             />
             <label
               htmlFor="classroomClimate"
-              className="text-[18px] font-medium text-[#080808] cursor-pointer flex items-center gap-2"
+              className="text-base sm:text-[18px] font-medium text-[#080808] cursor-pointer flex items-center gap-2"
             >
               Classroom Climate
               <span className="w-4 h-4 rounded-full border border-gray-400 text-gray-500 text-xs flex items-center justify-center">
@@ -87,7 +85,7 @@ const StepOneTeachingAreas = () => {
               </span>
             </label>
           </div>
-          <div className="md:col-span-7 text-[18px] font-normal text-[#080808] flex items-center gap-3 flex-wrap">
+          <div className="md:col-span-7 text-base sm:text-[18px] font-normal text-[#080808] flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <span>Classroom Safety</span>
             <DotSVG />
             <span>Student Wellbeing</span>
@@ -97,7 +95,7 @@ const StepOneTeachingAreas = () => {
         {/* Row 2: Learning Impact with border-top & border-bottom #E6F3FE */}
         <div
           style={{ borderTop: "1px solid #E6F3FE", borderBottom: "1px solid #E6F3FE" }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 rounded-2xl transition-colors"
+          className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl transition-colors"
         >
           <div className="md:col-span-5 flex items-center gap-3">
             <Checkbox
@@ -108,12 +106,12 @@ const StepOneTeachingAreas = () => {
             />
             <label
               htmlFor="learningImpact"
-              className="text-[18px] font-medium text-[#080808] cursor-pointer"
+              className="text-base sm:text-[18px] font-medium text-[#080808] cursor-pointer"
             >
               Learning Impact
             </label>
           </div>
-          <div className="md:col-span-7 text-[18px] font-normal text-[#080808] flex items-center gap-3 flex-wrap">
+          <div className="md:col-span-7 text-base sm:text-[18px] font-normal text-[#080808] flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <span>Understanding</span>
             <DotSVG />
             <span>Progress</span>
@@ -123,7 +121,7 @@ const StepOneTeachingAreas = () => {
         </div>
 
         {/* Row 3: Professional Practice */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
           <div className="md:col-span-5 flex items-center gap-3">
             <Checkbox
               id="professionalPractice"
@@ -133,12 +131,12 @@ const StepOneTeachingAreas = () => {
             />
             <label
               htmlFor="professionalPractice"
-              className="text-[18px] font-medium text-[#080808] cursor-pointer"
+              className="text-base sm:text-[18px] font-medium text-[#080808] cursor-pointer"
             >
               Professional Practice
             </label>
           </div>
-          <div className="md:col-span-7 text-[18px] font-normal text-[#080808] flex items-center gap-3 flex-wrap">
+          <div className="md:col-span-7 text-base sm:text-[18px] font-normal text-[#080808] flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <span>Lesson Coherence</span>
             <DotSVG />
             <span>Meaningful Assessment</span>
@@ -152,10 +150,10 @@ const StepOneTeachingAreas = () => {
         {/* Row 4: Teaching Quality (Always Included) with border-top & border-bottom #E6F3FE */}
         <div
           style={{ borderTop: "1px solid #E6F3FE", borderBottom: "1px solid #E6F3FE" }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 rounded-2xl transition-colors"
+          className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl transition-colors"
         >
           <div className="md:col-span-5 flex items-center gap-3">
-            <span className="text-[18px] font-medium text-[#080808]">
+            <span className="text-base sm:text-[18px] font-medium text-[#080808]">
               Teaching Quality
             </span>
             <div
@@ -163,12 +161,12 @@ const StepOneTeachingAreas = () => {
               className="px-3 py-1 inline-flex items-center gap-1.5 shrink-0"
             >
               <AlwaysIncludedSVG />
-              <span className="text-[14px] font-normal text-[#080808]">
+              <span className="text-xs sm:text-[14px] font-normal text-[#080808]">
                 Always Included
               </span>
             </div>
           </div>
-          <div className="md:col-span-7 text-[18px] font-normal text-[#080808] flex items-center gap-3 flex-wrap">
+          <div className="md:col-span-7 text-base sm:text-[18px] font-normal text-[#080808] flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <span>Clarity</span>
             <DotSVG />
             <span>Purpose</span>
@@ -184,9 +182,9 @@ const StepOneTeachingAreas = () => {
         </div>
 
         {/* Row 5: Learning Environment (Always Included) */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl bg-white hover:bg-gray-50/60 transition-colors">
           <div className="md:col-span-5 flex items-center gap-3">
-            <span className="text-[18px] font-medium text-[#080808]">
+            <span className="text-base sm:text-[18px] font-medium text-[#080808]">
               Learning Environment
             </span>
             <div
@@ -194,12 +192,12 @@ const StepOneTeachingAreas = () => {
               className="px-3 py-1 inline-flex items-center gap-1.5 shrink-0"
             >
               <AlwaysIncludedSVG />
-              <span className="text-[14px] font-normal text-[#080808]">
+              <span className="text-xs sm:text-[14px] font-normal text-[#080808]">
                 Always Included
               </span>
             </div>
           </div>
-          <div className="md:col-span-7 text-[18px] font-normal text-[#080808] flex items-center gap-3 flex-wrap">
+          <div className="md:col-span-7 text-base sm:text-[18px] font-normal text-[#080808] flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <span>Pace</span>
             <DotSVG />
             <span>Support</span>

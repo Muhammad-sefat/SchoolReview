@@ -40,13 +40,13 @@ const Onboarding = () => {
   const progressPercent = (currentStep / TOTAL_STEPS) * 100
 
   return (
-    <div className="w-full min-h-screen bg-[#F6F6F6] p-4 sm:p-6 md:p-10 font-urbanist flex flex-col justify-center items-center">
+    <div className="w-full min-h-screen bg-[#F6F6F6] p-6 lg:p-8 font-urbanist flex flex-col justify-center items-center">
       <div className="max-w-[1500px] w-full mx-auto space-y-6">
 
         {/* Main Onboarding Container Box */}
         <div
           style={{ borderRadius: "32px" }}
-          className="bg-white border border-[#EAEAEA] p-6 sm:p-8 md:p-12 space-y-8 shadow-xs"
+          className="bg-white border border-[#EAEAEA] p-6 md:p-8 lg:p-10 space-y-6 sm:space-y-8 shadow-xs"
         >
           {/* Quick Setup Progress Bar Bar */}
           <div className="w-full space-y-2">

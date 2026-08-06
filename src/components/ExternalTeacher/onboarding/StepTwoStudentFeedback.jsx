@@ -15,19 +15,19 @@ const StepTwoStudentFeedback = () => {
   }
 
   return (
-    <div className="space-y-6 font-urbanist">
+    <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[32px] md:text-[40px] font-semibold text-[#080808] leading-tight">
+      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
         Which students can give feedback
       </h1>
 
       {/* Options List */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
 
         {/* Option 1: School Email Verification (Recommended) */}
         <div
           onClick={() => handleOptionSelect("email")}
-          className={`rounded-2xl p-6 transition-all cursor-pointer ${selectedOption === "email"
+          className={`rounded-2xl p-4 sm:p-6 transition-all cursor-pointer ${selectedOption === "email"
             ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
             : "border border-[#EAEAEA] bg-white hover:border-gray-300"
             }`}

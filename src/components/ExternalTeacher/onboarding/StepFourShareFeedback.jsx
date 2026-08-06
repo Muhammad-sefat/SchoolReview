@@ -76,28 +76,28 @@ const StepFourShareFeedback = () => {
   }
 
   return (
-    <div className="space-y-6 font-urbanist">
+    <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[32px] md:text-[40px] font-semibold text-[#080808] leading-tight">
+      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
         Share your feedback page
       </h1>
 
       {/* Main Container Card */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
 
         {/* Card 1: Invite by email */}
         <div
           style={{ borderRadius: "20px" }}
-          className="bg-white border border-[#EAEAEA] p-6 space-y-3 shadow-xs"
+          className="bg-white border border-[#EAEAEA] p-4 sm:p-6 space-y-3 shadow-xs"
         >
-          <h2 className="text-[24px] font-semibold text-[#080808]">
+          <h2 className="text-[20px] sm:text-[24px] font-semibold text-[#080808]">
             Invite by email
           </h2>
-          <p className="text-lg font-normal text-[#080808]">
+          <p className="text-base sm:text-lg font-normal text-[#080808]">
             Invitations will be sent to your saved student and observer email lists.
           </p>
 
-          <div className="flex flex-wrap items-center gap-6 pt-1">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-1">
             <div className="flex items-center gap-3">
               <Checkbox
                 id="inviteStudents"
@@ -124,7 +124,7 @@ const StepFourShareFeedback = () => {
 
             <button
               type="button"
-              className="bg-[#038AF9] ml-4 hover:bg-[#0270ce] text-white px-5 py-2.5 rounded-xl font-medium text-base transition-colors cursor-pointer"
+              className="bg-[#038AF9] sm:ml-4 hover:bg-[#0270ce] text-white px-5 py-2.5 rounded-xl font-medium text-base transition-colors cursor-pointer w-full sm:w-auto text-center"
             >
               Send Invitation
             </button>
@@ -132,9 +132,9 @@ const StepFourShareFeedback = () => {
         </div>
 
         {/* Separator line with OR badge */}
-        <div className="relative flex items-center justify-center my-12">
+        <div className="relative flex items-center justify-center my-8 sm:my-12">
           <div className="w-full border-t border-[#E7E8EA]" />
-          <span className="absolute rounded-full aspect-square flex justify-center items-center bg-[#F6F6F6] px-4 text-sm font-mediumbold text-textPrimary uppercase tracking-wider">
+          <span className="absolute rounded-full aspect-square flex justify-center items-center bg-[#F6F6F6] px-4 text-xs sm:text-sm font-mediumbold text-textPrimary uppercase tracking-wider">
             OR
           </span>
         </div>
@@ -142,7 +142,7 @@ const StepFourShareFeedback = () => {
         {/* Card 2: Share your feedback link */}
         <div
           style={{ borderRadius: "20px" }}
-          className="bg-white border border-[#EAEAEA] p-6 sm:p-8 space-y-6 shadow-xs"
+          className="bg-white border border-[#EAEAEA] p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 shadow-xs"
         >
           <div className="space-y-1">
             <h2 className="text-[24px] font-semibold text-[#080808]">

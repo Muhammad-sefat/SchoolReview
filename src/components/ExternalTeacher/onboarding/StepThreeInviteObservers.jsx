@@ -18,16 +18,16 @@ const StepThreeInviteObservers = () => {
   }
 
   return (
-    <div className="space-y-6 font-urbanist">
+    <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[32px] md:text-[40px] font-semibold text-[#080808] leading-tight">
+      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
         Invite Observers (Optional)
       </h1>
 
       {/* Main Content Area Box */}
       <div
         style={{ borderRadius: "20px" }}
-        className="bg-white border border-[#EAEAEA] p-5  space-y-4 shadow-xs"
+        className="bg-white border border-[#EAEAEA] p-4 sm:p-6 space-y-4 shadow-xs"
       >
         {/* Existing Observers List */}
         {observers.map((email, idx) => (
