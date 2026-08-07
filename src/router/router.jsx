@@ -50,6 +50,9 @@ import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
 import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral"
 import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool"
 import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding"
+import ExternalTeacherLayout from "../layout/ExternalTeacherLayout"
+import ExternalTeachingInsight from "../pages/ExternalTeacher/ExternalTeachingInsight"
+import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFeedback"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -157,13 +160,19 @@ const router = createBrowserRouter([
     element: <Navigate to="/internal-teacher" replace />,
   },
 
-  // 5. External Teacher Onboarding
+  // 5. External Teacher Dashboard & Onboarding
   {
     path: "/external-teacher",
+    element: <ExternalTeacherLayout />,
     children: [
-      { path: "", element: <ExternalTeacherOnboarding /> },
-      { path: "onboarding", element: <ExternalTeacherOnboarding /> },
+      { path: "", element: <ExternalTeachingInsight /> },
+      { path: "teaching-insights", element: <ExternalTeachingInsight /> },
+      { path: "student-feedback", element: <ExternalStudentFeedback /> },
     ],
+  },
+  {
+    path: "/external-teacher/onboarding",
+    element: <ExternalTeacherOnboarding />,
   },
   {
     path: "/onboarding-external-teacher",
