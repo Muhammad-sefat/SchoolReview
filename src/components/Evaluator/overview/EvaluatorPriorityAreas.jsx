@@ -36,8 +36,9 @@ const EVALUATOR_PRIORITY_GROUPS = [
     count: "+3",
     items: [
       { label: "Kantonsschule Rotkreuz", score: "4.5" },
-      { label: "Kantonsschule Menzingen (KSM)", score: "4.2" },
       { label: "Pioneer Swiss School", score: "4.5" },
+      { label: "Kantonsschule Menzingen (KSM)", score: "4.2" },
+
     ],
   },
 ]
@@ -82,7 +83,7 @@ const EvaluatorPriorityAreas = ({ onSelectSchool }) => {
                   ) : (
                     <ChevronDown className="w-4 h-4" />
                   )}
-                  <span className="text-xs font-semibold pl-0.5">{group.count}</span>
+                  <span className="text-sm text-secondary font-medium pl-0.5">{group.count}</span>
                 </button>
               </div>
 
