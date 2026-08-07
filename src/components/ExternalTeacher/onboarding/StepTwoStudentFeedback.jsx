@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import StepTwoStudentsModal from "./StepTwoStudentsModal"
 import { DotSVG } from "./StepOneTeachingAreas"
 
-const StepTwoStudentFeedback = () => {
+const StepTwoStudentFeedback = ({ showTitle = true }) => {
   const [selectedOption, setSelectedOption] = useState("email")
   const [emailDomain, setEmailDomain] = useState("")
   const [isStudentsModalOpen, setIsStudentsModalOpen] = useState(false)
@@ -17,9 +17,11 @@ const StepTwoStudentFeedback = () => {
   return (
     <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
-        Which students can give feedback
-      </h1>
+      {showTitle && (
+        <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
+          Which students can give feedback
+        </h1>
+      )}
 
       {/* Options List */}
       <div className="space-y-3 sm:space-y-4">

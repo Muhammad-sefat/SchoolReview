@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Trash2 } from "lucide-react"
 
-const StepThreeInviteObservers = () => {
+const StepThreeInviteObservers = ({ showTitle = true }) => {
   const [observers, setObservers] = useState([])
   const [newEmail, setNewEmail] = useState("")
 
@@ -20,9 +20,11 @@ const StepThreeInviteObservers = () => {
   return (
     <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
-        Invite Observers (Optional)
-      </h1>
+      {showTitle && (
+        <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
+          Invite Observers (Optional)
+        </h1>
+      )}
 
       {/* Main Content Area Box */}
       <div

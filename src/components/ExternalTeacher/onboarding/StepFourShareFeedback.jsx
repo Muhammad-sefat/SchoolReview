@@ -57,7 +57,7 @@ const EditHoverIconSVG = () => (
 
 import EditTeachingCardModal from "./EditTeachingCardModal"
 
-const StepFourShareFeedback = () => {
+const StepFourShareFeedback = ({ showTitle = true }) => {
   const [inviteStudents, setInviteStudents] = useState(true)
   const [inviteObservers, setInviteObservers] = useState(true)
   const [copied, setCopied] = useState(false)
@@ -78,9 +78,11 @@ const StepFourShareFeedback = () => {
   return (
     <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
-        Share your feedback page
-      </h1>
+      {showTitle && (
+        <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
+          Share your feedback page
+        </h1>
+      )}
 
       {/* Main Container Card */}
       <div className="space-y-4 sm:space-y-6">

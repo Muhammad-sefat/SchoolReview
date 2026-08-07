@@ -22,7 +22,7 @@ const AlwaysIncludedSVG = () => (
   </svg>
 )
 
-const StepOneTeachingAreas = () => {
+const StepOneTeachingAreas = ({ showTitle = true }) => {
   const [selectedAreas, setSelectedAreas] = useState({
     classroomClimate: false,
     learningImpact: false,
@@ -36,9 +36,11 @@ const StepOneTeachingAreas = () => {
   return (
     <div className="space-y-4 sm:space-y-6 font-urbanist">
       {/* Title */}
-      <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
-        Choose Teaching Areas
-      </h1>
+      {showTitle && (
+        <h1 className="text-[28px] sm:text-[32px] lg:text-[40px] font-semibold text-[#080808] leading-tight">
+          Choose Teaching Areas
+        </h1>
+      )}
 
       {/* Info Pill Box */}
       <div

@@ -40,6 +40,7 @@ import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 import SchoolReport from "../pages/reports/SchoolReport"
 import InternalTeacherReport from "../pages/reports/InternalTeacherReport"
+import ExternalTeacherReport from "../pages/reports/ExternalTeacherReport"
 import ReportLayout from "../layout/ReportLayout"
 
 import InternalTeacherLayout from "../layout/InternalTeacherLayout"
@@ -53,6 +54,9 @@ import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding"
 import ExternalTeacherLayout from "../layout/ExternalTeacherLayout"
 import ExternalTeachingInsight from "../pages/ExternalTeacher/ExternalTeachingInsight"
 import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFeedback"
+import ExternalActivityTask from "../pages/ExternalTeacher/ExternalActivityTask"
+import ExternalMyActivity from "../pages/ExternalTeacher/ExternalMyActivity"
+import ExternalTeacherGeneral from "../pages/ExternalTeacher/ExternalTeacherGeneral"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -108,6 +112,8 @@ const router = createBrowserRouter([
       { path: "teacher", element: <InternalTeacherReport /> },
       { path: "teacher-report", element: <InternalTeacherReport /> },
       { path: "internal-teacher", element: <InternalTeacherReport /> },
+      { path: "external-teacher", element: <ExternalTeacherReport /> },
+      { path: "external-teacher-report", element: <ExternalTeacherReport /> },
     ],
   },
 
@@ -168,6 +174,10 @@ const router = createBrowserRouter([
       { path: "", element: <ExternalTeachingInsight /> },
       { path: "teaching-insights", element: <ExternalTeachingInsight /> },
       { path: "student-feedback", element: <ExternalStudentFeedback /> },
+      { path: "my-work/activity-task", element: <ExternalActivityTask /> },
+      { path: "my-work/my-activity", element: <ExternalMyActivity /> },
+      { path: "setting/general", element: <ExternalTeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
     ],
   },
   {
