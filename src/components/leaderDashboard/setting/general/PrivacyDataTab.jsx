@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { ChevronDown, ChevronUp, Check } from "lucide-react"
+import DeleteAccountModal from "@/components/evaluator/setting/DeleteAccountModal"
+import DeleteReviewsModal from "@/components/evaluator/setting/DeleteReviewsModal"
 
 const PrivacyDataTab = () => {
   // Download options state
@@ -12,20 +14,16 @@ const PrivacyDataTab = () => {
   // Accordion state for "Learn More About Your Data" (Default: false / collapsed)
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
 
+  // Modals state
+  const [isDeleteAccountOpen, setIsDeleteAccountOpen] = useState(false)
+  const [isDeleteReviewsOpen, setIsDeleteReviewsOpen] = useState(false)
+
   const toggleDownloadOption = (key) => {
     setDownloadOptions((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
   const handleDownload = () => {
     console.log("Download My Data requested with options:", downloadOptions)
-  }
-
-  const handleDeleteAccount = () => {
-    console.log("Delete My Account requested")
-  }
-
-  const handleDeleteReviews = () => {
-    console.log("Delete My Reviews requested")
   }
 
   return (
@@ -90,7 +88,7 @@ const PrivacyDataTab = () => {
 
         <button
           type="button"
-          onClick={handleDeleteAccount}
+          onClick={() => setIsDeleteAccountOpen(true)}
           className="px-6 py-2.5 rounded-xl bg-[#EF4444] hover:bg-red-600 text-white text-[16px] font-medium transition-colors shadow-xs cursor-pointer"
         >
           Delete My Account
@@ -108,7 +106,7 @@ const PrivacyDataTab = () => {
 
         <button
           type="button"
-          onClick={handleDeleteReviews}
+          onClick={() => setIsDeleteReviewsOpen(true)}
           className="px-6 py-2.5 rounded-xl bg-[#FF9500] hover:bg-amber-600 text-white text-[16px] font-medium transition-colors shadow-xs cursor-pointer"
         >
           Delete My Reviews
@@ -135,7 +133,7 @@ const PrivacyDataTab = () => {
           </div>
         </button>
 
-        {/* Expandable Content Container: Includes Data Retention, AI & Data Processing, and Hosting & Security */}
+        {/* Expandable Content Container */}
         {isLearnMoreOpen && (
           <div className="pt-6 space-y-8 border-t border-gray-100 mt-6">
             {/* 1. Data Retention */}
@@ -183,45 +181,41 @@ const PrivacyDataTab = () => {
             </div>
 
             {/* 2. AI & Data Processing */}
-            <div className="space-y-3 border-t border-gray-100 pt-6">
+            <div className="space-y-2">
               <h4 className="text-[18px] font-semibold text-[#080808]">AI & Data Processing</h4>
-              <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>Your personal data is not used to train public AI models.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>AI is used only to provide platform features and insights.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>Access to your data is restricted based on your role and permissions.</span>
-                </li>
-              </ul>
+              <p className="text-[16px] font-normal text-[#5A5A5A] leading-relaxed">
+                SchoolReview uses automated tools and AI-assisted processing to summarize feedback, detect safety risks, and generate school performance insights. Data processed for AI features is aggregated or anonymized where applicable and is never sold to third parties.
+              </p>
             </div>
 
             {/* 3. Hosting & Security */}
-            <div className="space-y-3 border-t border-gray-100 pt-6">
+            <div className="space-y-2">
               <h4 className="text-[18px] font-semibold text-[#080808]">Hosting & Security</h4>
-              <ul className="space-y-2 text-[16px] font-normal text-textPrimary">
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>Data is hosted using Swiss and/or GDPR-compliant infrastructure.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>Access to sensitive information is restricted based on user roles and permissions.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-textPrimary">•</span>
-                  <span>Where possible, identifying information is removed before aggregated analysis or benchmarking.</span>
-                </li>
-              </ul>
+              <p className="text-[16px] font-normal text-[#5A5A5A] leading-relaxed">
+                Your data is stored securely in compliant cloud data centers with strict access controls, encryption at rest and in transit, and continuous security monitoring.
+              </p>
             </div>
           </div>
         )}
       </div>
+
+      {/* Delete Account Modal */}
+      {isDeleteAccountOpen && (
+        <DeleteAccountModal
+          isOpen={isDeleteAccountOpen}
+          onClose={() => setIsDeleteAccountOpen(false)}
+          onConfirmDelete={() => console.log("Account deleted")}
+        />
+      )}
+
+      {/* Delete Reviews Modal */}
+      {isDeleteReviewsOpen && (
+        <DeleteReviewsModal
+          isOpen={isDeleteReviewsOpen}
+          onClose={() => setIsDeleteReviewsOpen(false)}
+          onConfirmDelete={() => console.log("Reviews deleted")}
+        />
+      )}
     </div>
   )
 }

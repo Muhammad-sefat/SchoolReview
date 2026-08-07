@@ -215,6 +215,18 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 >
                   General
                 </NavLink>
+
+                <NavLink
+                  to="/evaluator/setting/followed-schools"
+                  className={({ isActive }) =>
+                    `block text-[15px] transition-colors ${isActive
+                      ? "text-[#080808] font-semibold"
+                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    }`
+                  }
+                >
+                  Followed Schools
+                </NavLink>
               </div>
             )}
           </div>

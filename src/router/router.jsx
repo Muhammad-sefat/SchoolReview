@@ -61,6 +61,7 @@ import EvaluatorLayout from "../layout/EvaluatorLayout"
 import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview"
 import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools"
 import EvaluatorReports from "../pages/evaluator/EvaluatorReports"
+import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -202,7 +203,8 @@ const router = createBrowserRouter([
       { path: "overview", element: <EvaluatorOverview /> },
       { path: "my-schools", element: <EvaluatorMySchools /> },
       { path: "reports", element: <EvaluatorReports /> },
-      { path: "setting/general", element: <General /> },
+      { path: "setting/general", element: <EvaluatorGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
       { path: "*", element: <Navigate to="/evaluator/overview" replace /> },
     ],
   },
