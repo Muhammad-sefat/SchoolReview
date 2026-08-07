@@ -243,13 +243,13 @@ const ScatterPlot = ({
                 setActiveHoverMetric(null)
               }}
               onClick={() => handlePointClick(activeHoverMetric)}
-              className="absolute z-30 cursor-pointer bg-white border border-gray-200/90 rounded-2xl p-4 shadow-2xl space-y-2.5 min-w-[210px] font-urbanist select-none hover:border-[#038AF9] transition-all transform -translate-x-1/2"
+              className="absolute z-30 cursor-pointer bg-white border border-gray-200/90 rounded-2xl p-4 shadow-2xl space-y-2.5 min-w-[220px] font-urbanist select-none hover:border-[#038AF9] transition-all transform -translate-x-1/2"
               style={{
                 left: `${activeHoverMetric.cx}px`,
                 top:
-                  activeHoverMetric.cy < 170
+                  activeHoverMetric.cy < 200
                     ? `${activeHoverMetric.cy + 16}px`
-                    : `${activeHoverMetric.cy - 165}px`,
+                    : `${activeHoverMetric.cy - 195}px`,
               }}
             >
               <p className="text-[16px] font-medium text-textPrimary leading-[24px] font-urbanist">
@@ -279,6 +279,21 @@ const ScatterPlot = ({
                     {activeHoverMetric.parent !== undefined ? activeHoverMetric.parent.toFixed(1) : "1.5"}
                   </span>
                 </div>
+              </div>
+
+              {/* Professional View Details Button at bottom of hover box */}
+              <div className="border-t border-dashed border-gray-200 pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handlePointClick(activeHoverMetric)
+                  }}
+                  className="w-full py-1.5 px-3 rounded-lg bg-[#038AF9] hover:bg-[#0270ce] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+                >
+                  <span>View Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </button>
               </div>
             </div>
           )}
