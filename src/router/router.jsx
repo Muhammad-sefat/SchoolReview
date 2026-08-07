@@ -57,6 +57,10 @@ import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFee
 import ExternalActivityTask from "../pages/ExternalTeacher/ExternalActivityTask"
 import ExternalMyActivity from "../pages/ExternalTeacher/ExternalMyActivity"
 import ExternalTeacherGeneral from "../pages/ExternalTeacher/ExternalTeacherGeneral"
+import EvaluatorLayout from "../layout/EvaluatorLayout"
+import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview"
+import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools"
+import EvaluatorReports from "../pages/evaluator/EvaluatorReports"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -187,6 +191,20 @@ const router = createBrowserRouter([
   {
     path: "/onboarding-external-teacher",
     element: <ExternalTeacherOnboarding />,
+  },
+
+  // 6. Evaluator Dashboard
+  {
+    path: "/evaluator",
+    element: <EvaluatorLayout />,
+    children: [
+      { path: "", element: <EvaluatorOverview /> },
+      { path: "overview", element: <EvaluatorOverview /> },
+      { path: "my-schools", element: <EvaluatorMySchools /> },
+      { path: "reports", element: <EvaluatorReports /> },
+      { path: "setting/general", element: <General /> },
+      { path: "*", element: <Navigate to="/evaluator/overview" replace /> },
+    ],
   },
 
   // 4. Auth Pages
