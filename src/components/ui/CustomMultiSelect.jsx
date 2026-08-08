@@ -73,7 +73,7 @@ export const CustomMultiSelect = ({
   }
 
   return (
-    <div ref={dropdownRef} className={`relative w-full min-w-0 font-urbanist ${className}`}>
+    <div ref={dropdownRef} className={`relative w-full min-w-0 font-urbanist ${isOpen ? "z-40" : "z-0"} ${className}`}>
       {/* Trigger Button */}
       <button
         type="button"

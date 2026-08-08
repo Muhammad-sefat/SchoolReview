@@ -1,17 +1,27 @@
 import React, { useState, useRef, useEffect } from "react"
-import { ChevronDown, Check } from "lucide-react"
+import { ChevronDown, ChevronUp, Plus, Check } from "lucide-react"
 
-const AssignTeacherSelect = ({ selectedTeachers = [], onChange }) => {
+const DEFAULT_TEACHERS = [
+  "John Smith",
+  "Conner",
+  "Eleanor Pena",
+  "Darlene Robertson",
+  "Leslie",
+  "Graham, Cotter",
+]
+
+const AssignTeacherSelect = ({
+  selectedTeachers = [],
+  onChange,
+  onAddTeacherClick,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selected, setSelected] = useState(selectedTeachers || [])
   const dropdownRef = useRef(null)
-  const availableTeachers = [
-    "John Smith",
-    "Conner",
-    "Eleanor Pena",
-    "Darlene Robertson",
-    "Leslie",
-    "Graham, Cotter",
-  ]
+
+  useEffect(() => {
+    if (selectedTeachers) setSelected(selectedTeachers)
+  }, [selectedTeachers])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -25,53 +35,88 @@ const AssignTeacherSelect = ({ selectedTeachers = [], onChange }) => {
 
   const toggleTeacher = (t) => {
     let updated
-    if (selectedTeachers.includes(t)) {
-      updated = selectedTeachers.filter((item) => item !== t)
+    if (selected.includes(t)) {
+      updated = selected.filter((item) => item !== t)
     } else {
-      updated = [...selectedTeachers, t]
+      updated = [...selected, t]
     }
+    setSelected(updated)
     if (onChange) onChange(updated)
   }
 
   const getDisplayText = () => {
-    if (!selectedTeachers || selectedTeachers.length === 0) return "Assign Teacher"
-    if (selectedTeachers.length === 1) return selectedTeachers[0]
-    if (selectedTeachers.length === 2) return `${selectedTeachers[0]}, ${selectedTeachers[1]}`
-    return `${selectedTeachers[0]}, ${selectedTeachers[1]}, ${selectedTeachers.length - 2} more`
+    if (!selected || selected.length === 0) return "Assign Teacher"
+    if (selected.length === 1) return selected[0]
+    return `${selected[0]} (+${selected.length - 1} more)`
   }
 
   return (
-    <div ref={dropdownRef} className="relative w-full font-urbanist">
+    <div ref={dropdownRef} className={`relative w-full font-urbanist ${isOpen ? "z-40" : "z-0"}`}>
+      {/* Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full h-11 px-4 rounded-xl border border-gray-200 bg-white text-[16px] font-normal text-[#5A5A5A] hover:border-[#038AF9] flex items-center justify-between cursor-pointer transition-colors"
+        className={`w-full h-11 px-4 rounded-xl bg-white text-[16px] font-normal transition-all flex items-center justify-between cursor-pointer ${
+          isOpen
+            ? "border-2 border-[#038AF9] shadow-xs"
+            : "border border-gray-200 hover:border-[#038AF9]"
+        }`}
       >
-        <span className={selectedTeachers.length > 0 ? "text-[#080808] truncate" : "text-[#5A5A5A] truncate"}>
+        <span
+          className={`truncate text-left ${
+            selected.length > 0 ? "text-[#080808] font-normal" : "text-[#5A5A5A]"
+          }`}
+        >
           {getDisplayText()}
         </span>
-        <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 ml-2" />
+        {isOpen ? (
+          <ChevronUp className="w-4 h-4 text-[#080808] shrink-0 ml-2" />
+        ) : (
+          <ChevronDown className="w-4 h-4 text-[#080808] shrink-0 ml-2" />
+        )}
       </button>
 
+      {/* Expanded Multi-Select Dropdown with Plus icon to open Add Teacher Modal */}
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1.5 w-full bg-white rounded-2xl border border-gray-200 shadow-xl p-4 z-50 animate-fadeIn space-y-2 max-h-56 overflow-y-auto">
-          <div className="space-y-1.5">
-            {availableTeachers.map((t) => {
-              const isChecked = selectedTeachers.includes(t)
+        <div className="absolute left-0 top-full mt-1.5 w-full min-w-[240px] bg-white rounded-2xl border-2 border-[#038AF9] shadow-xl p-4 z-50 animate-fadeIn space-y-3">
+          {/* Plus Button Row */}
+          <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpen(false)
+                if (onAddTeacherClick) onAddTeacherClick()
+              }}
+              className="flex-1 h-9 px-3 rounded-lg border border-dashed border-[#038AF9] bg-blue-50/50 text-[#038AF9] text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-blue-100/60 transition-colors cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add New Teacher</span>
+            </button>
+          </div>
+
+          {/* Teacher Options List */}
+          <div className="space-y-1.5 max-h-48 overflow-y-auto">
+            {DEFAULT_TEACHERS.map((t) => {
+              const isChecked = selected.includes(t)
               return (
                 <div
                   key={t}
                   onClick={() => toggleTeacher(t)}
-                  className="flex items-center gap-2.5 rounded-lg hover:bg-gray-50 cursor-pointer py-1 px-1.5"
+                  className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
                 >
+                  <span className="text-[15px] font-normal text-[#080808] truncate">
+                    {t}
+                  </span>
                   <div
-                    className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${
-                      isChecked ? "bg-[#038AF9] border-[#038AF9] text-white" : "border-gray-300 bg-white"
+                    className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
+                      isChecked
+                        ? "bg-[#038AF9] border-[#038AF9] text-white"
+                        : "border-gray-300 bg-white"
                     }`}
                   >
-                    {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                    {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                   </div>
-                  <span className="text-sm font-normal text-[#080808]">{t}</span>
                 </div>
               )
             })}

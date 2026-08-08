@@ -133,7 +133,7 @@ const TeacherTableSection = () => {
         </div>
       </div>
 
-      <Table>
+      <Table containerClassName="overflow-visible">
         <TableHeader>
           <TableRow>
             <TableHead className="w-10 text-center px-2">
