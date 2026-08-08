@@ -33,7 +33,7 @@ const AccessRulesTab = () => {
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
-          <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
+          <span className="text-base font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={evaluatorRequests}
             onCheckedChange={handleToggleEvaluator}
@@ -51,7 +51,7 @@ const AccessRulesTab = () => {
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
-          <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
+          <span className="text-base font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={aggregatedDataAccess}
             onCheckedChange={handleToggleAggregated}
@@ -69,7 +69,7 @@ const AccessRulesTab = () => {
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
-          <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
+          <span className="text-base font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={externalObserverRequests}
             onCheckedChange={handleToggleObserver}

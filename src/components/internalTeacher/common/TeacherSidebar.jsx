@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import { ChevronDown, Settings, HelpCircle, LogOut } from "lucide-react"
+import { ChevronDown, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
 import { DashboardLogo } from "../../../components/icons/Logo/AllLogo"
-import { TbLayoutSidebarRightExpand, TbLayoutSidebarLeftExpand } from "react-icons/tb"
 import GetHelpModal from "@/components/leaderDashboard/setting/GetHelpModal"
 import LogoutModal from "@/components/leaderDashboard/setting/LogoutModal"
 
@@ -117,13 +116,13 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             <button
               type="button"
               onClick={() => setCollapsed(!collapsed)}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-200 bg-gray-100 transition-colors hidden lg:flex items-center justify-center cursor-pointer shrink-0"
+              className="w-9 h-9 rounded-xl border border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] shadow-2xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
               title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {collapsed ? (
-                <TbLayoutSidebarLeftExpand className="w-5 h-5 text-gray-600" />
+                <ChevronRight className="w-5 h-5 stroke-[2.25]" />
               ) : (
-                <TbLayoutSidebarRightExpand className="w-5 h-5 text-gray-600" />
+                <ChevronLeft className="w-5 h-5 stroke-[2.25]" />
               )}
             </button>
           </div>

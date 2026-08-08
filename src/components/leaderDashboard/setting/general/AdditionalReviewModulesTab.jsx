@@ -18,7 +18,7 @@ const AdditionalReviewModulesTab = () => {
     <div className="space-y-6 font-urbanist">
       <div className="px-1 space-y-1">
         <h3 className="text-[20px] font-semibold text-[#080808]">Additional Review Modules</h3>
-        <p className="text-[16px] font-normal text-textPrimary leading-relaxed max-w-4xl">
+        <p className="text-[16px] font-normal text-textPrimary leading-relaxed ">
           Select optional review modules to collect additional feedback. These questions are added to the core review and provide deeper insights into specific areas. Keep in mind that longer reviews may reduce response rates.
         </p>
       </div>
@@ -27,19 +27,17 @@ const AdditionalReviewModulesTab = () => {
         {/* Module 1: Classroom Climate */}
         <div
           onClick={() => toggleModule("classroomClimate")}
-          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${
-            modules.classroomClimate
+          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${modules.classroomClimate
               ? "border-2 border-[#038AF9]"
               : "border border-gray-200/80 hover:border-gray-300"
-          }`}
+            }`}
         >
           <div className="flex items-start gap-4">
             <div
-              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${
-                modules.classroomClimate
+              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${modules.classroomClimate
                   ? "bg-[#038AF9] border-[#038AF9] text-white"
                   : "border-gray-300 bg-white"
-              }`}
+                }`}
             >
               {modules.classroomClimate && <Check className="w-3.5 h-3.5 stroke-[3]" />}
             </div>
@@ -71,19 +69,17 @@ const AdditionalReviewModulesTab = () => {
         {/* Module 2: Learning Impact */}
         <div
           onClick={() => toggleModule("learningImpact")}
-          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${
-            modules.learningImpact
+          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${modules.learningImpact
               ? "border-2 border-[#038AF9]"
               : "border border-gray-200/80 hover:border-gray-300"
-          }`}
+            }`}
         >
           <div className="flex items-start gap-4">
             <div
-              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${
-                modules.learningImpact
+              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${modules.learningImpact
                   ? "bg-[#038AF9] border-[#038AF9] text-white"
                   : "border-gray-300 bg-white"
-              }`}
+                }`}
             >
               {modules.learningImpact && <Check className="w-3.5 h-3.5 stroke-[3]" />}
             </div>
@@ -119,19 +115,17 @@ const AdditionalReviewModulesTab = () => {
         {/* Module 3: Professional Practice */}
         <div
           onClick={() => toggleModule("professionalPractice")}
-          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${
-            modules.professionalPractice
+          className={`bg-white rounded-3xl p-6 sm:p-8 shadow-2xs transition-all cursor-pointer ${modules.professionalPractice
               ? "border-2 border-[#038AF9]"
               : "border border-gray-200/80 hover:border-gray-300"
-          }`}
+            }`}
         >
           <div className="flex items-start gap-4">
             <div
-              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${
-                modules.professionalPractice
+              className={`w-5 h-5 rounded-md border mt-0.5 flex items-center justify-center transition-colors shrink-0 ${modules.professionalPractice
                   ? "bg-[#038AF9] border-[#038AF9] text-white"
                   : "border-gray-300 bg-white"
-              }`}
+                }`}
             >
               {modules.professionalPractice && <Check className="w-3.5 h-3.5 stroke-[3]" />}
             </div>

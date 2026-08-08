@@ -32,7 +32,7 @@ const PrivacyDataTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Download My Data</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
+          <p className="text-[16px] font-normal text-textPrimary">
             Export a copy of your personal data and account activity.
           </p>
         </div>
@@ -52,11 +52,10 @@ const PrivacyDataTab = () => {
                 className="flex items-center gap-3 cursor-pointer select-none w-fit"
               >
                 <div
-                  className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${
-                    downloadOptions[item.id]
-                      ? "bg-[#038AF9] border-[#038AF9] text-white"
-                      : "border-gray-300 bg-white"
-                  }`}
+                  className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${downloadOptions[item.id]
+                    ? "bg-[#038AF9] border-[#038AF9] text-white"
+                    : "border-gray-300 bg-white"
+                    }`}
                 >
                   {downloadOptions[item.id] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
@@ -81,7 +80,7 @@ const PrivacyDataTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Delete My Account</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
+          <p className="text-[16px] font-normal text-textPrimary">
             Permanently delete your account and personal data. This action cannot be undone.
           </p>
         </div>
@@ -99,7 +98,7 @@ const PrivacyDataTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Delete My Reviews</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
+          <p className="text-[16px] font-normal text-textPrimary">
             Permanently delete the reviews and feedback you have submitted.
           </p>
         </div>
@@ -127,7 +126,7 @@ const PrivacyDataTab = () => {
           )}
           <div className="space-y-1">
             <h3 className="text-[20px] font-semibold text-[#080808]">Learn More About Your Data</h3>
-            <p className="text-[16px] font-normal text-[#5A5A5A]">
+            <p className="text-[16px] font-normal text-textPrimary">
               Additional information about how SchoolReview stores, protects, and processes your data.
             </p>
           </div>

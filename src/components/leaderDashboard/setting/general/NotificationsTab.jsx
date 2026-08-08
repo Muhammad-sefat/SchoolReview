@@ -32,13 +32,13 @@ const NotificationsTab = () => {
         <div className="flex items-center justify-between gap-6 ">
           <div className="space-y-1">
             <h3 className="text-[20px] font-semibold text-[#080808]">Notifications</h3>
-            <p className="text-[16px] font-normal text-[#5A5A5A]">
+            <p className="text-[16px] font-normal text-textPrimary">
               Stay informed about reviews, approvals, and important updates.
             </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <span className="text-[16px] font-normal text-[#080808]">Enable</span>
+            <span className="text-base font-normal text-textPrimary">On / Off</span>
             <Switch
               checked={generalNotifications}
               onCheckedChange={handleToggleGeneral}
@@ -51,13 +51,13 @@ const NotificationsTab = () => {
         <div className="border-t border-dashed border-gray-200 pt-6 flex items-center justify-between gap-6">
           <div className="space-y-1">
             <h3 className="text-[20px] font-semibold text-[#080808]">Email Notifications</h3>
-            <p className="text-[16px] font-normal text-[#5A5A5A]">
+            <p className="text-[16px] font-normal text-textPrimary">
               Receive important email updates about reviews, approvals, reports, and account activity.
             </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <span className="text-[16px] font-normal text-[#080808]">Enable</span>
+            <span className="text-base font-normal text-textPrimary">On / Off</span>
             <Switch
               checked={emailNotifications}
               onCheckedChange={handleToggleEmail}
@@ -71,7 +71,7 @@ const NotificationsTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Safeguarding Notifications</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
+          <p className="text-[16px] font-normal text-textPrimary">
             Configure how safeguarding reports are escalated if no action is taken.
           </p>
         </div>
