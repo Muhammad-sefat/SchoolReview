@@ -29,11 +29,11 @@ const CareerTab = ({ register, onSubmit }) => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8 font-urbanist text-textPrimary py-4">
+    <form onSubmit={onSubmit} className="space-y-6 font-urbanist text-textPrimary">
       {positions.map((pos, index) => (
         <div
           key={pos.id}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start border-b border-gray-100 pb-8"
+          className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-4 items-start"
         >
           {/* Position Label */}
           <div className="lg:col-span-2">

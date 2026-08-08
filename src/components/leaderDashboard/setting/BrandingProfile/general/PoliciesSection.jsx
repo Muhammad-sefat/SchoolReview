@@ -36,7 +36,7 @@ const PoliciesSection = ({ register }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+    <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
       <div className="lg:col-span-2 flex items-center gap-2">
         <div className="w-28 sm:w-32 shrink-0">
           <Title18 className="text-[#080808]">Policies</Title18>

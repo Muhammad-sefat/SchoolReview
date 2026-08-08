@@ -118,8 +118,8 @@ const SchoolBrandingProfile = () => {
                 </button>
             </div>
 
-            {/* Main White Card Container */}
-            <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs w-full max-w-full overflow-hidden">
+            {/* Active Tab Content (Each section renders as an independent white card) */}
+            <div className="w-full max-w-full space-y-6">
                 {activeTab === "general" && (
                     <GeneralTab
                         register={register}
