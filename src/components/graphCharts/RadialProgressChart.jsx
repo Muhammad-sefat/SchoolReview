@@ -111,22 +111,11 @@ const RadialProgressChart = ({
             })}
           </svg>
 
-          {/* Dynamic Center Display Number */}
+          {/* Center Display Number: Always Overall Rating */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none text-center">
-            {hoveredIdx !== null ? (
-              <>
-                <span className="font-urbanist text-2xl font-bold text-[#038AF9] transition-all">
-                  {data[hoveredIdx].count}
-                </span>
-                <span className="text-[9px] font-semibold text-gray-500 uppercase tracking-wider">
-                  Reports
-                </span>
-              </>
-            ) : (
-              <span className="font-urbanist text-2xl sm:text-3xl font-bold text-[#1F1F21] transition-all">
-                {centerNumber}
-              </span>
-            )}
+            <span className="font-urbanist text-2xl sm:text-3xl font-bold text-[#1F1F21]">
+              {centerNumber}
+            </span>
           </div>
 
           {/* Dynamic Hover Tooltip */}

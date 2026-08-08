@@ -7,11 +7,11 @@ import useUserProfile from "@/hooks/fetchUserProfile";
 const Layout = () => {
   useUserProfile();
   return (
-    <>
+    <div>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 

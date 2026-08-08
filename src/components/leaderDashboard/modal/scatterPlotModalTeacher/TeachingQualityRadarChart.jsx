@@ -58,9 +58,8 @@ const createRenderCustomTick = (radarData) => ({ payload, x, y, cx, cy }) => {
       className="overflow-visible"
     >
       <div
-        className={`flex items-center gap-1.5 whitespace-nowrap text-[15px] font-normal text-textPrimary font-urbanist ${
-          dx < -20 ? "justify-end" : dx > 20 ? "justify-start" : "justify-center"
-        }`}
+        className={`flex items-center gap-1.5 whitespace-nowrap text-[15px] font-normal text-textPrimary font-urbanist ${dx < -20 ? "justify-end" : dx > 20 ? "justify-start" : "justify-center"
+          }`}
       >
         <span>{payload.value}</span>
         <span

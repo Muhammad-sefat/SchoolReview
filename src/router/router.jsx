@@ -20,6 +20,11 @@ import ReviewLayout from "../layout/ReviewLayout"
 import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview"
 import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
 import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
+import SpeakUp from "../pages/speakUp/SpeakUp"
+import ReportTrack from "../pages/reportTrack/ReportTrack"
+import StudentSchoolReview from "../pages/schoolReview/StudentSchoolReview"
+import SchoolLeaderReview from "../pages/schoolReview/SchoolLeaderReview"
+import ThankTeacher from "../pages/schoolReview/ThankTeacher"
 
 import LeaderDashboardLayout from "../layout/LeaderDashboard"
 import OverView from "../pages/LeaderDashboard/OverView"
@@ -34,10 +39,90 @@ import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool"
 import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
 
 import SchoolReport from "../pages/reports/SchoolReport"
-
+import InternalTeacherReport from "../pages/reports/InternalTeacherReport"
+import ExternalTeacherReport from "../pages/reports/ExternalTeacherReport"
 import ReportLayout from "../layout/ReportLayout"
 
+import InternalTeacherLayout from "../layout/InternalTeacherLayout"
+import TeachingInsightTeacher from "../pages/internalTeacher/TeachingInsight"
+import StudentFeedbackTeacher from "../pages/internalTeacher/StudentFeedback"
+import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask"
+import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
+import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral"
+import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool"
+import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding"
+import ExternalTeacherLayout from "../layout/ExternalTeacherLayout"
+import ExternalTeachingInsight from "../pages/ExternalTeacher/ExternalTeachingInsight"
+import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFeedback"
+import ExternalActivityTask from "../pages/ExternalTeacher/ExternalActivityTask"
+import ExternalMyActivity from "../pages/ExternalTeacher/ExternalMyActivity"
+import ExternalTeacherGeneral from "../pages/ExternalTeacher/ExternalTeacherGeneral"
+import EvaluatorLayout from "../layout/EvaluatorLayout"
+import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview"
+import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools"
+import EvaluatorReports from "../pages/evaluator/EvaluatorReports"
+import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral"
+
 const router = createBrowserRouter([
+  // 1. Review & Feedback Forms
+  {
+    path: "/speak-up",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <SpeakUp /> }],
+  },
+  {
+    path: "/report-track",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <ReportTrack /> }],
+  },
+  {
+    path: "/school-review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "", element: <StudentSchoolReview /> },
+      { path: "student", element: <StudentSchoolReview /> },
+      { path: "leader", element: <SchoolLeaderReview /> },
+      { path: "thank-teacher", element: <ThankTeacher /> },
+    ],
+  },
+  {
+    path: "/school-leader-review",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <SchoolLeaderReview /> }],
+  },
+  {
+    path: "/thank-teacher",
+    element: <ReviewLayout />,
+    children: [{ path: "", element: <ThankTeacher /> }],
+  },
+
+
+  {
+    path: "/review",
+    element: <ReviewLayout />,
+    children: [
+      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
+      { path: "teacher-self", element: <TeacherSelfReview /> },
+      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
+    ],
+  },
+
+  // 2. Reports
+  {
+    path: "/reports",
+    element: <ReportLayout />,
+    children: [
+      { path: "school", element: <SchoolReport /> },
+      { path: "school-report", element: <SchoolReport /> },
+      { path: "teacher", element: <InternalTeacherReport /> },
+      { path: "teacher-report", element: <InternalTeacherReport /> },
+      { path: "internal-teacher", element: <InternalTeacherReport /> },
+      { path: "external-teacher", element: <ExternalTeacherReport /> },
+      { path: "external-teacher-report", element: <ExternalTeacherReport /> },
+    ],
+  },
+
+  // 3. Leader Dashboard
   {
     path: "/leader-dashboard",
     element: <LeaderDashboardLayout />,
@@ -50,7 +135,6 @@ const router = createBrowserRouter([
       { path: "community-feedback", element: <CommunityFeedbacck /> },
       { path: "teaching-insights", element: <TeachingInsight /> },
       { path: "reports", element: <ReportLeader /> },
-
       { path: "setting", element: <General /> },
       { path: "setting/branding-profile", element: <SchoolBrandingProfile /> },
       { path: "setting/user-admin", element: <UserManagement /> },
@@ -63,77 +147,99 @@ const router = createBrowserRouter([
     path: "/leader",
     element: <Navigate to="/leader-dashboard" replace />,
   },
+
+  // 4. Internal Teacher Dashboard
   {
-    path: "/review-teacher",
-    element: <ReviewLayout />,
+    path: "/internal-teacher",
+    element: <InternalTeacherLayout />,
+    errorElement: <DashboardErrorBoundary />,
     children: [
-      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
-      { path: "self", element: <TeacherSelfReview /> },
-      { path: "observer", element: <ObserverToTeacherReview /> },
-    ]
+      { path: "", element: <TeachingInsightTeacher /> },
+      { path: "teaching-insights", element: <TeachingInsightTeacher /> },
+      { path: "student-feedback", element: <StudentFeedbackTeacher /> },
+      { path: "my-work", element: <ActivityTaskTeacher /> },
+      { path: "my-work/activity-task", element: <ActivityTaskTeacher /> },
+      { path: "my-work/my-activity", element: <MyActivityTeacher /> },
+      { path: "setting", element: <TeacherGeneral /> },
+      { path: "setting/general", element: <TeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
+      { path: "*", element: <Navigate to="/internal-teacher" replace /> },
+    ],
   },
   {
-    path: "/review",
-    element: <ReviewLayout />,
-    children: [
-      { path: "student-to-teacher", element: <StudentToTeacherReview /> },
-      { path: "teacher-self", element: <TeacherSelfReview /> },
-      { path: "observer-to-teacher", element: <ObserverToTeacherReview /> },
-    ]
-  },
-  {
-    path: "/reports",
-    element: <ReportLayout />,
-    children: [
-      { path: "school", element: <SchoolReport /> },
-      { path: "school-report", element: <SchoolReport /> },
-    ]
+    path: "/teacher",
+    element: <Navigate to="/internal-teacher" replace />,
   },
 
+  // 5. External Teacher Dashboard & Onboarding
+  {
+    path: "/external-teacher",
+    element: <ExternalTeacherLayout />,
+    children: [
+      { path: "", element: <ExternalTeachingInsight /> },
+      { path: "teaching-insights", element: <ExternalTeachingInsight /> },
+      { path: "student-feedback", element: <ExternalStudentFeedback /> },
+      { path: "my-work/activity-task", element: <ExternalActivityTask /> },
+      { path: "my-work/my-activity", element: <ExternalMyActivity /> },
+      { path: "setting/general", element: <ExternalTeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
+    ],
+  },
+  {
+    path: "/external-teacher/onboarding",
+    element: <ExternalTeacherOnboarding />,
+  },
+  {
+    path: "/onboarding-external-teacher",
+    element: <ExternalTeacherOnboarding />,
+  },
+
+  // 6. Evaluator Dashboard
+  {
+    path: "/evaluator",
+    element: <EvaluatorLayout />,
+    children: [
+      { path: "", element: <EvaluatorOverview /> },
+      { path: "overview", element: <EvaluatorOverview /> },
+      { path: "my-schools", element: <EvaluatorMySchools /> },
+      { path: "reports", element: <EvaluatorReports /> },
+      { path: "setting/general", element: <EvaluatorGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
+      { path: "*", element: <Navigate to="/evaluator/overview" replace /> },
+    ],
+  },
+
+  // 4. Auth Pages
   {
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      { path: "/auth", element: <Navigate to="/auth/login" replace /> },
-      { path: "/auth/login", element: <Login /> },
+      { path: "", element: <Navigate to="/auth/login" replace /> },
       { path: "login", element: <Login /> },
-      { path: "/auth/select-role", element: <RoleSelect /> },
       { path: "select-role", element: <RoleSelect /> },
-      { path: "/auth/signup", element: <SignUp /> },
       { path: "signup", element: <SignUp /> },
-      { path: "/auth/signup/school-leader", element: <SchoolLeaderSignUp /> },
       { path: "signup/school-leader", element: <SchoolLeaderSignUp /> },
-      { path: "/auth/signup/teacher", element: <TeacherSignUp /> },
       { path: "signup/teacher", element: <TeacherSignUp /> },
-      { path: "/auth/signup/teacher/plan", element: <TeacherPlanSelect /> },
       { path: "signup/teacher/plan", element: <TeacherPlanSelect /> },
-      { path: "/auth/signup/school-evaluator", element: <SchoolEvaluatorSignUp /> },
       { path: "signup/school-evaluator", element: <SchoolEvaluatorSignUp /> },
-      { path: "/auth/verify-email", element: <VerifyEmail /> },
       { path: "verify-email", element: <VerifyEmail /> },
-      { path: "/auth/forgot-password", element: <ForgotPassword /> },
       { path: "forgot-password", element: <ForgotPassword /> },
-      { path: "/auth/reset-password", element: <ResetPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
     ],
   },
+
+  // 5. Main Site & Admin Dashboard
   {
     path: "/",
     element: <Layout />,
-    children: [
-      { path: "/", element: <Home /> },
-    ],
+    children: [{ path: "", element: <Home /> }],
   },
   {
     path: "/dashboard",
     element: <AdminLayout />,
     children: [
-      { path: "/dashboard", element: <Dashboard /> },
-
-      // Components Showcase route
-      { path: "/dashboard/showcase", element: <ComponentsShowcase /> },
-
-      // Redirect any mismatch in dashboard to dashboard root
+      { path: "", element: <Dashboard /> },
+      { path: "showcase", element: <ComponentsShowcase /> },
       { path: "*", element: <Navigate to="/dashboard" replace /> },
     ],
   },

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { ExternalLink } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { Title32, Title20Semi, Title16 } from "@/components/typho/Title"
 import GeneralTab from "@/components/leaderDashboard/setting/BrandingProfile/GeneralTab"
@@ -45,9 +44,9 @@ const SchoolBrandingProfile = () => {
     }
 
     return (
-        <div className="w-full max-w-full overflow-x-hidden space-y-6 font-urbanist bg-gray-50/20 min-h-screen">
+        <div className="w-full max-w-full overflow-x-hidden space-y-6 font-urbanist min-h-screen">
             {/* Top Header Row */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
                 <Title32 className="text-[#080808]">
                     School Branding Profile
                 </Title32>
@@ -56,10 +55,13 @@ const SchoolBrandingProfile = () => {
                     href="#live-profile"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#038AF9] hover:underline text-[16px] font-normal inline-flex items-center gap-1.5 transition-colors"
+                    className="text-[#038AF9] hover:underline text-[18px] font-medium leading-[28px] inline-flex items-center gap-2 transition-colors pb-0.5 sm:self-end"
                 >
                     <span>View Live Profile</span>
-                    <ExternalLink className="w-4 h-4" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="shrink-0">
+                        <path d="M11.199 4C7.95542 4.00584 6.2569 4.08549 5.17142 5.17114C4 6.34275 4 8.22842 4 11.9997C4 15.7711 4 17.6568 5.17142 18.8283C6.34283 20 8.2282 20 11.999 20C15.7696 20 17.6551 20 18.8265 18.8283C19.9119 17.7427 19.9915 16.0439 19.9974 12.7998" stroke="#038AF9" strokeWidth="1.33335" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M19.6073 4.44176L11.1562 12.9418M19.9965 8.46938C20.0054 7.84323 20.0464 4.88143 19.6073 4.44176C19.1682 4.0021 16.2102 4.04308 15.5848 4.05198" stroke="#038AF9" strokeWidth="1.33335" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                 </a>
             </div>
 
@@ -116,8 +118,8 @@ const SchoolBrandingProfile = () => {
                 </button>
             </div>
 
-            {/* Main White Card Container */}
-            <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs w-full max-w-full overflow-hidden">
+            {/* Active Tab Content (Each section renders as an independent white card) */}
+            <div className="w-full max-w-full space-y-6">
                 {activeTab === "general" && (
                     <GeneralTab
                         register={register}

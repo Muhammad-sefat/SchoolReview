@@ -79,7 +79,7 @@ const BubbleTimelineChart = ({
             {title}
           </h3>
           {subtitle && (
-            <p className="text-sm font-normal text-secondary mt-0.5">
+            <p className="text-sm font-normal text-secondary mt-2">
               {subtitle}
             </p>
           )}

@@ -16,7 +16,7 @@ const SubscriptionBillingTab = () => {
             </span>
           </div>
 
-          <p className="text-[16px] font-normal text-[#5A5A5A]">Essential features</p>
+          <p className="text-[16px] font-normal text-textPrimary">Essential features</p>
 
           {/* Action Buttons */}
           <div className="space-y-4">
@@ -61,7 +61,7 @@ const SubscriptionBillingTab = () => {
             </span>
           </div>
 
-          <p className="text-[16px] font-normal text-[#5A5A5A]">Advanced insights</p>
+          <p className="text-[16px] font-normal text-textPrimary">Advanced insights</p>
 
           {/* Action Buttons */}
           <div className="space-y-4">
@@ -122,7 +122,7 @@ const SubscriptionBillingTab = () => {
             </span>
           </div>
 
-          <p className="text-[16px] font-normal text-[#5A5A5A]">Complete solution</p>
+          <p className="text-[16px] font-normal text-textPrimary">Complete solution</p>
 
           {/* Action Buttons */}
           <div className="space-y-4">

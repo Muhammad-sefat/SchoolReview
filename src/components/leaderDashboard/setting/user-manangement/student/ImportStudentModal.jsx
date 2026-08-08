@@ -31,13 +31,13 @@ const ImportStudentModal = ({ isOpen, onClose }) => {
           </p>
         </DialogHeader>
 
-        {/* Box 1: Download CSV Template */}
+        {/* Box 1: Download Student Template */}
         <div className="p-5 rounded-2xl border border-gray-200 bg-white space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <Title20 className="text-[#080808] font-semibold">Download CSV Template</Title20>
-              <p className="text-[16px] font-normal text-textPrimary mt-2">
-                Use this template to format your student data correctly.
+              <Title24 className="text-[#080808] font-medium">Download Student Template</Title24>
+              <p className="text-[16px] font-normal text-textPrimary mt-0.5">
+                Download the CSV template and populate it with your students before uploading.
               </p>
             </div>
             <button
@@ -74,11 +74,11 @@ const ImportStudentModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Box 2: Upload Student File (CSV) */}
+        {/* Box 2: Upload CSV File */}
         <div className="space-y-4">
           <div>
-            <Title24 className="text-[#080808] font-medium">Upload Student File (CSV)</Title24>
-            <p className="text-[16px] font-normal text-[#5A5A5A] mt-0.5">Accepted format: .csv</p>
+            <Title24 className="text-[#080808] font-medium">Upload CSV File</Title24>
+            <p className="text-[16px] font-normal text-textPrimary mt-0.5">Supported format: CSV (.csv)</p>
           </div>
 
           <label className="border border-dashed border-blue-300 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-blue-50/40 transition-colors bg-white space-y-1">

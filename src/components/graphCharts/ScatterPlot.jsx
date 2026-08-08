@@ -73,6 +73,7 @@ const ScatterPlot = ({
   bottomCaptionTitle = null,
   bottomCaptionDesc = "Lower satisfaction (left) highlights greater opportunity for improvement; higher satisfaction (right) reflects stronger performance.",
   overallRatingLabel = "Overall Rating",
+  hideBottomBars = false,
 }) => {
   const [selectedMetric, setSelectedMetric] = useState(null)
   const [activeHoverMetric, setActiveHoverMetric] = useState(null)
@@ -131,15 +132,15 @@ const ScatterPlot = ({
 
         {/* Dynamic Tabs */}
         {!hideTabs && tabs && tabs.length > 0 && (
-          <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1 rounded-2xl w-fit">
+          <div className="flex items-center gap-2 mb-4 bg-gray-100/70 p-1.5 rounded-full w-fit">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => onTabChange && onTabChange(tab.id)}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
-                  ? "bg-white text-textPrimary shadow-2xs font-medium"
-                  : "text-[#5A5A5A] hover:text-textPrimary bg-[#F7F7F7]"
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-base font-medium transition-all cursor-pointer ${activeTab === tab.id
+                  ? "bg-white text-gray-900 shadow-xs"
+                  : "text-gray-500 hover:text-gray-900"
                   }`}
               >
                 {tab.label}
@@ -163,19 +164,10 @@ const ScatterPlot = ({
                 name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
-                tickFormatter={(val) => (val === 0 ? 0 : "")}
+                tick={false}
                 stroke="#94A3B8"
-                fontSize={11}
-                fontWeight={500}
                 tickLine={false}
-                height={40}
-                tick={{ fontSize: 16 }}
-                label={{
-                  value: xAxisLabel,
-                  position: "insideBottom",
-                  offset: -5,
-                  style: { textAnchor: "middle", fontSize: 16, fontWeight: 400, fill: "#1F1F21" },
-                }}
+                height={15}
               />
 
               <YAxis
@@ -203,13 +195,13 @@ const ScatterPlot = ({
               <ZAxis type="number" range={[100, 100]} />
 
               {/* Blue Dashed Curve Line */}
-              <Scatter
+              {/* <Scatter
                 data={CURVE_POINTS}
                 line={{ stroke: "#038AF9", strokeDasharray: "3 3", strokeWidth: 1.5 }}
                 lineType="joint"
                 shape={() => null}
                 isAnimationActive={false}
-              />
+              /> */}
 
               {/* Dotted Vertical Reference Line at 2.5 (Rendered ONLY when showReferenceLine is true) */}
               {showReferenceLine && (
@@ -242,13 +234,13 @@ const ScatterPlot = ({
                 setActiveHoverMetric(null)
               }}
               onClick={() => handlePointClick(activeHoverMetric)}
-              className="absolute z-30 cursor-pointer bg-white border border-gray-200/90 rounded-2xl p-4 shadow-2xl space-y-2.5 min-w-[210px] font-urbanist select-none hover:border-[#038AF9] transition-all transform -translate-x-1/2"
+              className="absolute z-30 cursor-pointer bg-white border border-gray-200/90 rounded-2xl p-4 shadow-2xl space-y-2.5 min-w-[220px] font-urbanist select-none hover:border-[#038AF9] transition-all transform -translate-x-1/2"
               style={{
                 left: `${activeHoverMetric.cx}px`,
                 top:
-                  activeHoverMetric.cy < 170
+                  activeHoverMetric.cy < 200
                     ? `${activeHoverMetric.cy + 16}px`
-                    : `${activeHoverMetric.cy - 165}px`,
+                    : `${activeHoverMetric.cy - 195}px`,
               }}
             >
               <p className="text-[16px] font-medium text-textPrimary leading-[24px] font-urbanist">
@@ -279,8 +271,36 @@ const ScatterPlot = ({
                   </span>
                 </div>
               </div>
+
+              {/* Professional View Details Button at bottom of hover box */}
+              <div className="border-t border-dashed border-gray-200 pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handlePointClick(activeHoverMetric)
+                  }}
+                  className="w-full py-1.5 px-3 rounded-lg bg-[#038AF9] hover:bg-[#0270ce] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+                >
+                  <span>View Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </button>
+              </div>
             </div>
           )}
+        </div>
+
+        {/* X-Axis Bottom Labels Row (← Less Improvement | Improvement Since Last Year | More Improvement →) */}
+        <div className="w-full flex items-center justify-between pl-12 pr-4  font-urbanist text-xs sm:text-sm">
+          <span className="text-textPrimary font-medium">
+            ← Less Improvement
+          </span>
+          <span className="text-[#080808] font-semibold tracking-tight">
+            {xAxisLabel}
+          </span>
+          <span className="text-textPrimary font-medium">
+            More Improvement →
+          </span>
         </div>
 
         {/* Bottom Explanatory Caption (Rendered ONLY when showBottomCaption is true) */}
@@ -303,6 +323,7 @@ const ScatterPlot = ({
         isOpen={!!selectedMetric}
         onClose={() => setSelectedMetric(null)}
         metric={selectedMetric}
+        hideBottomBars={hideBottomBars}
       />
     </>
   )

@@ -95,7 +95,7 @@ const StudentToTeacherReview = () => {
   return (
     <div className="w-full flex items-center justify-center font-urbanist">
       {/* Main Review Card Container */}
-      <div className="w-full max-w-[760px] bg-white rounded-[20px] border border-primary shadow-md overflow-hidden flex flex-col my-auto max-h-[90vh]">
+      <div className="w-full max-w-[1012px] bg-white rounded-[20px] border border-primary shadow-md overflow-hidden flex flex-col my-auto max-h-[90vh]">
         {/* Top Banner (120px height) */}
         <ReviewCardHeader />
 

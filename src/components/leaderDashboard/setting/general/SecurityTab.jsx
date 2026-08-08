@@ -12,7 +12,7 @@ const SecurityTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Password</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
+          <p className="text-[16px] font-normal text-textPrimary">
             Change your password to keep your account secure
           </p>
         </div>
@@ -30,8 +30,8 @@ const SecurityTab = () => {
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <h3 className="text-[20px] font-semibold text-[#080808]">Two-Factor Authentication</h3>
-          <p className="text-[16px] font-normal text-[#5A5A5A]">
-            Enabled via email - <span className="font-normal text-[#5A5A5A]">firstlastname@schoolname.edu</span>
+          <p className="text-[16px] font-normal text-textPrimary">
+            Enabled via email - <span className="font-normal text-textPrimary">firstlastname@schoolname.edu</span>
           </p>
         </div>
 

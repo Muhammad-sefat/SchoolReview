@@ -22,13 +22,13 @@ const FollowedSchoolNotificationsSection = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <h3 className="text-[18px] font-medium text-[#080808]">Followed School Notifications</h3>
-          <p className="text-[16px] font-normal text-secondary">
+          <p className="text-[16px] font-normal text-textPrimary">
             Choose how you'd like to receive updates from the schools you follow.
           </p>
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          <span className="text-[14px] font-normal text-[#5A5A5A]">Enable / Disable</span>
+          <span className="text-base font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={enabled}
             onCheckedChange={handleToggleSwitch}

@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react"
-import { Calendar, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, addMonths, subMonths, startOfWeek, endOfWeek } from "date-fns"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
 
 import "swiper/css"
 import "swiper/css/navigation"
@@ -113,81 +116,121 @@ const getStatusColorClass = (status, defaultClass) => {
 }
 
 const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
-  const [showCalendarModal, setShowCalendarModal] = useState(false)
-  const [selectedDate, setSelectedDate] = useState("2026-08-02")
+  const [selectedDate, setSelectedDate] = useState(new Date(2026, 7, 2))
+  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 7, 2))
 
   const prevRef = useRef(null)
   const nextRef = useRef(null)
 
+  // Calendar dates generation for Shadcn Calendar Popover
+  const startDate = startOfWeek(startOfMonth(currentMonth), { weekStartsOn: 0 })
+  const endDate = endOfWeek(endOfMonth(currentMonth), { weekStartsOn: 0 })
+  const days = eachDayOfInterval({ start: startDate, end: endDate })
+  const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+
   return (
-    <div className="w-full bg-white rounded-3xl border border-[#EAEAEA] p-5 md:p-6 shadow-xs flex flex-col justify-between h-full relative min-w-0">
+    <div className="w-full bg-white rounded-3xl border border-[#EAEAEA] p-5 md:p-6 shadow-xs flex flex-col justify-between h-full relative min-w-0 font-urbanist">
       <div>
-        {/* Header with Title, Count Badge, and Calendar Modal Button */}
+        {/* Header with Title, Count Badge, and Shadcn Calendar Popover */}
         <div className="flex items-center justify-between gap-3 mb-3 shrink-0">
           <div className="flex items-center gap-2">
-            <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808]">
+            <h3 className="text-xl sm:text-2xl font-semibold text-[#080808]">
               Discovery Call Requests
             </h3>
             <span className="w-6 h-6 rounded-full bg-[#038AF9] text-white text-xs font-bold flex items-center justify-center">
-              20
+              {calls.length}
             </span>
           </div>
 
-          {/* Right Calendar Icon Button */}
-          <button
-            type="button"
-            onClick={() => setShowCalendarModal(!showCalendarModal)}
-            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer shrink-0"
-            title="Select date range"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15.5984 3V6.6M8.39844 3V6.6" stroke="#1F1F21" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M12.8984 4.79999H11.0984C7.70432 4.79999 6.00727 4.79999 4.95285 5.8544C3.89844 6.90882 3.89844 8.60587 3.89844 12V13.8C3.89844 17.1941 3.89844 18.8912 4.95285 19.9455C6.00727 21 7.70432 21 11.0984 21H12.8984C16.2925 21 17.9896 21 19.044 19.9455C20.0984 18.8912 20.0984 17.1941 20.0984 13.8V12C20.0984 8.60587 20.0984 6.90882 19.044 5.8544C17.9896 4.79999 16.2925 4.79999 12.8984 4.79999Z" stroke="#1F1F21" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3.89844 10.2H20.0984" stroke="#1F1F21" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M11.9944 13.8H12.0025M11.9944 17.4H12.0025M15.5903 13.8H15.5984M8.39844 13.8H8.40651M8.39844 17.4H8.40651" stroke="#1F1F21" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
+          {/* Right Calendar Icon Popover Button */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                title="Select call date"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15.5984 3V6.6M8.39844 3V6.6" stroke="#1F1F21" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12.8984 4.79999H11.0984C7.70432 4.79999 6.00727 4.79999 4.95285 5.8544C3.89844 6.90882 3.89844 8.60587 3.89844 12V13.8C3.89844 17.1941 3.89844 18.8912 4.95285 19.9455C6.00727 21 7.70432 21 11.0984 21H12.8984C16.2925 21 17.9896 21 19.044 19.9455C20.0984 18.8912 20.0984 17.1941 20.0984 13.8V12C20.0984 8.60587 20.0984 6.90882 19.044 5.8544C17.9896 4.79999 16.2925 4.79999 12.8984 4.79999Z" stroke="#1F1F21" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3.89844 10.2H20.0984" stroke="#1F1F21" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M11.9944 13.8H12.0025M11.9944 17.4H12.0025M15.5903 13.8H15.5984M8.39844 13.8H8.40651M8.39844 17.4H8.40651" stroke="#1F1F21" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </PopoverTrigger>
+
+            {/* Direct Shadcn Calendar Popover */}
+            <PopoverContent className="w-auto p-3 bg-white rounded-2xl border border-gray-200 shadow-xl" align="end">
+              <div className="space-y-3 w-64">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-sm font-semibold text-foreground">
+                    {format(currentMonth, "MMMM yyyy")}
+                  </h4>
+                  <div className="flex gap-1">
+                    <button
+                      type="button"
+                      className="h-7 w-7 p-0 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50"
+                      onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
+                    >
+                      <ChevronLeft className="h-4 w-4 text-gray-600" />
+                    </button>
+                    <button
+                      type="button"
+                      className="h-7 w-7 p-0 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50"
+                      onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
+                    >
+                      <ChevronRight className="h-4 w-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-7 gap-1 text-center">
+                  {weekDays.map((wd) => (
+                    <span key={wd} className="text-[11px] font-medium text-muted-foreground uppercase py-1">
+                      {wd}
+                    </span>
+                  ))}
+
+                  {days.map((day) => {
+                    const isSelected = selectedDate ? isSameDay(day, selectedDate) : false
+                    const isCurrentMonth = day.getMonth() === currentMonth.getMonth()
+
+                    return (
+                      <button
+                        key={day.toString()}
+                        type="button"
+                        onClick={() => setSelectedDate(day)}
+                        className={cn(
+                          "h-8 w-8 rounded-md text-xs font-normal transition-colors flex items-center justify-center cursor-pointer",
+                          !isCurrentMonth && "text-muted-foreground/30",
+                          isCurrentMonth && "text-foreground",
+                          isToday(day) && !isSelected && "bg-accent/40 font-bold border border-primary/25",
+                          isSelected && "bg-[#038AF9] text-white font-semibold shadow",
+                          isCurrentMonth && !isSelected && "hover:bg-accent hover:text-accent-foreground"
+                        )}
+                      >
+                        {format(day, "d")}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Dotted Separator */}
         <div className="border-b border-dashed border-[#EAEAEA] mb-4" />
 
-        {/* Calendar Picker Dropdown Modal */}
-        {showCalendarModal && (
-          <div className="absolute top-16 right-6 z-30 bg-white border border-[#EAEAEA] rounded-2xl p-4 shadow-xl space-y-3 w-72 animate-fadeIn">
-            <div className="flex items-center justify-between border-b border-[#EAEAEA] pb-2">
-              <span className="text-xs font-bold text-textPrimary">
-                Select Call Date
-              </span>
-              <button
-                type="button"
-                onClick={() => setShowCalendarModal(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => {
-                setSelectedDate(e.target.value)
-                setShowCalendarModal(false)
-              }}
-              className="w-full border border-[#EAEAEA] rounded-xl px-3 py-2 text-xs font-medium text-textPrimary outline-none focus:border-[#038AF9]"
-            />
-          </div>
-        )}
-
-        {/* Swiper.js Cards Container */}
-        <div className="relative min-w-0 px-1 py-1">
+        {/* Discovery Call Cards Swiper Slider */}
+        <div className="relative group min-w-0">
           <Swiper
             modules={[Navigation]}
-            spaceBetween={16}
+            spaceBetween={14}
             slidesPerView={1.1}
             breakpoints={{
               640: { slidesPerView: 2.1 },
-              1024: { slidesPerView: 3 },
+              1024: { slidesPerView: 3.1 },
             }}
             navigation={{
               prevEl: prevRef.current,
@@ -197,7 +240,7 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
               swiper.params.navigation.prevEl = prevRef.current
               swiper.params.navigation.nextEl = nextRef.current
             }}
-            className="w-full"
+            className="w-full !pb-2"
           >
             {calls.map((call) => (
               <SwiperSlide key={call.id}>
@@ -229,22 +272,21 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
             ))}
           </Swiper>
 
+          {/* Navigation Arrows */}
           <button
             ref={prevRef}
             type="button"
-            className="absolute left-[-12px] top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white border border-[#EAEAEA] text-gray-500 shadow-md hover:bg-gray-50 flex items-center justify-center transition-all cursor-pointer z-20"
-            title="Previous slide"
+            className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer disabled:opacity-0 transition-all"
           >
-            <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
 
           <button
             ref={nextRef}
             type="button"
-            className="absolute right-[-12px] top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-[#038AF9] text-white shadow-md hover:bg-[#0274d4] flex items-center justify-center transition-all cursor-pointer z-20"
-            title="Next slide"
+            className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer disabled:opacity-0 transition-all"
           >
-            <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>

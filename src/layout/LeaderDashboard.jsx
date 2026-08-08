@@ -27,7 +27,7 @@ const LeaderDashboard = () => {
   }, [location.pathname])
 
   return (
-    <>
+    <div className=" max-w-[1920px] mx-auto">
       <ScrollRestoration />
       <div className="flex h-screen w-full max-w-full overflow-hidden bg-[#F8FAFC] text-foreground font-urbanist">
         {/* Leader Sidebar */}
@@ -51,7 +51,7 @@ const LeaderDashboard = () => {
           </main>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

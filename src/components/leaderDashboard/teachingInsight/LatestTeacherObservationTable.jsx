@@ -187,13 +187,13 @@ const LatestTeacherObservationTable = ({ onSetUpClick }) => {
                     {row.observationStatus === "action" && (
                       <button
                         type="button"
-                        className="px-4 py-1.5 rounded-full border border-[#038AF9] text-[#038AF9] hover:bg-[#038AF9]/10 text-[14px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                        className="px-4 py-2 rounded-[10px] border border-primary bg-[#FAFAFA] text-textPrimary hover:bg-[#038AF9]/10 text-[16px] font-medium transition-colors cursor-pointer inline-flex items-center gap-1.5"
                       >
-                        <span>→</span> Observe Teacher
+                        → Observe Teacher
                       </button>
                     )}
                     {row.observationStatus === "completed" && (
-                      <span className="px-3.5 py-1 rounded-full border border-[#66BB6A] text-[#2E7D32] text-[12px] font-medium bg-[#66BB6A]/10 inline-block">
+                      <span className="px-3.5 py-1 rounded-full border border-[#66BB6A] text-textPrimary text-[12px] font-normal inline-block">
                         Completed
                       </span>
                     )}
@@ -206,8 +206,10 @@ const LatestTeacherObservationTable = ({ onSetUpClick }) => {
 
                   {/* Lat Obs. Score Column */}
                   <TableCell className="px-4 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-1.5 font-bold text-[16px] text-textPrimary">
-                      <Star className="w-4 h-4 text-[#038AF9] fill-[#038AF9]" />
+                    <div className="flex items-center gap-1.5 font-normal text-[16px] text-textBlack">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.89506 2.46208C9.44081 1.40164 10.9706 1.40164 11.5164 2.46208L13.3551 6.03535C13.3856 6.09465 13.443 6.13591 13.5093 6.14638L17.5062 6.77679C18.6917 6.96377 19.1641 8.40241 18.3164 9.24425L15.4551 12.0855C15.4076 12.1326 15.3858 12.1992 15.3963 12.2648L16.027 16.2302C16.2139 17.4055 14.9765 18.295 13.9061 17.755L10.3011 15.9362C10.2412 15.906 10.1702 15.906 10.1103 15.9362L6.50534 17.755C5.43494 18.295 4.19759 17.4055 4.3845 16.2302L5.01518 12.2648C5.02562 12.1992 5.00378 12.1326 4.95639 12.0855L2.09504 9.24425C1.24734 8.40241 1.71974 6.96377 2.90524 6.77679L6.90212 6.14638C6.96848 6.13591 7.02579 6.09465 7.0563 6.03535L8.89506 2.46208Z" fill="#038AF9" />
+                      </svg>
                       <span>{row.score.toFixed(1)}</span>
                     </div>
                   </TableCell>

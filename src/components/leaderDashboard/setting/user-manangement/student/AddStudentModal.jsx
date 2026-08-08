@@ -9,7 +9,7 @@ import {
 import AssignClassesSelect from "../teacher/AssignClassesSelect"
 import AssignTeacherSelect from "./AssignTeacherSelect"
 
-const AddStudentModal = ({ isOpen, onClose, onAddStudent }) => {
+const AddStudentModal = ({ isOpen, onClose, onAddStudent, onAddTeacherClick }) => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -85,7 +85,7 @@ const AddStudentModal = ({ isOpen, onClose, onAddStudent }) => {
             />
           </div>
 
-          {/* Row 3: Class (Label on top, select below) */}
+          {/* Row 3: Class */}
           <div className="flex flex-col gap-4">
             <label className="text-[18px] font-medium text-[#080808]">Class</label>
             <AssignClassesSelect
@@ -94,27 +94,28 @@ const AddStudentModal = ({ isOpen, onClose, onAddStudent }) => {
             />
           </div>
 
-          {/* Row 4: Assign Teacher(s) (Label on top, select below) */}
+          {/* Row 4: Assign Teacher(s) */}
           <div className="flex flex-col gap-4">
             <label className="text-[18px] font-medium text-[#080808]">Assign Teacher(s)</label>
             <AssignTeacherSelect
               selectedTeachers={selectedTeachers}
               onChange={setSelectedTeachers}
+              onAddTeacherClick={onAddTeacherClick}
             />
           </div>
 
-          {/* Modal Footer */}
-          <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-100">
+          {/* Buttons */}
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2.5 rounded-xl border border-gray-200 text-[16px] font-medium text-[#5A5A5A] hover:bg-gray-50 cursor-pointer transition-colors"
+              className="px-6 py-2.5 rounded-xl border border-gray-200 text-textPrimary hover:bg-gray-50 text-[16px] font-medium transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-[16px] font-medium cursor-pointer shadow-xs transition-colors"
+              className="px-6 py-2.5 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-[16px] font-medium transition-colors cursor-pointer shadow-xs"
             >
               Add Student
             </button>

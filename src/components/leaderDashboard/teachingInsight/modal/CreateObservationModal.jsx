@@ -68,7 +68,7 @@ const CreateObservationModal = ({ isOpen, onClose, onSubmitSuccess }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="relative max-w-lg p-6 sm:p-8 max-h-[90vh] overflow-y-auto no-scrollbar rounded-3xl border-none bg-white shadow-2xl font-urbanist">
+      <DialogContent className="max-w-lg p-6 sm:p-8 max-h-[90vh] overflow-y-auto no-scrollbar rounded-3xl border-none bg-white shadow-2xl font-urbanist">
         {/* Header with Title24 */}
         <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0">
           <Title24 className="text-[#080808] font-semibold">

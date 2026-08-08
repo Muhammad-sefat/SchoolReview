@@ -31,9 +31,9 @@ const MediaTab = ({ register, onSubmit }) => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-10 font-urbanist text-textPrimary py-4">
+    <form onSubmit={onSubmit} className="space-y-6 font-urbanist text-textPrimary">
       {/* 1. PHOTO GALLERY SECTION */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start border-b border-gray-100 pb-10">
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         <div className="lg:col-span-2 flex items-center gap-1.5">
           <Title18 className="text-[#080808]">Photo gallery</Title18>
           <Info className="w-4 h-4 text-secondary shrink-0" />
@@ -43,8 +43,8 @@ const MediaTab = ({ register, onSubmit }) => {
           {/* Drag & Drop Upload Box */}
           <label className="border border-dashed border-[#038AF9] rounded-2xl p-6 w-52 h-32 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-blue-50/40 transition-colors bg-white shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-sm text-secondary font-normal">Drag & drop files here</span>
             <span className="text-xs text-secondary my-0.5">or</span>
@@ -70,7 +70,7 @@ const MediaTab = ({ register, onSubmit }) => {
       </div>
 
       {/* 2. VIDEOS SECTION */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start border-b border-gray-100 pb-10">
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         <div className="lg:col-span-2 flex items-center gap-1.5">
           <Title18 className="text-[#080808]">Videos</Title18>
           <Info className="w-4 h-4 text-secondary shrink-0" />
@@ -80,8 +80,8 @@ const MediaTab = ({ register, onSubmit }) => {
           {/* Drag & Drop Upload Box */}
           <label className="border border-dashed border-[#038AF9] rounded-2xl p-6 w-52 h-32 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-blue-50/40 transition-colors bg-white shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-sm text-secondary font-normal">Drag & drop files here</span>
             <span className="text-xs text-secondary my-0.5">or</span>
@@ -126,7 +126,7 @@ const MediaTab = ({ register, onSubmit }) => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end pt-2">
         <button
           type="submit"
           className="px-8 py-3 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-[16px] font-semibold transition-colors shadow-xs cursor-pointer"

@@ -34,7 +34,7 @@ const renderCustomizedLabel = ({
       fill={value === 44 ? "#333333" : "white"}
       textAnchor="middle"
       dominantBaseline="central"
-      className="text-[10px] sm:text-[11px] font-semibold"
+      className="text-[13px] sm:text-[14px] font-bold"
     >
       {`${value}%`}
     </text>
@@ -90,15 +90,15 @@ const PieChartComponent = ({
         </div>
 
         {/* Right Pie Chart Container */}
-        <div className="w-full xl:w-[184px] h-[164px] relative shrink-0 min-w-0 flex items-center justify-center">
+        <div className="w-full xl:w-[220px] h-[200px] relative shrink-0 min-w-0 flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <RechartsPieChart>
               <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={15}
-                outerRadius={72}
+                innerRadius={18}
+                outerRadius={88}
                 paddingAngle={2}
                 dataKey="value"
                 labelLine={false}

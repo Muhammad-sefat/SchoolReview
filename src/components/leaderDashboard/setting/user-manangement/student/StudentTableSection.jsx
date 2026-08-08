@@ -21,6 +21,7 @@ import ImportStudentModal from "./ImportStudentModal"
 import AddStudentModal from "./AddStudentModal"
 import EditStudentModal from "./EditStudentModal"
 import DeleteStudentModal from "./DeleteStudentModal"
+import AddTeacherModal from "../teacher/AddTeacherModal"
 
 const INITIAL_STUDENTS = [
   {
@@ -73,6 +74,7 @@ const StudentTableSection = () => {
   // Modals state
   const [isImportModalOpen, setIsImportModalOpen] = useState(false)
   const [isAddStudentModalOpen, setIsAddStudentModalOpen] = useState(false)
+  const [isAddTeacherModalOpen, setIsAddTeacherModalOpen] = useState(false)
   const [editingStudent, setEditingStudent] = useState(null)
   const [deletingStudent, setDeletingStudent] = useState(null)
 
@@ -136,7 +138,7 @@ const StudentTableSection = () => {
         </div>
       </div>
 
-      <Table>
+      <Table containerClassName="overflow-visible">
         <TableHeader>
           <TableRow>
             <TableHead className="w-10 text-center px-2">
@@ -162,6 +164,7 @@ const StudentTableSection = () => {
                 <AssignTeacherSelect
                   selectedTeachers={row.assignedTeachers}
                   onChange={(newTeachers) => handleTeachersChange(row.id, newTeachers)}
+                  onAddTeacherClick={() => setIsAddTeacherModalOpen(true)}
                 />
               </TableCell>
               <TableCell className="text-right">
@@ -198,6 +201,7 @@ const StudentTableSection = () => {
         isOpen={isAddStudentModalOpen}
         onClose={() => setIsAddStudentModalOpen(false)}
         onAddStudent={handleAddStudent}
+        onAddTeacherClick={() => setIsAddTeacherModalOpen(true)}
       />
 
       <EditStudentModal
@@ -205,6 +209,7 @@ const StudentTableSection = () => {
         onClose={() => setEditingStudent(null)}
         student={editingStudent}
         onUpdateStudent={handleUpdateStudent}
+        onAddTeacherClick={() => setIsAddTeacherModalOpen(true)}
       />
 
       <DeleteStudentModal
@@ -213,6 +218,18 @@ const StudentTableSection = () => {
         student={deletingStudent}
         onDeleteConfirm={handleDeleteStudent}
       />
+
+      {/* Add Teacher Modal triggered from Assigned Teacher(s) plus button */}
+      {isAddTeacherModalOpen && (
+        <AddTeacherModal
+          isOpen={isAddTeacherModalOpen}
+          onClose={() => setIsAddTeacherModalOpen(false)}
+          onAddTeacher={(newTeacher) => {
+            console.log("New teacher added from student tab:", newTeacher)
+            setIsAddTeacherModalOpen(false)
+          }}
+        />
+      )}
     </div>
   )
 }

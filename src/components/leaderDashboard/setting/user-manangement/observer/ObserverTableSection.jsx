@@ -100,28 +100,36 @@ const ObserverTableSection = () => {
     setObservers((prev) => prev.filter((o) => o.id !== id))
   }
 
-  const filteredObservers = observers.filter((o) => {
-    if (statusFilter === "all") return true
-    return o.status.toLowerCase() === statusFilter.toLowerCase()
-  })
+  const STATUS_ORDER = {
+    Pending: 1,
+    Verified: 2,
+    Declined: 3,
+  }
+
+  const filteredObservers = observers
+    .filter((o) => {
+      if (statusFilter === "all") return true
+      return o.status.toLowerCase() === statusFilter.toLowerCase()
+    })
+    .sort((a, b) => (STATUS_ORDER[a.status] || 99) - (STATUS_ORDER[b.status] || 99))
 
   const getStatusPill = (status) => {
     switch (status) {
       case "Verified":
         return (
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-600 border border-emerald-200/80 inline-block">
+          <span className="px-[12px] py-[6px] rounded-full text-sm font-normal leading-tight bg-white text-[#1F1F21] border border-[#66BB6A] inline-block">
             Verified
           </span>
         )
       case "Pending":
         return (
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-600 border border-amber-200/80 inline-block">
+          <span className="px-[12px] py-[6px] rounded-full text-sm font-normal leading-tight bg-white text-[#1F1F21] border border-[#FFC300] inline-block">
             Pending
           </span>
         )
       case "Declined":
         return (
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-600 border border-rose-200/80 inline-block">
+          <span className="px-[12px] py-[6px] rounded-full text-sm font-normal leading-tight bg-white text-[#1F1F21] border border-[#E53935] inline-block">
             Declined
           </span>
         )
@@ -151,7 +159,7 @@ const ObserverTableSection = () => {
         </div>
       </div>
 
-      <Table>
+      <Table containerClassName="overflow-visible">
         <TableHeader>
           <TableRow>
             <TableHead className="w-10 text-center px-2">

@@ -1,6 +1,5 @@
 import React from "react"
 import reviewBanner from "@/assets/images/reviewBg.png"
-import { LogoOne } from "@/components/icons/Logo/AllLogo"
 
 const ReviewCardHeader = () => {
   return (
@@ -11,10 +10,6 @@ const ReviewCardHeader = () => {
         alt="Review Banner"
         className="absolute inset-0 w-full h-full object-cover opacity-90"
       />
-      {/* Centered Logo */}
-      {/* <div className="relative z-10 flex items-center justify-center">
-        <LogoOne className="w-16 h-14" />
-      </div> */}
     </div>
   )
 }
