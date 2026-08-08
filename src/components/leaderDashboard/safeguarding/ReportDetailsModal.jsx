@@ -112,14 +112,15 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport, showAssignTo = tr
 
   return (
     <Dialog open={!!report} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-[1200px] w-[95vw] p-6 rounded-3xl bg-white border border-gray-100 shadow-2xl font-urbanist space-y-6">
-        <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0">
+      <DialogContent className="max-w-[1200px] w-[95vw] max-h-[90vh] flex flex-col p-6 sm:p-8 rounded-3xl bg-white border border-gray-100 shadow-2xl font-urbanist overflow-hidden">
+        <DialogHeader className="flex flex-row items-center justify-between border-b border-dashed border-gray-200/80 pb-4 space-y-0 shrink-0">
           <DialogTitle className="font-urbanist text-[20px] font-medium text-[#080808]">
             Report details
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        {/* Inner Scrollable Body that preserves outer rounded-3xl corners without scrollbar clipping */}
+        <div className="flex-1 overflow-y-auto pr-1 pt-2 space-y-6">
           {/* Section 1: Report Metadata & Summary Card with Primary Border */}
           <div className="border border-[#038AF9] rounded-3xl p-5 space-y-4 bg-white relative">
             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -362,7 +363,7 @@ const ReportDetailsModal = ({ report, onClose, onUpdateReport, showAssignTo = tr
               <h4 className="font-medium text-[20px] text-[#080808]">
                 History
               </h4>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-secondary">
                 Oct 11, 2025 at 2:30 PM
               </span>
             </div>
