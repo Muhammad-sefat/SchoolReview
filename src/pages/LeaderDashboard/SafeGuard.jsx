@@ -79,9 +79,20 @@ const SafeGuard = () => {
       {/* Conditional Content by Active Tab */}
       {activeTab === "overview" ? (
         <div className="space-y-6">
+
+
+          {/* Second Row: Reports Table (Image 1) */}
+          <SafeguardingReportsTable
+            onSelectReport={(report) => setActiveReportDetail(report)}
+          />
+        </div>
+      ) : (
+        /* Key Metrics Tab View (Image 4) */
+        <div className=" space-y-6 ">
+
           {/* Top Row: Bubble Timeline Chart + Category Insights */}
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch min-w-0">
-            <div className="lg:col-span-7 flex flex-col min-w-0">
+            <div className="lg:col-span-8 flex flex-col min-w-0">
               <BubbleTimelineChart
                 title="Safeguarding Reports"
                 subtitle="Select a category to view details."
@@ -91,40 +102,39 @@ const SafeGuard = () => {
               />
             </div>
 
-            <div className="lg:col-span-5 flex flex-col min-w-0">
+            <div className="lg:col-span-4 flex flex-col min-w-0">
               <SafeguardingCategoryInsights
                 selectedCategoryId={selectedCategory}
               />
             </div>
           </div>
 
-          {/* Second Row: Reports Table (Image 1) */}
-          <SafeguardingReportsTable
-            onSelectReport={(report) => setActiveReportDetail(report)}
-          />
-        </div>
-      ) : (
-        /* Key Metrics Tab View (Image 4) */
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch min-w-0">
-          <div className="flex flex-col min-w-0">
-            <KeyMetricsCard
-              title="Key Metrics"
-              metrics={SAFETY_KEY_METRICS}
-            />
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch min-w-0">
+
+
+            <div className="flex flex-col min-w-0">
+              <KeyMetricsCard
+                title="Key Metrics"
+                metrics={SAFETY_KEY_METRICS}
+              />
+            </div>
+
+            <div className="flex flex-col min-w-0">
+              <RadialProgressChart
+                title="Annual Safety Reports Overview"
+                centerNumber={48}
+                avgResolutionTime="4.5 Day"
+                resolvedReportsCount={12}
+              />
+            </div>
+
+            <div className="flex flex-col min-w-0">
+              <StudentSafetySignals enabled={true} />
+            </div>
           </div>
 
-          <div className="flex flex-col min-w-0">
-            <RadialProgressChart
-              title="Annual Safety Reports Overview"
-              centerNumber={48}
-              avgResolutionTime="4.5 Day"
-              resolvedReportsCount={12}
-            />
-          </div>
 
-          <div className="flex flex-col min-w-0">
-            <StudentSafetySignals enabled={true} />
-          </div>
+
         </div>
       )}
 
