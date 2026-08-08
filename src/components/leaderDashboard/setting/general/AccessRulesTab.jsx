@@ -22,9 +22,9 @@ const AccessRulesTab = () => {
   }
 
   return (
-    <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-4 font-urbanist">
-      {/* Item 1 */}
-      <div className="flex items-center justify-between gap-6 pb-4">
+    <div className="space-y-6 font-urbanist">
+      {/* Item 1: Evaluator Requests */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <h3 className="text-[20px] font-semibold text-[#080808]">Evaluator Requests</h3>
           <p className="text-[16px] font-normal text-textPrimary">
@@ -32,18 +32,17 @@ const AccessRulesTab = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
           <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={evaluatorRequests}
             onCheckedChange={handleToggleEvaluator}
-            className="data-[state=checked]:bg-[#038AF9]"
           />
         </div>
       </div>
 
-      {/* Item 2 */}
-      <div className="flex items-center justify-between gap-6 pb-4 pt-2">
+      {/* Item 2: Allow Aggregated Data Access */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <h3 className="text-[20px] font-semibold text-[#080808]">Allow Aggregated Data Access</h3>
           <p className="text-[16px] font-normal text-textPrimary">
@@ -51,18 +50,17 @@ const AccessRulesTab = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
           <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={aggregatedDataAccess}
             onCheckedChange={handleToggleAggregated}
-            className="data-[state=checked]:bg-[#038AF9]"
           />
         </div>
       </div>
 
-      {/* Item 3 */}
-      <div className="border-t border-dashed border-gray-200 pt-6 flex items-center justify-between gap-6">
+      {/* Item 3: External Observer Access Requests */}
+      <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <h3 className="text-[20px] font-semibold text-[#080808]">External Observer Access Requests</h3>
           <p className="text-[16px] font-normal text-textPrimary">
@@ -70,12 +68,11 @@ const AccessRulesTab = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3 shrink-0 self-start sm:self-center">
           <span className="text-[14px] font-normal text-textPrimary">On / Off</span>
           <Switch
             checked={externalObserverRequests}
             onCheckedChange={handleToggleObserver}
-            className="data-[state=checked]:bg-[#038AF9]"
           />
         </div>
       </div>
