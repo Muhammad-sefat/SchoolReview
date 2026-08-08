@@ -45,7 +45,7 @@ const SchoolBrandingProfile = () => {
     }
 
     return (
-        <div className="w-full max-w-full overflow-x-hidden space-y-6 font-urbanist bg-gray-50/20 min-h-screen">
+        <div className="w-full max-w-full overflow-x-hidden space-y-6 font-urbanist min-h-screen">
             {/* Top Header Row */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <Title32 className="text-[#080808]">
