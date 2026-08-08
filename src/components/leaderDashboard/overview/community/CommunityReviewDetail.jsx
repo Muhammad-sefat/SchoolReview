@@ -151,7 +151,7 @@ const CommunityReviewDetail = ({ selectedReview }) => {
             type="button"
             onClick={handleGenerateAiResponse}
             disabled={isGeneratingAi}
-            className="px-6 py-3 rounded-2xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-sm md:text-lg font-semibold transition-all shadow-xs cursor-pointer flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl  bg-[#038AF9] hover:bg-[#0274d4] text-white text-base font-semibold transition-all shadow-xs cursor-pointer flex items-center gap-2"
           >
 
             <span>

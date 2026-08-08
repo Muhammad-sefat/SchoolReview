@@ -164,19 +164,10 @@ const ScatterPlot = ({
                 name={xAxisLabel}
                 domain={[0, 5]}
                 ticks={[0, 1, 2, 3, 4, 5]}
-                tickFormatter={(val) => val}
+                tick={false}
                 stroke="#94A3B8"
-                fontSize={11}
-                fontWeight={500}
                 tickLine={false}
-                height={40}
-                tick={{ fontSize: 16 }}
-                label={{
-                  value: xAxisLabel,
-                  position: "insideBottom",
-                  offset: -5,
-                  style: { textAnchor: "middle", fontSize: 16, fontWeight: 400, fill: "#1F1F21" },
-                }}
+                height={15}
               />
 
               <YAxis
@@ -297,6 +288,19 @@ const ScatterPlot = ({
               </div>
             </div>
           )}
+        </div>
+
+        {/* X-Axis Bottom Labels Row (← Less Improvement | Improvement Since Last Year | More Improvement →) */}
+        <div className="w-full flex items-center justify-between pl-12 pr-4  font-urbanist text-xs sm:text-sm">
+          <span className="text-textPrimary font-medium">
+            ← Less Improvement
+          </span>
+          <span className="text-[#080808] font-semibold tracking-tight">
+            {xAxisLabel}
+          </span>
+          <span className="text-textPrimary font-medium">
+            More Improvement →
+          </span>
         </div>
 
         {/* Bottom Explanatory Caption (Rendered ONLY when showBottomCaption is true) */}
