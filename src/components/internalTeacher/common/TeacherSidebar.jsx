@@ -158,13 +158,18 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Student Feedback" : undefined}
             >
-              <div className="shrink-0 flex items-center justify-center">
+              <div className="shrink-0 flex items-center justify-center relative">
                 <StudentFeedbackIcon
                   className={`w-5 h-5 transition-colors ${location.pathname.includes("/internal-teacher/student-feedback")
                     ? "text-[#080808]"
                     : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                     }`}
                 />
+                {collapsed && (
+                  <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-[#038AF9] text-white flex items-center justify-center ring-2 ring-white shadow-2xs">
+                    1
+                  </span>
+                )}
               </div>
               {!collapsed && <span className="flex-1 truncate">Student Feedback</span>}
               {!collapsed && (
@@ -175,7 +180,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             </NavLink>
 
             {/* 3. My Work Collapsible Dropdown */}
-            <div className="space-y-1">
+            <div className="space-y-1 relative group">
               <button
                 type="button"
                 onClick={() => setMyWorkOpen(!myWorkOpen)}
@@ -186,10 +191,17 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 title={collapsed ? "My Work" : undefined}
               >
                 <div className="flex items-center gap-3.5">
-                  <MyWorkIcon
-                    className={`w-5 h-5 shrink-0 ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                      }`}
-                  />
+                  <div className="relative shrink-0 flex items-center justify-center">
+                    <MyWorkIcon
+                      className={`w-5 h-5 ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
+                        }`}
+                    />
+                    {collapsed && (
+                      <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-[#038AF9] text-white flex items-center justify-center ring-2 ring-white shadow-2xs">
+                        1
+                      </span>
+                    )}
+                  </div>
                   {!collapsed && (
                     <span className="text-base font-medium">My Work</span>
                   )}
@@ -207,7 +219,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 )}
               </button>
 
-              {/* My Work Sub-links */}
+              {/* Uncollapsed My Work Sub-links */}
               {!collapsed && myWorkOpen && (
                 <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
                   <NavLink
@@ -235,6 +247,42 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   </NavLink>
                 </div>
               )}
+
+              {/* Collapsed My Work Flyout Popover Menu */}
+              {collapsed && (
+                <div className="absolute left-full top-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                  <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[200px] space-y-2 font-urbanist">
+                    <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                      My Work
+                    </div>
+                    <NavLink
+                      to="/internal-teacher/my-work/activity-task"
+                      className={({ isActive }) =>
+                        `flex items-center justify-between px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
+                          ? "bg-blue-50 text-[#038AF9] font-semibold"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                        }`
+                      }
+                    >
+                      <span>Activity task</span>
+                      <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                        1
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/internal-teacher/my-work/my-activity"
+                      className={({ isActive }) =>
+                        `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
+                          ? "bg-blue-50 text-[#038AF9] font-semibold"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                        }`
+                      }
+                    >
+                      My activity
+                    </NavLink>
+                  </div>
+                </div>
+              )}
             </div>
           </nav>
         </div>
@@ -242,7 +290,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         {/* Bottom Menu Items */}
         <div className="px-3 py-4 border-t border-gray-100 space-y-1 font-urbanist">
           {/* Settings Collapsible Dropdown */}
-          <div className="space-y-1">
+          <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
@@ -300,6 +348,39 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 >
                   Followed school
                 </NavLink>
+              </div>
+            )}
+
+            {/* Collapsed Settings Flyout Popover */}
+            {collapsed && (
+              <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[180px] space-y-2 font-urbanist">
+                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                    Settings
+                  </div>
+                  <NavLink
+                    to="/internal-teacher/setting/general"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
+                        ? "bg-blue-50 text-[#038AF9] font-semibold"
+                        : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    General
+                  </NavLink>
+                  <NavLink
+                    to="/internal-teacher/setting/followed-schools"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
+                        ? "bg-blue-50 text-[#038AF9] font-semibold"
+                        : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    Followed school
+                  </NavLink>
+                </div>
               </div>
             )}
           </div>

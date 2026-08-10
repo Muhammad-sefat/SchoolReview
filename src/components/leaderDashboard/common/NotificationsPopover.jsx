@@ -63,8 +63,10 @@ const CloseCrossIcon = () => (
   </svg>
 )
 
-const NotificationsPopover = ({ onClose, unreadCount, onMarkAllRead }) => {
+const NotificationsPopover = ({ isOpen = true, onClose, unreadCount, onMarkAllRead }) => {
   const [data, setData] = useState(NOTIFICATIONS_INITIAL_DATA)
+
+  if (isOpen === false) return null
 
   const handleMarkAllAsRead = () => {
     setData((prev) => ({

@@ -62,6 +62,10 @@ import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview"
 import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools"
 import EvaluatorReports from "../pages/evaluator/EvaluatorReports"
 import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral"
+import ExternalObserverLayout from "../layout/ExternalObserverLayout"
+import ExternalObserverActiveTasks from "../pages/externalObserver/ExternalObserverActiveTasks"
+import ExternalObserverMyActivity from "../pages/externalObserver/ExternalObserverMyActivity"
+import ExternalObserverSchoolAccess from "../pages/externalObserver/ExternalObserverSchoolAccess"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -206,6 +210,21 @@ const router = createBrowserRouter([
       { path: "setting/general", element: <EvaluatorGeneral /> },
       { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
       { path: "*", element: <Navigate to="/evaluator/overview" replace /> },
+    ],
+  },
+
+  // 7. External Observer Dashboard
+  {
+    path: "/external-observer",
+    element: <ExternalObserverLayout />,
+    children: [
+      { path: "", element: <ExternalObserverActiveTasks /> },
+      { path: "my-work/active-task", element: <ExternalObserverActiveTasks /> },
+      { path: "my-work/my-activity", element: <ExternalObserverMyActivity /> },
+      { path: "school-access", element: <ExternalObserverSchoolAccess /> },
+      { path: "setting/general", element: <TeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
+      { path: "*", element: <Navigate to="/external-observer" replace /> },
     ],
   },
 
