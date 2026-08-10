@@ -24,9 +24,9 @@ const UserStarIcon = ({ width = 20, height = 20, fill = "#038AF9" }) => (
 // User Provided Exact Modal Edit Pencil SVG Icon
 const ModalEditPencilIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
-    <path d="M11.7255 3.23527C12.3465 2.56246 12.657 2.22606 12.9869 2.02984C13.783 1.55636 14.7633 1.54164 15.5727 1.991C15.9081 2.17723 16.2281 2.50416 16.8682 3.15803C17.5083 3.8119 17.8284 4.13883 18.0106 4.4815C18.4506 5.30833 18.4361 6.30972 17.9726 7.12298C17.7806 7.46003 17.4512 7.77721 16.7926 8.41156L8.95623 15.9593C7.70813 17.1615 7.08406 17.7626 6.30411 18.0671C5.52416 18.3718 4.66673 18.3494 2.95186 18.3046L2.71855 18.2985C2.19649 18.2848 1.93546 18.278 1.78372 18.1057C1.63198 17.9336 1.6527 17.6676 1.69413 17.1359L1.71663 16.8471C1.83324 15.3503 1.89154 14.602 2.18382 13.9292C2.4761 13.2565 2.98026 12.7103 3.98859 11.6178L11.7255 3.23527Z" stroke="#038AF9" strokeWidth="1.25" strokeLinejoin="round"/>
-    <path d="M10.8359 3.33594L16.6693 9.16927" stroke="#038AF9" strokeWidth="1.25" strokeLinejoin="round"/>
-    <path d="M11.6641 18.3359H18.3307" stroke="#038AF9" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M11.7255 3.23527C12.3465 2.56246 12.657 2.22606 12.9869 2.02984C13.783 1.55636 14.7633 1.54164 15.5727 1.991C15.9081 2.17723 16.2281 2.50416 16.8682 3.15803C17.5083 3.8119 17.8284 4.13883 18.0106 4.4815C18.4506 5.30833 18.4361 6.30972 17.9726 7.12298C17.7806 7.46003 17.4512 7.77721 16.7926 8.41156L8.95623 15.9593C7.70813 17.1615 7.08406 17.7626 6.30411 18.0671C5.52416 18.3718 4.66673 18.3494 2.95186 18.3046L2.71855 18.2985C2.19649 18.2848 1.93546 18.278 1.78372 18.1057C1.63198 17.9336 1.6527 17.6676 1.69413 17.1359L1.71663 16.8471C1.83324 15.3503 1.89154 14.602 2.18382 13.9292C2.4761 13.2565 2.98026 12.7103 3.98859 11.6178L11.7255 3.23527Z" stroke="#038AF9" strokeWidth="1.25" strokeLinejoin="round" />
+    <path d="M10.8359 3.33594L16.6693 9.16927" stroke="#038AF9" strokeWidth="1.25" strokeLinejoin="round" />
+    <path d="M11.6641 18.3359H18.3307" stroke="#038AF9" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
@@ -81,7 +81,7 @@ const ReviewBreakdownModal = ({ isOpen, onClose, onEditCategory }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[1572px] w-[95vw] rounded-[28px] p-6 sm:p-8 bg-white border border-gray-100 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto">
-        
+
         {/* Category Pills Navigation Bar */}
         <div className="flex items-center gap-2.5 overflow-x-auto pb-3 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {CATEGORIES.map((cat) => {
@@ -91,11 +91,10 @@ const ReviewBreakdownModal = ({ isOpen, onClose, onEditCategory }) => {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-[18px] font-normal transition-all whitespace-nowrap cursor-pointer ${
-                  isActive
-                    ? "border border-[#038AF9] text-[#080808] bg-white shadow-2xs"
-                    : "border border-gray-200/90 text-[#080808] hover:bg-gray-50 bg-white"
-                }`}
+                className={`px-5 py-2 rounded-full text-[18px] font-normal transition-all whitespace-nowrap cursor-pointer ${isActive
+                  ? "border border-[#038AF9] text-[#080808] bg-white shadow-2xs"
+                  : "border border-gray-200/90 text-[#080808] hover:bg-gray-50 bg-white"
+                  }`}
               >
                 {cat}
               </button>
@@ -104,8 +103,8 @@ const ReviewBreakdownModal = ({ isOpen, onClose, onEditCategory }) => {
         </div>
 
         {/* Modal Section Header */}
-        <div className="flex items-center justify-between gap-4 pt-4 pb-2 border-b border-dashed border-gray-200/80">
-          <h2 className="text-[22px] sm:text-[24px] font-semibold text-[#080808]">
+        <div className="flex items-center  gap-4 pt-4 pb-6 ">
+          <h2 className="text-[24px] sm:text-[24px] font-semibold text-[#080808]">
             {activeCategory}
           </h2>
 
@@ -126,25 +125,25 @@ const ReviewBreakdownModal = ({ isOpen, onClose, onEditCategory }) => {
           <Table containerClassName="border border-gray-100 rounded-2xl bg-white shadow-2xs overflow-hidden" className="w-full">
             <TableHeader>
               <TableRow className="bg-gray-50/40 border-b border-gray-100">
-                <TableHead className="text-[15px] font-medium text-[#5A5A5A] py-3.5 pl-6 w-[25%]">Metric</TableHead>
-                <TableHead className="text-[15px] font-medium text-[#5A5A5A] py-3.5 w-[20%]">Score</TableHead>
-                <TableHead className="text-[15px] font-medium text-[#5A5A5A] py-3.5 pr-6 w-[55%]">Your Comments</TableHead>
+                <TableHead className="text-[16px] font-medium text-[#5A5A5A] py-3.5 pl-6 w-[25%]">Metric</TableHead>
+                <TableHead className="text-[16px] font-medium text-[#5A5A5A] py-3.5 w-[20%]">Score</TableHead>
+                <TableHead className="text-[16px] font-medium text-[#5A5A5A] py-3.5 pr-6 w-[55%]">Your Comments</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentMetrics.length > 0 ? (
                 currentMetrics.map((row, idx) => (
                   <TableRow key={idx} className="border-b border-gray-50/80 hover:bg-gray-50/50 transition-colors">
-                    <TableCell className="text-[15px] font-normal text-[#080808] pl-6 py-4 whitespace-nowrap">
+                    <TableCell className="text-[16px] font-normal text-[#080808] pl-6 py-4 whitespace-nowrap">
                       {row.metric}
                     </TableCell>
                     <TableCell className="py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-1.5 text-[15px] font-medium text-[#080808]">
+                      <div className="flex items-center gap-1.5 text-[16px] font-normal text-[#080808]">
                         <UserStarIcon width={16} height={16} fill="#038AF9" />
                         <span>{row.score}</span>
                       </div>
                     </TableCell>
-                    <TableCell className="text-[15px] font-normal text-[#080808] pr-6 py-4">
+                    <TableCell className="text-[16px] font-normal text-[#080808] pr-6 py-4">
                       {row.comments}
                     </TableCell>
                   </TableRow>

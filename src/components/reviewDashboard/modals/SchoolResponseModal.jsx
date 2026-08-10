@@ -6,8 +6,8 @@ const SchoolResponseModal = ({ isOpen, onClose, responseData }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[780px] w-[95vw] rounded-[24px] p-6 sm:p-8 bg-white border border-gray-100 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto">
-        
+      <DialogContent className="max-w-[780px] w-[95vw] rounded-3xl p-6 sm:p-8 bg-white border border-gray-100 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto">
+
         {/* Modal Title Header */}
         <div className="pb-4">
           <h2 className="text-[22px] sm:text-[24px] font-semibold text-[#080808] leading-tight">
