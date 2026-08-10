@@ -8,13 +8,17 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table"
+import SchoolResponseModal from "@/components/reviewDashboard/modals/SchoolResponseModal"
+import ReviewBreakdownModal from "@/components/reviewDashboard/modals/ReviewBreakdownModal"
+import EditCategoryReviewModal from "@/components/reviewDashboard/modals/EditCategoryReviewModal"
 
-const SmallStarIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="none">
+// User Provided Star SVG Icon
+const UserStarIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" fill="none" className="shrink-0 inline-block">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M7.12074 1.97025C7.55734 1.1219 8.7812 1.1219 9.2178 1.97025L10.6888 4.82887C10.7132 4.8763 10.7591 4.90932 10.8121 4.91769L14.0097 5.42202C14.9581 5.5716 15.336 6.72252 14.6578 7.39598L12.3687 9.66898C12.3308 9.70665 12.3133 9.75992 12.3217 9.81245L12.8263 12.9848C12.9758 13.925 11.9859 14.6366 11.1296 14.2046L8.2456 12.7496C8.19767 12.7254 8.14087 12.7254 8.09294 12.7496L5.20896 14.2046C4.35264 14.6366 3.36276 13.925 3.51229 12.9848L4.01683 9.81245C4.02518 9.75992 4.00771 9.70665 3.9698 9.66898L1.68072 7.39598C1.00256 6.72252 1.38048 5.5716 2.32888 5.42202L5.52638 4.91769C5.57947 4.90932 5.62532 4.8763 5.64973 4.82887L7.12074 1.97025Z"
+      d="M8.89506 2.45939C9.44081 1.39895 10.9706 1.39895 11.5164 2.45939L13.3551 6.03267C13.3856 6.09196 13.443 6.13323 13.5093 6.14369L17.5062 6.7741C18.6917 6.96108 19.1641 8.39973 18.3164 9.24156L15.4551 12.0828C15.4076 12.1299 15.3858 12.1965 15.3963 12.2621L16.027 16.2276C16.2139 17.4028 14.9765 18.2923 13.9061 17.7523L10.3011 15.9336C10.2412 15.9033 10.1702 15.9033 10.1103 15.9336L6.50534 17.7523C5.43494 18.2923 4.19759 17.4028 4.3845 16.2276L5.01518 12.2621C5.02562 12.1965 5.00378 12.1299 4.95639 12.0828L2.09504 9.24156C1.24734 8.39973 1.71974 6.96108 2.90524 6.7741L6.90212 6.14369C6.96848 6.13323 7.02579 6.09196 7.0563 6.03267L8.89506 2.45939Z"
       fill="#038AF9"
     />
   </svg>
@@ -122,25 +126,47 @@ const INITIAL_SCHOOL_REVIEWS = [
   },
 ]
 
-const MySchoolReviewsTable = () => {
-  const [reviewsData, setReviewsData] = useState(INITIAL_SCHOOL_REVIEWS)
+const MySchoolReviewsTable = ({ initialData }) => {
+  const [reviewsData, setReviewsData] = useState(initialData || INITIAL_SCHOOL_REVIEWS)
   const [deleteTarget, setDeleteTarget] = useState(null)
   const [removedInfoTarget, setRemovedInfoTarget] = useState(null)
+  const [selectedResponseTarget, setSelectedResponseTarget] = useState(null)
+  const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
+  const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] = useState(false)
+  const [activeCategoryForEdit, setActiveCategoryForEdit] = useState("Wellbeing")
 
   const handleDeleteConfirm = () => {
     if (deleteTarget) {
       const targetItem = deleteTarget
       setReviewsData((prev) => prev.filter((item) => item.id !== deleteTarget.id))
       setDeleteTarget(null)
-      // Show the "Review removed" info modal after delete confirmation
       setRemovedInfoTarget(targetItem)
     }
+  }
+
+  const handleOpenResponse = (row) => {
+    setSelectedResponseTarget(row)
+  }
+
+  const handleOpenBreakdown = (row) => {
+    setIsBreakdownModalOpen(true)
+  }
+
+  const handleOpenEditCategory = (catName) => {
+    setActiveCategoryForEdit(catName || "Wellbeing")
+    setIsBreakdownModalOpen(false)
+    setIsEditCategoryModalOpen(true)
+  }
+
+  const handleCloseEditCategoryModal = () => {
+    setIsEditCategoryModalOpen(false)
+    setIsBreakdownModalOpen(true)
   }
 
   return (
     <div className="w-full bg-white rounded-3xl border border-gray-100 p-6 sm:p-8 shadow-xs font-urbanist relative">
       <div className="w-full overflow-x-auto no-scrollbar">
-        <Table className="w-full text-left border-collapse">
+        <Table className="w-full text-left border-collapse min-w-[750px]">
           <TableHeader>
             <TableRow className="border-b border-gray-100 bg-[#FAFAFA]/60 hover:bg-[#FAFAFA]/60">
               <TableHead className="py-4 px-6 text-[16px] font-normal text-secondary h-auto">
@@ -171,19 +197,18 @@ const MySchoolReviewsTable = () => {
               >
                 {/* Your Feedback Cell */}
                 <TableCell className="py-5 px-6 space-y-1 max-w-sm">
-                  <h4 className="text-[16px] font-normal text-textBlack text-[#080808]">
+                  <h4 className="text-[16px] font-normal text-[#080808]">
                     {row.title}
                   </h4>
                   <div className="flex items-center gap-1.5 text-[12px] font-normal text-secondary flex-wrap">
                     <span className="text-[#038AF9] font-medium flex items-center gap-1">
-                      <SmallStarIcon /> {row.rating}
+                      <UserStarIcon /> {row.rating}
                     </span>
                     <span>|</span>
                     <span>{row.date}</span>
                     <span>|</span>
                     <span>{row.school}</span>
                     <span>|</span>
-                    {/* Status badge: text-[#E53935] for "Removed by moderation", text-[#66BB6A] for Active */}
                     {row.status === "Removed by moderation" ? (
                       <button
                         type="button"
@@ -200,14 +225,15 @@ const MySchoolReviewsTable = () => {
                   </div>
                 </TableCell>
 
-                {/* School Responses Cell: Title 16px text-textBlack font-normal, subtext 14px */}
+                {/* School Responses Cell */}
                 <TableCell className="py-5 px-6">
                   {row.responseDate ? (
                     <div className="space-y-0.5">
-                      <p className="text-[16px] text-textBlack text-[#080808] font-normal leading-normal">
+                      <p className="text-[16px] text-[#080808] font-normal leading-normal">
                         {row.response}{" "}
                         <button
                           type="button"
+                          onClick={() => handleOpenResponse(row)}
                           className="text-[#038AF9] font-medium hover:underline cursor-pointer"
                         >
                           Read Response
@@ -224,7 +250,7 @@ const MySchoolReviewsTable = () => {
                   )}
                 </TableCell>
 
-                {/* Community Feedback Cell: 16px for likes, 14px for private text */}
+                {/* Community Feedback Cell */}
                 <TableCell className="py-5 px-6">
                   {row.private ? (
                     <span className="text-secondary text-[14px] font-normal">
@@ -243,8 +269,9 @@ const MySchoolReviewsTable = () => {
                   <div className="flex items-center justify-end gap-2">
                     <button
                       type="button"
+                      onClick={() => handleOpenBreakdown(row)}
                       className="w-8 h-8 rounded-full bg-[rgba(8,8,8,0.04)] hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer"
-                      title="Edit"
+                      title="Edit Review"
                     >
                       <EditIcon />
                     </button>
@@ -252,7 +279,7 @@ const MySchoolReviewsTable = () => {
                       type="button"
                       onClick={() => setDeleteTarget(row)}
                       className="w-8 h-8 rounded-full bg-[rgba(8,8,8,0.04)] hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer"
-                      title="Delete"
+                      title="Delete Review"
                     >
                       <DeleteIcon />
                     </button>
@@ -264,11 +291,10 @@ const MySchoolReviewsTable = () => {
         </Table>
       </div>
 
-      {/* Delete Review Modal (Image 1) */}
+      {/* Delete Review Modal */}
       {deleteTarget && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 font-urbanist">
           <div className="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-7 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
-            {/* Modal Header */}
             <div className="flex items-center justify-between">
               <h3 className="text-[20px] font-semibold text-[#080808]">
                 Delete Review?
@@ -281,16 +307,10 @@ const MySchoolReviewsTable = () => {
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Dotted Divider */}
             <div className="border-b border-dashed border-gray-200/80 my-2" />
-
-            {/* Modal Body */}
             <p className="text-[16px] font-normal text-textPrimary py-1">
               Are you sure you want to delete this review?
             </p>
-
-            {/* Modal Actions */}
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 type="button"
@@ -311,11 +331,10 @@ const MySchoolReviewsTable = () => {
         </div>
       )}
 
-      {/* Review Removed Info Modal (Image 2 - shown after delete confirmation or status click) */}
+      {/* Review Removed Info Modal */}
       {removedInfoTarget && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 font-urbanist">
           <div className="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-7 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
-            {/* Modal Header */}
             <div className="flex items-center justify-between">
               <h3 className="text-[20px] font-semibold text-[#080808]">
                 Review removed
@@ -328,22 +347,14 @@ const MySchoolReviewsTable = () => {
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Dotted Divider */}
             <div className="border-b border-dashed border-gray-200/80 my-2" />
-
-            {/* Modal Body */}
             <p className="text-[16px] font-normal text-textPrimary leading-relaxed">
               This review has been removed after moderation because it does not meet our guidelines.
             </p>
-
-            {/* Blue Info Box */}
             <div className="bg-[#E6F4FE] border border-[#B3E1FF] text-[#038AF9] rounded-2xl p-4 flex items-center gap-3 text-[14px] font-medium my-3">
               <InfoCircleIcon />
               <span>False or misleading information</span>
             </div>
-
-            {/* Learn More Link */}
             <div className="text-center pt-2">
               <button
                 type="button"
@@ -356,6 +367,28 @@ const MySchoolReviewsTable = () => {
           </div>
         </div>
       )}
+
+      {/* Modal 1: Response from the School Modal (Image 2) */}
+      <SchoolResponseModal
+        isOpen={!!selectedResponseTarget}
+        onClose={() => setSelectedResponseTarget(null)}
+        responseData={selectedResponseTarget}
+      />
+
+      {/* Modal 2: Category Breakdown Modal (Image 3) */}
+      <ReviewBreakdownModal
+        isOpen={isBreakdownModalOpen}
+        onClose={() => setIsBreakdownModalOpen(false)}
+        onEditCategory={handleOpenEditCategory}
+      />
+
+      {/* Modal 3: Edit Category Review Modal (Image 4) */}
+      <EditCategoryReviewModal
+        isOpen={isEditCategoryModalOpen}
+        onClose={handleCloseEditCategoryModal}
+        onSave={handleCloseEditCategoryModal}
+        categoryName={activeCategoryForEdit}
+      />
     </div>
   )
 }

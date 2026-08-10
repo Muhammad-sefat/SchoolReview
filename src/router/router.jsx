@@ -67,6 +67,12 @@ import ExternalObserverActiveTasks from "../pages/externalObserver/ExternalObser
 import ExternalObserverMyActivity from "../pages/externalObserver/ExternalObserverMyActivity"
 import ExternalObserverSchoolAccess from "../pages/externalObserver/ExternalObserverSchoolAccess"
 
+import ReviewDashboardLayout from "../layout/ReviewDashboardLayout"
+import MyFeedbackPage from "../pages/reviewDashboard/MyFeedbackPage"
+import MyProfilePage from "../pages/reviewDashboard/MyProfilePage"
+import FollowedSchoolsPage from "../pages/reviewDashboard/FollowedSchoolsPage"
+import ReviewSettingsPage from "../pages/reviewDashboard/ReviewSettingsPage"
+
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
   {
@@ -247,7 +253,22 @@ const router = createBrowserRouter([
     ],
   },
 
-  // 5. Main Site & Admin Dashboard
+  // 5. Review Dashboard Routes
+  {
+    path: "/review-dashboard",
+    element: <ReviewDashboardLayout />,
+    children: [
+      { path: "", element: <MyFeedbackPage /> },
+      { path: "my-feedback", element: <MyFeedbackPage /> },
+      { path: "my-profile", element: <MyProfilePage /> },
+      { path: "followed-schools", element: <FollowedSchoolsPage /> },
+      { path: "setting", element: <ReviewSettingsPage /> },
+      { path: "setting/general", element: <ReviewSettingsPage /> },
+      { path: "setting/followed-schools", element: <FollowedSchoolsPage /> },
+    ],
+  },
+
+  // 6. Main Site & Admin Dashboard
   {
     path: "/",
     element: <Layout />,
