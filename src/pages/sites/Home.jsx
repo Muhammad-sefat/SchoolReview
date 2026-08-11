@@ -1,8 +1,12 @@
-import React from 'react'
+import { ScrollRestoration } from "react-router-dom"
+import HomeBanner from "../../components/home/HomeBanner"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <ScrollRestoration />
+      <HomeBanner />
+    </>
   )
 }
 
