@@ -26,7 +26,7 @@ const StudentSchoolReview = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
 
   const [formData, setFormData] = useState({
-    school: "", // Initially empty so school search dropdown shows first by default
+    school: "",
     role: "student",
     title: "",
     workingWell: "",
