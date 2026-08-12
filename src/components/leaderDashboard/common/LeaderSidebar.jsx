@@ -165,7 +165,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         {/* Bottom Menu Items - Matching Top Default Text & Colors */}
         <div className="px-3 py-4 border-t border-gray-100 space-y-2 font-urbanist">
           {/* Settings Collapsible Dropdown */}
-          <div className="space-y-1">
+          <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
@@ -201,7 +201,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               )}
             </button>
 
-            {/* Settings Sub-links */}
+            {/* Uncollapsed Settings Sub-links */}
             {!collapsed && settingsOpen && (
               <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
                 <NavLink
@@ -242,6 +242,55 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 >
                   Followed Schools
                 </NavLink>
+              </div>
+            )}
+
+            {/* Collapsed Settings Flyout Popover */}
+            {collapsed && (
+              <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[200px] space-y-2 font-urbanist">
+                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                    Settings
+                  </div>
+                  <NavLink
+                    to="/leader-dashboard/setting/branding-profile"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive || location.pathname === "/leader-dashboard/setting"
+                        ? "bg-blue-50 text-[#038AF9] font-semibold"
+                        : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    School Branding Profile
+                  </NavLink>
+                  <NavLink
+                    to="/leader-dashboard/setting/user-admin"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-blue-50 text-[#038AF9] font-semibold" : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    User Administration
+                  </NavLink>
+                  <NavLink
+                    to="/leader-dashboard/setting/general"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-blue-50 text-[#038AF9] font-semibold" : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    General
+                  </NavLink>
+                  <NavLink
+                    to="/leader-dashboard/setting/followed-schools"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-blue-50 text-[#038AF9] font-semibold" : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    Followed Schools
+                  </NavLink>
+                </div>
               </div>
             )}
           </div>
