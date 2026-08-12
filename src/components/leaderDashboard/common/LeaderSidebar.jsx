@@ -87,20 +87,21 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-[106px]" : "w-72"
           } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-              ? "flex-col items-center justify-center gap-3 py-4 px-3"
-              : "flex-row items-center justify-between px-5 py-5"
+            className={`flex flex-row items-center justify-between border-b border-gray-50 transition-all duration-300 ${collapsed ? "px-3.5 py-4" : "px-5 py-5"
               }`}
           >
             {/* Logo Badge */}
             <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+              <div
+                className={`rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all ${collapsed ? "p-2.5" : "p-3"
+                  }`}
+              >
                 <DashboardLogo />
               </div>
             </div>
@@ -109,13 +110,13 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             <button
               type="button"
               onClick={() => setCollapsed(!collapsed)}
-              className="w-9 h-9 rounded-full border border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+              className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
               title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {collapsed ? (
-                <ChevronRight className="w-6 h-6 stroke-[2.25] text-[#038AF9]" />
+                <ChevronRight className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
               ) : (
-                <ChevronLeft className="w-6 h-6 stroke-[2.25] text-[#038AF9]" />
+                <ChevronLeft className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
               )}
             </button>
           </div>
