@@ -9,8 +9,8 @@ const UserManagement = () => {
 
   return (
     <div className="w-full space-y-6 font-urbanist bg-gray-50/20 min-h-screen">
-      {/* User Role Pills Bar */}
-      <div className="flex flex-wrap items-center gap-3">
+      {/* User Role Pills Bar - Responsive Overflow Scroll */}
+      <div className="flex items-center gap-3 overflow-x-auto max-w-full pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {[
           { id: "teacher", label: "Teacher" },
           { id: "student", label: "Student" },
@@ -21,10 +21,11 @@ const UserManagement = () => {
             key={tab.id}
             type="button"
             onClick={() => setActiveUserTab(tab.id)}
-            className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer ${activeUserTab === tab.id
+            className={`px-6 py-2 rounded-full text-[18px] transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+              activeUserTab === tab.id
                 ? "bg-[#038AF9] text-white font-medium shadow-xs"
                 : "border border-gray-200/90 bg-white text-textPrimary font-normal hover:text-[#080808]"
-              }`}
+            }`}
           >
             {tab.label}
           </button>

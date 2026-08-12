@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Download, X, FileText } from "lucide-react"
-import { Title24, Title20 } from "@/components/typho/Title"
+import { Title24 } from "@/components/typho/Title"
 import {
   Dialog,
   DialogContent,
@@ -31,8 +31,8 @@ const ImportStudentModal = ({ isOpen, onClose }) => {
           </p>
         </DialogHeader>
 
-        {/* Box 1: Download Student Template */}
-        <div className="p-5 rounded-2xl border border-gray-200 bg-white space-y-4">
+        {/* Section 1: Download Student Template (Unboxed for consistent design) */}
+        <div className="space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <Title24 className="text-[#080808] font-medium">Download Student Template</Title24>
@@ -74,7 +74,7 @@ const ImportStudentModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Box 2: Upload CSV File */}
+        {/* Section 2: Upload CSV File */}
         <div className="space-y-4">
           <div>
             <Title24 className="text-[#080808] font-medium">Upload CSV File</Title24>

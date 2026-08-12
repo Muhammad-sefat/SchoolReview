@@ -96,16 +96,18 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
-          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
+          collapsed ? "w-[96px]" : "w-72"
+        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-              ? "flex-col items-center justify-center gap-3 p-3.5"
-              : "items-center justify-between px-6 py-4.5"
-              }`}
+            className={`flex transition-all duration-300 border-b border-gray-50 ${
+              collapsed
+                ? "flex-row items-center justify-between px-3.5 py-4"
+                : "flex-row items-center justify-between px-6 py-4.5"
+            }`}
           >
             <NavLink to="/internal-teacher" className="flex items-center gap-3">
               <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
