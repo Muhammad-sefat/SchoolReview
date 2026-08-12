@@ -32,17 +32,21 @@ const ContactSection = ({ register, setValue }) => {
 
   return (
     <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
-      <div className="lg:col-span-2 flex items-center gap-2">
-        <div className="w-28 sm:w-32 shrink-0">
-          <Title18 className="text-[#080808]">Contact</Title18>
-        </div>
+      <div
+        className="lg:col-span-2 flex items-center gap-1.5 cursor-pointer select-none"
+        onClick={() => setContactOpen(!contactOpen)}
+      >
         <button
           type="button"
-          onClick={() => setContactOpen(!contactOpen)}
+          onClick={(e) => {
+            e.stopPropagation()
+            setContactOpen(!contactOpen)
+          }}
           className="text-[#038AF9] hover:text-[#0270ce] transition-colors cursor-pointer shrink-0 p-0.5"
         >
           {contactOpen ? <ChevronUp className="w-5 h-5 stroke-[2.25]" /> : <ChevronDown className="w-5 h-5 stroke-[2.25]" />}
         </button>
+        <Title18 className="text-[#080808]">Contact</Title18>
       </div>
 
       {contactOpen && (
