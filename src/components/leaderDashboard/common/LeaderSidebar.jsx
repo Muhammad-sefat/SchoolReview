@@ -204,7 +204,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Uncollapsed Settings Sub-links */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+              <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                 <NavLink
                   to="/leader-dashboard/setting/branding-profile"
                   className={({ isActive }) =>
@@ -253,6 +253,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
                     Settings
                   </div>
+
                   <NavLink
                     to="/leader-dashboard/setting/branding-profile"
                     className={({ isActive }) =>
@@ -291,6 +292,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   >
                     Followed Schools
                   </NavLink>
+
+
                 </div>
               </div>
             )}
