@@ -57,7 +57,7 @@ const StudentRecognitionSlider = () => {
     <div className="w-full bg-white border border-gray-100 rounded-3xl p-6 sm:p-7 shadow-xs space-y-4 font-urbanist">
       {/* Header Row */}
       <div className="space-y-1">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-3">
           <h3 className="text-[24px] font-semibold text-textPrimary leading-tight">
             Student Recognition
           </h3>
@@ -83,9 +83,9 @@ const StudentRecognitionSlider = () => {
           </div>
         </div>
 
-        <p className="text-[16px] font-normal text-textPrimary mt-1">
+        {/* <p className="text-[16px] font-normal text-textPrimary mt-1">
           Click to mark this feedback as read.
-        </p>
+        </p> */}
       </div>
 
       {/* Swiper Slider */}
