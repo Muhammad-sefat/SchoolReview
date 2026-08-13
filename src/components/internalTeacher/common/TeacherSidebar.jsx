@@ -96,41 +96,42 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
-          collapsed ? "w-[96px]" : "w-72"
-        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-[106px]" : "w-72"
+          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex transition-all duration-300 border-b border-gray-50 ${
-              collapsed
-                ? "flex-row items-center justify-between px-3.5 py-4"
-                : "flex-row items-center justify-between px-6 py-4.5"
-            }`}
+            className={`flex flex-row items-center justify-between border-b border-gray-50 transition-all duration-300 ${collapsed ? "px-3.5 py-4" : "px-5 py-5"
+              }`}
           >
-            <NavLink to="/internal-teacher" className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+            {/* Logo Badge */}
+            <div className="flex items-center gap-3">
+              <div
+                className={`rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all ${collapsed ? "p-2.5" : "p-3"
+                  }`}
+              >
                 <DashboardLogo />
               </div>
-            </NavLink>
+            </div>
 
+            {/* Sidebar Toggle Expand/Collapse Button */}
             <button
               type="button"
               onClick={() => setCollapsed(!collapsed)}
-              className="w-9 h-9 rounded-xl border border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] shadow-2xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+              className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
               title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {collapsed ? (
-                <ChevronRight className="w-5 h-5 stroke-[2.25]" />
+                <ChevronRight className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
               ) : (
-                <ChevronLeft className="w-5 h-5 stroke-[2.25]" />
+                <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
               )}
             </button>
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-2 font-urbanist">
+          <nav className={`px-3 py-4 space-y-2 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {/* 1. Teaching Insights */}
             <NavLink
               to="/internal-teacher/teaching-insights"
@@ -142,7 +143,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             >
               <div className="shrink-0 flex items-center justify-center">
                 <TeachingInsightsIcon
-                  className={`w-5 h-5 transition-colors ${isPathActive("/internal-teacher/teaching-insights")
+                  className={`w-[22px] h-[22px] transition-colors ${isPathActive("/internal-teacher/teaching-insights")
                     ? "text-[#080808]"
                     : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                     }`}
@@ -162,7 +163,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             >
               <div className="shrink-0 flex items-center justify-center relative">
                 <StudentFeedbackIcon
-                  className={`w-5 h-5 transition-colors ${location.pathname.includes("/internal-teacher/student-feedback")
+                  className={`w-[22px] h-[22px] transition-colors ${location.pathname.includes("/internal-teacher/student-feedback")
                     ? "text-[#080808]"
                     : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                     }`}
@@ -195,7 +196,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <div className="flex items-center gap-3.5">
                   <div className="relative shrink-0 flex items-center justify-center">
                     <MyWorkIcon
-                      className={`w-5 h-5 ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
+                      className={`w-[22px] h-[22px] ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
                         }`}
                     />
                     {collapsed && (
@@ -302,9 +303,9 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
                 <Settings
-                  className={`w-5 h-5 shrink-0 ${settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
+                  className={`w-[22px] h-[22px] shrink-0 ${settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
                     }`}
                 />
                 {!collapsed && (
@@ -326,7 +327,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Settings Sub-links */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+              <div className="pl-9 pr-2 space-y-4 py-1.5 animate-fadeIn">
                 <NavLink
                   to="/internal-teacher/setting/general"
                   className={({ isActive }) =>
@@ -395,7 +396,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <HelpCircle className="w-[22px] h-[22px] shrink-0 stroke-[1.75]" />
             {!collapsed && <span>Get help</span>}
           </button>
 
@@ -407,7 +408,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <LogOut className="w-[22px] h-[22px] shrink-0 stroke-[1.75]" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>

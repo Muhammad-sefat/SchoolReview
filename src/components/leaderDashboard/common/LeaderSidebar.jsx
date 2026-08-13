@@ -122,7 +122,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3.5 py-4 space-y-3 font-urbanist">
+          <nav className={`px-3 py-4 space-y-2 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {navItems.map((item) => {
               const active = isPathActive(item.path)
               const IconComp = item.icon
@@ -131,7 +131,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center ${collapsed ? "mt-3" : "mt-0"}  gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${active
+                  className={`flex items-center   gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${active
                     ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                     : "text-[#5A5A5A] font-medium hover:bg-gray-50"
                     } ${collapsed ? "justify-center px-0" : ""}`}
