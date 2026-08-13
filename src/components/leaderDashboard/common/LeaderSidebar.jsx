@@ -114,15 +114,15 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {collapsed ? (
-                <ChevronRight className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
+                <ChevronRight className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
               ) : (
-                <ChevronLeft className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
+                <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
               )}
             </button>
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-2 font-urbanist">
+          <nav className="px-3.5 py-4 space-y-3 font-urbanist">
             {navItems.map((item) => {
               const active = isPathActive(item.path)
               const IconComp = item.icon
@@ -131,7 +131,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${active
+                  className={`flex items-center ${collapsed ? "mt-3" : "mt-0"}  gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${active
                     ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                     : "text-[#5A5A5A] font-medium hover:bg-gray-50"
                     } ${collapsed ? "justify-center px-0" : ""}`}
@@ -140,7 +140,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   {/* Icon with Top Notification Indicator when collapsed */}
                   <div className="shrink-0 flex items-center justify-center relative">
                     <IconComp
-                      className={`w-5 h-5 transition-colors ${active ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      className={`w-[22px] h-[22px] transition-colors ${active ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                         }`}
                     />
                     {collapsed && item.badge && (
@@ -164,21 +164,21 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Menu Items - Matching Top Default Text & Colors */}
-        <div className="px-3 py-4 border-t border-gray-100 space-y-2 font-urbanist">
+        <div className="px-3.5 py-4 border-t border-gray-100 space-y-3 font-urbanist">
           {/* Settings Collapsible Dropdown */}
           <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
               className={`w-full flex items-center justify-between transition-all duration-200 group cursor-pointer ${settingsOpen && isSettingsActive
-                ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
+                ? "px-3.5 py-3 rounded-xl border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                : "px-3.5 py-3 rounded-xl text-[#5A5A5A] font-medium hover:bg-gray-50"
                 } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
                 <Settings
-                  className={`w-5 h-5 shrink-0 transition-colors ${settingsOpen && isSettingsActive
+                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${settingsOpen && isSettingsActive
                     ? "text-[#080808] stroke-[2]"
                     : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
                     }`}
@@ -249,8 +249,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* Collapsed Settings Flyout Popover */}
             {collapsed && (
               <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
-                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[200px] space-y-2 font-urbanist">
-                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                <div className="bg-white border border-gray-200/90 rounded-2xl p-3 shadow-xl space-y-2 min-w-[200px]">
+                  <div className="text-xs font-semibold text-gray-400 px-2.5 pb-1 border-b border-gray-100">
                     Settings
                   </div>
 
@@ -303,11 +303,11 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
+            <HelpCircle className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Get help</span>}
           </button>
 
@@ -315,11 +315,11 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
+            <LogOut className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>
