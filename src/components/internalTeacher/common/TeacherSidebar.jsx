@@ -189,11 +189,13 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   </span>
                 )}
               </div>
-              {!collapsed && <span className="flex-1 truncate">Student Feedback</span>}
               {!collapsed && (
-                <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-[#038AF9] text-white">
-                  1
-                </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className="truncate">Student Feedback</span>
+                  <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+                    1
+                  </span>
+                </div>
               )}
             </NavLink>
 
@@ -202,10 +204,10 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               <button
                 type="button"
                 onClick={() => setMyWorkOpen(!myWorkOpen)}
-                className={`w-full flex items-center justify-between transition-all duration-200 group cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl transition-all duration-200 group cursor-pointer ${
                   myWorkOpen && isMyWorkActive
-                    ? "px-3.5 py-3 rounded-xl border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                    : "px-3.5 py-3 rounded-xl text-[#5A5A5A] font-medium hover:bg-gray-50"
+                    ? "border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                    : "text-[#5A5A5A] font-medium hover:bg-gray-50"
                 } ${collapsed ? "justify-center px-0" : ""}`}
                 title={collapsed ? "My Work" : undefined}
               >
@@ -225,32 +227,24 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     )}
                   </div>
                   {!collapsed && (
-                    <span
-                      className={`text-base transition-colors ${
-                        myWorkOpen && isMyWorkActive
-                          ? "text-[#080808] font-semibold"
-                          : "text-[#5A5A5A] font-medium group-hover:text-[#080808]"
-                      }`}
-                    >
-                      My Work
-                    </span>
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base font-medium">My Work</span>
+                      <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+                        1
+                      </span>
+                    </div>
                   )}
                 </div>
                 {!collapsed && (
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-[#038AF9] text-white">
-                      1
-                    </span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                        myWorkOpen ? "rotate-180 text-[#080808]" : ""
-                      }`}
-                    />
-                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                      myWorkOpen ? "rotate-180 text-[#080808]" : ""
+                    }`}
+                  />
                 )}
               </button>
 
-              {/* Uncollapsed My Work Sub-links matching LeaderSidebar space-y-6 */}
+              {/* Uncollapsed My Work Sub-links */}
               {!collapsed && myWorkOpen && (
                 <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                   <NavLink
@@ -258,7 +252,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     className={({ isActive }) =>
                       `block text-[15px] transition-colors ${
                         isActive
-                          ? "text-[#080808] font-semibold"
+                          ? "text-[#080808]"
                           : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
@@ -271,7 +265,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     className={({ isActive }) =>
                       `block text-[15px] transition-colors ${
                         isActive
-                          ? "text-[#080808] font-semibold"
+                          ? "text-[#080808]"
                           : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
@@ -293,7 +287,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                       className={({ isActive }) =>
                         `flex items-center justify-between px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
                           isActive
-                            ? "bg-blue-50 text-[#038AF9] font-semibold"
+                            ? "bg-blue-50 text-[#038AF9]"
                             : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
                         }`
                       }
@@ -308,7 +302,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                       className={({ isActive }) =>
                         `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
                           isActive
-                            ? "bg-blue-50 text-[#038AF9] font-semibold"
+                            ? "bg-blue-50 text-[#038AF9]"
                             : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
                         }`
                       }
@@ -373,7 +367,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   className={({ isActive }) =>
                     `block text-[15px] transition-colors ${
                       isActive
-                        ? "text-[#080808] font-semibold"
+                        ? "text-[#080808]"
                         : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
@@ -386,7 +380,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   className={({ isActive }) =>
                     `block text-[15px] transition-colors ${
                       isActive
-                        ? "text-[#080808] font-semibold"
+                        ? "text-[#080808]"
                         : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
@@ -408,7 +402,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     className={({ isActive }) =>
                       `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
                         isActive
-                          ? "bg-blue-50 text-[#038AF9] font-semibold"
+                          ? "bg-blue-50 text-[#038AF9]"
                           : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
                       }`
                     }
@@ -420,7 +414,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     className={({ isActive }) =>
                       `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
                         isActive
-                          ? "bg-blue-50 text-[#038AF9] font-semibold"
+                          ? "bg-blue-50 text-[#038AF9]"
                           : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
                       }`
                     }
