@@ -311,7 +311,7 @@ const ClassroomInsightsTab = () => {
   const currentRows = CATEGORY_INSIGHTS_DATA_MAP[activeSubTab] || CATEGORY_INSIGHTS_DATA_MAP["Classroom Climate"]
 
   return (
-    <div className="w-full bg-[#F6F6F6] rounded-3xl p-5 md:p-6 space-y-6 font-urbanist">
+    <div className="w-full bg-white rounded-3xl p-5 md:p-6 space-y-6 font-urbanist">
       <TeachingInsightsTab
         activeSubTab={activeSubTab}
         setActiveSubTab={setActiveSubTab}
