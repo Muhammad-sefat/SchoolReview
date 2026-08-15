@@ -6,7 +6,7 @@ import FeedbackSuggestionsSlider from "@/components/internalTeacher/studentFeedb
 
 const StudentFeedback = () => {
   return (
-    <div className="w-full space-y-6 font-urbanist pb-10">
+    <div className="w-full space-y-10 font-urbanist pb-10">
       {/* Top Header */}
       {/* <div className="space-y-1">
         <Title32 className="text-[#080808] leading-tight">
