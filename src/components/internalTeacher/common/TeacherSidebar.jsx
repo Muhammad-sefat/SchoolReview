@@ -131,7 +131,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className={`px-3 py-4 space-y-2 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
+          <nav className={`px-3 py-4 space-y-3 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {/* 1. Teaching Insights */}
             <NavLink
               to="/internal-teacher/teaching-insights"
@@ -206,7 +206,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     )}
                   </div>
                   {!collapsed && (
-                    <span className="text-base font-medium">My Work</span>
+                    <span className="text-base font-medium ">My Work</span>
                   )}
                 </div>
                 {!collapsed && (
@@ -240,7 +240,7 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   <NavLink
                     to="/internal-teacher/my-work/my-activity"
                     className={({ isActive }) =>
-                      `block text-[16px] transition-colors ${isActive
+                      `block text-[16px] transition-colors mt-4 ${isActive
                         ? "text-[#080808] font-semibold"
                         : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
