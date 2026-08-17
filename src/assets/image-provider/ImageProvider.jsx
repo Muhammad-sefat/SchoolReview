@@ -10,6 +10,15 @@ import share from "../images/share.png";
 import report from "../images/report.png";
 import teacher from "../images/teacher.png";
 import thank from "../images/thank.png";
+import teacherBannerImg from "../images/teacherbanner1.png";
+import schoolBannerImg from "../images/schoolbanner.png";
+import youschool from "../images/yourschool.png";
+import youschool1 from "../images/yourschool1.png";
+import evaluation from "../images/evaluation.png";
+import evaluation1 from "../images/evaluation1.png";
+import minischoolreports from "../images/minischoolreports.png";
+import minischoolreports1 from "../images/minischoolreports1.png";
+import schoolreports from "../images/schoolreports.png";
 
 export const ImageProvider = {
     banner,
@@ -23,5 +32,14 @@ export const ImageProvider = {
     share,
     report,
     teacher,
-    thank
+    thank,
+    teacherBannerImg,
+    schoolBannerImg,
+    youschool,
+    youschool1,
+    evaluation,
+    evaluation1,
+    minischoolreports,
+    minischoolreports1,
+    schoolreports
 };

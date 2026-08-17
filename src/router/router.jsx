@@ -2,6 +2,12 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import AdminLayout from "../layout/DashboardLayout"
 import Home from "../pages/sites/Home"
+import ForSchools from "../pages/sites/ForSchools"
+import ForTeachers from "../pages/sites/ForTeachers"
+import ForParents from "../pages/sites/ForParents"
+import ForStudents from "../pages/sites/ForStudents"
+import ForSchoolEvaluators from "../pages/sites/ForSchoolEvaluators"
+import ForTeacherObservers from "../pages/sites/ForTeacherObservers"
 import Dashboard from "../pages/dashboard/Dashboard"
 import ComponentsShowcase from "../pages/dashboard/ComponentsShowcase"
 import Layout from "../layout/Layout"
@@ -232,7 +238,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ path: "", element: <Home /> }],
+    children: [
+      { path: "", element: <Home /> },
+      { path: "for-schools", element: <ForSchools /> },
+      { path: "for-teachers", element: <ForTeachers /> },
+      { path: "for-parents", element: <ForParents /> },
+      { path: "for-students", element: <ForStudents /> },
+      { path: "for-school-evaluators", element: <ForSchoolEvaluators /> },
+      { path: "for-teacher-observers", element: <ForTeacherObservers /> },
+    ],
   },
   {
     path: "/dashboard",
