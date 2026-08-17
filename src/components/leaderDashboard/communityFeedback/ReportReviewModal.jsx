@@ -35,7 +35,7 @@ const ReportReviewModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-      <DialogContent className="max-w-[560px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl space-y-6 font-urbanist max-h-[92vh] overflow-y-auto">
+      <DialogContent className="max-w-[560px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl  font-urbanist max-h-[92vh] overflow-y-auto">
         {/* Modal Header */}
         <DialogHeader className="space-y-0 text-left">
           <div className="flex items-center justify-between">

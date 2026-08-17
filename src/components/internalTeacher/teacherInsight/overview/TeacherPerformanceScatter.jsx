@@ -92,6 +92,7 @@ const TeacherPerformanceScatter = () => {
         <PrioprityArea
           title="Priority Areas by Performance"
           groups={TEACHER_PRIORITY_GROUPS}
+          type="teacher"
         />
       </div>
 
