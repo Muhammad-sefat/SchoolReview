@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import { ChevronDown, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  LogOut,
+  Settings,
+  HelpCircle,
+} from "lucide-react"
+
 import { DashboardLogo } from "@/components/icons/Logo/AllLogo"
 import GetHelpModal from "@/components/leaderDashboard/setting/GetHelpModal"
 import LogoutModal from "@/components/leaderDashboard/setting/LogoutModal"
@@ -11,7 +19,7 @@ const EvaluatorOverviewIcon = ({ className = "w-5 h-5" }) => (
     <path d="M21 6.75C21 4.67893 19.3211 3 17.25 3C15.1789 3 13.5 4.67893 13.5 6.75C13.5 8.82107 15.1789 10.5 17.25 10.5C19.3211 10.5 21 8.82107 21 6.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     <path d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 10.5 6.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     <path d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    <path d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    <path d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 10.5 19.3211 10.5 17.25Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
   </svg>
 )
 
@@ -29,9 +37,9 @@ const EvaluatorMySchoolsIcon = ({ className = "w-5 h-5" }) => (
 
 const EvaluatorReportsIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M16 3.38462V2M19.6306 4.36369L20.6081 3.38462M20.6176 8H22" stroke="#1F1F21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2" stroke="#1F1F21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M11.8497 8.00781H15.0718C15.4507 8.00781 15.7578 8.32272 15.7578 8.71119V12.0364M2.75781 13.9593C5.03105 14.2251 10.7353 13.5147 14.8894 8.8906" stroke="#1F1F21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M16 3.38462V2M19.6306 4.36369L20.6081 3.38462M20.6176 8H22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M11.8497 8.00781H15.0718C15.4507 8.00781 15.7578 8.32272 15.7578 8.71119V12.0364M2.75781 13.9593C5.03105 14.2251 10.7353 13.5147 14.8894 8.8906" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
@@ -70,54 +78,75 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Sidebar Container - w-[106px] when collapsed matching LeaderSidebar */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
-          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
+          collapsed ? "w-[106px]" : "w-72"
+        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-              ? "flex-col items-center justify-center gap-3 p-3.5"
-              : "items-center justify-between px-6 py-4.5"
-              }`}
+            className={`flex flex-row items-center border-b border-gray-50 transition-all duration-300 ${
+              collapsed ? "justify-center px-3.5 py-4" : "justify-between px-5 py-5"
+            }`}
           >
-            <NavLink to="/evaluator/overview" className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
-                <DashboardLogo />
+            {/* Logo Badge Container */}
+            {collapsed ? (
+              <div
+                onClick={() => setCollapsed(false)}
+                className="relative group cursor-pointer"
+                title="Expand sidebar"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all duration-300 group-hover:bg-[#0270ce] group-hover:scale-105 active:scale-95 relative overflow-hidden">
+                  {/* Brand Logo - Smoothly fades out and scales down on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-75">
+                    <DashboardLogo />
+                  </div>
+                  {/* Expand ChevronRight Icon - Smoothly fades in and scales up on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                    <ChevronRight className="w-5 h-5 stroke-[2.5] text-white" />
+                  </div>
+                </div>
               </div>
-            </NavLink>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+                    <DashboardLogo />
+                  </div>
+                </div>
 
-            <button
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="w-9 h-9 rounded-xl border border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] shadow-2xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
-              title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            >
-              {collapsed ? (
-                <ChevronRight className="w-5 h-5 stroke-[2.25]" />
-              ) : (
-                <ChevronLeft className="w-5 h-5 stroke-[2.25]" />
-              )}
-            </button>
+                {/* Sidebar Collapse Button when Expanded */}
+                <button
+                  type="button"
+                  onClick={() => setCollapsed(true)}
+                  className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+                  title="Collapse sidebar"
+                >
+                  <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
+                </button>
+              </>
+            )}
           </div>
 
-          {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-2 font-urbanist">
+          {/* Navigation Links - px-3.5 py-4 space-y-3 font-urbanist */}
+          <nav className={`px-3.5 py-4 space-y-3 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {/* 1. Overview */}
             <NavLink
               to="/evaluator/overview"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${isOverviewActive
-                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
+                isOverviewActive
+                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Overview" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <EvaluatorOverviewIcon
-                  className={`w-5 h-5 transition-colors ${isOverviewActive ? "text-[#038AF9]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    isOverviewActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                  }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">Overview</span>}
@@ -126,18 +155,20 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* 2. My Schools */}
             <NavLink
               to="/evaluator/my-schools"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${location.pathname.includes("/evaluator/my-schools")
-                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
+                location.pathname.includes("/evaluator/my-schools")
+                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "My Schools" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <EvaluatorMySchoolsIcon
-                  className={`w-5 h-5 transition-colors ${location.pathname.includes("/evaluator/my-schools")
-                    ? "text-[#080808]"
-                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    location.pathname.includes("/evaluator/my-schools")
+                      ? "text-[#080808]"
+                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                  }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">My Schools</span>}
@@ -146,18 +177,20 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* 3. Reports */}
             <NavLink
               to="/evaluator/reports"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${location.pathname.includes("/evaluator/reports")
-                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
+                location.pathname.includes("/evaluator/reports")
+                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Reports" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <EvaluatorReportsIcon
-                  className={`w-5 h-5 transition-colors ${location.pathname.includes("/evaluator/reports")
-                    ? "text-[#080808]"
-                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    location.pathname.includes("/evaluator/reports")
+                      ? "text-[#080808]"
+                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                  }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">Reports</span>}
@@ -166,27 +199,34 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Menu Items */}
-        <div className="px-3 py-4 border-t border-gray-100 space-y-1 font-urbanist">
-          {/* Settings Collapsible Dropdown */}
+        <div className="px-3.5 py-4 border-t border-gray-100 space-y-1 font-urbanist">
+          {/* Settings Collapsible Dropdown matching LeaderSidebar 100% */}
           <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between transition-all cursor-pointer ${settingsOpen && isSettingsActive
-                ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`w-full flex items-center justify-between transition-all duration-200 group cursor-pointer ${
+                settingsOpen && isSettingsActive
+                  ? "px-3.5 py-3 rounded-xl border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                  : "px-3.5 py-3 rounded-xl text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
                 <Settings
-                  className={`w-5 h-5 shrink-0 ${settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
-                    }`}
+                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${
+                    settingsOpen && isSettingsActive
+                      ? "text-[#080808] stroke-[2]"
+                      : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
+                  }`}
                 />
                 {!collapsed && (
                   <span
-                    className={`text-base font-medium ${settingsOpen && isSettingsActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                      }`}
+                    className={`text-base transition-colors ${
+                      settingsOpen && isSettingsActive
+                        ? "text-[#080808] font-semibold"
+                        : "text-[#5A5A5A] font-medium group-hover:text-[#080808]"
+                    }`}
                   >
                     Settings
                   </span>
@@ -194,21 +234,23 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               </div>
               {!collapsed && (
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${settingsOpen ? "rotate-180 text-[#080808]" : ""
-                    }`}
+                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                    settingsOpen ? "rotate-180 text-[#080808]" : ""
+                  }`}
                 />
               )}
             </button>
 
-            {/* Uncollapsed Settings Sub-links */}
+            {/* Settings Sub-links: space-y-6, text-[15px] matching LeaderSidebar 100% */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+              <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                 <NavLink
                   to="/evaluator/setting/general"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${isActive
-                      ? "text-[#080808] font-semibold"
-                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${
+                      isActive
+                        ? "text-[#080808]"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -218,9 +260,10 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/evaluator/setting/followed-schools"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${isActive
-                      ? "text-[#080808] font-semibold"
-                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${
+                      isActive
+                        ? "text-[#080808]"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -231,57 +274,63 @@ const EvaluatorSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Collapsed Settings Flyout Popover */}
             {collapsed && (
-              <div className="absolute left-full bottom-0 ml-3 hidden group-hover:flex group-focus-within:flex flex-col bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 z-50 min-w-[180px] space-y-2 font-urbanist animate-fadeIn">
-                <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
-                  Settings
+              <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[180px] space-y-2 font-urbanist">
+                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                    Settings
+                  </div>
+                  <NavLink
+                    to="/evaluator/setting/general"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                        isActive
+                          ? "bg-blue-50 text-[#038AF9]"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    General
+                  </NavLink>
+                  <NavLink
+                    to="/evaluator/setting/followed-schools"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                        isActive
+                          ? "bg-blue-50 text-[#038AF9]"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    Followed Schools
+                  </NavLink>
                 </div>
-                <NavLink
-                  to="/evaluator/setting/general"
-                  className={({ isActive }) =>
-                    `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                      ? "bg-blue-50 text-[#038AF9] font-semibold"
-                      : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                    }`
-                  }
-                >
-                  General
-                </NavLink>
-                <NavLink
-                  to="/evaluator/setting/followed-schools"
-                  className={({ isActive }) =>
-                    `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                      ? "bg-blue-50 text-[#038AF9] font-semibold"
-                      : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                    }`
-                  }
-                >
-                  Followed Schools
-                </NavLink>
               </div>
             )}
           </div>
 
-          {/* Get Help Button */}
+          {/* Get Help Button matching LeaderSidebar */}
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <HelpCircle className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Get help</span>}
           </button>
 
-          {/* Log Out Button */}
+          {/* Log Out Button matching LeaderSidebar */}
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <LogOut className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>
