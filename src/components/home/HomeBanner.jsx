@@ -1,17 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ShieldAlert,
-  Building,
-  GraduationCap,
-  Heart,
-  Lock,
-  Star,
-  Users,
-  Award,
-  Smile,
-  BookOpen
-} from "lucide-react";
+import { Lock, Star } from "lucide-react";
 import { ImageProvider } from "../../assets/image-provider/ImageProvider";
 
 // Custom SVG Switzerland Flag Component
@@ -62,11 +51,8 @@ const BlueStarRating = ({ rating }) => {
 };
 
 const HomeBanner = () => {
-  // Option Card States (Index 0 is active/blue by default)
   const [hoveredCard, setHoveredCard] = useState(null);
   const activeCardIndex = hoveredCard !== null ? hoveredCard : 0;
-
-  // Search Submit Handler
   const handleSearchSubmit = (e) => {
     e.preventDefault();
   };
@@ -78,7 +64,7 @@ const HomeBanner = () => {
       path: "/school-review",
       icon: ImageProvider.share,
       iconBg: "bg-[#038AF9]/10",
-      colorClass: "text-[#038AF9]"
+      colorClass: "text-[#038AF9]",
     },
     {
       title: "Report a Concern",
@@ -86,7 +72,7 @@ const HomeBanner = () => {
       path: "/speak-up",
       icon: ImageProvider.report,
       iconBg: "bg-[#F97316]/10",
-      colorClass: "text-[#F97316]"
+      colorClass: "text-[#F97316]",
     },
     {
       title: "Share Teacher Feedback",
@@ -94,7 +80,7 @@ const HomeBanner = () => {
       path: "/review/student-to-teacher",
       icon: ImageProvider.teacher,
       iconBg: "bg-[#8B5CF6]/10",
-      colorClass: "text-[#8B5CF6]"
+      colorClass: "text-[#8B5CF6]",
     },
     {
       title: "Thank a Teacher",
@@ -102,17 +88,15 @@ const HomeBanner = () => {
       path: "/thank-teacher",
       icon: ImageProvider.thank,
       iconBg: "bg-[#EF4444]/10",
-      colorClass: "text-[#EF4444]"
-    }
+      colorClass: "text-[#EF4444]",
+    },
   ];
 
   return (
     <section className="section-padding-x py-12 lg:py-16 bg-white overflow-hidden font-urbanist select-none">
       <div className="flex flex-col md:flex-row gap-12 lg:gap-16 w-full">
-
         {/* Left Section: Information, Search, and Action Options */}
         <div className="flex flex-col items-start w-full md:w-[60%]">
-          {/* Top Badges Row */}
           <div className="flex flex-wrap items-center gap-2.5 mb-6">
             <div className="flex items-center gap-1.5 px-3 py-1 bg-gray-50 border border-gray-100 rounded-full text-xs font-semibold text-secondary">
               <Lock className="w-3.5 h-3.5 text-secondary shrink-0 stroke-2" />
@@ -123,34 +107,27 @@ const HomeBanner = () => {
               <span>Swiss Hosted</span>
             </div>
           </div>
-
-          {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-textPrimary leading-[1.1] tracking-tight">
             Help Schools{" "}
             <span className="text-primary relative inline-block">
               Learn
-              {/* Premium curved underline SVG */}
               <svg
                 viewBox="0 0 90 10"
                 className="absolute left-0 -bottom-2 w-full h-2.5 text-primary pointer-events-none"
                 fill="none"
                 preserveAspectRatio="none"
               >
-                <path
-                  d="M 2,8 Q 45,-4 88,8 Q 45,0 2,8 Z"
-                  fill="currentColor"
-                />
+                <path d="M 2,8 Q 45,-4 88,8 Q 45,0 2,8 Z" fill="currentColor" />
               </svg>
             </span>
           </h1>
-
-          {/* Subhead Description */}
           <p className="lg:text-lg font-medium text-textSecondary mt-6 leading-relaxed">
             Find your school. Select an option. Make your voice count.
           </p>
-
-          {/* Search Input Bar Wrapper */}
-          <form onSubmit={handleSearchSubmit} className="relative w-full mt-8 z-10">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="relative w-full mt-8 z-10"
+          >
             <input
               type="text"
               placeholder="Search for your school..."
@@ -178,10 +155,11 @@ const HomeBanner = () => {
                   key={index}
                   to={card.path}
                   onMouseEnter={() => setHoveredCard(index)}
-                  className={`flex flex-col justify-between p-4 sm:p-5 min-h-[90px] sm:min-h-[100px] rounded-2xl border transition-all duration-300 ${isActive
-                    ? "bg-primary text-white border-primary shadow-md translate-y-0.5"
-                    : "bg-white text-textPrimary border-gray-100 shadow-2xs hover:shadow-md hover:border-gray-200"
-                    }`}
+                  className={`flex flex-col justify-between p-4 sm:p-5 min-h-[90px] sm:min-h-[100px] rounded-2xl border transition-all duration-300 ${
+                    isActive
+                      ? "bg-primary text-white border-primary shadow-md translate-y-0.5"
+                      : "bg-white text-textPrimary border-gray-100 shadow-2xs hover:shadow-md hover:border-gray-200"
+                  }`}
                 >
                   {/* Card Header title */}
                   <h3 className="text-sm sm:text-base font-semibold leading-snug">
@@ -191,20 +169,26 @@ const HomeBanner = () => {
                   {/* Bottom Row: Icon & Status */}
                   <div className="flex items-center gap-2 mt-4">
                     <div
-                      className={`p-2 rounded-xl flex items-center justify-center transition-colors duration-300 ${isActive ? "bg-white" : card.iconBg
-                        }`}
+                      className={`flex items-center justify-center rounded-full ${
+                        isActive ? "bg-white" : card.iconBg
+                      }`}
                     >
-                      <img src={CardIcon} alt={`${card.title} icon`} className="w-5 h-5 shrink-0" />
+                      <img
+                        src={CardIcon}
+                        alt={`${card.title} icon`}
+                        className="w-6 h-6"
+                      />
                     </div>
 
                     <div
-                      className={`flex items-center gap-1 text-[10px] sm:text-sm ${isActive ? "text-blue-100" : "text-secondary"
-                        }`}
+                      className={`flex items-center gap-1 text-[10px] sm:text-sm ${
+                        isActive ? "text-blue-100" : "text-secondary"
+                      }`}
                     >
                       {card.subtext === "Enabled" ? (
                         <svg
                           viewBox="0 0 24 24"
-                          className="w-3.5 h-3.5 stroke-[2.5] fill-none shrink-0"
+                          className="w-3 h-3 stroke-[2] fill-none shrink-0"
                           stroke="currentColor"
                         >
                           <circle cx="12" cy="12" r="10" />
@@ -213,7 +197,7 @@ const HomeBanner = () => {
                       ) : (
                         <svg
                           viewBox="0 0 24 24"
-                          className="w-3.5 h-3.5 stroke-[2.5] fill-none shrink-0"
+                          className="w-3 h-3 stroke-[2] fill-none shrink-0"
                           stroke="currentColor"
                         >
                           <circle cx="12" cy="12" r="10" />
@@ -239,7 +223,6 @@ const HomeBanner = () => {
         {/* Right Section: Staggered Grid of 4 rounded image cards with overlays */}
         <div className="w-full md:w-[40%] flex justify-center items-center">
           <div className="grid grid-cols-2 gap-4 lg:gap-6 w-full">
-
             {/* Column 1 (Left column - Staggered offset downwards) */}
             <div className="flex flex-col gap-4 lg:gap-6">
               {/* Card 1: Teaching */}
@@ -260,7 +243,6 @@ const HomeBanner = () => {
                       <BlueStarRating rating={4.0} />
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -275,10 +257,15 @@ const HomeBanner = () => {
                 <div className="absolute bottom-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-xs rounded-2xl p-3 border border-gray-100 flex flex-col gap-1.5 shadow-sm">
                   <div className="flex items-center gap-1.5">
                     <div className="p-1 rounded-md bg-blue-50 text-primary">
-                      <img src={ImageProvider.bannericon2} alt="Leadership icon" />
+                      <img
+                        src={ImageProvider.bannericon2}
+                        alt="Leadership icon"
+                      />
                     </div>
                     <div>
-                      <span className="text-sm text-textPrimary">Leadership</span>
+                      <span className="text-sm text-textPrimary">
+                        Leadership
+                      </span>
                       <BlueStarRating rating={4.2} />
                     </div>
                   </div>
@@ -299,10 +286,15 @@ const HomeBanner = () => {
                 <div className="absolute bottom-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-xs rounded-xl p-3 border border-gray-100 flex flex-col gap-1.5 shadow-sm">
                   <div className="flex items-center gap-1.5">
                     <div className="p-1 rounded-md bg-blue-50 text-primary">
-                      <img src={ImageProvider.bannericon1} alt="Inclusion icon" />
+                      <img
+                        src={ImageProvider.bannericon1}
+                        alt="Inclusion icon"
+                      />
                     </div>
                     <div>
-                      <span className="text-sm text-textPrimary">Inclusion</span>
+                      <span className="text-sm text-textPrimary">
+                        Inclusion
+                      </span>
                       <BlueStarRating rating={4.8} />
                     </div>
                   </div>
@@ -319,24 +311,25 @@ const HomeBanner = () => {
                 <div className="absolute top-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-xs rounded-xl p-3 border border-gray-100 flex flex-col gap-1.5 shadow-sm">
                   <div className="flex items-center gap-1.5">
                     <div className="p-1 rounded-md bg-blue-50 text-primary">
-                      <img src={ImageProvider.bannericon3} alt="Wellbeing icon" />
+                      <img
+                        src={ImageProvider.bannericon3}
+                        alt="Wellbeing icon"
+                      />
                     </div>
                     <div>
-                      <span className="text-sm text-textPrimary">Wellbeing</span>
+                      <span className="text-sm text-textPrimary">
+                        Wellbeing
+                      </span>
                       <BlueStarRating rating={4.5} />
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
-
-
           </div>
-
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 
