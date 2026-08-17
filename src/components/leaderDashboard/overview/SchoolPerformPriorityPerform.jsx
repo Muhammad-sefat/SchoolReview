@@ -54,9 +54,9 @@ const SchoolPerformPriorityPerform = () => {
         />
       </div>
 
-      {/* Right Priority Areas */}
+      {/* Right Priority Areas - Pass dynamic type prop based on active tab */}
       <div className="xlg:col-span-4 flex">
-        <PrioprityArea />
+        <PrioprityArea type={activeTab === "teacher" ? "teacher" : "school"} />
       </div>
     </div>
   )

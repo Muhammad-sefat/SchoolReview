@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
+import ScatterPlotModal from "@/components/leaderDashboard/modal/ScatterPlotModal"
+import ScatterPlotModalTeacher from "@/components/leaderDashboard/modal/ScatterPlotModalTeacher"
 
 const PRIORITY_GROUPS = [
   {
@@ -21,7 +23,7 @@ const PRIORITY_GROUPS = [
     title: "Developing",
     borderColor: "border-[#FB8C00]",
     textColor: "text-[#080808]",
-    bgColor: "bg-[#FAFAFA",
+    bgColor: "bg-[#FAFAFA]",
     items: [
       { label: "School Communication", score: "3.2" },
       { label: "Leadership", score: "3.8" },
@@ -52,47 +54,91 @@ const PRIORITY_GROUPS = [
 const PrioprityArea = ({
   groups = PRIORITY_GROUPS,
   title = "Priority Areas by Performance",
+  type = "school", // "school" | "teacher"
+  onItemClick,
 }) => {
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleChipClick = (item) => {
+    const metricData = {
+      name: item.label || item.name || "Priority Area",
+      overall: item.score !== undefined ? Number(item.score) : 4.5,
+      ...item,
+    }
+    setSelectedItem(metricData)
+    setIsModalOpen(true)
+    if (onItemClick) {
+      onItemClick(metricData)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedItem(null)
+  }
+
   return (
-    <div className="w-full bg-white rounded-3xl border border-gray-100 p-4 md:p-5 shadow-xs space-y-5 h-full flex flex-col justify-between">
-      {/* Header Title */}
-      <div>
-        <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808] leading-snug">
-          {title}
-        </h3>
-      </div>
+    <>
+      <div className="w-full bg-white rounded-3xl border border-gray-100 p-4 md:p-5 shadow-xs space-y-5 h-full flex flex-col justify-between font-urbanist">
+        {/* Header Title */}
+        <div>
+          <h3 className="font-urbanist text-xl sm:text-2xl font-semibold text-[#080808] leading-snug">
+            {title}
+          </h3>
+        </div>
 
-      {/* Priority Category Groups */}
-      <div className="space-y-6 flex-1 flex flex-col justify-start pt-2">
-        {groups.map((group) => (
-          <div key={group.id} className="space-y-4">
-            {/* Category Pill Header */}
-            <div>
-              <span
-                className={`inline-block px-3 py-2 rounded-full border text-sm font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
-              >
-                {group.title}
-              </span>
-            </div>
-
-            {/* Chips List */}
-            <div className="flex flex-wrap gap-3">
-              {group.items.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white border border-[#EAEAEA] rounded-full px-3 py-2 text-xs sm:text-sm font-normal text-textPrimary flex items-center gap-2.5 shadow-2xs hover:border-gray-300 transition-colors cursor-default"
+        {/* Priority Category Groups */}
+        <div className="space-y-6 flex-1 flex flex-col justify-start pt-2">
+          {groups.map((group) => (
+            <div key={group.id} className="space-y-4">
+              {/* Category Pill Header */}
+              <div>
+                <span
+                  className={`inline-block px-3 py-2 rounded-full border text-sm font-medium tracking-tight ${group.borderColor} ${group.textColor} ${group.bgColor}`}
                 >
-                  <span>{item.label}</span>
-                  <span className="font-medium text-textPrimary">
-                    {item.score}
-                  </span>
-                </div>
-              ))}
+                  {group.title}
+                </span>
+              </div>
+
+              {/* Chips List */}
+              <div className="flex flex-wrap gap-3">
+                {group.items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => handleChipClick(item)}
+                    className="bg-white border border-[#EAEAEA] rounded-full px-3 py-2 text-xs sm:text-sm font-normal text-textPrimary flex items-center gap-2.5 shadow-2xs hover:border-[#038AF9] hover:bg-[#038AF9]/5 hover:shadow-xs transition-all cursor-pointer active:scale-95 select-none"
+                    title={`Click to view ${item.label} details`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="font-medium text-textPrimary">
+                      {item.score}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Modal Popup */}
+      {selectedItem && (
+        type === "teacher" ? (
+          <ScatterPlotModalTeacher
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            metric={selectedItem}
+          />
+        ) : (
+          <ScatterPlotModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            metric={selectedItem}
+          />
+        )
+      )}
+    </>
   )
 }
 

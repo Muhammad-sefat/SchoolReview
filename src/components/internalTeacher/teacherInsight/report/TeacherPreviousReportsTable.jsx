@@ -21,7 +21,7 @@ const TeacherPreviousReportsTable = ({ reports = DEFAULT_REPORTS, onDownload }) 
     <div className="w-full bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xs font-urbanist">
       {/* Title */}
       <h3 className="text-[24px] font-semibold text-[#080808]">
-        Previous School Reports
+        Previous Reports
       </h3>
 
       {/* Dotted Divider */}

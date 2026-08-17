@@ -34,7 +34,7 @@ const DeleteAccountModal = ({ isOpen, onClose, onConfirmDelete }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleCloseModal}>
-      <DialogContent className="max-w-[480px] w-[95vw] p-6 rounded-3xl font-urbanist bg-white border border-gray-100 shadow-2xl space-y-6">
+      <DialogContent className="max-w-[480px] w-[95vw] p-6 rounded-3xl font-urbanist bg-white border border-gray-100 shadow-2xl ">
         {step === 1 ? (
           <>
             {/* Step 1: Delete account? */}

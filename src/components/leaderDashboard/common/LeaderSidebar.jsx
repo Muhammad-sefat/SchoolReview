@@ -93,36 +93,51 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex flex-row items-center justify-between border-b border-gray-50 transition-all duration-300 ${collapsed ? "px-3.5 py-4" : "px-5 py-5"
-              }`}
+            className={`flex flex-row items-center border-b border-gray-50 transition-all duration-300 ${
+              collapsed ? "justify-center px-3.5 py-4" : "justify-between px-5 py-5"
+            }`}
           >
-            {/* Logo Badge */}
-            <div className="flex items-center gap-3">
+            {/* Logo Badge Container */}
+            {collapsed ? (
               <div
-                className={`rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all ${collapsed ? "p-2.5" : "p-3"
-                  }`}
+                onClick={() => setCollapsed(false)}
+                className="relative group cursor-pointer"
+                title="Expand sidebar"
               >
-                <DashboardLogo />
+                <div className="w-11 h-11 rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all duration-300 group-hover:bg-[#0270ce] group-hover:scale-105 active:scale-95 relative overflow-hidden">
+                  {/* Brand Logo - Smoothly fades out and scales down on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-75">
+                    <DashboardLogo />
+                  </div>
+                  {/* Expand ChevronRight Icon - Smoothly fades in and scales up on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                    <ChevronRight className="w-5 h-5 stroke-[2.5] text-white" />
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+                    <DashboardLogo />
+                  </div>
+                </div>
 
-            {/* Sidebar Toggle Expand/Collapse Button */}
-            <button
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
-              title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            >
-              {collapsed ? (
-                <ChevronRight className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
-              ) : (
-                <ChevronLeft className="w-4 h-4 stroke-[2.25] text-[#038AF9]" />
-              )}
-            </button>
+                {/* Sidebar Collapse Button when Expanded */}
+                <button
+                  type="button"
+                  onClick={() => setCollapsed(true)}
+                  className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+                  title="Collapse sidebar"
+                >
+                  <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
+                </button>
+              </>
+            )}
           </div>
 
           {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-2 font-urbanist">
+          <nav className={`px-3 py-4 space-y-2 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {navItems.map((item) => {
               const active = isPathActive(item.path)
               const IconComp = item.icon
@@ -131,7 +146,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   key={item.id}
                   to={item.path}
-                  className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${active
+                  className={`flex items-center   gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${active
                     ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                     : "text-[#5A5A5A] font-medium hover:bg-gray-50"
                     } ${collapsed ? "justify-center px-0" : ""}`}
@@ -140,7 +155,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   {/* Icon with Top Notification Indicator when collapsed */}
                   <div className="shrink-0 flex items-center justify-center relative">
                     <IconComp
-                      className={`w-5 h-5 transition-colors ${active ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      className={`w-[22px] h-[22px] transition-colors ${active ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
                         }`}
                     />
                     {collapsed && item.badge && (
@@ -164,21 +179,21 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Menu Items - Matching Top Default Text & Colors */}
-        <div className="px-3 py-4 border-t border-gray-100 space-y-2 font-urbanist">
+        <div className="px-3.5 py-4 border-t border-gray-100 space-y-3 font-urbanist">
           {/* Settings Collapsible Dropdown */}
           <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
               className={`w-full flex items-center justify-between transition-all duration-200 group cursor-pointer ${settingsOpen && isSettingsActive
-                ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
+                ? "px-3.5 py-3 rounded-xl border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                : "px-3.5 py-3 rounded-xl text-[#5A5A5A] font-medium hover:bg-gray-50"
                 } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
                 <Settings
-                  className={`w-5 h-5 shrink-0 transition-colors ${settingsOpen && isSettingsActive
+                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${settingsOpen && isSettingsActive
                     ? "text-[#080808] stroke-[2]"
                     : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
                     }`}
@@ -204,7 +219,7 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Uncollapsed Settings Sub-links */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+              <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                 <NavLink
                   to="/leader-dashboard/setting/branding-profile"
                   className={({ isActive }) =>
@@ -249,10 +264,11 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* Collapsed Settings Flyout Popover */}
             {collapsed && (
               <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
-                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[200px] space-y-2 font-urbanist">
-                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                <div className="bg-white border border-gray-200/90 rounded-2xl p-3 shadow-xl space-y-2 min-w-[200px]">
+                  <div className="text-xs font-semibold text-gray-400 px-2.5 pb-1 border-b border-gray-100">
                     Settings
                   </div>
+
                   <NavLink
                     to="/leader-dashboard/setting/branding-profile"
                     className={({ isActive }) =>
@@ -291,6 +307,8 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   >
                     Followed Schools
                   </NavLink>
+
+
                 </div>
               </div>
             )}
@@ -300,11 +318,11 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
+            <HelpCircle className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Get help</span>}
           </button>
 
@@ -312,11 +330,11 @@ const LeaderSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${collapsed ? "justify-center px-0" : ""
               }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
+            <LogOut className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>

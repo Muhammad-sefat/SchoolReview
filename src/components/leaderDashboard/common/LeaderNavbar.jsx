@@ -11,7 +11,7 @@ const LeaderNavbar = ({ open, setOpen }) => {
   }
 
   return (
-    <header className="w-full bg-white border-b border-gray-100 px-4 md:px-8 py-3.5 flex items-center justify-between gap-4 sticky top-0 z-30">
+    <header className="w-full bg-white border-b border-gray-100 px-4 md:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4 sticky top-0 z-30">
       {/* Mobile Drawer Hamburger Button */}
       <button
         type="button"
