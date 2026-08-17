@@ -111,34 +111,47 @@ const TeacherSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex flex-row items-center justify-between border-b border-gray-50 transition-all duration-300 ${
-              collapsed ? "px-3.5 py-4" : "px-5 py-5"
+            className={`flex flex-row items-center border-b border-gray-50 transition-all duration-300 ${
+              collapsed ? "justify-center px-3.5 py-4" : "justify-between px-5 py-5"
             }`}
           >
-            {/* Logo Badge */}
-            <div className="flex items-center gap-3">
+            {/* Logo Badge Container */}
+            {collapsed ? (
               <div
-                className={`rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all ${
-                  collapsed ? "p-2.5" : "p-3"
-                }`}
+                onClick={() => setCollapsed(false)}
+                className="relative group cursor-pointer"
+                title="Expand sidebar"
               >
-                <DashboardLogo />
+                <div className="w-11 h-11 rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all duration-300 group-hover:bg-[#0270ce] group-hover:scale-105 active:scale-95 relative overflow-hidden">
+                  {/* Brand Logo - Smoothly fades out and scales down on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-75">
+                    <DashboardLogo />
+                  </div>
+                  {/* Expand ChevronRight Icon - Smoothly fades in and scales up on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                    <ChevronRight className="w-5 h-5 stroke-[2.5] text-white" />
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+                    <DashboardLogo />
+                  </div>
+                </div>
 
-            {/* Sidebar Toggle Expand/Collapse Button */}
-            <button
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
-              title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            >
-              {collapsed ? (
-                <ChevronRight className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
-              ) : (
-                <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
-              )}
-            </button>
+                {/* Sidebar Collapse Button when Expanded */}
+                <button
+                  type="button"
+                  onClick={() => setCollapsed(true)}
+                  className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+                  title="Collapse sidebar"
+                >
+                  <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
+                </button>
+              </>
+            )}
           </div>
 
           {/* Navigation Links */}
