@@ -21,7 +21,7 @@ const ImportStudentModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[850px] w-[95vw] rounded-3xl p-6 sm:p-8 space-y-6 bg-white border border-gray-200 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <DialogContent className="max-w-[850px] w-[95vw] rounded-3xl p-6 sm:p-8  bg-white border border-gray-200 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <DialogHeader className="p-0 space-y-1 text-left">
           <DialogTitle asChild>
             <Title24 className="text-[#080808] font-semibold">Upload Students (CSV)</Title24>

@@ -101,7 +101,7 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-        <DialogContent className="max-w-[920px] w-[95%] sm:w-full rounded-[32px] bg-white p-5 sm:p-6 border border-gray-100 shadow-2xl space-y-4 font-urbanist max-h-[92vh] overflow-y-auto">
+        <DialogContent className="max-w-[920px] w-[95%] sm:w-full rounded-[32px] bg-white p-5 sm:p-6 border border-gray-100 shadow-2xl font-urbanist max-h-[92vh] overflow-y-auto">
           {/* Modal Header Title */}
           <DialogHeader className="space-y-0 text-left">
             <DialogTitle className="text-[24px] font-semibold text-[#080808] font-urbanist leading-tight">

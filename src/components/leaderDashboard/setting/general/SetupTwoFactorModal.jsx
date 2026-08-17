@@ -43,7 +43,7 @@ const SetupTwoFactorModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-lg w-[95vw] rounded-3xl p-6 sm:p-8 space-y-6 bg-white border border-gray-200 shadow-2xl font-urbanist">
+      <DialogContent className="max-w-lg w-[95vw] rounded-3xl p-6 sm:p-8  bg-white border border-gray-200 shadow-2xl font-urbanist">
         {step === 1 ? (
           <>
             {/* Step 1 Header */}
@@ -61,11 +61,10 @@ const SetupTwoFactorModal = ({ isOpen, onClose }) => {
               {/* Option 1: Email (Recommended) */}
               <div
                 onClick={() => setMethod("email")}
-                className={`p-5 rounded-2xl border transition-all cursor-pointer bg-white space-y-3 ${
-                  method === "email"
+                className={`p-5 rounded-2xl border transition-all cursor-pointer bg-white space-y-3 ${method === "email"
                     ? "border-2 border-[#080808]"
                     : "border border-gray-200 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <div className="space-y-1">
                   <h4 className="text-[18px] font-medium text-[#080808]">Email (Recommended)</h4>
@@ -88,11 +87,10 @@ const SetupTwoFactorModal = ({ isOpen, onClose }) => {
               {/* Option 2: Phone (SMS) */}
               <div
                 onClick={() => setMethod("sms")}
-                className={`p-5 rounded-2xl border transition-all cursor-pointer bg-white space-y-3 ${
-                  method === "sms"
+                className={`p-5 rounded-2xl border transition-all cursor-pointer bg-white space-y-3 ${method === "sms"
                     ? "border-2 border-[#080808]"
                     : "border border-gray-200 hover:border-gray-300"
-                }`}
+                  }`}
               >
                 <div className="space-y-1">
                   <h4 className="text-[18px] font-medium text-[#080808]">Phone (SMS)</h4>

@@ -30,7 +30,7 @@ const ScatterPlotModal = ({ isOpen, onClose, metric, hideBottomBars = false }) =
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-            <DialogContent className="max-w-[1000px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl space-y-5 font-urbanist">
+            <DialogContent className="max-w-[1000px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl  font-urbanist">
                 {/* Modal Header */}
                 <DialogHeader className="space-y-0 text-left">
                     <div className="flex items-start justify-between gap-4 pr-6">

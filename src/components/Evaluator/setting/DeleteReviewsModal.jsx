@@ -17,7 +17,7 @@ const DeleteReviewsModal = ({ isOpen, onClose, onConfirmDelete }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-[480px] w-[95vw] p-6  rounded-3xl font-urbanist bg-white border border-gray-100 shadow-2xl space-y-6">
+      <DialogContent className="max-w-[480px] w-[95vw] p-6  rounded-3xl font-urbanist bg-white border border-gray-100 shadow-2xl ">
         {/* Header */}
         <DialogHeader className="pb-3 border-b border-dashed border-gray-200">
           <DialogTitle className="text-[24px] font-semibold text-[#080808] text-left">

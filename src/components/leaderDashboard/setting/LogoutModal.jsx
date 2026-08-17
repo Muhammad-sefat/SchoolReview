@@ -16,7 +16,7 @@ const LogoutModal = ({ isOpen, onClose, onLogoutConfirm }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] rounded-3xl p-6 space-y-4 bg-white border border-gray-200 shadow-2xl font-urbanist">
+      <DialogContent className="max-w-md w-[95vw] rounded-3xl p-6  bg-white border border-gray-200 shadow-2xl font-urbanist">
         <DialogHeader className="p-0 space-y-1 text-left pb-3 border-b border-gray-100">
           <DialogTitle asChild>
             <Title24 className="text-[#080808] font-semibold">Log out?</Title24>
