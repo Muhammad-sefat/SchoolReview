@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import { ChevronDown, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  LogOut,
+  Settings,
+  HelpCircle,
+} from "lucide-react"
+
 import { DashboardLogo } from "@/components/icons/Logo/AllLogo"
 import GetHelpModal from "@/components/leaderDashboard/setting/GetHelpModal"
 import LogoutModal from "@/components/leaderDashboard/setting/LogoutModal"
 
-// Custom SVG Icons
+// Custom SVG Icons provided by user (matching TeacherSidebar 100%)
 const TeachingInsightsIcon = ({ className = "w-5 h-5" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={className}>
     <path d="M13 15C10.7083 21 4.29167 15 2 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -94,56 +102,77 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Sidebar Container - w-[106px] when collapsed matching TeacherSidebar */}
       <aside
-        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-20" : "w-72"
-          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static top-0 left-0 z-50 h-screen bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
+          collapsed ? "w-[106px]" : "w-72"
+        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
         {/* Top Header & Logo Area */}
         <div>
           <div
-            className={`flex border-b border-gray-50 transition-all duration-300 ${collapsed
-              ? "flex-col items-center justify-center gap-3 p-3.5"
-              : "items-center justify-between px-6 py-4.5"
-              }`}
+            className={`flex flex-row items-center border-b border-gray-50 transition-all duration-300 ${
+              collapsed ? "justify-center px-3.5 py-4" : "justify-between px-5 py-5"
+            }`}
           >
-            <NavLink to="/external-teacher/teaching-insights" className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
-                <DashboardLogo />
+            {/* Logo Badge Container */}
+            {collapsed ? (
+              <div
+                onClick={() => setCollapsed(false)}
+                className="relative group cursor-pointer"
+                title="Expand sidebar"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all duration-300 group-hover:bg-[#0270ce] group-hover:scale-105 active:scale-95 relative overflow-hidden">
+                  {/* Brand Logo - Smoothly fades out and scales down on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-75">
+                    <DashboardLogo />
+                  </div>
+                  {/* Expand ChevronRight Icon - Smoothly fades in and scales up on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                    <ChevronRight className="w-5 h-5 stroke-[2.5] text-white" />
+                  </div>
+                </div>
               </div>
-            </NavLink>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-[#038AF9] p-3 flex items-center justify-center shadow-xs shrink-0">
+                    <DashboardLogo />
+                  </div>
+                </div>
 
-            <button
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="w-9 h-9 rounded-xl border border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] shadow-2xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
-              title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            >
-              {collapsed ? (
-                <ChevronRight className="w-5 h-5 stroke-[2.25]" />
-              ) : (
-                <ChevronLeft className="w-5 h-5 stroke-[2.25]" />
-              )}
-            </button>
+                {/* Sidebar Collapse Button when Expanded */}
+                <button
+                  type="button"
+                  onClick={() => setCollapsed(true)}
+                  className="w-8 h-8 rounded-full border mx-3 border-gray-200/80 bg-white hover:bg-gray-50 text-[#038AF9] hover:text-[#0270ce] shadow-2xs hover:shadow-xs transition-all hidden lg:flex items-center justify-center cursor-pointer shrink-0 active:scale-95"
+                  title="Collapse sidebar"
+                >
+                  <ChevronLeft className="w-5 h-5 stroke-[2.25] text-[#038AF9]" />
+                </button>
+              </>
+            )}
           </div>
 
-          {/* Navigation Links */}
-          <nav className="px-3 py-4 space-y-2 font-urbanist">
+          {/* Navigation Links - px-3.5 py-4 space-y-3 font-urbanist */}
+          <nav className={`px-3.5 py-4 space-y-3 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
             {/* 1. Teaching Insights */}
             <NavLink
               to="/external-teacher/teaching-insights"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${isPathActive("/external-teacher/teaching-insights")
-                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
+                isPathActive("/external-teacher/teaching-insights")
+                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Teaching Insights" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center">
                 <TeachingInsightsIcon
-                  className={`w-5 h-5 transition-colors ${isPathActive("/external-teacher/teaching-insights")
-                    ? "text-[#080808]"
-                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    isPathActive("/external-teacher/teaching-insights")
+                      ? "text-[#080808]"
+                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                  }`}
                 />
               </div>
               {!collapsed && <span className="flex-1 truncate">Teaching Insights</span>}
@@ -152,18 +181,20 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             {/* 2. Student Feedback */}
             <NavLink
               to="/external-teacher/student-feedback"
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base transition-all duration-200 group ${location.pathname.includes("/external-teacher/student-feedback")
-                ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
-                : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
+                location.pathname.includes("/external-teacher/student-feedback")
+                  ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
+                  : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Student Feedback" : undefined}
             >
               <div className="shrink-0 flex items-center justify-center relative">
                 <StudentFeedbackIcon
-                  className={`w-5 h-5 transition-colors ${location.pathname.includes("/external-teacher/student-feedback")
-                    ? "text-[#080808]"
-                    : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    location.pathname.includes("/external-teacher/student-feedback")
+                      ? "text-[#080808]"
+                      : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                  }`}
                 />
                 {collapsed && (
                   <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-[#038AF9] text-white flex items-center justify-center ring-2 ring-white shadow-2xs">
@@ -171,11 +202,13 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                   </span>
                 )}
               </div>
-              {!collapsed && <span className="flex-1 truncate">Student Feedback</span>}
               {!collapsed && (
-                <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-[#038AF9] text-white">
-                  1
-                </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className="truncate">Student Feedback</span>
+                  <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+                    1
+                  </span>
+                </div>
               )}
             </NavLink>
 
@@ -184,17 +217,21 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               <button
                 type="button"
                 onClick={() => setMyWorkOpen(!myWorkOpen)}
-                className={`w-full flex items-center justify-between transition-all cursor-pointer ${myWorkOpen && isMyWorkActive
-                  ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                  : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
-                  } ${collapsed ? "justify-center px-0" : ""}`}
+                className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl transition-all duration-200 group cursor-pointer ${
+                  myWorkOpen && isMyWorkActive
+                    ? "border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                    : "text-[#5A5A5A] font-medium hover:bg-gray-50"
+                } ${collapsed ? "justify-center px-0" : ""}`}
                 title={collapsed ? "My Work" : undefined}
               >
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-4">
                   <div className="relative shrink-0 flex items-center justify-center">
                     <MyWorkIcon
-                      className={`w-5 h-5 ${myWorkOpen && isMyWorkActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                        }`}
+                      className={`w-[22px] h-[22px] transition-colors ${
+                        myWorkOpen && isMyWorkActive
+                          ? "text-[#080808]"
+                          : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      }`}
                     />
                     {collapsed && (
                       <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-[#038AF9] text-white flex items-center justify-center ring-2 ring-white shadow-2xs">
@@ -203,43 +240,46 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                     )}
                   </div>
                   {!collapsed && (
-                    <span className="text-base font-medium">My Work</span>
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base font-medium">My Work</span>
+                      <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+                        1
+                      </span>
+                    </div>
                   )}
                 </div>
                 {!collapsed && (
-                  <div className="flex items-center gap-1.5">
-                    <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-[#038AF9] text-white">
-                      1
-                    </span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${myWorkOpen ? "rotate-180 text-[#080808]" : ""
-                        }`}
-                    />
-                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                      myWorkOpen ? "rotate-180 text-[#080808]" : ""
+                    }`}
+                  />
                 )}
               </button>
 
-              {/* Uncollapsed My Work Sub-links */}
+              {/* Uncollapsed My Work Sub-links - space-y-6, text-[15px] matching TeacherSidebar */}
               {!collapsed && myWorkOpen && (
-                <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+                <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                   <NavLink
                     to="/external-teacher/my-work/activity-task"
                     className={({ isActive }) =>
-                      `block text-[16px] transition-colors ${isActive
-                        ? "text-[#080808] font-semibold"
-                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                      `block text-[15px] transition-colors ${
+                        isActive
+                          ? "text-[#080808]"
+                          : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
                   >
-                    Activity task
+                    Active task
                   </NavLink>
 
                   <NavLink
                     to="/external-teacher/my-work/my-activity"
                     className={({ isActive }) =>
-                      `block text-[16px] transition-colors ${isActive
-                        ? "text-[#080808] font-semibold"
-                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                      `block text-[15px] transition-colors ${
+                        isActive
+                          ? "text-[#080808]"
+                          : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                       }`
                     }
                   >
@@ -250,35 +290,39 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
               {/* Collapsed My Work Flyout Popover Menu */}
               {collapsed && (
-                <div className="absolute left-full top-0 ml-3 hidden group-hover:flex group-focus-within:flex flex-col bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 z-50 min-w-[200px] space-y-2 font-urbanist animate-fadeIn">
-                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
-                    My Work
+                <div className="absolute left-full top-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                  <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[200px] space-y-2 font-urbanist">
+                    <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                      My Work
+                    </div>
+                    <NavLink
+                      to="/external-teacher/my-work/activity-task"
+                      className={({ isActive }) =>
+                        `flex items-center justify-between px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                          isActive
+                            ? "bg-blue-50 text-[#038AF9]"
+                            : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                        }`
+                      }
+                    >
+                      <span>Active task</span>
+                      <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                        1
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/external-teacher/my-work/my-activity"
+                      className={({ isActive }) =>
+                        `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                          isActive
+                            ? "bg-blue-50 text-[#038AF9]"
+                            : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                        }`
+                      }
+                    >
+                      My activity
+                    </NavLink>
                   </div>
-                  <NavLink
-                    to="/external-teacher/my-work/activity-task"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                        ? "bg-blue-50 text-[#038AF9] font-semibold"
-                        : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                      }`
-                    }
-                  >
-                    <span>Activity task</span>
-                    <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-xs font-semibold flex items-center justify-center shrink-0">
-                      1
-                    </span>
-                  </NavLink>
-                  <NavLink
-                    to="/external-teacher/my-work/my-activity"
-                    className={({ isActive }) =>
-                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                        ? "bg-blue-50 text-[#038AF9] font-semibold"
-                        : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                      }`
-                    }
-                  >
-                    My activity
-                  </NavLink>
                 </div>
               )}
             </div>
@@ -286,27 +330,34 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Menu Items */}
-        <div className="px-3 py-4 border-t border-gray-100 space-y-1 font-urbanist">
-          {/* Settings Collapsible Dropdown */}
+        <div className="px-3.5 py-4 border-t border-gray-100 space-y-1 font-urbanist">
+          {/* Settings Collapsible Dropdown matching TeacherSidebar 100% */}
           <div className="space-y-1 relative group">
             <button
               type="button"
               onClick={() => setSettingsOpen(!settingsOpen)}
-              className={`w-full flex items-center justify-between transition-all cursor-pointer ${settingsOpen && isSettingsActive
-                ? "px-3.5 py-2.5 rounded-[10px] border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
-                : "px-3.5 py-2.5 rounded-[10px] text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+              className={`w-full flex items-center justify-between transition-all duration-200 group cursor-pointer ${
+                settingsOpen && isSettingsActive
+                  ? "px-3.5 py-3 rounded-xl border border-[#EAEAEA] bg-[#FDFDFD] text-[#080808] font-semibold shadow-2xs"
+                  : "px-3.5 py-3 rounded-xl text-[#5A5A5A] font-medium hover:bg-gray-50"
+              } ${collapsed ? "justify-center px-0" : ""}`}
               title={collapsed ? "Settings" : undefined}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
                 <Settings
-                  className={`w-5 h-5 shrink-0 ${settingsOpen && isSettingsActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75]"
-                    }`}
+                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${
+                    settingsOpen && isSettingsActive
+                      ? "text-[#080808] stroke-[2]"
+                      : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
+                  }`}
                 />
                 {!collapsed && (
                   <span
-                    className={`text-base font-medium ${settingsOpen && isSettingsActive ? "text-[#080808]" : "text-[#5A5A5A]"
-                      }`}
+                    className={`text-base transition-colors ${
+                      settingsOpen && isSettingsActive
+                        ? "text-[#080808] font-semibold"
+                        : "text-[#5A5A5A] font-medium group-hover:text-[#080808]"
+                    }`}
                   >
                     Settings
                   </span>
@@ -314,21 +365,23 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               </div>
               {!collapsed && (
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${settingsOpen ? "rotate-180 text-[#080808]" : ""
-                    }`}
+                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                    settingsOpen ? "rotate-180 text-[#080808]" : ""
+                  }`}
                 />
               )}
             </button>
 
-            {/* Settings Sub-links */}
+            {/* Settings Sub-links: space-y-6, text-[15px] matching TeacherSidebar 100% */}
             {!collapsed && settingsOpen && (
-              <div className="pl-9 pr-2 space-y-2 py-1.5 animate-fadeIn">
+              <div className="pl-9 pr-2 space-y-6 py-1.5 animate-fadeIn">
                 <NavLink
                   to="/external-teacher/setting/general"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${isActive
-                      ? "text-[#080808] font-semibold"
-                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${
+                      isActive
+                        ? "text-[#080808]"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -338,9 +391,10 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 <NavLink
                   to="/external-teacher/setting/followed-schools"
                   className={({ isActive }) =>
-                    `block text-[15px] transition-colors ${isActive
-                      ? "text-[#080808] font-semibold"
-                      : "text-[#5A5A5A] font-normal hover:text-[#080808]"
+                    `block text-[15px] transition-colors ${
+                      isActive
+                        ? "text-[#080808]"
+                        : "text-[#5A5A5A] font-normal hover:text-[#080808]"
                     }`
                   }
                 >
@@ -351,57 +405,63 @@ const ExternalSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
 
             {/* Collapsed Settings Flyout Popover */}
             {collapsed && (
-              <div className="absolute left-full bottom-0 ml-3 hidden group-hover:flex group-focus-within:flex flex-col bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 z-50 min-w-[180px] space-y-2 font-urbanist animate-fadeIn">
-                <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
-                  Settings
+              <div className="absolute left-full bottom-0 pl-2 hidden group-hover:flex flex-col z-50 animate-fadeIn">
+                <div className="bg-white border border-gray-200/90 rounded-2xl shadow-xl p-3 min-w-[180px] space-y-2 font-urbanist">
+                  <div className="text-xs font-bold text-gray-400 px-2 pb-1 border-b border-gray-100 uppercase tracking-wider">
+                    Settings
+                  </div>
+                  <NavLink
+                    to="/external-teacher/setting/general"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                        isActive
+                          ? "bg-blue-50 text-[#038AF9]"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    General
+                  </NavLink>
+                  <NavLink
+                    to="/external-teacher/setting/followed-schools"
+                    className={({ isActive }) =>
+                      `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${
+                        isActive
+                          ? "bg-blue-50 text-[#038AF9]"
+                          : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
+                      }`
+                    }
+                  >
+                    Followed school
+                  </NavLink>
                 </div>
-                <NavLink
-                  to="/external-teacher/setting/general"
-                  className={({ isActive }) =>
-                    `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                      ? "bg-blue-50 text-[#038AF9] font-semibold"
-                      : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                    }`
-                  }
-                >
-                  General
-                </NavLink>
-                <NavLink
-                  to="/external-teacher/setting/followed-schools"
-                  className={({ isActive }) =>
-                    `block px-2.5 py-1.5 rounded-lg text-sm transition-colors ${isActive
-                      ? "bg-blue-50 text-[#038AF9] font-semibold"
-                      : "text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808]"
-                    }`
-                  }
-                >
-                  Followed school
-                </NavLink>
               </div>
             )}
           </div>
 
-          {/* Get Help Button */}
+          {/* Get Help Button matching TeacherSidebar 100% */}
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Get help" : undefined}
           >
-            <HelpCircle className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <HelpCircle className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Get help</span>}
           </button>
 
-          {/* Log Out Button */}
+          {/* Log Out Button matching TeacherSidebar 100% */}
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-[10px] text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all cursor-pointer ${collapsed ? "justify-center px-0" : ""
-              }`}
+            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
+              collapsed ? "justify-center px-0" : ""
+            }`}
             title={collapsed ? "Log out" : undefined}
           >
-            <LogOut className="w-5 h-5 shrink-0 stroke-[1.75]" />
+            <LogOut className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
             {!collapsed && <span>Log out</span>}
           </button>
         </div>
