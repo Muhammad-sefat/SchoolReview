@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select"
 import { DatePicker } from "@/components/ui/date-picker"
 import { format } from "date-fns"
+import { Switch } from "@/components/ui/switch"
 
 const REVIEWS_LIST = [
   {
@@ -202,6 +203,7 @@ const ReviewInsightsTab = () => {
   const [selectedReviewId, setSelectedReviewId] = useState(1)
   const [activeSubCategory, setActiveSubCategory] = useState("climate")
   const [isExpanded, setIsExpanded] = useState(false)
+  const [alwaysExpand, setAlwaysExpand] = useState(false)
 
   const [roleFilter, setRoleFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
@@ -231,13 +233,20 @@ const ReviewInsightsTab = () => {
 
   const currentFeedbackItems = SUB_CATEGORY_FEEDBACK_MAP[activeSubCategory] || SUB_CATEGORY_FEEDBACK_MAP["climate"]
 
+  const handleSelectReview = (id) => {
+    setSelectedReviewId(id)
+    if (alwaysExpand) {
+      setIsExpanded(true)
+    }
+  }
+
   return (
     <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch font-urbanist">
       {/* Left Reviews List Column (4 Cols) */}
       <div className="xlg:col-span-4 bg-white rounded-3xl border border-gray-100 p-5 shadow-xs space-y-4 flex flex-col justify-between">
         <div className="space-y-4">
-          {/* Header with Title & Badge & Reset */}
-          <div className="flex items-center justify-between">
+          {/* Header with Title, Badge, Shadcn Switch & Reset */}
+          <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2">
               <h3 className="font-urbanist text-2xl font-bold text-[#080808]">
                 Reviews
@@ -245,6 +254,18 @@ const ReviewInsightsTab = () => {
               <span className="w-6 h-6 rounded-full bg-[#038AF9] text-white text-xs font-bold flex justify-center items-center">
                 {filteredReviews.length}
               </span>
+            </div>
+
+            {/* Shadcn Switch for Always Expand */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-medium text-[#5A5A5A]">Always expand</span>
+              <Switch
+                checked={alwaysExpand}
+                onCheckedChange={(checked) => {
+                  setAlwaysExpand(checked)
+                  setIsExpanded(checked)
+                }}
+              />
             </div>
 
             {(roleFilter !== "All" || ratingFilter !== "All" || selectedDate !== undefined) && (
@@ -311,7 +332,7 @@ const ReviewInsightsTab = () => {
               return (
                 <div
                   key={item.id}
-                  onClick={() => setSelectedReviewId(item.id)}
+                  onClick={() => handleSelectReview(item.id)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer relative ${
                     isSelected
                       ? "border-[#038AF9] bg-white shadow-2xs"
@@ -382,55 +403,44 @@ const ReviewInsightsTab = () => {
             </p>
           </div>
 
-          {/* Bottom Sub-Category Container with Smooth 500ms Expand/Collapse */}
+          {/* Bottom Sub-Category Container */}
           <div className="border border-gray-200/80 rounded-2xl p-5 bg-white space-y-5">
-            <div className="flex gap-5 flex-col md:flex-row items-stretch transition-all duration-500 ease-in-out">
-              {/* Left Sub-Category Column (Aligned to TOP via justify-start, collapses smoothly on Expand All) */}
-              <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                  isExpanded
-                    ? "hidden md:hidden max-h-0 opacity-0 md:w-0 p-0 border-0 pointer-events-none"
-                    : "max-w-[208px] w-full border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-col justify-start shrink-0 min-h-[220px]"
-                }`}
-              >
-                {!isExpanded &&
-                  SUB_CATEGORIES.map((cat) => {
-                    const isActive = activeSubCategory === cat.id
-                    return (
-                      <button
-                        key={cat.id}
-                        type="button"
-                        onClick={() => setActiveSubCategory(cat.id)}
-                        className={`w-full text-center px-4 py-2.5 rounded-full text-base transition-all cursor-pointer whitespace-nowrap ${
-                          isActive
-                            ? "bg-[#038AF9] text-white font-medium shadow-2xs"
-                            : "bg-[#FAFAFA] border border-gray-200/60 text-textPrimary font-normal hover:bg-gray-100"
-                        }`}
-                      >
-                        {cat.label}
-                      </button>
-                    )
-                  })}
+            <div className="flex gap-5 flex-col md:flex-row items-start">
+              {/* Left Sub-Category Column (ALWAYS VISIBLE & Aligned to TOP via justify-start) */}
+              <div className="max-w-[208px] w-full border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-col justify-start shrink-0 min-h-[220px]">
+                {SUB_CATEGORIES.map((cat) => {
+                  const isActive = activeSubCategory === cat.id
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => setActiveSubCategory(cat.id)}
+                      className={`w-full text-center px-4 py-2.5 rounded-full text-base transition-all cursor-pointer whitespace-nowrap ${
+                        isActive
+                          ? "bg-[#038AF9] text-white font-medium shadow-2xs"
+                          : "bg-[#FAFAFA] border border-gray-200/60 text-textPrimary font-normal hover:bg-gray-100"
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  )
+                })}
               </div>
 
-              {/* Right Content Box (Expands to 100% width smoothly) */}
-              <div
-                className={`transition-all duration-500 ease-in-out bg-white border flex-1 w-full border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden flex flex-col justify-between ${
-                  isExpanded ? "p-2 sm:p-4" : "min-h-[220px]"
-                }`}
-              >
+              {/* Right Content Box (Expands height smoothly displaying all categories when isExpanded) */}
+              <div className="bg-white border flex-1 w-full border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden flex flex-col justify-between transition-all duration-500 ease-in-out min-h-[220px]">
                 <div>
-                  {/* Top Bar with Expand All / Hide Full Review Toggle */}
+                  {/* Top Bar with Expand All / Hide All Toggle */}
                   <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-start bg-white">
                     <button
                       type="button"
-                      onClick={() => setIsExpanded(!isExpanded)}
+                      onClick={() => setIsExpanded((prev) => !prev)}
                       className="text-[#038AF9] hover:underline text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
                       {isExpanded ? (
                         <>
                           <Minimize2 className="w-3.5 h-3.5 text-[#038AF9]" />
-                          <span>Hide Full Review</span>
+                          <span>Hide All</span>
                         </>
                       ) : (
                         <>
@@ -441,11 +451,11 @@ const ReviewInsightsTab = () => {
                     </button>
                   </div>
 
-                  {/* Sub-Category Feedback Body with Fade Transition */}
+                  {/* Sub-Category Feedback Body */}
                   <div className="p-5 transition-all duration-500 ease-in-out">
                     {isExpanded ? (
                       /* Expanded View: All Category Groups with Badges & Dotted Dividers */
-                      <div className="space-y-6 animate-fadeIn">
+                      <div className="space-y-6 animate-fadeIn transition-all duration-500">
                         {ALL_SUB_CATEGORIES_FEEDBACK.map((catGroup, groupIdx) => (
                           <div key={groupIdx} className="space-y-4">
                             {/* Category Badge Header Row */}
@@ -490,7 +500,7 @@ const ReviewInsightsTab = () => {
                       </div>
                     ) : (
                       /* Collapsed Single Category Feedback List */
-                      <div className="space-y-4 animate-fadeIn">
+                      <div className="space-y-4 animate-fadeIn transition-all duration-500">
                         {currentFeedbackItems.map((fb, idx) => (
                           <div key={idx} className="space-y-2 border-b border-gray-100 last:border-none pb-4 last:pb-0">
                             <div className="flex items-center gap-3 flex-wrap">

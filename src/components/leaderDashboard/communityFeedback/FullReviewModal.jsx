@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   Dialog,
   DialogContent,
@@ -156,11 +156,17 @@ const ALL_CATEGORIES_REVIEWS = [
   },
 ]
 
-const FullReviewModal = ({ isOpen, onClose, review }) => {
+const FullReviewModal = ({ isOpen, onClose, review, initialExpanded = false }) => {
   const [activeSubTab, setActiveSubTab] = useState("Wellbeing")
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(initialExpanded)
   const [showReportModal, setShowReportModal] = useState(false)
   const [agreeCount, setAgreeCount] = useState(4)
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsExpanded(initialExpanded)
+    }
+  }, [isOpen, initialExpanded])
 
   const reviewTitle = review?.title || "Great teachers, but workload can be challenging"
   const rating = review?.rating || 4.5
@@ -199,43 +205,35 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
           {/* Dotted Divider */}
           <div className="border-b border-dashed border-gray-200/80 my-2" />
 
-          {/* Sub-Category Content Shell with Smooth 500ms Transition */}
+          {/* Sub-Category Content Shell */}
           <div className="w-full font-urbanist">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch transition-all duration-500 ease-in-out">
-              {/* Left Sub-Tabs Column (Fades & Collapses Smoothly on Expand All) */}
-              <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded
-                  ? "hidden md:hidden max-h-0 opacity-0 md:w-0 p-0 border-0 pointer-events-none"
-                  : "md:col-span-3 lg:col-span-2 border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-row md:flex-col justify-center overflow-x-auto no-scrollbar opacity-100 min-h-[280px]"
-                  }`}
-              >
-                {!isExpanded &&
-                  MODAL_SUB_TABS.map((tab) => {
-                    const isActive = activeSubTab === tab
-                    return (
-                      <button
-                        key={tab}
-                        type="button"
-                        onClick={() => setActiveSubTab(tab)}
-                        className={`w-full text-center px-3 py-2 rounded-full text-[14px] transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+            <div className="flex gap-5 flex-col md:flex-row items-start">
+              {/* Left Sub-Tabs Column (ALWAYS VISIBLE & Aligned to TOP via justify-start) */}
+              <div className="max-w-[208px] w-full border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-row md:flex-col justify-start overflow-x-auto no-scrollbar min-h-[280px] shrink-0">
+                {MODAL_SUB_TABS.map((tab) => {
+                  const isActive = activeSubTab === tab
+                  return (
+                    <button
+                      key={tab}
+                      type="button"
+                      onClick={() => setActiveSubTab(tab)}
+                      className={`w-full text-center px-3 py-2 rounded-full text-[14px] transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                        isActive
                           ? "bg-[#038AF9] text-white font-medium shadow-2xs"
                           : "bg-[#FAFAFA] border border-gray-200/60 text-[#5A5A5A] font-normal hover:bg-gray-100"
-                          }`}
-                      >
-                        {tab}
-                      </button>
-                    )
-                  })}
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  )
+                })}
               </div>
 
-              {/* Right Content Box (Expands to 12 Cols Smoothly when Expanded) */}
-              <div
-                className={`transition-all duration-500 ease-in-out bg-white border border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden flex flex-col justify-between ${isExpanded ? "md:col-span-12 p-2 sm:p-4" : "md:col-span-9 lg:col-span-10 min-h-[280px]"
-                  }`}
-              >
+              {/* Right Content Box (Expands height smoothly displaying all categories when isExpanded) */}
+              <div className="bg-white border flex-1 w-full border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden flex flex-col justify-between transition-all duration-500 ease-in-out min-h-[280px]">
                 <div>
-                  {/* Header Bar with Toggle Link */}
-                  <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-between bg-white">
+                  {/* Header Bar with Expand All / Hide All Toggle */}
+                  <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-start bg-white">
                     <button
                       type="button"
                       onClick={() => setIsExpanded(!isExpanded)}
@@ -244,7 +242,7 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
                       {isExpanded ? (
                         <>
                           <Minimize2 className="w-4 h-4 text-[#038AF9]" />
-                          <span>Hide Full Review</span>
+                          <span>Hide All</span>
                         </>
                       ) : (
                         <>
@@ -258,8 +256,8 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
                   {/* Content Body with Smooth Fade & Transition */}
                   <div className="p-5 md:p-6 transition-all duration-500 ease-in-out">
                     {isExpanded ? (
-                      /* Expanded View with Badges and Dotted Lines (Matching User Image 100%) */
-                      <div className="space-y-6 animate-fadeIn">
+                      /* Expanded View with Badges and Dotted Lines */
+                      <div className="space-y-6 animate-fadeIn transition-all duration-500">
                         {ALL_CATEGORIES_REVIEWS.map((catGroup, groupIdx) => (
                           <div key={groupIdx} className="space-y-4">
                             {/* Category Header Row with Pill Badge on Right */}
@@ -298,7 +296,7 @@ const FullReviewModal = ({ isOpen, onClose, review }) => {
                       </div>
                     ) : (
                       /* Collapsed Single Tab View */
-                      <div className="space-y-5 animate-fadeIn">
+                      <div className="space-y-5 animate-fadeIn transition-all duration-500">
                         {currentItems.map((item, idx) => (
                           <div key={idx} className="space-y-2">
                             <h4 className="text-[16px] font-medium text-[#080808]">
