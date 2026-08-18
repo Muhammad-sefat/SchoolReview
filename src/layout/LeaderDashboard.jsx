@@ -44,7 +44,7 @@ const LeaderDashboard = () => {
           <LeaderNavbar open={sidebarOpen} setOpen={setSidebarOpen} />
 
           {/* Core Scrollable Viewport */}
-          <main className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-6 bg-[#FAFAFA]">
+          <main className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-8 py-3 bg-[#FAFAFA]">
             <div className="w-full space-y-6">
               <Outlet />
             </div>
