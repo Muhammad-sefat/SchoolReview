@@ -50,18 +50,16 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         />
       )}
 
-      {/* Sidebar Container - w-[106px] when collapsed matching LeaderSidebar */}
+      {/* Sidebar Container */}
       <aside
-        className={`fixed xl:static inset-y-0 left-0 z-50 bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${
-          collapsed ? "w-[106px]" : "w-72"
-        } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
+        className={`fixed xl:static inset-y-0 left-0 z-50 bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0 ${collapsed ? "w-[106px]" : "w-72"
+          } ${open ? "translate-x-0" : "-translate-x-full xl:translate-x-0"}`}
       >
-        {/* Top Header Logo & Collapse Toggle */}
-        <div>
+        {/* Top Header Logo & Collapse Toggle - Exact h-[68px] min-h-[68px] to align with Navbar border-bottom */}
+        <div className="shrink-0">
           <div
-            className={`flex flex-row items-center border-b border-gray-50 transition-all duration-300 ${
-              collapsed ? "justify-center px-3.5 py-4" : "justify-between px-5 py-5"
-            }`}
+            className={`h-[68px] min-h-[68px] border-b border-gray-100 flex flex-row items-center transition-all duration-300 ease-in-out ${collapsed ? "justify-center px-3.5" : "justify-between px-5"
+              }`}
           >
             {/* Logo Badge Container */}
             {collapsed ? (
@@ -71,11 +69,11 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                 title="Expand sidebar"
               >
                 <div className="w-11 h-11 rounded-xl bg-[#038AF9] flex items-center justify-center shadow-xs shrink-0 transition-all duration-300 group-hover:bg-[#0270ce] group-hover:scale-105 active:scale-95 relative overflow-hidden">
-                  {/* Brand Logo - Smoothly fades out and scales down on hover */}
+                  {/* Brand Logo */}
                   <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-75">
                     <DashboardLogo />
                   </div>
-                  {/* Expand ChevronRight Icon - Smoothly fades in and scales up on hover */}
+                  {/* Expand ChevronRight Icon */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
                     <ChevronRight className="w-5 h-5 stroke-[2.5] text-white" />
                   </div>
@@ -102,8 +100,8 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
             )}
           </div>
 
-          {/* Navigation Items - px-3.5 py-4 space-y-3 font-urbanist */}
-          <nav className={`px-3.5 py-4 space-y-3 font-urbanist ${collapsed ? "mt-3" : "mt-0"}`}>
+          {/* Navigation Items */}
+          <nav className={`px-3.5 py-4 space-y-3 font-urbanist `}>
             {/* 1. My Feedback */}
             {(() => {
               const isActive =
@@ -113,18 +111,16 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               return (
                 <NavLink
                   to="/review-dashboard/my-feedback"
-                  className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
-                    isActive
+                  className={`flex items-center px-3.5 py-3 rounded-xl text-base transition-all duration-300 ease-in-out group ${isActive
                       ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                       : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                  } ${collapsed ? "justify-center px-0" : ""}`}
+                    } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? "My Feedback" : undefined}
                 >
                   <div className="relative shrink-0 flex items-center justify-center">
                     <MyFeedbackIcon
-                      className={`w-[22px] h-[22px] transition-colors ${
-                        isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                      }`}
+                      className={`w-[22px] h-[22px] transition-colors ${isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                        }`}
                     />
                     {collapsed && (
                       <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-[#038AF9] text-white flex items-center justify-center ring-2 ring-white shadow-2xs">
@@ -132,14 +128,15 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
                       </span>
                     )}
                   </div>
-                  {!collapsed && (
-                    <div className="flex items-center gap-2.5 min-w-0 flex-1 justify-between">
-                      <span className="truncate">My Feedback</span>
-                      <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
-                        1
-                      </span>
-                    </div>
-                  )}
+                  <div
+                    className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                      }`}
+                  >
+                    <span className="truncate">My Feedback</span>
+                    <span className="w-5 h-5 rounded-full bg-[#038AF9] text-white text-[11px] font-bold flex items-center justify-center shrink-0 ml-2">
+                      1
+                    </span>
+                  </div>
                 </NavLink>
               )
             })()}
@@ -150,19 +147,22 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               return (
                 <NavLink
                   to="/review-dashboard/my-profile"
-                  className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
-                    isActive
+                  className={`flex items-center px-3.5 py-3 rounded-xl text-base transition-all duration-300 ease-in-out group ${isActive
                       ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                       : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                  } ${collapsed ? "justify-center px-0" : ""}`}
+                    } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? "My Profile" : undefined}
                 >
                   <User
-                    className={`w-[22px] h-[22px] shrink-0 transition-colors ${
-                      isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                    className={`w-[22px] h-[22px] shrink-0 transition-colors ${isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      }`}
                   />
-                  {!collapsed && <span className="flex-1 truncate">My Profile</span>}
+                  <div
+                    className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                      }`}
+                  >
+                    <span className="truncate">My Profile</span>
+                  </div>
                 </NavLink>
               )
             })()}
@@ -173,19 +173,22 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
               return (
                 <NavLink
                   to="/review-dashboard/followed-schools"
-                  className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
-                    isActive
+                  className={`flex items-center px-3.5 py-3 rounded-xl text-base transition-all duration-300 ease-in-out group ${isActive
                       ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                       : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                  } ${collapsed ? "justify-center px-0" : ""}`}
+                    } ${collapsed ? "justify-center px-0" : ""}`}
                   title={collapsed ? "Followed Schools" : undefined}
                 >
                   <FollowedSchoolsIcon
-                    className={`w-[22px] h-[22px] shrink-0 transition-colors ${
-                      isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
-                    }`}
+                    className={`w-[22px] h-[22px] shrink-0 transition-colors ${isActive ? "text-[#080808]" : "text-[#5A5A5A] group-hover:text-[#1F1F21]"
+                      }`}
                   />
-                  {!collapsed && <span className="flex-1 truncate">Followed Schools</span>}
+                  <div
+                    className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                      }`}
+                  >
+                    <span className="truncate">Followed Schools</span>
+                  </div>
                 </NavLink>
               )
             })()}
@@ -193,64 +196,73 @@ const ReviewSidebar = ({ open, setOpen, collapsed, setCollapsed }) => {
         </div>
 
         {/* Bottom Navigation Menu */}
-        <div className="px-3.5 py-4 border-t border-gray-100 space-y-1 font-urbanist">
+        <div className="px-3.5 py-4 border-t border-gray-100 space-y-1 font-urbanist shrink-0">
           {/* Settings Direct NavLink */}
           {(() => {
             const isActive = location.pathname.includes("/review-dashboard/setting")
             return (
               <NavLink
                 to="/review-dashboard/setting"
-                className={`flex items-center gap-4 px-3.5 py-3 rounded-xl text-base transition-all duration-200 group ${
-                  isActive
+                className={`flex items-center px-3.5 py-3 rounded-xl text-base transition-all duration-300 ease-in-out group ${isActive
                     ? "bg-[#FDFDFD] text-[#080808] border border-[#EAEAEA] shadow-2xs font-semibold"
                     : "text-[#5A5A5A] font-medium hover:bg-gray-50"
-                } ${collapsed ? "justify-center px-0" : ""}`}
+                  } ${collapsed ? "justify-center px-0" : ""}`}
                 title={collapsed ? "Settings" : undefined}
               >
                 <Settings
-                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${
-                    isActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
-                  }`}
+                  className={`w-[22px] h-[22px] shrink-0 transition-colors ${isActive ? "text-[#080808] stroke-[2]" : "text-[#5A5A5A] stroke-[1.75] group-hover:text-[#1F1F21]"
+                    }`}
                 />
-                {!collapsed && <span>Settings</span>}
+                <div
+                  className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                    }`}
+                >
+                  <span className="truncate">Settings</span>
+                </div>
               </NavLink>
             )
           })()}
 
-          {/* Get Help Button matching LeaderSidebar */}
+          {/* Get Help Button */}
           <button
             type="button"
             onClick={() => setIsHelpOpen(true)}
-            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
-              collapsed ? "justify-center px-0" : ""
-            }`}
+            className={`w-full flex items-center px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-300 ease-in-out group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              }`}
             title={collapsed ? "Get help" : undefined}
           >
             <HelpCircle className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
-            {!collapsed && <span>Get help</span>}
+            <div
+              className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                }`}
+            >
+              <span>Get help</span>
+            </div>
           </button>
 
           {/* Log Out Button */}
           <button
             type="button"
             onClick={() => setIsLogoutOpen(true)}
-            className={`w-full flex items-center gap-4 px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-200 group cursor-pointer ${
-              collapsed ? "justify-center px-0" : ""
-            }`}
+            className={`w-full flex items-center px-3.5 py-3 rounded-xl text-base font-medium text-[#5A5A5A] hover:bg-gray-50 hover:text-[#080808] transition-all duration-300 ease-in-out group cursor-pointer ${collapsed ? "justify-center px-0" : ""
+              }`}
             title={collapsed ? "Log out" : undefined}
           >
             <LogOut className="w-[22px] h-[22px] text-[#5A5A5A] group-hover:text-[#1F1F21] shrink-0 stroke-[1.75] transition-colors" />
-            {!collapsed && <span>Log out</span>}
+            <div
+              className={`flex items-center justify-between flex-1 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap ${collapsed ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100 ml-4"
+                }`}
+            >
+              <span>Log out</span>
+            </div>
           </button>
         </div>
       </aside>
 
-      {/* Get Help Modal */}
+      {/* Modals */}
       {isHelpOpen && (
         <GetHelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
       )}
-
-      {/* Logout Confirmation Modal */}
       {isLogoutOpen && (
         <LogoutModal
           isOpen={isLogoutOpen}

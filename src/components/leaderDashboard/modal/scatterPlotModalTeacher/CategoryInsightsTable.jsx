@@ -161,7 +161,7 @@ const CategoryInsightsTable = ({ rows = [] }) => {
   // Group items into Needs Attention, Developing, and Strong with exact design rules
   const groups = [
     {
-      title: "Needs Attention",
+      title: "Needs Support",
       badgeStyle: "border border-[#E53935] bg-[#FAFAFA]",
       items: itemsToRender.filter((r) => r.status === "Needs Attention"),
     },
@@ -171,7 +171,7 @@ const CategoryInsightsTable = ({ rows = [] }) => {
       items: itemsToRender.filter((r) => r.status === "Developing"),
     },
     {
-      title: "Strong",
+      title: "Effective",
       badgeStyle: "border border-[#66BB6A] bg-[#FAFAFA]",
       items: itemsToRender.filter((r) => r.status === "Strong"),
     },
