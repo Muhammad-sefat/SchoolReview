@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import bannerImg from "../../assets/images/banner.png";
-import banner1Img from "../../assets/images/banner1.png";
-import banner2Img from "../../assets/images/banner2.png";
-import banner3Img from "../../assets/images/banner3.png";
+import bannerImg from "../../../assets/images/banner.png";
+import banner1Img from "../../../assets/images/banner1.png";
+import banner2Img from "../../../assets/images/banner2.png";
+import banner3Img from "../../../assets/images/banner3.png";
 
 import "swiper/css";
 import "swiper/css/navigation";

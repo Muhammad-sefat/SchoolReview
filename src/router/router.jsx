@@ -1,73 +1,76 @@
-import { createBrowserRouter, Navigate } from "react-router-dom"
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import AdminLayout from "../layout/DashboardLayout"
-import Home from "../pages/sites/Home"
-import ForSchools from "../pages/sites/ForSchools"
-import ForTeachers from "../pages/sites/ForTeachers"
-import ForParents from "../pages/sites/ForParents"
-import ForStudents from "../pages/sites/ForStudents"
-import ForSchoolEvaluators from "../pages/sites/ForSchoolEvaluators"
-import ForTeacherObservers from "../pages/sites/ForTeacherObservers"
-import Dashboard from "../pages/dashboard/Dashboard"
-import ComponentsShowcase from "../pages/dashboard/ComponentsShowcase"
-import Layout from "../layout/Layout"
-import AuthLayout from "../layout/AuthLayout"
-import Login from "../pages/auth/Login"
-import RoleSelect from "../pages/auth/RoleSelect"
-import SignUp from "../pages/auth/SignUp"
-import SchoolLeaderSignUp from "../pages/auth/SchoolLeaderSignUp"
-import TeacherSignUp from "../pages/auth/TeacherSignUp"
-import TeacherPlanSelect from "../pages/auth/TeacherPlanSelect"
-import SchoolEvaluatorSignUp from "../pages/auth/SchoolEvaluatorSignUp"
-import VerifyEmail from "../pages/auth/VerifyEmail"
-import ForgotPassword from "../pages/auth/ForgotPassword"
-import ResetPassword from "../pages/auth/ResetPassword"
-import ReviewLayout from "../layout/ReviewLayout"
-import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview"
-import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview"
-import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview"
-import SpeakUp from "../pages/speakUp/SpeakUp"
-import ReportTrack from "../pages/reportTrack/ReportTrack"
-import StudentSchoolReview from "../pages/schoolReview/StudentSchoolReview"
-import SchoolLeaderReview from "../pages/schoolReview/SchoolLeaderReview"
-import ThankTeacher from "../pages/schoolReview/ThankTeacher"
+import AdminLayout from "../layout/DashboardLayout";
+import Home from "../pages/sites/Home";
+import ForSchools from "../pages/sites/ForSchools";
+import ForTeachers from "../pages/sites/ForTeachers";
+import ForParents from "../pages/sites/ForParents";
+import ForStudents from "../pages/sites/ForStudents";
+import ForSchoolEvaluators from "../pages/sites/ForSchoolEvaluators";
+import ForTeacherObservers from "../pages/sites/ForTeacherObservers";
+import Dashboard from "../pages/dashboard/Dashboard";
+import ComponentsShowcase from "../pages/dashboard/ComponentsShowcase";
+import Layout from "../layout/Layout";
+import AuthLayout from "../layout/AuthLayout";
+import Login from "../pages/auth/Login";
+import RoleSelect from "../pages/auth/RoleSelect";
+import SignUp from "../pages/auth/SignUp";
+import SchoolLeaderSignUp from "../pages/auth/SchoolLeaderSignUp";
+import TeacherSignUp from "../pages/auth/TeacherSignUp";
+import TeacherPlanSelect from "../pages/auth/TeacherPlanSelect";
+import SchoolEvaluatorSignUp from "../pages/auth/SchoolEvaluatorSignUp";
+import VerifyEmail from "../pages/auth/VerifyEmail";
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import ResetPassword from "../pages/auth/ResetPassword";
+import ReviewLayout from "../layout/ReviewLayout";
+import StudentToTeacherReview from "../pages/review_teacher/StudentToTeacherReview";
+import TeacherSelfReview from "../pages/review_teacher/TeacherSelfReview";
+import ObserverToTeacherReview from "../pages/review_teacher/ObserverToTeacherReview";
+import SpeakUp from "../pages/speakUp/SpeakUp";
+import ReportTrack from "../pages/reportTrack/ReportTrack";
+import StudentSchoolReview from "../pages/schoolReview/StudentSchoolReview";
+import SchoolLeaderReview from "../pages/schoolReview/SchoolLeaderReview";
+import ThankTeacher from "../pages/schoolReview/ThankTeacher";
 
-import LeaderDashboardLayout from "../layout/LeaderDashboard"
-import OverView from "../pages/LeaderDashboard/OverView"
-import SafeGuard from "../pages/LeaderDashboard/SafeGuard"
-import TeachingInsight from "../pages/LeaderDashboard/TeachingInsight"
-import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck"
-import ReportLeader from "../pages/LeaderDashboard/ReportLeader"
-import SchoolBrandingProfile from "../pages/LeaderDashboard/setting/SchoolBrandingProfile"
-import UserManagement from "../pages/LeaderDashboard/setting/UserManagement"
-import General from "../pages/LeaderDashboard/setting/General"
-import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool"
-import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary"
+import LeaderDashboardLayout from "../layout/LeaderDashboard";
+import OverView from "../pages/LeaderDashboard/OverView";
+import SafeGuard from "../pages/LeaderDashboard/SafeGuard";
+import TeachingInsight from "../pages/LeaderDashboard/TeachingInsight";
+import CommunityFeedbacck from "../pages/LeaderDashboard/CommunityFeedbacck";
+import ReportLeader from "../pages/LeaderDashboard/ReportLeader";
+import SchoolBrandingProfile from "../pages/LeaderDashboard/setting/SchoolBrandingProfile";
+import UserManagement from "../pages/LeaderDashboard/setting/UserManagement";
+import General from "../pages/LeaderDashboard/setting/General";
+import FollowedSchool from "../pages/LeaderDashboard/setting/FollowedSchool";
+import DashboardErrorBoundary from "../components/common/DashboardErrorBoundary";
 
-import SchoolReport from "../pages/reports/SchoolReport"
-import InternalTeacherReport from "../pages/reports/InternalTeacherReport"
-import ExternalTeacherReport from "../pages/reports/ExternalTeacherReport"
-import ReportLayout from "../layout/ReportLayout"
+import SchoolReport from "../pages/reports/SchoolReport";
+import InternalTeacherReport from "../pages/reports/InternalTeacherReport";
+import ExternalTeacherReport from "../pages/reports/ExternalTeacherReport";
+import ReportLayout from "../layout/ReportLayout";
 
-import InternalTeacherLayout from "../layout/InternalTeacherLayout"
-import TeachingInsightTeacher from "../pages/internalTeacher/TeachingInsight"
-import StudentFeedbackTeacher from "../pages/internalTeacher/StudentFeedback"
-import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask"
-import MyActivityTeacher from "../pages/internalTeacher/MyActivity"
-import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral"
-import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool"
-import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding"
-import ExternalTeacherLayout from "../layout/ExternalTeacherLayout"
-import ExternalTeachingInsight from "../pages/ExternalTeacher/ExternalTeachingInsight"
-import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFeedback"
-import ExternalActivityTask from "../pages/ExternalTeacher/ExternalActivityTask"
-import ExternalMyActivity from "../pages/ExternalTeacher/ExternalMyActivity"
-import ExternalTeacherGeneral from "../pages/ExternalTeacher/ExternalTeacherGeneral"
-import EvaluatorLayout from "../layout/EvaluatorLayout"
-import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview"
-import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools"
-import EvaluatorReports from "../pages/evaluator/EvaluatorReports"
-import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral"
+import InternalTeacherLayout from "../layout/InternalTeacherLayout";
+import TeachingInsightTeacher from "../pages/internalTeacher/TeachingInsight";
+import StudentFeedbackTeacher from "../pages/internalTeacher/StudentFeedback";
+import ActivityTaskTeacher from "../pages/internalTeacher/ActivityTask";
+import MyActivityTeacher from "../pages/internalTeacher/MyActivity";
+import TeacherGeneral from "../pages/internalTeacher/setting/TeacherGeneral";
+import TeacherFollowedSchool from "../pages/internalTeacher/setting/TeacherFollowedSchool";
+import ExternalTeacherOnboarding from "../pages/ExternalTeacher/Onboarding";
+import ExternalTeacherLayout from "../layout/ExternalTeacherLayout";
+import ExternalTeachingInsight from "../pages/ExternalTeacher/ExternalTeachingInsight";
+import ExternalStudentFeedback from "../pages/ExternalTeacher/ExternalStudentFeedback";
+import ExternalActivityTask from "../pages/ExternalTeacher/ExternalActivityTask";
+import ExternalMyActivity from "../pages/ExternalTeacher/ExternalMyActivity";
+import ExternalTeacherGeneral from "../pages/ExternalTeacher/ExternalTeacherGeneral";
+import EvaluatorLayout from "../layout/EvaluatorLayout";
+import EvaluatorOverview from "../pages/evaluator/EvaluatorOverview";
+import EvaluatorMySchools from "../pages/evaluator/EvaluatorMySchools";
+import EvaluatorReports from "../pages/evaluator/EvaluatorReports";
+import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral";
+import AboutUs from "../pages/sites/AboutUs";
+import Consultation from "../pages/sites/Consultation";
+import ContactUs from "../pages/sites/ContactUs";
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -101,7 +104,6 @@ const router = createBrowserRouter([
     element: <ReviewLayout />,
     children: [{ path: "", element: <ThankTeacher /> }],
   },
-
 
   {
     path: "/review",
@@ -246,6 +248,9 @@ const router = createBrowserRouter([
       { path: "for-students", element: <ForStudents /> },
       { path: "for-school-evaluators", element: <ForSchoolEvaluators /> },
       { path: "for-teacher-observers", element: <ForTeacherObservers /> },
+      { path: "about-us", element: <AboutUs /> },
+      { path: "consultation", element: <Consultation /> },
+      { path: "contact-us", element: <ContactUs /> },
     ],
   },
   {
@@ -261,6 +266,6 @@ const router = createBrowserRouter([
     path: "*",
     element: <Navigate to="/" replace />,
   },
-])
+]);
 
-export default router
+export default router;

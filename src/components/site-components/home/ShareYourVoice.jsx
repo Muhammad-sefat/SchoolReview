@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight, MessageSquare } from "lucide-react";
-import shareVoiceImg from "../../assets/images/sharevoice.png";
-import shareVoice1Img from "../../assets/images/sharevoice1.png";
-import shareVoice2Img from "../../assets/images/sharevoice2.png";
+import shareVoiceImg from "../../../assets/images/sharevoice.png";
+import shareVoice1Img from "../../../assets/images/sharevoice1.png";
+import shareVoice2Img from "../../../assets/images/sharevoice2.png";
 
 import "swiper/css";
 import "swiper/css/navigation";

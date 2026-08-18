@@ -19,6 +19,7 @@ import evaluation1 from "../images/evaluation1.png";
 import minischoolreports from "../images/minischoolreports.png";
 import minischoolreports1 from "../images/minischoolreports1.png";
 import schoolreports from "../images/schoolreports.png";
+import aboutusbanner from "../images/aboutusbanner.png";
 
 export const ImageProvider = {
     banner,
@@ -41,5 +42,6 @@ export const ImageProvider = {
     evaluation1,
     minischoolreports,
     minischoolreports1,
-    schoolreports
+    schoolreports,
+    aboutusbanner
 };

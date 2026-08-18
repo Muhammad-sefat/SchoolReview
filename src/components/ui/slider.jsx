@@ -7,6 +7,7 @@ export const CustomSlider = ({
   defaultLow = 20,
   defaultHigh = 80,
   rangeText = "",
+  onChange,
   className,
 }) => {
   const [low, setLow] = useState(defaultLow)
@@ -14,6 +15,12 @@ export const CustomSlider = ({
   const trackRef = useRef(null)
 
   const activeThumbRef = useRef(null)
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(low, high)
+    }
+  }, [low, high, onChange])
 
   const getValueFromX = (clientX) => {
     if (!trackRef.current) return 0

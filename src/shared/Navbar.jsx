@@ -8,6 +8,7 @@ import {
   BookOpen,
   Layers,
   PhoneCall,
+  Calendar,
 } from "lucide-react";
 import Logo from "../assets/images/Logo.png";
 
@@ -183,6 +184,8 @@ const Navbar = () => {
     "/for-teacher-observers",
   ];
   const isPlatformActive = platformPaths.includes(location.pathname);
+  const aboutPaths = ["/about-us", "/consultation", "/contact-us"];
+  const isAboutActive = aboutPaths.includes(location.pathname);
 
   // Synchronize navbarMode with routing
   useEffect(() => {
@@ -281,9 +284,10 @@ const Navbar = () => {
                 onMouseEnter={() => handleMouseEnter("about")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
+                <Link
+                  to="/about-us"
                   className={`flex items-center gap-1 transition-colors font-semibold text-sm cursor-pointer outline-none ${
-                    activeDropdown === "about"
+                    activeDropdown === "about" || isAboutActive
                       ? "text-primary"
                       : "text-secondary hover:text-primary"
                   }`}
@@ -296,65 +300,36 @@ const Navbar = () => {
                         : "text-secondary"
                     }`}
                   />
-                </button>
+                </Link>
 
                 {/* Centered hover popover content with visual padding bridge */}
                 {activeDropdown === "about" && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[320px] z-50 pointer-events-auto"
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[160px] z-50 pointer-events-auto"
                     onMouseEnter={() => handleMouseEnter("about")}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 grid grid-cols-1 gap-2.5">
+                    <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-2 flex flex-col gap-1">
                       <Link
-                        to="/about/our-story"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
+                        to="/consultation"
+                        className={`px-3 py-1.5 rounded-lg text-sm transition-colors block ${
+                          location.pathname === "/consultation"
+                            ? "text-primary bg-blue-50/50"
+                            : "text-secondary hover:text-primary hover:bg-gray-50"
+                        }`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <BookOpen className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            Our Story
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Discover our journey, mission, and vision.
-                          </p>
-                        </div>
+                        Consultation
                       </Link>
 
                       <Link
-                        to="/about/how-it-works"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
+                        to="/contact-us"
+                        className={`px-3 py-1.5 rounded-lg text-sm transition-colors block ${
+                          location.pathname === "/contact-us"
+                            ? "text-primary bg-blue-50/50"
+                            : "text-secondary hover:text-primary hover:bg-gray-50"
+                        }`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <Layers className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            How It Works
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Learn how we gather and verify school feedback.
-                          </p>
-                        </div>
-                      </Link>
-
-                      <Link
-                        to="/about/contact"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
-                      >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <PhoneCall className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            Contact Us
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Get in touch with our support & partnership team.
-                          </p>
-                        </div>
+                        Contact Us
                       </Link>
                     </div>
                   </div>
@@ -374,9 +349,10 @@ const Navbar = () => {
                 onMouseEnter={() => handleMouseEnter("about")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
+                <Link
+                  to="/about-us"
                   className={`flex items-center gap-1 transition-colors font-semibold text-sm cursor-pointer outline-none ${
-                    activeDropdown === "about"
+                    activeDropdown === "about" || isAboutActive
                       ? "text-primary"
                       : "text-secondary hover:text-primary"
                   }`}
@@ -389,64 +365,35 @@ const Navbar = () => {
                         : "text-secondary"
                     }`}
                   />
-                </button>
+                </Link>
 
                 {activeDropdown === "about" && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[320px] pt-1.5 z-50 pointer-events-auto"
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[160px] pt-1.5 z-50 pointer-events-auto"
                     onMouseEnter={() => handleMouseEnter("about")}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-4 grid grid-cols-1 gap-2.5">
+                    <div className="bg-white border border-gray-100 rounded-xl shadow-lg p-2.5 flex flex-col gap-1">
                       <Link
-                        to="/about/our-story"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
+                        to="/consultation"
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors block ${
+                          location.pathname === "/consultation"
+                            ? "text-primary bg-blue-50/50"
+                            : "text-secondary hover:text-primary hover:bg-gray-50"
+                        }`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <BookOpen className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            Our Story
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Discover our journey, mission, and vision.
-                          </p>
-                        </div>
+                        Consultation
                       </Link>
 
                       <Link
-                        to="/about/how-it-works"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
+                        to="/contact-us"
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors block ${
+                          location.pathname === "/contact-us"
+                            ? "text-primary bg-blue-50/50"
+                            : "text-secondary hover:text-primary hover:bg-gray-50"
+                        }`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <Layers className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            How It Works
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Learn how we gather and verify school feedback.
-                          </p>
-                        </div>
-                      </Link>
-
-                      <Link
-                        to="/about/contact"
-                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group/item"
-                      >
-                        <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors">
-                          <PhoneCall className="w-[18px] h-[18px] stroke-[1.75]" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-semibold text-textPrimary">
-                            Contact Us
-                          </h4>
-                          <p className="text-[10px] text-secondary mt-0.5 leading-relaxed">
-                            Get in touch with our support & partnership team.
-                          </p>
-                        </div>
+                        Contact Us
                       </Link>
                     </div>
                   </div>
@@ -663,7 +610,11 @@ const Navbar = () => {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                  className="flex items-center justify-between px-2 py-1.5 text-sm font-semibold text-textPrimary hover:text-primary outline-none"
+                  className={`flex items-center justify-between px-2 py-1.5 text-sm font-semibold outline-none ${
+                    isAboutActive
+                      ? "text-primary"
+                      : "text-textPrimary hover:text-primary"
+                  }`}
                 >
                   <span>About Us</span>
                   <ChevronDown
@@ -673,23 +624,35 @@ const Navbar = () => {
                 {mobileAboutOpen && (
                   <div className="pl-4 flex flex-col gap-2 border-l border-gray-100 ml-2">
                     <Link
-                      to="/about/our-story"
+                      to="/about-us"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/about-us"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
-                      Our Story
+                      About Us
                     </Link>
                     <Link
-                      to="/about/how-it-works"
+                      to="/consultation"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/consultation"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
-                      How It Works
+                      Consultation
                     </Link>
                     <Link
-                      to="/about/contact"
+                      to="/contact-us"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/contact-us"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
                       Contact Us
                     </Link>
@@ -884,7 +847,11 @@ const Navbar = () => {
                 {/* About Us */}
                 <button
                   onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                  className="flex items-center justify-between px-2 py-1.5 text-sm font-semibold text-textPrimary hover:text-primary outline-none"
+                  className={`flex items-center justify-between px-2 py-1.5 text-sm font-semibold outline-none ${
+                    isAboutActive
+                      ? "text-primary"
+                      : "text-textPrimary hover:text-primary"
+                  }`}
                 >
                   <span>About Us</span>
                   <ChevronDown
@@ -894,23 +861,35 @@ const Navbar = () => {
                 {mobileAboutOpen && (
                   <div className="pl-4 flex flex-col gap-2 border-l border-gray-100 ml-2">
                     <Link
-                      to="/about/our-story"
+                      to="/about-us"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/about-us"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
-                      Our Story
+                      About Us
                     </Link>
                     <Link
-                      to="/about/how-it-works"
+                      to="/consultation"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/consultation"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
-                      How It Works
+                      Consultation
                     </Link>
                     <Link
-                      to="/about/contact"
+                      to="/contact-us"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-xs font-semibold text-secondary py-1"
+                      className={`text-xs font-semibold py-1 ${
+                        location.pathname === "/contact-us"
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
                     >
                       Contact Us
                     </Link>
