@@ -24,18 +24,21 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
       )}
 
       {/* Options List */}
-      <div className="space-y-3 sm:space-y-4">
+      <div className="space-y-4 sm:space-y-5">
 
         {/* Option 1: School Email Verification (Recommended) */}
         <div
           onClick={() => handleOptionSelect("email")}
-          className={`rounded-2xl p-4 sm:p-6 transition-all cursor-pointer ${selectedOption === "email"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          style={{
+            borderRadius: "48px",
+            border: selectedOption === "email" ? "1.5px solid #080808" : "1px solid #EAEAEA",
+          }}
+          className={`p-6 sm:p-7 md:px-8 transition-all cursor-pointer bg-white ${
+            selectedOption === "email" ? "shadow-xs" : "hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3.5">
               <input
                 type="radio"
                 name="feedbackMode"
@@ -45,10 +48,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "email"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "email"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   School Email Verification (Recommended)
                 </h3>
@@ -81,13 +85,16 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
         {/* Option 2: Anyone (Public) */}
         <div
           onClick={() => handleOptionSelect("public")}
-          className={`rounded-2xl p-6 transition-all cursor-pointer ${selectedOption === "public"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          style={{
+            borderRadius: "48px",
+            border: selectedOption === "public" ? "1.5px solid #080808" : "1px solid #EAEAEA",
+          }}
+          className={`p-6 sm:p-7 md:px-8 transition-all cursor-pointer bg-white ${
+            selectedOption === "public" ? "shadow-xs" : "hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3.5">
               <input
                 type="radio"
                 name="feedbackMode"
@@ -97,10 +104,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "public"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "public"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   Anyone (Public)
                 </h3>
@@ -120,13 +128,16 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
         {/* Option 3: Assigned Students Only (Full Control) */}
         <div
           onClick={() => handleOptionSelect("assigned")}
-          className={`rounded-2xl p-6 transition-all cursor-pointer ${selectedOption === "assigned"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          style={{
+            borderRadius: "48px",
+            border: selectedOption === "assigned" ? "1.5px solid #080808" : "1px solid #EAEAEA",
+          }}
+          className={`p-6 sm:p-7 md:px-8 transition-all cursor-pointer bg-white ${
+            selectedOption === "assigned" ? "shadow-xs" : "hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3.5">
               <input
                 type="radio"
                 name="feedbackMode"
@@ -136,10 +147,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "assigned"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "assigned"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   Assigned Students Only (Full Control)
                 </h3>
