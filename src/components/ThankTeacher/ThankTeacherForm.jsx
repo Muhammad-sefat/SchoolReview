@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import TeacherSchoolSelectDropdown from "@/components/auth/teacher/TeacherSchoolSelectDropdown"
 import TeacherSelectDropdown from "@/components/auth/teacher/TeacherSelectDropdown"
-import CustomInput from "@/components/common/CustomInput"
 import VoiceInputButton from "@/components/common/VoiceInputButton"
 import { Info } from "lucide-react"
 
@@ -23,9 +22,12 @@ const COMPLIMENT_OPTIONS = [
 ]
 
 const ThankTeacherForm = ({ formData, updateFormData }) => {
+  const [isCodeSent, setIsCodeSent] = useState(!!formData.verificationCode && formData.verificationCode !== "2026")
   const [codeDigits, setCodeDigits] = useState(
-    formData.verificationCode ? formData.verificationCode.split("") : ["2", "0", "2", "6"]
+    formData.verificationCode ? formData.verificationCode.split("") : ["", "", "", ""]
   )
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((formData.email || "").trim())
 
   const handleDigitChange = (index, value) => {
     if (!/^\d*$/.test(value)) return
@@ -33,6 +35,12 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
     newDigits[index] = value.slice(-1)
     setCodeDigits(newDigits)
     updateFormData({ verificationCode: newDigits.join("") })
+  }
+
+  const handleSendCode = () => {
+    if (!isValidEmail) return
+    setIsCodeSent(true)
+    console.log("[ThankTeacherForm] Verification code sent to email:", formData.email)
   }
 
   const handleActionSelect = (actionType) => {
@@ -63,44 +71,65 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
         <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Email</h3>
 
         {/* Info Banner */}
-        <div className="bg-[#EBF5FF] border border-[#BEE0FF] text-[#1E40AF] px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
+        <div className="bg-[#E8F4FE] border border-[#BEE0FF] text-[#1E40AF] px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
           <Info className="w-4 h-4 shrink-0 text-[#2563EB]" />
           <span>
             Used only to confirm your teacher(s). Your name and email are <strong>never</strong> shared with the teacher.
           </span>
         </div>
 
-        <CustomInput
-          type="email"
-          placeholder="Enter your email"
-          value={formData.email || ""}
-          onChange={(e) => updateFormData({ email: e.target.value })}
-        />
-      </div>
-
-      {/* 3. Verification Code Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Verification code</h3>
-        <div className="flex items-center gap-3">
-          {codeDigits.map((digit, idx) => (
-            <input
-              key={idx}
-              type="text"
-              maxLength={1}
-              value={digit}
-              onChange={(e) => handleDigitChange(idx, e.target.value)}
-              className="w-12 h-12 text-center text-lg font-semibold border border-border/80 rounded-xl bg-background text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-            />
-          ))}
+        {/* Email Input Box with Send Code Button Inside (Image 2 design) */}
+        <div className="relative flex items-center w-full bg-white border border-[#EAEAEA] rounded-xl p-1.5 focus-within:border-[#038AF9] focus-within:ring-1 focus-within:ring-[#038AF9] transition-all shadow-2xs">
           <button
             type="button"
-            className="text-sm font-medium text-primary hover:underline ml-2 cursor-pointer"
-            onClick={() => console.log("Resend code clicked")}
+            onClick={handleSendCode}
+            disabled={!isValidEmail}
+            className={`px-4 h-9 rounded-lg font-medium text-xs sm:text-sm shrink-0 transition-all ${
+              isValidEmail
+                ? "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95 shadow-2xs"
+                : "bg-[#038AF9]/40 opacity-60 text-white cursor-not-allowed"
+            }`}
           >
-            Resend code
+            {isCodeSent ? "Resend" : "Send Code"}
           </button>
+
+          <div className="h-5 w-[1px] bg-gray-200 mx-2.5 shrink-0" />
+
+          <input
+            type="email"
+            placeholder="Enter your email..."
+            value={formData.email || ""}
+            onChange={(e) => updateFormData({ email: e.target.value })}
+            className="w-full h-9 px-1 text-sm sm:text-base text-[#1F1F21] placeholder:text-[#5A5A5A] bg-transparent focus:outline-none font-urbanist"
+          />
         </div>
       </div>
+
+      {/* 3. Verification Code Field (HIDDEN BY DEFAULT, REVEALED WHEN SEND CODE IS CLICKED) */}
+      {isCodeSent && (
+        <div className="space-y-2 animate-fadeIn pt-1">
+          <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Verification code</h3>
+          <div className="flex items-center gap-3 flex-wrap">
+            {codeDigits.map((digit, idx) => (
+              <input
+                key={idx}
+                type="text"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleDigitChange(idx, e.target.value)}
+                className="w-12 h-12 text-center text-lg font-semibold border border-[#EAEAEA] rounded-xl bg-white text-[#1F1F21] focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all shadow-2xs"
+              />
+            ))}
+            <button
+              type="button"
+              className="text-sm font-medium text-[#038AF9] hover:underline ml-2 cursor-pointer"
+              onClick={handleSendCode}
+            >
+              Resend code
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* 4. Select a Teacher Field */}
       <div className="space-y-2">
