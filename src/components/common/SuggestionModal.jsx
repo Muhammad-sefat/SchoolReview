@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Shield, AlertTriangle, X } from "lucide-react"
 
 // Exact User SVG for Suggestion modal header
@@ -51,12 +51,21 @@ const SuggestionModal = ({
   onUseSuggestion,
 }) => {
   const [activeTab, setActiveTab] = useState("use") // "use" | "edit" | "why"
+  const [editedText, setEditedText] = useState(suggestedText)
+
+  useEffect(() => {
+    setEditedText(suggestedText)
+  }, [suggestedText])
 
   if (!isOpen) return null
 
   const handleContinueClick = () => {
-    if ((activeTab === "use" || activeTab === "edit") && onUseSuggestion) {
-      onUseSuggestion(suggestedText)
+    if (activeTab === "use") {
+      if (onUseSuggestion) onUseSuggestion(suggestedText)
+    } else if (activeTab === "edit") {
+      if (onUseSuggestion) onUseSuggestion(editedText)
+    } else if (activeTab === "why") {
+      if (onUseSuggestion) onUseSuggestion(suggestedText)
     }
     if (onClose) onClose()
   }
@@ -170,10 +179,17 @@ const SuggestionModal = ({
         )}
 
         {activeTab === "edit" && (
-          <div className="pt-1">
-            <div className="p-4 rounded-xl border border-[#EAEAEA] bg-white text-xs sm:text-sm md:text-base font-normal text-[#1F1F21] leading-relaxed">
-              {suggestedText}
-            </div>
+          <div className="pt-1 space-y-2">
+            <label className="text-xs sm:text-sm font-medium text-[#5A5A5A]">
+              Edit your feedback:
+            </label>
+            <textarea
+              rows={4}
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+              className="w-full p-4 text-xs sm:text-sm md:text-base border border-[#EAEAEA] rounded-xl bg-white text-[#1F1F21] placeholder:text-[#5A5A5A] focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all font-urbanist shadow-2xs resize-none"
+              placeholder="Edit your feedback..."
+            />
           </div>
         )}
 
