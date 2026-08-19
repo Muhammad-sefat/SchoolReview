@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import TeacherSchoolSelectDropdown from "@/components/auth/teacher/TeacherSchoolSelectDropdown"
 import TeacherSelectDropdown from "@/components/auth/teacher/TeacherSelectDropdown"
 import VoiceInputButton from "@/components/common/VoiceInputButton"
@@ -26,6 +26,7 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
   const [codeDigits, setCodeDigits] = useState(
     formData.verificationCode ? formData.verificationCode.split("") : ["", "", "", ""]
   )
+  const actionContentRef = useRef(null)
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((formData.email || "").trim())
 
@@ -45,6 +46,15 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
   const handleActionSelect = (actionType) => {
     updateFormData({ actionType })
+    // Auto scroll down smoothly to newly revealed content for better UX
+    setTimeout(() => {
+      if (actionContentRef.current) {
+        actionContentRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    }, 120)
   }
 
   const handleComplimentSelect = (complimentId) => {
@@ -67,7 +77,7 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
       </div>
 
       {/* 2. Email Field */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Email</h3>
 
         {/* Info Banner */}
@@ -79,16 +89,15 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
         </div>
 
         {/* Email Input Box with Send Code Button Inside (Image 2 design) */}
-        <div className="relative flex items-center w-full bg-white border border-[#EAEAEA] rounded-xl p-1.5 focus-within:border-[#038AF9] focus-within:ring-1 focus-within:ring-[#038AF9] transition-all shadow-2xs">
+        <div className="relative flex my-4 py-2 items-center w-full bg-white border border-[#EAEAEA] rounded-xl p-1.5 focus-within:border-[#038AF9] focus-within:ring-1 focus-within:ring-[#038AF9] transition-all shadow-2xs">
           <button
             type="button"
             onClick={handleSendCode}
             disabled={!isValidEmail}
-            className={`px-4 h-9 rounded-lg font-medium text-xs sm:text-sm shrink-0 transition-all ${
-              isValidEmail
-                ? "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95 shadow-2xs"
-                : "bg-[#038AF9]/40 opacity-60 text-white cursor-not-allowed"
-            }`}
+            className={`px-4 h-9 rounded-lg font-medium text-xs sm:text-sm shrink-0 transition-all ${isValidEmail
+              ? "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95 shadow-2xs"
+              : "bg-[#038AF9]/40 opacity-60 text-white cursor-not-allowed"
+              }`}
           >
             {isCodeSent ? "Resend" : "Send Code"}
           </button>
@@ -132,7 +141,7 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
       )}
 
       {/* 4. Select a Teacher Field */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Select a teacher</h3>
         <TeacherSelectDropdown
           value={formData.teacherId || ""}
@@ -152,11 +161,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
           <button
             type="button"
             onClick={() => handleActionSelect("compliment")}
-            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-              formData.actionType === "compliment"
-                ? "border-[#080808] border-2 bg-white shadow-xs"
-                : "border-border/80 bg-background hover:bg-muted/30"
-            }`}
+            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${formData.actionType === "compliment"
+              ? "border-[#080808] border-2 bg-white shadow-xs"
+              : "border-border/80 bg-background hover:bg-muted/30"
+              }`}
           >
             <img src={thumbsUpImg} alt="Give a compliment" className="w-7 h-7 object-contain shrink-0" />
             <span className="text-[18px] font-medium text-[#080808]">Give a compliment</span>
@@ -166,11 +174,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
           <button
             type="button"
             onClick={() => handleActionSelect("feedback")}
-            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-              formData.actionType === "feedback"
-                ? "border-[#080808] border-2 bg-white shadow-xs"
-                : "border-border/80 bg-background hover:bg-muted/30"
-            }`}
+            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${formData.actionType === "feedback"
+              ? "border-[#080808] border-2 bg-white shadow-xs"
+              : "border-border/80 bg-background hover:bg-muted/30"
+              }`}
           >
             <img src={thumbsDownImg} alt="Send feedback" className="w-7 h-7 object-contain shrink-0" />
             <span className="text-[18px] font-medium text-[#080808]">Send feedback</span>
@@ -180,7 +187,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 6A. If "Give a compliment" is selected */}
       {formData.actionType === "compliment" && (
-        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div
+          ref={actionContentRef}
+          className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300 scroll-mt-6"
+        >
           <h3 className="text-[20px] font-semibold text-[#080808]">
             Why do you want to thank your teacher?
           </h3>
@@ -194,11 +204,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
                   key={opt.id}
                   type="button"
                   onClick={() => handleComplimentSelect(opt.id)}
-                  className={`px-4 py-2.5 rounded-full text-base flex items-center gap-2 transition-all cursor-pointer ${
-                    isSelected
-                      ? "border-[#080808] border-2 bg-white font-medium shadow-xs"
-                      : "border border-border/80 text-[#080808] bg-background hover:bg-muted/40 font-normal"
-                  }`}
+                  className={`px-4 py-2.5 rounded-full text-base flex items-center gap-2 transition-all cursor-pointer ${isSelected
+                    ? "border-[#080808] border-2 bg-white font-medium shadow-xs"
+                    : "border border-border/80 text-[#080808] bg-background hover:bg-muted/40 font-normal"
+                    }`}
                 >
                   {opt.icon ? (
                     <img src={opt.icon} alt="" className="w-5 h-5 object-contain shrink-0" />
@@ -236,7 +245,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 6B. If "Send feedback" is selected */}
       {formData.actionType === "feedback" && (
-        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div
+          ref={actionContentRef}
+          className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300 scroll-mt-6"
+        >
           {/* Textarea Input Box */}
           <div className="relative w-full">
             <textarea
