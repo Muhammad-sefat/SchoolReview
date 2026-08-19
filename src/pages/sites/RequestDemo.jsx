@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Shield } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 import { ScrollRestoration } from "react-router-dom";
 import { Card } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
@@ -11,15 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-import CustomSlider from "../../components/ui/slider";
 import { Button } from "../../components/ui/button";
 
-function Consultation() {
-  const [budgetRange, setBudgetRange] = useState({ low: 0, high: 200 });
-
+function RequestDemo() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Consultation request submitted successfully!");
+    alert(
+      "Demo request submitted successfully! We will get in touch with you shortly.",
+    );
   };
 
   return (
@@ -27,37 +25,45 @@ function Consultation() {
       <ScrollRestoration />
       <div className="section-padding-x w-full flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
         {/* Left Column: Heading and Info */}
-        <div className="w-full lg:w-[40%] flex flex-col items-start text-left lg:sticky lg:top-28">
+        <div className="w-full lg:w-[45%] flex flex-col items-start text-left lg:sticky lg:top-28">
           <div className="flex items-center gap-1.5 px-3 py-1 bg-gray-50 border border-gray-100 rounded-full text-xs font-semibold text-secondary mb-6">
-            <Shield className="w-3.5 h-3.5 shrink-0 stroke-[2.25]" />
-            <span>Book a Consultation</span>
+            <span>For School Leaders / School Evaluators</span>
           </div>
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold text-textPrimary leading-[1.15] tracking-tight">
-            Find the Right School <br /> with Expert{" "}
-            <span className="text-primary relative inline-block">
-              Guidance
-              <svg
-                viewBox="0 0 90 10"
-                className="absolute left-0 -bottom-1.5 w-full h-3 text-primary pointer-events-none"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <path d="M 2,8 Q 45,-4 88,8 Q 45,0 2,8 Z" fill="currentColor" />
-              </svg>
-            </span>
+            Request a Personalised Demo
           </h1>
 
           {/* Subheading */}
-          <p className="text-sm sm:text-base md:text-lg text-textSecondary mt-6 leading-relaxed font-medium max-w-[480px]">
-            Receive personalised school advice from an experienced education
-            consultant.
+          <p className="text-sm lg:text-lg text-textSecondary mt-6 leading-relaxed">
+            See how SchoolReview helps your school collect meaningful feedback,
+            measure improvement, and make evidence-based decisions.
           </p>
+
+          {/* Checklist */}
+          <ul className="flex flex-col gap-3.5 mt-8">
+            {[
+              "30-minute personalised demo",
+              "Tailored to your school's needs",
+              "Live Q&A with our team",
+              "No obligation",
+            ].map((item, index) => (
+              <li
+                key={index}
+                className="flex items-center gap-3 text-textPrimary"
+              >
+                <div className="flex items-center justify-center w-6 h-6 shrink-0">
+                  <CircleCheck className="w-4 h-4 stroke-[2]" />
+                </div>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Right Column: Shadcn Form Card */}
-        <div className="w-full lg:w-[60%] flex justify-center lg:justify-end">
+        <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
           <Card className="w-full max-w-[650px] bg-white border-4 border-gray-100 rounded-[24px] shadow-sm p-6 sm:p-8 hover:shadow-md transition-shadow">
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               {/* Name Field */}
@@ -84,63 +90,46 @@ function Consultation() {
                 />
               </div>
 
-              {/* Child's Age & Current School Grade Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input
-                  type="text"
-                  placeholder="Child's Age"
-                  className="h-11 border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium"
-                />
-                <Input
-                  type="text"
-                  placeholder="Current School Grade (Optional)"
-                  className="h-11 border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium"
-                />
-              </div>
-
-              {/* Preferred School Location */}
+              {/* School Name */}
               <Input
                 type="text"
-                placeholder="Preferred School Location"
+                placeholder="School name"
+                required
                 className="h-11 border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium"
               />
 
-              {/* School Type Select */}
-              <Select>
+              {/* Your Role Select */}
+              <Select required>
                 <SelectTrigger className="h-11 border-gray-200 focus:ring-primary focus:border-primary text-secondary rounded-lg text-sm font-medium w-full bg-white">
-                  <SelectValue placeholder="School Type" />
+                  <SelectValue placeholder="Your role" />
                 </SelectTrigger>
                 <SelectContent className="bg-white border border-gray-100 rounded-lg shadow-md z-50">
-                  <SelectItem value="public">Public School</SelectItem>
-                  <SelectItem value="private">Private School</SelectItem>
-                  <SelectItem value="international">
-                    International School
-                  </SelectItem>
-                  <SelectItem value="boarding">Boarding School</SelectItem>
+                  <SelectItem value="leader">School Leader</SelectItem>
+                  <SelectItem value="evaluator">School Evaluator</SelectItem>
+                  <SelectItem value="teacher">Teacher</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
 
-              {/* Tuition Budget Range Slider */}
-              <div className="flex flex-col gap-2.5">
-                <div className="flex justify-between items-center text-xs font-semibold text-textSecondary">
-                  <span>Annual Tuition Budget</span>
-                  <span className="text-primary font-bold">
-                    {budgetRange.low}k - {budgetRange.high}k
-                  </span>
-                </div>
-                <CustomSlider
-                  min={0}
-                  max={200}
-                  defaultLow={0}
-                  defaultHigh={200}
-                  onChange={(low, high) => setBudgetRange({ low, high })}
-                  className="py-1"
-                />
-              </div>
+              {/* Location */}
+              <Input
+                type="text"
+                placeholder="Location"
+                required
+                className="h-11 border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium"
+              />
 
-              {/* What are you looking for text area */}
+              {/* School Website (Optional) */}
+              <Input
+                type="url"
+                placeholder="School Website (Optional)"
+                className="h-11 border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium"
+              />
+
+              {/* Text Area */}
               <Textarea
-                placeholder="What are you looking for in a school?"
+                placeholder="What would you like to learn during the demo?"
+                required
                 className="min-h-[110px] border-gray-200 focus-visible:ring-primary focus-visible:border-primary rounded-lg text-sm font-medium resize-none p-3 bg-white"
               />
 
@@ -149,7 +138,7 @@ function Consultation() {
                 type="submit"
                 className="w-full h-12 bg-primary hover:bg-primary/95 text-white font-semibold rounded-[10px] transition-all duration-200 shadow-xs hover:shadow-md cursor-pointer text-sm"
               >
-                Request My Consultation
+                Schedule My Demo
               </Button>
             </form>
           </Card>
@@ -159,4 +148,4 @@ function Consultation() {
   );
 }
 
-export default Consultation;
+export default RequestDemo;

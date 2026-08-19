@@ -16,11 +16,16 @@ export const CustomSlider = ({
 
   const activeThumbRef = useRef(null)
 
+  const onChangeRef = useRef(onChange)
   useEffect(() => {
-    if (onChange) {
-      onChange(low, high)
+    onChangeRef.current = onChange
+  }, [onChange])
+
+  useEffect(() => {
+    if (onChangeRef.current) {
+      onChangeRef.current(low, high)
     }
-  }, [low, high, onChange])
+  }, [low, high])
 
   const getValueFromX = (clientX) => {
     if (!trackRef.current) return 0

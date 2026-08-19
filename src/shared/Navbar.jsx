@@ -1,19 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {
-  ChevronDown,
-  Globe,
-  Menu,
-  X,
-  BookOpen,
-  Layers,
-  PhoneCall,
-  Calendar,
-} from "lucide-react";
+import { ChevronDown, Globe, Menu, X } from "lucide-react";
 import Logo from "../assets/images/Logo.png";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [navbarMode, setNavbarMode] = useState("guest");
@@ -184,8 +174,7 @@ const Navbar = () => {
     "/for-teacher-observers",
   ];
   const isPlatformActive = platformPaths.includes(location.pathname);
-  const aboutPaths = ["/about-us", "/consultation", "/contact-us"];
-  const isAboutActive = aboutPaths.includes(location.pathname);
+  const isAboutActive = location.pathname === "/about-us";
 
   // Synchronize navbarMode with routing
   useEffect(() => {
@@ -438,7 +427,7 @@ const Navbar = () => {
 
               {/* Request a School Demo Button */}
               <Link
-                to="/demo"
+                to="/request-demo"
                 className="bg-primary hover:bg-primary/95 text-white font-semibold text-sm px-5 py-2.5 rounded-[8px] transition-all duration-200 cursor-pointer text-center"
               >
                 Request a School Demo

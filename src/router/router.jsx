@@ -71,6 +71,12 @@ import EvaluatorGeneral from "../pages/evaluator/EvaluatorGeneral";
 import AboutUs from "../pages/sites/AboutUs";
 import Consultation from "../pages/sites/Consultation";
 import ContactUs from "../pages/sites/ContactUs";
+import RequestDemo from "../pages/sites/RequestDemo";
+import TermsAndCondition from "../pages/sites/TermsAndCondition";
+import PrivacyPolicy from "../pages/sites/PrivacyPolicy";
+import CommunityGuidelines from "../pages/sites/CommunityGuidelines";
+import FAQ from "../pages/sites/FAQ";
+import Pricing from "../pages/sites/Pricing";
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -251,6 +257,12 @@ const router = createBrowserRouter([
       { path: "about-us", element: <AboutUs /> },
       { path: "consultation", element: <Consultation /> },
       { path: "contact-us", element: <ContactUs /> },
+      { path: "request-demo", element: <RequestDemo /> },
+      { path: "terms-conditions", element: <TermsAndCondition /> },
+      { path: "privacy-policy", element: <PrivacyPolicy /> },
+      { path: "community-guidelines", element: <CommunityGuidelines /> },
+      { path: "faq", element: <FAQ /> },
+      { path: "pricing", element: <Pricing /> },
     ],
   },
   {
