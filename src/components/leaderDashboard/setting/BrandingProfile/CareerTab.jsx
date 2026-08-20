@@ -1,11 +1,34 @@
 import React, { useState } from "react"
-import { Trash2, Plus, Upload } from "lucide-react"
+import { Plus } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Title18 } from "@/components/typho/Title"
+import DragDropUploadBox from "./common/DragDropUploadBox"
+
+// User Provided Delete SVG Icon
+const TrashCanIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M19.5 5.50098L18.6139 20.122C18.5499 21.1776 17.6751 22.001 16.6175 22.001H7.38246C6.32488 22.001 5.4501 21.1776 5.38612 20.122L4.5 5.50098"
+      stroke="#1F1F21"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3 5.49902H8M8 5.49902L9.24025 2.6051C9.39783 2.23742 9.75937 1.99902 10.1594 1.99902H13.8406C14.2406 1.99902 14.6022 2.23742 14.7597 2.6051L16 5.49902M8 5.49902H16M21 5.49902H16"
+      stroke="#1F1F21"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M9.5 16.5V10.5" stroke="#1F1F21" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14.5 16.5V10.5" stroke="#1F1F21" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
 
 const INITIAL_POSITIONS = [
-  { id: 1, title: "", description: "", link: "", isPublished: true },
-  { id: 2, title: "", description: "", link: "", isPublished: true },
+  { id: 1, title: "", description: "", link: "", isPublished: true, pdfFile: null },
+  { id: 2, title: "", description: "", link: "", isPublished: true, pdfFile: null },
 ]
 
 const CareerTab = ({ register, onSubmit }) => {
@@ -14,7 +37,7 @@ const CareerTab = ({ register, onSubmit }) => {
   const handleAddPosition = () => {
     setPositions((prev) => [
       ...prev,
-      { id: Date.now(), title: "", description: "", link: "", isPublished: true },
+      { id: Date.now(), title: "", description: "", link: "", isPublished: true, pdfFile: null },
     ])
   }
 
@@ -26,6 +49,15 @@ const CareerTab = ({ register, onSubmit }) => {
     setPositions((prev) =>
       prev.map((p) => (p.id === id ? { ...p, isPublished: !p.isPublished } : p))
     )
+  }
+
+  const handlePdfUpload = (id, e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setPositions((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, pdfFile: file.name } : p))
+      )
+    }
   }
 
   return (
@@ -72,21 +104,20 @@ const CareerTab = ({ register, onSubmit }) => {
               />
             </div>
 
-            {/* Middle Upload Box (3.5 Cols) */}
+            {/* Middle Drag & Drop Upload Box (3.5 Cols) */}
             <div className="lg:col-span-3">
-              <label className="border border-dashed border-gray-300 rounded-2xl p-5 w-full h-36 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#038AF9] transition-colors bg-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <span className="text-sm text-gray-500 font-normal">Job Description (PDF)</span>
-                <span className="text-sm text-textPrimary font-medium underline mt-1">Choose files</span>
-                <input type="file" className="hidden" accept=".pdf" />
-              </label>
+              <DragDropUploadBox
+                onChange={(e) => handlePdfUpload(pos.id, e)}
+                accept=".pdf"
+                multiple={false}
+                subLabel={pos.pdfFile ? pos.pdfFile : "Job Description (PDF)"}
+                chooseText="Choose files"
+                className="w-full h-36"
+              />
             </div>
 
-            {/* Right Action Buttons (1.5 Cols) */}
-            <div className="lg:col-span-2 flex items-center gap-3 pt-2">
+            {/* Right Action Buttons (1.5 Cols) with SVG Delete Icon & Custom Background */}
+            <div className="lg:col-span-2 flex items-center justify-between gap-3 pt-2">
               <div className="flex items-center space-x-2 cursor-pointer">
                 <Checkbox
                   id={`pub-${pos.id}`}
@@ -101,13 +132,14 @@ const CareerTab = ({ register, onSubmit }) => {
                 </label>
               </div>
 
+              {/* Styled SVG Delete Button with background */}
               <button
                 type="button"
                 onClick={() => handleRemovePosition(pos.id)}
-                className="text-gray-400 hover:text-red-600 transition-colors p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer ml-auto"
+                className="w-9 h-9 rounded-full bg-[rgba(8,8,8,0.04)] hover:bg-gray-200 text-[#1F1F21] flex items-center justify-center transition-colors cursor-pointer shrink-0"
                 title="Delete position"
               >
-                <Trash2 className="w-4 h-4" />
+                <TrashCanIcon />
               </button>
             </div>
           </div>

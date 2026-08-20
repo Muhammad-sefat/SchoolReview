@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react"
-import { ChevronRight, Maximize2, X } from "lucide-react"
+import { ChevronRight, Maximize2, Minimize2, X } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select"
 import { DatePicker } from "@/components/ui/date-picker"
 import { format } from "date-fns"
+import { Switch } from "@/components/ui/switch"
 
 const REVIEWS_LIST = [
   {
@@ -64,18 +65,110 @@ const SUB_CATEGORIES = [
   { id: "impact", label: "Learning Impact" },
 ]
 
-const SUB_CATEGORY_FEEDBACK = [
+const SUB_CATEGORY_FEEDBACK_MAP = {
+  climate: [
+    {
+      title: "Classroom Safety",
+      tag: "Sometimes feel uncomfortable",
+      rating: 4.5,
+      text: "Most students feel safe and comfortable in class. However, this becomes less consistent during transitions, where noise and loss of focus create moments of instability.",
+    },
+    {
+      title: "Student Wellbeing",
+      tag: "Usually feel good",
+      rating: 3.5,
+      text: "Students generally feel positive in class. However, when behaviour is corrected loudly, some students feel unsettled or anxious, which can affect their confidence and ability to stay focused.",
+    },
+  ],
+  quality: [
+    {
+      title: "Teaching Clarity",
+      tag: "Clear explanations",
+      rating: 4.8,
+      text: "Lessons are delivered with high clarity, structured slides, and clear instructions.",
+    },
+    {
+      title: "Pacing & Engagement",
+      tag: "Good pace",
+      rating: 4.2,
+      text: "Lesson speed is suitable for most learners with interactive activities.",
+    },
+  ],
+  environment: [
+    {
+      title: "Classroom Setup & Resources",
+      tag: "Well-equipped",
+      rating: 4.5,
+      text: "Desks, digital boards, and learning material are easily accessible and organized.",
+    },
+  ],
+  impact: [
+    {
+      title: "Academic Growth",
+      tag: "High impact",
+      rating: 4.0,
+      text: "Formative assessments demonstrate steady student understanding and improvement.",
+    },
+  ],
+}
+
+// All Categories Dataset for Expand All View
+const ALL_SUB_CATEGORIES_FEEDBACK = [
   {
-    title: "Classroom Safety",
-    tag: "Sometimes feel uncomfortable",
-    rating: 4.5,
-    text: "Most students feel safe and comfortable in class. However, this becomes less consistent during transitions, where noise and loss of focus create moments of instability.",
+    category: "Classroom Climate",
+    items: [
+      {
+        title: "Classroom Safety",
+        tag: "Sometimes feel uncomfortable",
+        rating: 4.5,
+        text: "Most students feel safe and comfortable in class. However, this becomes less consistent during transitions, where noise and loss of focus create moments of instability.",
+      },
+      {
+        title: "Student Wellbeing",
+        tag: "Usually feel good",
+        rating: 3.5,
+        text: "Students generally feel positive in class. However, when behaviour is corrected loudly, some students feel unsettled or anxious, which can affect their confidence and ability to stay focused.",
+      },
+    ],
   },
   {
-    title: "Student Wellbeing",
-    tag: "Usually feel good",
-    rating: 3.5,
-    text: "Students generally feel positive in class. However, when behaviour is corrected loudly, some students feel unsettled or anxious, which can affect their confidence and ability to stay focused.",
+    category: "Teaching Quality",
+    items: [
+      {
+        title: "Teaching Clarity",
+        tag: "Clear explanations",
+        rating: 4.8,
+        text: "Lessons are delivered with high clarity, structured slides, and clear instructions.",
+      },
+      {
+        title: "Pacing & Engagement",
+        tag: "Good pace",
+        rating: 4.2,
+        text: "Lesson speed is suitable for most learners with interactive activities.",
+      },
+    ],
+  },
+  {
+    category: "Learning Environment",
+    items: [
+      {
+        title: "Classroom Setup & Resources",
+        tag: "Well-equipped",
+        rating: 4.5,
+        text: "Desks, digital boards, and learning material are easily accessible and organized.",
+      },
+    ],
+  },
+  {
+    category: "Learning Impact",
+    items: [
+      {
+        title: "Academic Growth",
+        tag: "High impact",
+        rating: 4.0,
+        text: "Formative assessments demonstrate steady student understanding and improvement.",
+      },
+    ],
   },
 ]
 
@@ -109,6 +202,8 @@ const BlueStarRating = ({ rating = 4.5 }) => {
 const ReviewInsightsTab = () => {
   const [selectedReviewId, setSelectedReviewId] = useState(1)
   const [activeSubCategory, setActiveSubCategory] = useState("climate")
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [alwaysExpand, setAlwaysExpand] = useState(false)
 
   const [roleFilter, setRoleFilter] = useState("All")
   const [ratingFilter, setRatingFilter] = useState("All")
@@ -136,13 +231,22 @@ const ReviewInsightsTab = () => {
   const selectedReview =
     filteredReviews.find((r) => r.id === selectedReviewId) || filteredReviews[0] || REVIEWS_LIST[0]
 
+  const currentFeedbackItems = SUB_CATEGORY_FEEDBACK_MAP[activeSubCategory] || SUB_CATEGORY_FEEDBACK_MAP["climate"]
+
+  const handleSelectReview = (id) => {
+    setSelectedReviewId(id)
+    if (alwaysExpand) {
+      setIsExpanded(true)
+    }
+  }
+
   return (
     <div className="w-full grid grid-cols-1 xlg:grid-cols-12 gap-6 items-stretch font-urbanist">
-      {/* Left Reviews List Column (4 Cols) - Image 3 Layout */}
+      {/* Left Reviews List Column (4 Cols) */}
       <div className="xlg:col-span-4 bg-white rounded-3xl border border-gray-100 p-5 shadow-xs space-y-4 flex flex-col justify-between">
         <div className="space-y-4">
-          {/* Header with Title & Badge & Reset */}
-          <div className="flex items-center justify-between">
+          {/* Header with Title, Badge, Shadcn Switch & Reset */}
+          <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2">
               <h3 className="font-urbanist text-2xl font-bold text-[#080808]">
                 Reviews
@@ -150,6 +254,18 @@ const ReviewInsightsTab = () => {
               <span className="w-6 h-6 rounded-full bg-[#038AF9] text-white text-xs font-bold flex justify-center items-center">
                 {filteredReviews.length}
               </span>
+            </div>
+
+            {/* Shadcn Switch for Always Expand */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-medium text-[#5A5A5A]">Always expand</span>
+              <Switch
+                checked={alwaysExpand}
+                onCheckedChange={(checked) => {
+                  setAlwaysExpand(checked)
+                  setIsExpanded(checked)
+                }}
+              />
             </div>
 
             {(roleFilter !== "All" || ratingFilter !== "All" || selectedDate !== undefined) && (
@@ -164,7 +280,7 @@ const ReviewInsightsTab = () => {
             )}
           </div>
 
-          {/* Clickable Filter Dropdowns matching CommunityReviewsList */}
+          {/* Clickable Filter Dropdowns */}
           <div className="flex items-center gap-2 flex-wrap text-sm font-normal text-[#080808]">
             <div className="w-28">
               <Select value={roleFilter} onValueChange={setRoleFilter}>
@@ -193,7 +309,7 @@ const ReviewInsightsTab = () => {
               </Select>
             </div>
 
-            {/* DatePicker component with showIcon={false} and showChevron={true} */}
+            {/* DatePicker */}
             <div className="w-28">
               <DatePicker
                 value={selectedDate}
@@ -216,7 +332,7 @@ const ReviewInsightsTab = () => {
               return (
                 <div
                   key={item.id}
-                  onClick={() => setSelectedReviewId(item.id)}
+                  onClick={() => handleSelectReview(item.id)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer relative ${
                     isSelected
                       ? "border-[#038AF9] bg-white shadow-2xs"
@@ -243,10 +359,10 @@ const ReviewInsightsTab = () => {
         </div>
       </div>
 
-      {/* Right Review Detail Column (8 Cols) - Image 4 Typography & Layout */}
+      {/* Right Review Detail Column (8 Cols) */}
       <div className="xlg:col-span-8 bg-white rounded-3xl border border-gray-100 p-6 md:p-8 shadow-xs space-y-6 flex flex-col justify-between">
         <div className="space-y-6">
-          {/* Top Header: Title (24px semibold responsive), Rating (16px medium), Subtitle Meta */}
+          {/* Top Header: Title, Rating, Subtitle Meta */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="space-y-1.5">
               <h2 className="text-xl sm:text-[24px] font-semibold text-textPrimary leading-tight">
@@ -287,11 +403,11 @@ const ReviewInsightsTab = () => {
             </p>
           </div>
 
-          {/* Bottom Sub-Category Box matching Image 4 */}
+          {/* Bottom Sub-Category Container */}
           <div className="border border-gray-200/80 rounded-2xl p-5 bg-white space-y-5">
-            <div className="flex gap-5 flex-col md:flex-row items-stretch">
-              {/* Left Sub-Category Column (max-w-[208px]) */}
-              <div className="max-w-[208px] w-full border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-col justify-center shrink-0">
+            <div className="flex gap-5 flex-col md:flex-row items-start">
+              {/* Left Sub-Category Column (ALWAYS VISIBLE & Aligned to TOP via justify-start) */}
+              <div className="max-w-[208px] w-full border border-gray-200/60 rounded-2xl p-2.5 bg-white space-y-2 flex flex-col justify-start shrink-0 min-h-[220px]">
                 {SUB_CATEGORIES.map((cat) => {
                   const isActive = activeSubCategory === cat.id
                   return (
@@ -311,43 +427,103 @@ const ReviewInsightsTab = () => {
                 })}
               </div>
 
-              {/* Right Content Box */}
-              <div className="bg-white border flex-1 w-full border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden h-full flex flex-col justify-between min-h-[220px]">
+              {/* Right Content Box (Expands height smoothly displaying all categories when isExpanded) */}
+              <div className="bg-white border flex-1 w-full border-gray-200/80 rounded-2xl shadow-2xs overflow-hidden flex flex-col justify-between transition-all duration-500 ease-in-out min-h-[220px]">
                 <div>
-                  {/* Top Bar with Expand All */}
+                  {/* Top Bar with Expand All / Hide All Toggle */}
                   <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-start bg-white">
                     <button
                       type="button"
-                      className="text-[#038AF9] hover:underline text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer"
+                      onClick={() => setIsExpanded((prev) => !prev)}
+                      className="text-[#038AF9] hover:underline text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
-                      <Maximize2 className="w-3.5 h-3.5" />
-                      <span>Expand All</span>
+                      {isExpanded ? (
+                        <>
+                          <Minimize2 className="w-3.5 h-3.5 text-[#038AF9]" />
+                          <span>Hide All</span>
+                        </>
+                      ) : (
+                        <>
+                          <Maximize2 className="w-3.5 h-3.5 text-[#038AF9]" />
+                          <span>Expand All</span>
+                        </>
+                      )}
                     </button>
                   </div>
 
-                  {/* Sub-Category Feedback Rows */}
-                  <div className="p-5 space-y-4">
-                    {SUB_CATEGORY_FEEDBACK.map((fb, idx) => (
-                      <div key={idx} className="space-y-2 border-b border-gray-100 last:border-none pb-4 last:pb-0">
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <h5 className="font-medium text-base text-[#080808]">
-                            {fb.title}
-                          </h5>
-                          {fb.tag && (
-                            <span className="px-3 py-1 rounded-full text-sm font-normal text-textPrimary bg-white border border-[#90D0FF]">
-                              {fb.tag}
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-normal text-textPrimary">{fb.rating}</span>
-                          <BlueStarRating rating={fb.rating} />
-                        </div>
-                        <p className="text-base font-normal text-textPrimary leading-relaxed">
-                          {fb.text}
-                        </p>
+                  {/* Sub-Category Feedback Body */}
+                  <div className="p-5 transition-all duration-500 ease-in-out">
+                    {isExpanded ? (
+                      /* Expanded View: All Category Groups with Badges & Dotted Dividers */
+                      <div className="space-y-6 animate-fadeIn transition-all duration-500">
+                        {ALL_SUB_CATEGORIES_FEEDBACK.map((catGroup, groupIdx) => (
+                          <div key={groupIdx} className="space-y-4">
+                            {/* Category Badge Header Row */}
+                            <div className="flex items-center justify-between gap-4">
+                              <div />
+                              <span className="px-3.5 py-1 rounded-full bg-[#FAFAFA] border border-gray-200/60 text-textPrimary text-xs sm:text-sm font-normal shrink-0">
+                                {catGroup.category}
+                              </span>
+                            </div>
+
+                            {/* Feedback Items inside Category */}
+                            <div className="space-y-4">
+                              {catGroup.items.map((fb, itemIdx) => (
+                                <div key={itemIdx} className="space-y-2 border-b border-gray-100 last:border-none pb-4 last:pb-0 font-urbanist">
+                                  <div className="flex items-center gap-3 flex-wrap">
+                                    <h5 className="font-semibold text-base text-[#080808]">
+                                      {fb.title}
+                                    </h5>
+                                    {fb.tag && (
+                                      <span className="px-3 py-1 rounded-full text-sm font-normal text-textPrimary bg-white border border-[#90D0FF]">
+                                        {fb.tag}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-sm font-normal text-textPrimary">{fb.rating}</span>
+                                    <BlueStarRating rating={fb.rating} />
+                                  </div>
+                                  <p className="text-base font-normal text-textPrimary leading-relaxed">
+                                    {fb.text}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Dotted Divider between Category Blocks */}
+                            {groupIdx < ALL_SUB_CATEGORIES_FEEDBACK.length - 1 && (
+                              <div className="border-b border-dashed border-gray-200/80 pt-2 my-4" />
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    ) : (
+                      /* Collapsed Single Category Feedback List */
+                      <div className="space-y-4 animate-fadeIn transition-all duration-500">
+                        {currentFeedbackItems.map((fb, idx) => (
+                          <div key={idx} className="space-y-2 border-b border-gray-100 last:border-none pb-4 last:pb-0">
+                            <div className="flex items-center gap-3 flex-wrap">
+                              <h5 className="font-medium text-base text-[#080808]">
+                                {fb.title}
+                              </h5>
+                              {fb.tag && (
+                                <span className="px-3 py-1 rounded-full text-sm font-normal text-textPrimary bg-white border border-[#90D0FF]">
+                                  {fb.tag}
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-normal text-textPrimary">{fb.rating}</span>
+                              <BlueStarRating rating={fb.rating} />
+                            </div>
+                            <p className="text-base font-normal text-textPrimary leading-relaxed">
+                              {fb.text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

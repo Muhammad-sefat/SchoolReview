@@ -168,6 +168,7 @@ const ScatterPlot = ({
                 stroke="#94A3B8"
                 tickLine={false}
                 height={15}
+                padding={{ right: 20 }}
               />
 
               <YAxis
@@ -183,6 +184,7 @@ const ScatterPlot = ({
                 tickLine={false}
                 tick={{ fontSize: 16 }}
                 width={45}
+                padding={{ top: 20 }}
                 label={{
                   value: yAxisLabel,
                   angle: -90,
@@ -291,14 +293,14 @@ const ScatterPlot = ({
         </div>
 
         {/* X-Axis Bottom Labels Row (← Less Improvement | Improvement Since Last Year | More Improvement →) */}
-        <div className="w-full flex items-center justify-between pl-12 pr-4  font-urbanist text-xs sm:text-sm">
-          <span className="text-textPrimary font-medium">
+        <div className="w-full flex items-center justify-between pl-12 pr-4  font-urbanist ">
+          <span className="text-textPrimary font-medium text-xs sm:text-sm ml-14">
             ← Less Improvement
           </span>
-          <span className="text-[#080808] font-semibold tracking-tight">
+          <span className="text-[#1F1F21] text-base font-normal tracking-tight">
             {xAxisLabel}
           </span>
-          <span className="text-textPrimary font-medium">
+          <span className="text-textPrimary font-medium text-xs sm:text-sm mr-14">
             More Improvement →
           </span>
         </div>

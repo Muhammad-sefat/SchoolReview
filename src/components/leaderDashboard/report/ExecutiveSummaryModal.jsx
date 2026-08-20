@@ -19,7 +19,7 @@ const ExecutiveSummaryModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-      <DialogContent className="max-w-[760px] w-[95%] sm:w-full rounded-3xl bg-white p-8 border border-gray-100 shadow-2xl space-y-5 font-urbanist max-h-[92vh] overflow-y-auto">
+      <DialogContent className="max-w-[760px] w-[95%] sm:w-full rounded-3xl bg-white p-8 border border-gray-100 shadow-2xl  font-urbanist max-h-[92vh] overflow-y-auto">
         {/* Modal Header */}
         <DialogHeader className="space-y-1.5 text-left">
           <DialogTitle className="text-[24px] font-semibold text-[#080808] font-urbanist leading-tight">

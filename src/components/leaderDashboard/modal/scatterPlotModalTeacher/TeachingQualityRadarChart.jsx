@@ -33,20 +33,20 @@ const createRenderCustomTick = (radarData) => ({ payload, x, y, cx, cy }) => {
   const dx = x - cx
   const dy = y - cy
 
-  const width = 160
-  const height = 30
+  const width = 170
+  const height = 32
 
   let left = x - width / 2
   let top = y - height / 2
 
-  if (dx > 20) {
-    left = x + 8
-  } else if (dx < -20) {
-    left = x - width - 8
+  if (dx > 15) {
+    left = x + 10
+  } else if (dx < -15) {
+    left = x - width - 10
   } else if (dy < 0) {
-    top = y - 32
+    top = y - 28
   } else {
-    top = y + 8
+    top = y + 10
   }
 
   return (
@@ -58,8 +58,9 @@ const createRenderCustomTick = (radarData) => ({ payload, x, y, cx, cy }) => {
       className="overflow-visible"
     >
       <div
-        className={`flex items-center gap-1.5 whitespace-nowrap text-[15px] font-normal text-textPrimary font-urbanist ${dx < -20 ? "justify-end" : dx > 20 ? "justify-start" : "justify-center"
-          }`}
+        className={`flex items-center gap-1.5 whitespace-nowrap text-[15px] font-normal text-textPrimary font-urbanist ${
+          dx < -15 ? "justify-end" : dx > 15 ? "justify-start" : "justify-center"
+        }`}
       >
         <span>{payload.value}</span>
         <span
@@ -117,10 +118,10 @@ const TeachingQualityRadarChart = ({
 
       {/* Single Main Outer Box Container */}
       <div className="w-full bg-white rounded-3xl border border-gray-200/80 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 shadow-2xs">
-        {/* Left Radar Chart Box */}
-        <div className="w-full md:w-[58%] h-[340px] shrink-0">
+        {/* Left Radar Chart Box - Height increased to 420px & outerRadius to 80% for larger spider chart display */}
+        <div className="w-full md:w-[64%] h-[420px] shrink-0">
           <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
+            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
               <PolarGrid stroke="#EAEAEA" strokeWidth={1} />
               <PolarAngleAxis
                 dataKey="subject"
@@ -143,7 +144,7 @@ const TeachingQualityRadarChart = ({
                   stroke={leg.color}
                   fill="none"
                   fillOpacity={0}
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                 />
               ))}
             </RadarChart>
@@ -151,12 +152,12 @@ const TeachingQualityRadarChart = ({
         </div>
 
         {/* Right Legends Row (Rounded Square Legend Color Boxes) */}
-        <div className="w-full md:w-[38%] flex items-center justify-center md:justify-start gap-6 text-[16px] font-normal text-textPrimary pl-2 md:pl-8">
+        <div className="w-full md:w-[32%] flex flex-wrap md:flex-col items-center md:items-start justify-center gap-5 text-[16px] font-normal text-textPrimary pl-2 md:pl-6">
           {legends.map((leg) => (
             <div key={leg.key} className="flex items-center gap-2.5 shrink-0">
-              {/* Rounded Square Box matching user image */}
+              {/* Rounded Square Box matching legend color */}
               <span
-                className="w-3.5 h-3.5 rounded-xs shrink-0"
+                className="w-4 h-4 rounded-xs shrink-0"
                 style={{ backgroundColor: leg.color }}
               />
               <span>{leg.name}</span>

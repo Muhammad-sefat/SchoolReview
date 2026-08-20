@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Download, X, FileText } from "lucide-react"
-import { Title24, Title20 } from "@/components/typho/Title"
+import { Title24 } from "@/components/typho/Title"
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ const ImportTeacherModal = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[850px] w-[95vw] rounded-3xl p-6 sm:p-8 space-y-6 bg-white border border-gray-200 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <DialogContent className="max-w-[850px] w-[95vw] rounded-3xl p-6 sm:p-8  bg-white border border-gray-200 shadow-2xl font-urbanist max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <DialogHeader className="p-0 space-y-1 text-left">
           <DialogTitle asChild>
             <Title24 className="text-[#080808] font-semibold">Upload Teachers (CSV)</Title24>
@@ -31,8 +31,8 @@ const ImportTeacherModal = ({ isOpen, onClose }) => {
           </p>
         </DialogHeader>
 
-        {/* Box 1: Download Teacher Template */}
-        <div className="p-5 rounded-2xl border border-gray-200 bg-white space-y-4">
+        {/* Section 1: Download Teacher Template (Unboxed for consistent design) */}
+        <div className="space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <Title24 className="text-[#080808] font-medium">Download Teacher Template</Title24>
@@ -74,7 +74,7 @@ const ImportTeacherModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Box 2: Upload CSV File */}
+        {/* Section 2: Upload CSV File */}
         <div className="space-y-4">
           <div>
             <Title24 className="text-[#080808] font-medium">Upload CSV File</Title24>

@@ -101,30 +101,30 @@ const StudentTableSection = () => {
   return (
     <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 shadow-2xs space-y-6 font-urbanist">
       {/* Header & Action Buttons */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         <Title24 className="text-[#080808]">Students</Title24>
 
-        <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setIsImportModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-[16px] font-medium transition-colors shadow-xs cursor-pointer flex items-center gap-2"
+            className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2.5 rounded-xl bg-[#038AF9] hover:bg-[#0274d4] text-white text-[15px] sm:text-[16px] font-medium transition-colors shadow-xs cursor-pointer flex items-center justify-center gap-2"
           >
-            <Upload className="w-4 h-4" />
+            <Upload className="w-4 h-4 shrink-0" />
             <span>Import CSV</span>
           </button>
 
           <button
             type="button"
             onClick={() => setIsAddStudentModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl border border-[#038AF9] text-textPrimary hover:bg-blue-50/50 text-[16px] font-medium transition-colors cursor-pointer flex items-center gap-1.5"
+            className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2.5 rounded-xl border border-[#038AF9] text-textPrimary hover:bg-blue-50/50 text-[15px] sm:text-[16px] font-medium transition-colors cursor-pointer flex items-center justify-center gap-1.5"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 shrink-0" />
             <span>Add Student</span>
           </button>
 
           <Select defaultValue="all">
-            <SelectTrigger className="h-11 px-3.5 rounded-xl border-gray-200 text-[16px] font-medium text-textPrimary bg-white min-w-[130px] overflow-hidden">
+            <SelectTrigger className="h-11 px-3.5 rounded-xl border-gray-200 text-[15px] sm:text-[16px] font-medium text-textPrimary bg-white min-w-[120px] w-full sm:w-auto overflow-hidden">
               <SelectValue placeholder="All Class" className="truncate text-left whitespace-nowrap" />
             </SelectTrigger>
             <SelectContent>
@@ -138,7 +138,7 @@ const StudentTableSection = () => {
         </div>
       </div>
 
-      <Table containerClassName="overflow-visible">
+      <Table containerClassName="overflow-x-auto max-w-full pb-2 [scrollbar-width:thin]" className="min-w-[680px]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-10 text-center px-2">
@@ -147,7 +147,7 @@ const StudentTableSection = () => {
             <TableHead className="text-[16px] font-medium text-[#5A5A5A] pl-1">Name</TableHead>
             <TableHead className="text-[16px] font-medium text-[#5A5A5A]">Email</TableHead>
             <TableHead className="text-[16px] font-medium text-[#5A5A5A]">Class</TableHead>
-            <TableHead className="text-[16px] font-medium text-[#5A5A5A]">Assigned Teacher(s)</TableHead>
+            <TableHead className="text-[16px] font-medium text-[#5A5A5A] w-[400px]">Assigned Teacher(s)</TableHead>
             <TableHead className="text-[16px] font-medium text-[#5A5A5A] text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>

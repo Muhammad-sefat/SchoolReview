@@ -80,7 +80,7 @@ export const CustomMultiSelect = ({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full h-11 px-4 rounded-xl bg-white text-[16px] font-normal transition-all flex items-center justify-between cursor-pointer ${
           isOpen
-            ? "border-2 border-[#038AF9] shadow-xs"
+            ? "border border-[#038AF9] shadow-xs"
             : "border border-gray-200 hover:border-[#038AF9]"
         }`}
       >
@@ -96,7 +96,7 @@ export const CustomMultiSelect = ({
 
       {/* Expanded Dropdown Box */}
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1.5 w-full min-w-[260px] bg-white rounded-2xl border-2 border-[#038AF9] shadow-xl p-4 z-50 animate-fadeIn space-y-3">
+        <div className="absolute left-0 top-full mt-1.5 w-full bg-white rounded-2xl border border-[#038AF9] shadow-xl p-4 z-50 animate-fadeIn space-y-3">
           {/* Top Custom Add Input Row */}
           {allowAddCustom && (
             <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
@@ -108,15 +108,15 @@ export const CustomMultiSelect = ({
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleAddCustom(e)
                 }}
-                className="flex-1 h-10 px-3.5 rounded-xl border border-gray-200 text-[14px] font-normal text-[#080808] placeholder:text-gray-400 outline-none focus:border-[#038AF9] bg-white"
+                className="flex-1 h-10 px-3.5 rounded-xl border border-dashed border-[#038AF9] bg-blue-50/50 text-[14px] font-medium text-[#038AF9] placeholder:text-[#038AF9]/70 outline-none focus:border-[#038AF9] transition-colors"
               />
               <button
                 type="button"
                 onClick={handleAddCustom}
-                className="w-10 h-10 rounded-xl border border-[#038AF9] text-[#038AF9] flex items-center justify-center hover:bg-blue-50/50 transition-colors cursor-pointer shrink-0"
+                className="w-10 h-10 rounded-xl border border-dashed border-[#038AF9] bg-blue-50/50 text-[#038AF9] flex items-center justify-center hover:bg-blue-100/60 transition-colors cursor-pointer shrink-0"
                 title="Add option"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 stroke-[2.25]" />
               </button>
             </div>
           )}
@@ -133,11 +133,10 @@ export const CustomMultiSelect = ({
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
-                      className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${
-                        isChecked
+                      className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${isChecked
                           ? "bg-[#038AF9] border-[#038AF9] text-white"
                           : "border-gray-400 bg-white"
-                      }`}
+                        }`}
                     >
                       {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                     </div>

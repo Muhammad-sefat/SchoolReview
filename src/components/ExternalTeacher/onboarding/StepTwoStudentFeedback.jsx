@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import StepTwoStudentsModal from "./StepTwoStudentsModal"
-import { DotSVG } from "./StepOneTeachingAreas"
 
 const StepTwoStudentFeedback = ({ showTitle = true }) => {
   const [selectedOption, setSelectedOption] = useState("email")
@@ -29,10 +28,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
         {/* Option 1: School Email Verification (Recommended) */}
         <div
           onClick={() => handleOptionSelect("email")}
-          className={`rounded-2xl p-4 sm:p-6 transition-all cursor-pointer ${selectedOption === "email"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          className={`rounded-2xl p-6 transition-all cursor-pointer bg-white ${
+            selectedOption === "email"
+              ? "border-[1.5px] border-[#080808] shadow-xs"
+              : "border border-[#EAEAEA] hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start gap-3">
@@ -45,10 +45,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "email"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "email"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   School Email Verification (Recommended)
                 </h3>
@@ -57,10 +58,21 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
                 </p>
               </div>
             </div>
-            <div className="text-base font-normal text-textBlack flex items-center gap-2 shrink-0">
-              <span>Quick setup</span>
-              <DotSVG />
-              <span>Moderate control</span>
+
+            {/* Individual Pill Badges (Dot removed, 48px rounded border on each word) */}
+            <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                Quick setup
+              </span>
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                Moderate control
+              </span>
             </div>
           </div>
 
@@ -81,10 +93,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
         {/* Option 2: Anyone (Public) */}
         <div
           onClick={() => handleOptionSelect("public")}
-          className={`rounded-2xl p-6 transition-all cursor-pointer ${selectedOption === "public"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          className={`rounded-2xl p-6 transition-all cursor-pointer bg-white ${
+            selectedOption === "public"
+              ? "border-[1.5px] border-[#080808] shadow-xs"
+              : "border border-[#EAEAEA] hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start gap-3">
@@ -97,10 +110,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "public"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "public"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   Anyone (Public)
                 </h3>
@@ -109,10 +123,21 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
                 </p>
               </div>
             </div>
-            <div className="text-base font-normal text-textBlack flex items-center gap-2 shrink-0">
-              <span>High participation</span>
-              <DotSVG />
-              <span>Less control</span>
+
+            {/* Individual Pill Badges (Dot removed, 48px rounded border on each word) */}
+            <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                High participation
+              </span>
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                Less control
+              </span>
             </div>
           </div>
         </div>
@@ -120,10 +145,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
         {/* Option 3: Assigned Students Only (Full Control) */}
         <div
           onClick={() => handleOptionSelect("assigned")}
-          className={`rounded-2xl p-6 transition-all cursor-pointer ${selectedOption === "assigned"
-            ? "border-[1.5px] border-[#080808] bg-white shadow-xs"
-            : "border border-[#EAEAEA] bg-white hover:border-gray-300"
-            }`}
+          className={`rounded-2xl p-6 transition-all cursor-pointer bg-white ${
+            selectedOption === "assigned"
+              ? "border-[1.5px] border-[#080808] shadow-xs"
+              : "border border-[#EAEAEA] hover:border-gray-300"
+          }`}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start gap-3">
@@ -136,10 +162,11 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
               />
               <div className="space-y-1">
                 <h3
-                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${selectedOption === "assigned"
-                    ? "text-[#038AF9] font-semibold"
-                    : "text-[#080808] font-semibold"
-                    }`}
+                  className={`text-[18px] leading-[28px] font-urbanist transition-colors ${
+                    selectedOption === "assigned"
+                      ? "text-[#038AF9] font-semibold"
+                      : "text-[#080808] font-semibold"
+                  }`}
                 >
                   Assigned Students Only (Full Control)
                 </h3>
@@ -148,10 +175,21 @@ const StepTwoStudentFeedback = ({ showTitle = true }) => {
                 </p>
               </div>
             </div>
-            <div className="text-base font-normal text-textBlack flex items-center gap-2 shrink-0">
-              <span>Maximum control</span>
-              <DotSVG />
-              <span>Requires setup</span>
+
+            {/* Individual Pill Badges (Dot removed, 48px rounded border on each word) */}
+            <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                Maximum control
+              </span>
+              <span
+                style={{ borderRadius: "48px", border: "1px solid #EAEAEA" }}
+                className="text-sm sm:text-base font-normal text-[#080808] px-4 py-2 bg-white"
+              >
+                Requires setup
+              </span>
             </div>
           </div>
         </div>
