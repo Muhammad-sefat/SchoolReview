@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import { ImageProvider } from "../../assets/image-provider/ImageProvider";
+import { ImageProvider } from "../../../assets/image-provider/ImageProvider";
 
 // Custom Star Rating Component with Brand Blue Color
 const BlueStarRating = ({ rating }) => {

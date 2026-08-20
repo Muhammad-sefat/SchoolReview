@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Settings, Clock, Star } from "lucide-react";
-import { ImageProvider } from "../../assets/image-provider/ImageProvider";
+import { ImageProvider } from "../../../assets/image-provider/ImageProvider";
 
 function StayEvaluation() {
   return (

@@ -1,5 +1,5 @@
-import { ScrollRestoration } from "react-router-dom"
-import TeachersBanner from "../../components/forteachers/TeachersBanner"
+import { ScrollRestoration } from "react-router-dom";
+import TeachersBanner from "../../components/site-components/forteachers/TeachersBanner";
 
 function ForTeachers() {
   return (
@@ -7,7 +7,7 @@ function ForTeachers() {
       <ScrollRestoration />
       <TeachersBanner />
     </>
-  )
+  );
 }
 
-export default ForTeachers
+export default ForTeachers;

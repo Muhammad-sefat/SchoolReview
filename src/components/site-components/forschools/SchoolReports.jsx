@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ImageProvider } from "../../assets/image-provider/ImageProvider";
+import { ImageProvider } from "../../../assets/image-provider/ImageProvider";
 
 import "swiper/css";
 import "swiper/css/navigation";

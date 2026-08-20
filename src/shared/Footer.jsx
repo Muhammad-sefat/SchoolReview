@@ -45,10 +45,19 @@ const Footer = () => {
                 { label: "Tell a Teacher", path: "/tell-a-teacher" },
                 { label: "SpeakUp - Report a Concern", path: "/speak-up" },
                 { label: "Review Schools", path: "/school-review" },
-                { label: "Review Teachers", path: "/review/student-to-teacher" },
-                { label: "School 360° Insights & Reporting", path: "/leader-dashboard" },
-                { label: "Teacher Observations – Performance Coaching", path: "/review/observer-to-teacher" },
-                { label: "School Evaluation Suite", path: "/evaluator" }
+                {
+                  label: "Review Teachers",
+                  path: "/review/student-to-teacher",
+                },
+                {
+                  label: "School 360° Insights & Reporting",
+                  path: "/leader-dashboard",
+                },
+                {
+                  label: "Teacher Observations – Performance Coaching",
+                  path: "/review/observer-to-teacher",
+                },
+                { label: "School Evaluation Suite", path: "/evaluator" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
@@ -73,8 +82,14 @@ const Footer = () => {
                 { label: "Teachers", path: "/auth/signup/teacher" },
                 { label: "Students", path: "/school-review" },
                 { label: "Parents", path: "/school-review" },
-                { label: "School Evaluators", path: "/auth/signup/school-evaluator" },
-                { label: "Teacher Observers", path: "/review/observer-to-teacher" }
+                {
+                  label: "School Evaluators",
+                  path: "/auth/signup/school-evaluator",
+                },
+                {
+                  label: "Teacher Observers",
+                  path: "/review/observer-to-teacher",
+                },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
@@ -98,7 +113,7 @@ const Footer = () => {
               <ul className="flex flex-col gap-3">
                 {[
                   { label: "Find a School", path: "/school-review" },
-                  { label: "Pricing", path: "/pricing" }
+                  { label: "Pricing", path: "/pricing" },
                 ].map((item, index) => (
                   <li key={index}>
                     <Link
@@ -121,9 +136,12 @@ const Footer = () => {
                 {[
                   { label: "About Us", path: "/about/our-story" },
                   { label: "Contact Us", path: "/about/contact" },
-                  { label: "Community Guidelines", path: "/community-guidelines" },
-                  { label: "Terms & Conditions", path: "/terms" },
-                  { label: "Privacy Policy", path: "/privacy" }
+                  {
+                    label: "Community Guidelines",
+                    path: "/community-guidelines",
+                  },
+                  { label: "Terms & Conditions", path: "/terms-conditions" },
+                  { label: "Privacy Policy", path: "/privacy-policy" },
                 ].map((item, index) => (
                   <li key={index}>
                     <Link
@@ -148,8 +166,8 @@ const Footer = () => {
               <ul className="flex flex-col gap-3">
                 {[
                   { label: "Book a 1:1 Consultation", path: "/consultation" },
-                  { label: "Support", path: "/support" },
-                  { label: "Request a Demo", path: "/demo" }
+                  { label: "Support", path: "/faq" },
+                  { label: "Request a Demo", path: "/request-demo" },
                 ].map((item, index) => (
                   <li key={index}>
                     <Link
@@ -171,7 +189,7 @@ const Footer = () => {
               <ul className="flex flex-col gap-3">
                 {[
                   { label: "Log in", path: "/auth/login" },
-                  { label: "Request a Demo", path: "/demo" }
+                  { label: "Request a Demo", path: "/request-demo" },
                 ].map((item, index) => (
                   <li key={index}>
                     <Link
@@ -196,7 +214,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left copyright info */}
           <p className="text-sm font-medium text-secondary text-center md:text-left">
-            © {new Date().getFullYear()} www.SchoolReview.ch All rights reserved.
+            © {new Date().getFullYear()} www.SchoolReview.ch All rights
+            reserved.
           </p>
 
           {/* Right brand social icons */}

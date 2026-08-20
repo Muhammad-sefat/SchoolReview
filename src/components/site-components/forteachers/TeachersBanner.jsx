@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   MessageSquare,
@@ -8,7 +7,7 @@ import {
   Eye,
   BookOpen,
 } from "lucide-react";
-import { ImageProvider } from "../../assets/image-provider/ImageProvider";
+import { ImageProvider } from "../../../assets/image-provider/ImageProvider";
 
 // Custom Star Rating Component with Brand Blue Color
 const BlueStarRating = ({ rating }) => {

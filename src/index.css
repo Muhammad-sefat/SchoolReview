@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -8,10 +8,13 @@
   /* font */
   --font-urbanist: "Urbanist", sans-serif;
 
-
   /* color */
   --color-primary: var(--primary);
-  --color-bg-custom: linear-gradient(135deg, var(--background) 0%, var(--muted) 100%);
+  --color-bg-custom: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--muted) 100%
+  );
 
   /* breakpoint */
   --breakpoint-xxs: 390px;
@@ -103,10 +106,10 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #038AF9;
+  --primary: #038af9;
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: #5A5A5A;
-  --textPrimary: #1F1F21;
+  --secondary: #5a5a5a;
+  --textPrimary: #1f1f21;
   --textBlack: #080808;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -173,12 +176,11 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-
   }
 
   input::placeholder,
   textarea::placeholder {
-    color: #5A5A5A !important;
+    color: #5a5a5a !important;
     opacity: 1;
   }
 }

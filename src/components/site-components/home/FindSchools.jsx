@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Star, MapPin, School, Heart, ChevronLeft, ChevronRight } from "lucide-react";
-import schoolIcon from "../../assets/images/schoolicon.png";
-import fSchoolImg from "../../assets/images/fschool.jpg";
-import fSchool1Img from "../../assets/images/fschool1.jpg";
-import schoolLogoImg from "../../assets/images/schoolLogo.png";
+import schoolIcon from "../../../assets/images/schoolicon.png";
+import fSchoolImg from "../../../assets/images/fschool.jpg";
+import fSchool1Img from "../../../assets/images/fschool1.jpg";
+import schoolLogoImg from "../../../assets/images/schoolLogo.png";
 
 import "swiper/css";
 import "swiper/css/navigation";

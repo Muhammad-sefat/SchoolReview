@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import forSchoolsImg from "../../assets/images/forschools.png";
-import forTeachersImg from "../../assets/images/forteachers.png";
+import forSchoolsImg from "../../../assets/images/forschools.png";
+import forTeachersImg from "../../../assets/images/forteachers.png";
 
 const BuiltSchoolsAndTeachers = () => {
     return (

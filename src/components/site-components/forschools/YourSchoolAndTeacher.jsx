@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight, Users } from "lucide-react";
-import { ImageProvider } from "../../assets/image-provider/ImageProvider";
+import { ImageProvider } from "../../../assets/image-provider/ImageProvider";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -39,7 +39,7 @@ function YourSchoolAndTeacher() {
   const nextRef = useRef(null);
 
   return (
-    <section className="relative w-full bg-white py-12 lg:py-4 overflow-hidden font-urbanist select-none">
+    <section className="relative w-full bg-white py-10 lg:py-4 overflow-hidden font-urbanist select-none">
       <div className="section-padding-x w-full flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 lg:mb-14">
         {/* Left Side: Category Pill & Section Title */}
         <div className="flex flex-col items-start gap-3">
