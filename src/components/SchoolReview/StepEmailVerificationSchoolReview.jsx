@@ -17,8 +17,8 @@ const StepEmailVerificationSchoolReview = ({ formData, updateFormData }) => {
         <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Email</h3>
 
         {/* Info Notice Box */}
-        <div className="bg-[#EBF5FF] border border-[#BEE0FF] text-[#1E40AF] px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-3">
-          <Info className="w-5 h-5 shrink-0 text-[#2563EB]" />
+        <div className="bg-[#EBF5FF] border border-[#BEE0FF] text-textPrimary px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-3">
+          <Info className="w-5 h-5 shrink-0 text-textPrimary" />
           <span>
             We verify every review to help keep SchoolReview trustworthy. Your email is <strong>never</strong> shared with the school or published.
           </span>

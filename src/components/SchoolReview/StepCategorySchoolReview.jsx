@@ -19,7 +19,7 @@ const TeachingIcon = ({ className = "w-6 h-6" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none" className={className}>
     <path d="M12.016 22L10.0128 16H2L4.00321 22H12.016ZM12.016 22H16.0224" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M12.0206 13V12.5C12.0206 10.6144 12.0206 9.67157 11.4339 9.08579C10.8472 8.5 9.90286 8.5 8.01422 8.5C6.12558 8.5 5.18126 8.5 4.59454 9.08579C4.00781 9.67157 4.00781 10.6144 4.00781 12.5V13" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M19.0298 13C19.0298 14.1046 18.133 15 17.0266 15C15.9203 15 15.0234 14.1046 15.0234 13C15.0234 11.8954 15.9203 11 17.0266 11C18.133 11 19.0298 11.8954 19.0298 13Z" stroke="#1F1F21" strokeWidth="1.5" />
+    <path d="M19.0298 13C19.0298 14.1046 18.133 15 17.0266 15C15.9203 15 15.0234 14.1046 17.0266 11C18.133 11 19.0298 11.8954 19.0298 13Z" stroke="#1F1F21" strokeWidth="1.5" />
     <path d="M10.0142 4C10.0142 5.10457 9.11736 6 8.01102 6C6.90468 6 6.00781 5.10457 6.00781 4C6.00781 2.89543 6.90468 2 8.01102 2C9.11736 2 10.0142 2.89543 10.0142 4Z" stroke="#1F1F21" strokeWidth="1.5" />
     <path d="M14.0234 17.5H20.0331C21.1394 17.5 22.0363 18.3954 22.0363 19.5V20C22.0363 21.1046 21.1394 22 20.0331 22H19.0315" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
@@ -45,7 +45,7 @@ const FacilityIcon = ({ className = "w-6 h-6" }) => (
 const ShareExperienceIcon = ({ className = "w-6 h-6" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none" className={className}>
     <path d="M8.01562 13.5H16.0284M8.01562 8.5H12.022" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M6.10538 19C4.80319 18.8721 3.82767 18.4816 3.17345 17.8284C2 16.6569 2 14.7712 2 11V10.5C2 6.72876 2 4.84315 3.17345 3.67157C4.3469 2.5 6.23554 2.5 10.0128 2.5H14.0192C17.7965 2.5 19.6852 2.5 20.8586 3.67157C22.0321 4.84315 22.0321 6.72876 22.0321 10.5V11C22.0321 16.6569 22.0321 16.6569 20.8586 17.8284C19.6852 19 17.7965 19 14.0192 19C13.4578 19.0125 13.0107 19.0551 12.5715 19.155C11.3712 19.4309 10.2597 20.0441 9.16133 20.5789C7.59624 21.3408 6.8137 21.7218 6.32261 21.3651C5.3831 20.6665 6.30142 18.5019 6.50721 17.5" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M6.10538 19C4.80319 18.8721 3.82767 18.4816 3.17345 17.8284C2 16.6569 2 14.7712 2 11V10.5C2 6.72876 2 4.84315 3.17345 3.67157C4.3469 2.5 6.23554 2.5 10.0128 2.5H14.0192C17.7965 2.5 19.6852 2.5 20.8586 3.67157C22.0321 4.84315 22.0321 6.72876 22.0321 10.5V11C22.0321 14.7712 22.0321 16.6569 20.8586 17.8284C19.6852 19 17.7965 19 14.0192 19C13.4578 19.0125 13.0107 19.0551 12.5715 19.155C11.3712 19.4309 10.2597 20.0441 9.16133 20.5789C7.59624 21.3408 6.8137 21.7218 6.32261 21.3651C5.3831 20.6665 6.30142 18.5019 6.50721 17.5" stroke="#1F1F21" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 )
 
@@ -101,6 +101,8 @@ const SchoolRatingItem = ({
   const currentRating = itemRatingObj.rating || 0
   const currentDetails = itemRatingObj.details || ""
 
+  const activeRating = hoveredStar || currentRating
+
   const handleStarClick = (starValue) => {
     const newRating = currentRating === starValue ? 0 : starValue
     updateRating(item.id, {
@@ -137,32 +139,48 @@ const SchoolRatingItem = ({
 
   return (
     <div className="py-5 border-b border-[#EAEAEA] last:border-b-0 space-y-3 font-urbanist">
-      {/* Question Text on Left + 5 Star SVGs on Right */}
+      {/* Question Text on Left + 5 Star SVGs Container on Right */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
         <Title24 className="text-[#1F1F21] font-medium text-[20px] lg:text-[24px] leading-[32px] lg:leading-[36px] flex-1 min-w-0 pr-2">
           {questionText}
         </Title24>
 
-        {/* 5 Star SVGs Container */}
-        <div
-          className="flex items-center gap-1.5 shrink-0 self-start sm:self-center"
-          onMouseLeave={() => setHoveredStar(0)}
-        >
-          {[1, 2, 3, 4, 5].map((starNum) => {
-            const isFilled = starNum <= (hoveredStar || currentRating)
-            return (
-              <button
-                key={starNum}
-                type="button"
-                onClick={() => handleStarClick(starNum)}
-                onMouseEnter={() => setHoveredStar(starNum)}
-                className="cursor-pointer transition-transform hover:scale-110 focus:outline-none p-0.5"
-                title={getStarHoverTitle(starNum)}
-              >
-                <UserStarSvg isFilled={isFilled} />
-              </button>
-            )
-          })}
+        {/* 5 Star SVGs & Customized Tooltip / Mobile Label Container */}
+        <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-center">
+          <div
+            className="flex items-center gap-1.5"
+            onMouseLeave={() => setHoveredStar(0)}
+          >
+            {[1, 2, 3, 4, 5].map((starNum) => {
+              const isFilled = starNum <= activeRating
+              return (
+                <div key={starNum} className="relative flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleStarClick(starNum)}
+                    onMouseEnter={() => setHoveredStar(starNum)}
+                    className="cursor-pointer transition-transform hover:scale-110 focus:outline-none p-0.5"
+                  >
+                    <UserStarSvg isFilled={isFilled} />
+                  </button>
+
+                  {/* Desktop Floating Tooltip Above Hovered Star */}
+                  {hoveredStar === starNum && (
+                    <div className="hidden sm:flex absolute -top-10 left-1/2 bg-white -translate-x-1/2 border text-textBlack border-textPrimary text-xs font-medium px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap z-20 animate-fadeIn pointer-events-none items-center justify-center">
+                      {getStarHoverTitle(starNum)}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Mobile-Only Rating Label Badge (Visible on Right side when star is clicked/rated) */}
+          {currentRating > 0 && (
+            <span className="block sm:hidden bg-white text-xs font-semibold border text-textBlack border-textPrimary px-2.5 py-1 rounded-full animate-fadeIn whitespace-nowrap shadow-2xs">
+              {getStarHoverTitle(currentRating)}
+            </span>
+          )}
         </div>
       </div>
 

@@ -38,10 +38,10 @@ const SelfAttachmentsStep = ({ files = [], setFiles }) => {
 
       {/* Section Subheading */}
       <div className="space-y-1">
-        <h4 className="text-base font-semibold text-foreground">
+        <h4 className="md:text-[24px] text-xl text-textBlack font-medium ">
           Upload Supporting Material
         </h4>
-        <p className="text-xs text-muted-foreground font-normal">
+        <p className="md:text-base text-sm text-textPrimary font-normal">
           Upload videos or documents that support this review.
         </p>
       </div>
@@ -49,16 +49,19 @@ const SelfAttachmentsStep = ({ files = [], setFiles }) => {
       {/* Drag & Drop Box */}
       <div
         onClick={() => fileInputRef.current?.click()}
-        className="w-full py-8 px-4 border border-dashed border-border/80 rounded-2xl bg-background hover:bg-muted/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-center space-y-2"
+        className="w-full py-8 px-4 border border-dashed border-[#B1DBFD]  rounded-2xl bg-[rgba(255,255,255,0.10)] hover:bg-muted/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-center space-y-2"
       >
-        <UploadCloud className="w-8 h-8 text-muted-foreground/70 stroke-[1.5]" />
-        <p className="text-xs text-muted-foreground">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M10.0005 9.01101C9.16474 8.38194 8.12582 8.00917 7 8.00917C6.83823 8.00917 6.67826 8.01687 6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M9.5 16L12 13.5L14.5 16M12 21V14.1088" stroke="#5A5A5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p className="text-sm text-secondary">
           Drag & drop files here
         </p>
-        <span className="text-[11px] text-muted-foreground">or</span>
+        <span className="text-sm text-secondary">or</span>
         <button
           type="button"
-          className="text-xs font-semibold text-primary underline hover:text-primary/80 cursor-pointer"
+          className="text-sm font-medium text-textPrimary underline hover:text-primary/80 cursor-pointer"
         >
           Choose files
         </button>
@@ -87,7 +90,7 @@ const SelfAttachmentsStep = ({ files = [], setFiles }) => {
                 ) : (
                   <FileText className="w-4 h-4 text-muted-foreground shrink-0" />
                 )}
-                <span className="text-xs font-medium text-foreground truncate">
+                <span className="text-sm font-medium text-textPrimary truncate">
                   {file.name}
                 </span>
               </div>
@@ -108,7 +111,7 @@ const SelfAttachmentsStep = ({ files = [], setFiles }) => {
               <button
                 type="button"
                 onClick={(e) => handleRemoveFile(e, file.id)}
-                className="text-muted-foreground/70 hover:text-destructive transition-colors p-1 cursor-pointer"
+                className="text-secondary hover:text-destructive transition-colors p-1 cursor-pointer"
                 title="Remove file"
               >
                 {file.progress < 100 ? (
@@ -123,7 +126,7 @@ const SelfAttachmentsStep = ({ files = [], setFiles }) => {
       )}
 
       {/* Footer Info Counter */}
-      <div className="flex items-center justify-between text-[11px] text-muted-foreground border-t border-border/40 pt-3">
+      <div className="flex items-center justify-between text-sm text-textPrimary border-t border-border/40 pt-3">
         <span>You can upload up to 4 files</span>
         <span>{files.length}/4 selected</span>
       </div>

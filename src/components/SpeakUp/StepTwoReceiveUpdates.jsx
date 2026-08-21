@@ -1,9 +1,26 @@
-import React from "react"
+import React, { useRef } from "react"
 import CustomInput from "@/components/common/CustomInput"
 
 const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
   const selectedPreference = formData.updatePreference || "email"
-  const accessCodeDelivery = formData.accessCodeDelivery || "email"
+  const accessCodeDelivery = formData.accessCodeDelivery || ""
+
+  const option2EmailRef = useRef(null)
+  const accessCodeEmailRef = useRef(null)
+
+  const handleSelectOption2Email = () => {
+    updateFormData({ updatePreference: "email" })
+    setTimeout(() => {
+      option2EmailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+    }, 100)
+  }
+
+  const handleSelectAccessCodeEmail = () => {
+    updateFormData({ accessCodeDelivery: "email" })
+    setTimeout(() => {
+      accessCodeEmailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+    }, 100)
+  }
 
   return (
     <div className="space-y-4 md:space-y-[24px] font-urbanist">
@@ -16,20 +33,18 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
         {/* Option 1: Stay anonymous */}
         <div
           onClick={() => updateFormData({ updatePreference: "anonymous" })}
-          className={`p-5 rounded-2xl border transition-all cursor-pointer ${
-            selectedPreference === "anonymous"
-              ? "border-primary ring-1 ring-primary bg-background shadow-sm"
-              : "border-border/80 hover:border-primary/50 bg-background"
-          }`}
+          className={`p-5 rounded-2xl border transition-all cursor-pointer ${selectedPreference === "anonymous"
+            ? "border-primary ring-1 ring-primary bg-background shadow-sm"
+            : "border-border/80 hover:border-primary/50 bg-background"
+            }`}
         >
           <div className="flex items-start gap-3.5">
             <div className="pt-0.5 shrink-0">
               <div
-                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${
-                  selectedPreference === "anonymous"
-                    ? "border-primary bg-white"
-                    : "border-muted-foreground/60 bg-transparent"
-                }`}
+                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${selectedPreference === "anonymous"
+                  ? "border-primary bg-white"
+                  : "border-muted-foreground/60 bg-transparent"
+                  }`}
               >
                 {selectedPreference === "anonymous" && (
                   <div className="w-2.5 h-2.5 rounded-full bg-primary" />
@@ -49,21 +64,19 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
 
         {/* Option 2: Get updates by email */}
         <div
-          onClick={() => updateFormData({ updatePreference: "email" })}
-          className={`p-5 rounded-2xl border transition-all cursor-pointer ${
-            selectedPreference === "email"
-              ? "border-primary ring-1 ring-primary bg-background shadow-sm"
-              : "border-border/80 hover:border-primary/50 bg-background"
-          }`}
+          onClick={handleSelectOption2Email}
+          className={`p-5 rounded-2xl border transition-all cursor-pointer ${selectedPreference === "email"
+            ? "border-primary ring-1 ring-primary bg-background shadow-sm"
+            : "border-border/80 hover:border-primary/50 bg-background"
+            }`}
         >
           <div className="flex items-start gap-3.5">
             <div className="pt-0.5 shrink-0">
               <div
-                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${
-                  selectedPreference === "email"
-                    ? "border-primary bg-white"
-                    : "border-muted-foreground/60 bg-transparent"
-                }`}
+                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${selectedPreference === "email"
+                  ? "border-primary bg-white"
+                  : "border-muted-foreground/60 bg-transparent"
+                  }`}
               >
                 {selectedPreference === "email" && (
                   <div className="w-2.5 h-2.5 rounded-full bg-primary" />
@@ -80,7 +93,7 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
 
               {/* Expanded Email Input Field */}
               {selectedPreference === "email" && (
-                <div className="pt-4 md:pt-[24px]" onClick={(e) => e.stopPropagation()}>
+                <div ref={option2EmailRef} className="pt-4 md:pt-[24px]" onClick={(e) => e.stopPropagation()}>
                   <CustomInput
                     type="email"
                     placeholder="Enter your email"
@@ -96,20 +109,18 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
         {/* Option 3: Get an access code to check updates */}
         <div
           onClick={() => updateFormData({ updatePreference: "access-code" })}
-          className={`p-5 rounded-2xl border transition-all cursor-pointer ${
-            selectedPreference === "access-code"
-              ? "border-primary ring-1 ring-primary bg-background shadow-sm"
-              : "border-border/80 hover:border-primary/50 bg-background"
-          }`}
+          className={`p-5 rounded-2xl border transition-all cursor-pointer ${selectedPreference === "access-code"
+            ? "border-primary ring-1 ring-primary bg-background shadow-sm"
+            : "border-border/80 hover:border-primary/50 bg-background"
+            }`}
         >
           <div className="flex items-start gap-3.5">
             <div className="pt-0.5 shrink-0">
               <div
-                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${
-                  selectedPreference === "access-code"
-                    ? "border-primary bg-white"
-                    : "border-muted-foreground/60 bg-transparent"
-                }`}
+                className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${selectedPreference === "access-code"
+                  ? "border-primary bg-white"
+                  : "border-muted-foreground/60 bg-transparent"
+                  }`}
               >
                 {selectedPreference === "access-code" && (
                   <div className="w-2.5 h-2.5 rounded-full bg-primary" />
@@ -134,12 +145,11 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
                   <div className="flex flex-col sm:flex-row items-center gap-3">
                     {/* Sub-Card 1: Send it to my email */}
                     <div
-                      onClick={() => updateFormData({ accessCodeDelivery: "email" })}
-                      className={`flex-1 w-full p-4 rounded-xl border transition-all cursor-pointer ${
-                        accessCodeDelivery === "email"
-                          ? "border-primary/80 bg-primary/5 shadow-xs"
-                          : "border-border/80 hover:border-primary/40 bg-background"
-                      }`}
+                      onClick={handleSelectAccessCodeEmail}
+                      className={`flex-1 w-full p-4 rounded-xl border transition-all cursor-pointer ${accessCodeDelivery === "email"
+                        ? "border-primary/80 bg-primary/5 shadow-xs"
+                        : "border-border/80 hover:border-primary/40 bg-background"
+                        }`}
                     >
                       <h5 className="text-[18px] font-medium text-[#080808]">
                         Send it to my email
@@ -154,11 +164,10 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
                     {/* Sub-Card 2: Show it now */}
                     <div
                       onClick={() => updateFormData({ accessCodeDelivery: "now" })}
-                      className={`flex-1 w-full p-4 rounded-xl border transition-all cursor-pointer ${
-                        accessCodeDelivery === "now"
-                          ? "border-primary/80 bg-primary/5 shadow-xs"
-                          : "border-border/80 hover:border-primary/40 bg-background"
-                      }`}
+                      className={`flex-1 w-full p-4 rounded-xl border transition-all cursor-pointer ${accessCodeDelivery === "now"
+                        ? "border-primary/80 bg-primary/5 shadow-xs"
+                        : "border-border/80 hover:border-primary/40 bg-background"
+                        }`}
                     >
                       <h5 className="text-[18px] font-medium text-[#080808]">
                         Show it now
@@ -168,6 +177,25 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
                       </p>
                     </div>
                   </div>
+
+                  {/* Email Input Field when "Send it to my email" is selected */}
+                  {accessCodeDelivery === "email" && (
+                    <div
+                      ref={accessCodeEmailRef}
+                      className="pt-2 space-y-2 animate-fadeIn"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <label className="block text-[16px] font-medium text-[#080808]">
+                        Email
+                      </label>
+                      <CustomInput
+                        type="email"
+                        placeholder="Enter your email"
+                        value={formData.email || ""}
+                        onChange={(e) => updateFormData({ email: e.target.value })}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>

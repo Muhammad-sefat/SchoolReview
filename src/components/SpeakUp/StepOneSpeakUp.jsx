@@ -37,7 +37,7 @@ const StepOneSpeakUp = ({ formData, updateFormData, attachedFile, onFileChange }
     <div className="space-y-6 md:space-y-8">
       {/* School Field */}
       <div className="space-y-4 md:space-y-[24px]">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">
           {formData.school ? "School name" : "School"}
         </h3>
 
@@ -83,7 +83,7 @@ const StepOneSpeakUp = ({ formData, updateFormData, attachedFile, onFileChange }
 
       {/* Select a Topic Field */}
       <div className="space-y-4 md:space-y-[24px]">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Select a topic</h3>
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">Select a topic</h3>
         <TopicSelectDropdown
           value={formData.topic}
           onChange={(topicId) => updateFormData({ topic: topicId })}

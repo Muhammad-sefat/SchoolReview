@@ -68,8 +68,8 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
   return (
     <div className="space-y-6 font-urbanist w-full">
       {/* 1. School Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">School</h3>
+      <div className="space-y-3">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">School</h3>
         <TeacherSchoolSelectDropdown
           value={formData.school}
           onChange={(schoolName) => updateFormData({ school: schoolName })}
@@ -78,11 +78,11 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 2. Email Field */}
       <div className="space-y-3">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Email</h3>
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">Email</h3>
 
         {/* Info Banner */}
-        <div className="bg-[#E8F4FE] border border-[#BEE0FF] text-[#1E40AF] px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
-          <Info className="w-4 h-4 shrink-0 text-[#2563EB]" />
+        <div className="bg-[#E8F4FE] border border-[#BEE0FF] text-textPrimary px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
+          <Info className="w-4 h-4 shrink-0 text-textPrimary" />
           <span>
             Used only to confirm your teacher(s). Your name and email are <strong>never</strong> shared with the teacher.
           </span>
@@ -96,7 +96,7 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
             disabled={!isValidEmail}
             className={`px-4 h-9 rounded-lg font-medium text-xs sm:text-sm shrink-0 transition-all ${isValidEmail
               ? "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95 shadow-2xs"
-              : "bg-[#038AF9]/40 opacity-60 text-white cursor-not-allowed"
+              : "bg-[#038AF9] opacity-70 text-white cursor-not-allowed"
               }`}
           >
             {isCodeSent ? "Resend" : "Send Code"}
@@ -142,7 +142,7 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 4. Select a Teacher Field */}
       <div className="space-y-3">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Select a teacher</h3>
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">Select a teacher</h3>
         <TeacherSelectDropdown
           value={formData.teacherId || ""}
           onChange={(val) => updateFormData({ teacherId: val })}
@@ -152,11 +152,11 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 5. What would you like to do ? */}
       <div className="space-y-4 pt-2">
-        <h3 className="text-[20px] font-semibold text-[#080808]">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">
           What would you like to do ?
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
           {/* Card 1: Give a compliment */}
           <button
             type="button"
@@ -191,12 +191,12 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
           ref={actionContentRef}
           className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300 scroll-mt-6"
         >
-          <h3 className="text-[20px] font-semibold text-[#080808]">
+          <h3 className="text-[20px] font-semibold text-[#080808] mt-3">
             Why do you want to thank your teacher?
           </h3>
 
           {/* Compliment Pills */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             {COMPLIMENT_OPTIONS.map((opt) => {
               const isSelected = formData.complimentId === opt.id
               return (
