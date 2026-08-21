@@ -95,18 +95,20 @@ const ObserverToTeacherReview = () => {
           )}
 
           {currentStep === 3 && (
-            <StepTeachingFeedback
-              feedbackData={teachingFeedback}
-              updateFeedback={updateTeachingFeedback}
-              role="observer"
-            />
-          )}
 
-          {currentStep === 4 && (
             <StepCategoryReview
               categoryTitle="Professional Practice"
               ratings={ratings}
               updateRating={updateRating}
+              role="observer"
+            />
+
+          )}
+
+          {currentStep === 4 && (
+            <StepTeachingFeedback
+              feedbackData={teachingFeedback}
+              updateFeedback={updateTeachingFeedback}
               role="observer"
             />
           )}

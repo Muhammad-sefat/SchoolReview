@@ -1,9 +1,26 @@
-import React from "react"
+import React, { useRef } from "react"
 import CustomInput from "@/components/common/CustomInput"
 
 const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
-  const selectedPreference = formData.updatePreference || "email"
-  const accessCodeDelivery = formData.accessCodeDelivery || "email"
+  const selectedPreference = formData.updatePreference || ""
+  const accessCodeDelivery = formData.accessCodeDelivery || ""
+
+  const option2EmailRef = useRef(null)
+  const accessCodeEmailRef = useRef(null)
+
+  const handleSelectOption2Email = () => {
+    updateFormData({ updatePreference: "email" })
+    setTimeout(() => {
+      option2EmailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+    }, 100)
+  }
+
+  const handleSelectAccessCodeEmail = () => {
+    updateFormData({ accessCodeDelivery: "email" })
+    setTimeout(() => {
+      accessCodeEmailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+    }, 100)
+  }
 
   return (
     <div className="space-y-4 md:space-y-[24px] font-urbanist">
@@ -49,7 +66,7 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
 
         {/* Option 2: Get updates by email */}
         <div
-          onClick={() => updateFormData({ updatePreference: "email" })}
+          onClick={handleSelectOption2Email}
           className={`p-5 rounded-2xl border transition-all cursor-pointer ${
             selectedPreference === "email"
               ? "border-primary ring-1 ring-primary bg-background shadow-sm"
@@ -80,7 +97,7 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
 
               {/* Expanded Email Input Field */}
               {selectedPreference === "email" && (
-                <div className="pt-4 md:pt-[24px]" onClick={(e) => e.stopPropagation()}>
+                <div ref={option2EmailRef} className="pt-4 md:pt-[24px]" onClick={(e) => e.stopPropagation()}>
                   <CustomInput
                     type="email"
                     placeholder="Enter your email"
@@ -134,7 +151,7 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
                   <div className="flex flex-col sm:flex-row items-center gap-3">
                     {/* Sub-Card 1: Send it to my email */}
                     <div
-                      onClick={() => updateFormData({ accessCodeDelivery: "email" })}
+                      onClick={handleSelectAccessCodeEmail}
                       className={`flex-1 w-full p-4 rounded-xl border transition-all cursor-pointer ${
                         accessCodeDelivery === "email"
                           ? "border-primary/80 bg-primary/5 shadow-xs"
@@ -168,6 +185,25 @@ const StepTwoReceiveUpdates = ({ formData, updateFormData }) => {
                       </p>
                     </div>
                   </div>
+
+                  {/* Email Input Field when "Send it to my email" is selected */}
+                  {accessCodeDelivery === "email" && (
+                    <div
+                      ref={accessCodeEmailRef}
+                      className="pt-2 space-y-2 animate-fadeIn"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <label className="block text-[16px] font-medium text-[#080808]">
+                        Email
+                      </label>
+                      <CustomInput
+                        type="email"
+                        placeholder="Enter your email"
+                        value={formData.email || ""}
+                        onChange={(e) => updateFormData({ email: e.target.value })}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>

@@ -43,25 +43,7 @@ const StepOneTeachingAreas = ({ showTitle = true }) => {
       )}
 
       {/* Info Pill Box */}
-      <div
-        style={{
-          borderRadius: "10px",
-          border: "1px solid #B1DBFD",
-          background: "rgba(3, 138, 249, 0.04)",
-        }}
-        className="px-3.5 py-2.5 flex items-center gap-2.5 w-fit max-w-full"
-      >
-        <InfoIconSVG />
-        <span
-          style={{
-            color: "#080808",
-            fontWeight: 400,
-          }}
-          className="font-urbanist text-sm sm:text-base lg:text-[18px] leading-snug sm:leading-[28px]"
-        >
-          If multiple areas are selected, questions are rotated to reduce student workload.
-        </span>
-      </div>
+
 
       {/* Main Content Area Box */}
       <div

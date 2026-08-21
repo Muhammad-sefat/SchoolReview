@@ -46,6 +46,8 @@ const RatingItem = ({
   const selectedTags = ratingData.selectedTags || []
   const details = ratingData.details || ""
 
+  const activeRating = hoveredStar || currentRating
+
   const handleStarClick = (stars) => {
     const newRating = currentRating === stars ? 0 : stars
     onUpdateRating(item.id, {
@@ -96,8 +98,8 @@ const RatingItem = ({
     role === "observer"
       ? item.observer?.question
       : role === "teacher"
-      ? item.teacher?.question
-      : item.student?.question
+        ? item.teacher?.question
+        : item.student?.question
 
   // Get star_based_review list depending on role/data
   const starBasedReviewList =
@@ -125,33 +127,50 @@ const RatingItem = ({
 
   return (
     <div className="py-5 border-b border-[#EAEAEA] last:border-b-0 space-y-3 font-urbanist">
-      {/* Top Row: Question Text on Left + 5 Star SVGs on Right */}
+      {/* Top Row: Question Text on Left + 5 Star SVGs Container on Right */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
-        {/* Question Text with Title24 styling: color #1F1F21, 24px medium */}
+        {/* Question Text */}
         <Title24 className="text-[#1F1F21] font-medium text-[20px] lg:text-[24px] leading-[32px] lg:leading-[36px] flex-1 min-w-0 pr-2">
           {questionText}
         </Title24>
 
-        {/* 5 Star SVGs Container */}
-        <div
-          className="flex items-center gap-1.5 shrink-0 self-start sm:self-center"
-          onMouseLeave={() => setHoveredStar(0)}
-        >
-          {[1, 2, 3, 4, 5].map((starNum) => {
-            const isFilled = starNum <= (hoveredStar || currentRating)
-            return (
-              <button
-                key={starNum}
-                type="button"
-                onClick={() => handleStarClick(starNum)}
-                onMouseEnter={() => setHoveredStar(starNum)}
-                className="cursor-pointer transition-transform hover:scale-110 focus:outline-none p-0.5"
-                title={getStarHoverTitle(starNum)}
-              >
-                <UserStarSvg isFilled={isFilled} />
-              </button>
-            )
-          })}
+        {/* 5 Star SVGs & Customized Tooltip / Mobile Label Container */}
+        <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-center">
+          <div
+            className="flex items-center gap-1.5"
+            onMouseLeave={() => setHoveredStar(0)}
+          >
+            {[1, 2, 3, 4, 5].map((starNum) => {
+              const isFilled = starNum <= activeRating
+              return (
+                <div key={starNum} className="relative flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleStarClick(starNum)}
+                    onMouseEnter={() => setHoveredStar(starNum)}
+                    className="cursor-pointer transition-transform hover:scale-110 focus:outline-none p-0.5"
+                  >
+                    <UserStarSvg isFilled={isFilled} />
+                  </button>
+
+                  {/* Desktop Floating Tooltip Above Hovered Star */}
+                  {hoveredStar === starNum && (
+                    <div className="hidden sm:flex absolute -top-10 left-1/2 bg-white -translate-x-1/2 border text-textBlack border-textPrimary  text-xs font-medium px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap z-20 animate-fadeIn pointer-events-none items-center justify-center">
+                      {getStarHoverTitle(starNum)}
+
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Mobile-Only Rating Label Badge (Visible on Right side when star is clicked/rated) */}
+          {currentRating > 0 && (
+            <span className="block sm:hidden bg-white text-xs font-semibold border text-textBlack border-textPrimary px-2.5 py-1 rounded-full animate-fadeIn whitespace-nowrap shadow-2xs">
+              {getStarHoverTitle(currentRating)}
+            </span>
+          )}
         </div>
       </div>
 
@@ -166,11 +185,10 @@ const RatingItem = ({
                   key={idx}
                   type="button"
                   onClick={() => handleTagToggle(tagText)}
-                  className={`text-[14px] leading-[20px] rounded-[48px] px-4 py-2 transition-all cursor-pointer ${
-                    isSelected
-                      ? "text-[#080808] border border-[#080808] bg-white font-semibold shadow-2xs"
-                      : "text-[#1F1F21] border border-[#EAEAEA] bg-white font-medium hover:border-[#080808]"
-                  }`}
+                  className={`text-[14px] leading-[20px] rounded-[48px] px-4 py-2 transition-all cursor-pointer ${isSelected
+                    ? "text-[#080808] border border-[#080808] bg-white font-semibold shadow-2xs"
+                    : "text-[#1F1F21] border border-[#EAEAEA] bg-white font-medium hover:border-[#080808]"
+                    }`}
                 >
                   {tagText}
                 </button>
@@ -184,11 +202,10 @@ const RatingItem = ({
                 <button
                   type="button"
                   onClick={() => handleTagToggle("Something else")}
-                  className={`text-[14px] leading-[20px] rounded-[48px] px-4 py-2 transition-all cursor-pointer ${
-                    isSelected
-                      ? "text-[#080808] border border-[#080808] bg-white font-semibold shadow-2xs"
-                      : "text-[#1F1F21] border border-[#EAEAEA] bg-white font-medium hover:border-[#080808]"
-                  }`}
+                  className={`text-[14px] leading-5 rounded-[48px] px-4 py-2 transition-all cursor-pointer ${isSelected
+                    ? "text-[#080808] border  border-[#0088f7] bg-white font-semibold shadow-2xs"
+                    : "text-[#1F1F21] border border-[#B1DBFD]  bg-white font-medium hover:border-[#0088f7]"
+                    }`}
                 >
                   Something else
                 </button>
