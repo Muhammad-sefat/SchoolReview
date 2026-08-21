@@ -166,9 +166,8 @@ const SchoolRatingItem = ({
 
                   {/* Desktop Floating Tooltip Above Hovered Star */}
                   {hoveredStar === starNum && (
-                    <div className="hidden sm:flex absolute -top-10 left-1/2 -translate-x-1/2 bg-[#080808] text-white text-[11px] font-medium px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap z-20 animate-fadeIn pointer-events-none items-center justify-center">
+                    <div className="hidden sm:flex absolute -top-10 left-1/2 bg-white -translate-x-1/2 border text-textBlack border-textPrimary text-xs font-medium px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap z-20 animate-fadeIn pointer-events-none items-center justify-center">
                       {getStarHoverTitle(starNum)}
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#080808]" />
                     </div>
                   )}
                 </div>
@@ -178,7 +177,7 @@ const SchoolRatingItem = ({
 
           {/* Mobile-Only Rating Label Badge (Visible on Right side when star is clicked/rated) */}
           {currentRating > 0 && (
-            <span className="block sm:hidden text-xs font-semibold text-[#038AF9] bg-[#E8F4FE] border border-[#BEE0FF] px-2.5 py-1 rounded-full animate-fadeIn whitespace-nowrap shadow-2xs">
+            <span className="block sm:hidden bg-white text-xs font-semibold border text-textBlack border-textPrimary px-2.5 py-1 rounded-full animate-fadeIn whitespace-nowrap shadow-2xs">
               {getStarHoverTitle(currentRating)}
             </span>
           )}

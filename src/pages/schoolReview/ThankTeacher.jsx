@@ -78,7 +78,7 @@ const ThankTeacher = () => {
             totalSteps={1}
             onNext={handleNext}
             onBack={handleBack}
-            nextButtonText="Next"
+            nextButtonText="Submit"
           />
         </div>
       </div>
