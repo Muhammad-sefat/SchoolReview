@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Globe, Menu, X } from "lucide-react";
 import Logo from "../assets/images/Logo.png";
 
@@ -567,15 +567,24 @@ const Navbar = () => {
                     <span className="text-secondary">{column.title}</span>
 
                     <div className="flex flex-col gap-3">
-                      {column.links.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.link}
-                          className="text-textPrimary hover:text-primary transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
+                      {column.links.map((item) => {
+                        const hasTm = item.label.endsWith("™");
+                        const cleanLabel = hasTm ? item.label.slice(0, -1) : item.label;
+                        return (
+                          <Link
+                            key={item.label}
+                            to={item.link}
+                            className="text-textPrimary hover:text-primary transition-colors inline-flex items-baseline"
+                          >
+                            <span>{cleanLabel}</span>
+                            {hasTm && (
+                              <sup className="text-primary text-[10px] font-bold ml-0.5 select-none">
+                                TM
+                              </sup>
+                            )}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
