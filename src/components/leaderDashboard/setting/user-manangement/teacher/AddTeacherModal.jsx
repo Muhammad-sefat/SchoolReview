@@ -37,7 +37,7 @@ const AddTeacherModal = ({ isOpen, onClose, onAddTeacher }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg w-[95vw] rounded-3xl p-6 sm:p-8 space-y-6 bg-white border border-gray-200 shadow-2xl font-urbanist overflow-visible">
+      <DialogContent className=" rounded-3xl p-6 sm:p-8 s bg-white border border-gray-200 shadow-2xl font-urbanist overflow-visible">
         <DialogHeader className="p-0 space-y-1 text-left pb-3 border-b border-gray-100">
           <DialogTitle asChild>
             <Title24 className="text-[#080808] font-semibold">Add a Teacher</Title24>

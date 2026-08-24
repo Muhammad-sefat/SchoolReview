@@ -5,30 +5,30 @@ const ReviewCardFooter = ({ currentStep, totalSteps = 6, onNext, onBack, isNextD
   const progressPercent = Math.min(100, Math.max(0, (currentStep / totalSteps) * 100))
 
   return (
-    <div className="w-full pt-6 pb-2 border-t border-border/40 flex items-center justify-between gap-4">
+    <div className="w-full pt-4 pb-2 border-t border-[#EAEAEA] flex items-center justify-between gap-2 sm:gap-4 font-urbanist shrink-0">
       {/* Back Button */}
       <button
         type="button"
         onClick={onBack}
         disabled={currentStep === 1}
-        className={`w-10 h-10 rounded-full flex items-center justify-center border border-border/80 transition-colors ${
-          currentStep === 1
-            ? "opacity-30 cursor-not-allowed bg-muted/20"
-            : "hover:bg-muted/40 cursor-pointer bg-background"
-        }`}
+        className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0 transition-all ${currentStep === 1
+            ? "opacity-30 cursor-not-allowed bg-[#F7F7F7] text-gray-400"
+            : "hover:bg-gray-200 cursor-pointer bg-[#F7F7F7] text-[#1F1F21] active:scale-95"
+          }`}
+        title="Previous step"
       >
-        <ArrowLeft className="w-4 h-4 text-foreground" />
+        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
-      {/* Progress Bar Container */}
-      <div className="flex-1 flex items-center gap-3 max-w-md">
-        <div className="flex-1 h-2 rounded-full bg-muted/40 overflow-hidden relative">
+      {/* Progress Bar Container (Responsive for Mobile) */}
+      <div className="flex-1 min-w-0 flex items-center justify-center gap-1.5 sm:gap-4 max-w-lg mx-1 sm:mx-auto">
+        <div className="flex-1 min-w-[40px] h-2 sm:h-2.5 rounded-full bg-[#EAEAEA] overflow-hidden relative">
           <div
-            className="h-full bg-primary rounded-full transition-all duration-300 ease-out"
+            className="h-full bg-[#038AF9] rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
+        <span className="text-xs sm:text-sm font-medium text-[#1F1F21] whitespace-nowrap shrink-0">
           Step {currentStep}/{totalSteps}
         </span>
       </div>
@@ -38,11 +38,10 @@ const ReviewCardFooter = ({ currentStep, totalSteps = 6, onNext, onBack, isNextD
         type="button"
         onClick={onNext}
         disabled={isNextDisabled}
-        className={`h-10 px-7 rounded-xl font-medium text-sm transition-all shadow-sm ${
-          isNextDisabled
-            ? "bg-primary/50 text-white cursor-not-allowed"
-            : "bg-primary hover:bg-primary/90 text-white cursor-pointer active:scale-95"
-        }`}
+        className={`h-9 sm:h-11 px-4 sm:px-8 rounded-xl font-semibold text-xs sm:text-base shrink-0 transition-all shadow-xs ${isNextDisabled
+            ? "bg-[#038AF9]/50 text-white cursor-not-allowed"
+            : "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95"
+          }`}
       >
         {currentStep === totalSteps ? "Submit" : "Next"}
       </button>

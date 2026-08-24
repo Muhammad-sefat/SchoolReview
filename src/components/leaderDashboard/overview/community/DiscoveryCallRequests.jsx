@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
@@ -118,9 +118,7 @@ const getStatusColorClass = (status, defaultClass) => {
 const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
   const [selectedDate, setSelectedDate] = useState(new Date(2026, 7, 2))
   const [currentMonth, setCurrentMonth] = useState(new Date(2026, 7, 2))
-
-  const prevRef = useRef(null)
-  const nextRef = useRef(null)
+  const [swiperInstance, setSwiperInstance] = useState(null)
 
   // Calendar dates generation for Shadcn Calendar Popover
   const startDate = startOfWeek(startOfMonth(currentMonth), { weekStartsOn: 0 })
@@ -226,19 +224,12 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
         <div className="relative group min-w-0">
           <Swiper
             modules={[Navigation]}
+            onSwiper={setSwiperInstance}
             spaceBetween={14}
             slidesPerView={1.1}
             breakpoints={{
               640: { slidesPerView: 2.1 },
               1024: { slidesPerView: 3.1 },
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current
-              swiper.params.navigation.nextEl = nextRef.current
             }}
             className="w-full !pb-2"
           >
@@ -272,19 +263,22 @@ const DiscoveryCallRequests = ({ calls = DISCOVERY_CALLS_DATA }) => {
             ))}
           </Swiper>
 
-          {/* Navigation Arrows */}
+          {/* Left Arrow Button */}
           <button
-            ref={prevRef}
             type="button"
-            className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer disabled:opacity-0 transition-all"
+            onClick={() => swiperInstance?.slidePrev()}
+            className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer hover:scale-105 active:scale-95 transition-all"
+            title="Previous discovery calls"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
+          {/* Right Arrow Button */}
           <button
-            ref={nextRef}
             type="button"
-            className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer disabled:opacity-0 transition-all"
+            onClick={() => swiperInstance?.slideNext()}
+            className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer hover:scale-105 active:scale-95 transition-all"
+            title="Next discovery calls"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

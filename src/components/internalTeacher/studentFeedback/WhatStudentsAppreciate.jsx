@@ -13,7 +13,7 @@ const APPRECIATION_ITEMS = [
 
 const WhatStudentsAppreciate = () => {
   return (
-    <div className="w-full bg-white border border-gray-100 rounded-3xl p-6 sm:p-7 shadow-xs space-y-5 font-urbanist">
+    <div className="w-full bg-white border border-gray-300 rounded-3xl p-6 sm:p-7 shadow-xs space-y-5 font-urbanist">
       {/* Box Title */}
       <h3 className="text-[24px] font-semibold text-textPrimary leading-tight">
         What Students Appreciate About You

@@ -1,59 +1,34 @@
-import React from "react"
-import { starIcon as StarIconSvg } from "@/components/icons/CustomIcons"
-import { Title16 } from "@/components/typho/Title"
-import {
-  Shield,
-  Heart,
-  MessageSquareText,
-  Target,
-  BarChart3,
-  Brain,
-  Users,
-  Clock,
-  HelpCircle,
-  Share2,
-  Scale,
-  Sparkles,
-  CheckCircle2,
-  Lightbulb,
-  TrendingUp,
-  Award,
-  BookOpen,
-  FileCheck,
-  RotateCcw,
-} from "lucide-react"
+import React, { useState, useRef } from "react"
+import { Title24 } from "@/components/typho/Title"
+import SuggestionModal from "@/components/common/SuggestionModal"
 
-// Helper to map meaning/measure to icons
-const getIconForMeaning = (measure = "", meaning = "") => {
-  const m = `${measure} ${meaning}`.toLowerCase()
-  if (m.includes("safe") || m.includes("safety")) return Shield
-  if (m.includes("wellbeing") || m.includes("good")) return Heart
-  if (m.includes("clarity") || m.includes("clear")) return CheckCircle2
-  if (m.includes("purpose") || m.includes("goals")) return Target
-  if (m.includes("progression") || m.includes("building")) return BarChart3
-  if (m.includes("challenge") || m.includes("thinking")) return Brain
-  if (m.includes("engagement") || m.includes("taking part")) return Users
-  if (m.includes("feedback") || m.includes("progress")) return MessageSquareText
-  if (m.includes("pace") || m.includes("speed")) return Clock
-  if (m.includes("support") || m.includes("help")) return HelpCircle
-  if (m.includes("dialogue") || m.includes("sharing")) return Share2
-  if (m.includes("fairness") || m.includes("fairly")) return Scale
-  if (m.includes("inclusion") || m.includes("belonging")) return Users
-  if (m.includes("behaviour") || m.includes("rules")) return Sparkles
-  if (m.includes("coherence")) return BookOpen
-  if (m.includes("assessment")) return FileCheck
-  if (m.includes("adaptive")) return RotateCcw
-  if (m.includes("ongoing")) return TrendingUp
-  return Shield
-}
+// Exact User Star SVG Component
+const UserStarSvg = ({ isFilled = false, className = "w-[30px] h-[30px] sm:w-[33px] sm:h-[33px]" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="33"
+    height="33"
+    viewBox="0 0 33 33"
+    fill="none"
+    className={className}
+  >
+    <path
+      d="M18.7164 3.29127L21.3561 8.61432C21.7161 9.3553 22.6759 10.066 23.4859 10.2021L28.2704 11.0036C31.3301 11.5178 32.05 13.7559 29.8452 15.9637L26.1257 19.714C25.4957 20.3491 25.1508 21.574 25.3457 22.4512L26.4106 27.0937C27.2505 30.7684 25.3156 32.19 22.0911 30.2694L17.6065 27.5928C16.7967 27.1089 15.4618 27.1089 14.6368 27.5928L10.1524 30.2694C6.94275 32.19 4.99297 30.7533 5.83288 27.0937L6.89776 22.4512C7.09273 21.574 6.74778 20.3491 6.11784 19.714L2.39826 15.9637C0.208499 13.7559 0.913424 11.5178 3.97308 10.2021L8.75755 10.2021C9.55246 10.066 10.5124 9.3553 10.8723 8.61432L13.512 3.29127C14.9518 0.402911 17.2915 0.402911 18.7164 3.29127Z"
+      fill={isFilled ? "#038AF9" : "none"}
+      stroke="#038AF9"
+      strokeWidth="2.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
 
-const getRatingLabel = (stars) => {
-  if (!stars || stars === 0) return "Select a Rating"
-  if (stars === 1 || stars === 2) return "Could Be Better"
-  if (stars === 3) return "Okay"
-  if (stars === 4) return "Good"
-  if (stars === 5) return "Excellent"
-  return "Select a Rating"
+const getStarHoverTitle = (starNum) => {
+  if (starNum === 1 || starNum === 2) return "Could be better"
+  if (starNum === 3) return "Ok"
+  if (starNum === 4) return "Good"
+  if (starNum === 5) return "Excellent"
+  return ""
 }
 
 const RatingItem = ({
@@ -61,16 +36,19 @@ const RatingItem = ({
   ratingData = {},
   onUpdateRating,
   role = "student",
-  isFirst = false,
-  showInstruction = isFirst,
 }) => {
-  const IconComponent = getIconForMeaning(item.short_measure, item.meaning)
+  const [hoveredStar, setHoveredStar] = useState(0)
+  const [isSuggestionModalOpen, setIsSuggestionModalOpen] = useState(false)
+  const debounceTimerRef = useRef(null)
+
+  // Unrated by default (no pre-selected stars!)
   const currentRating = ratingData.rating || 0
   const selectedTags = ratingData.selectedTags || []
   const details = ratingData.details || ""
 
+  const activeRating = hoveredStar || currentRating
+
   const handleStarClick = (stars) => {
-    // Toggle off to 0 stars if clicking the active star
     const newRating = currentRating === stars ? 0 : stars
     onUpdateRating(item.id, {
       ...ratingData,
@@ -95,6 +73,24 @@ const RatingItem = ({
       ...ratingData,
       details: val,
     })
+
+    // Debounce: trigger SuggestionModal automatically 1 sec after user finishes typing 3+ characters
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current)
+    }
+
+    if (val.trim().length >= 3) {
+      debounceTimerRef.current = setTimeout(() => {
+        setIsSuggestionModalOpen(true)
+      }, 1000)
+    }
+  }
+
+  const handleUseSuggestion = (suggestedText) => {
+    onUpdateRating(item.id, {
+      ...ratingData,
+      details: suggestedText,
+    })
   }
 
   // Get question text depending on role
@@ -113,114 +109,133 @@ const RatingItem = ({
     item.star_based_review
 
   const starReviewObj = starBasedReviewList?.find((s) => s.number_of_stars === currentRating)
-  const availableTags = starReviewObj?.tag || []
+  let availableTags = (starReviewObj?.tag || []).map((t) => (typeof t === "string" ? t : t.value || t.name))
+
+  // Provide fallback tags if none exist in dataset for this rating
+  if (availableTags.length === 0 && currentRating > 0) {
+    if (currentRating >= 4) {
+      availableTags = ["Mostly clear", "Some helpful examples", "Usually checks understanding"]
+    } else if (currentRating === 3) {
+      availableTags = ["Mostly clear", "Some helpful examples", "Usually checks understanding"]
+    } else {
+      availableTags = ["Hard to follow", "Need more explanation", "Fast pace"]
+    }
+  }
+
+  // Details input box ONLY appears when "Something else" tag is clicked/selected
+  const showDetailsInput = selectedTags.includes("Something else") || details.length > 0
 
   return (
-    <div className="py-5 border-b border-border/40 last:border-0 space-y-4">
-      {/* Top Header: Meaning/Measure + Icon */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-        <div className="space-y-3 flex-1 min-w-0">
-          <div className="flex items-center gap-2 text-foreground">
-            <IconComponent className="w-5 h-5 text-foreground shrink-0 stroke-[1.75]" />
-            <Title16 className="text-[16px] font-normal text-foreground">
-              {item.meaning && item.meaning !== "n-a" ? item.meaning : item.short_measure}
-            </Title16>
-          </div>
+    <div className="py-5 border-b border-[#EAEAEA] last:border-b-0 space-y-3 font-urbanist">
+      {/* Top Row: Question Text on Left + 5 Star SVGs Container on Right */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+        {/* Question Text */}
+        <Title24 className="text-[#1F1F21] font-medium text-[20px] lg:text-[24px] leading-[32px] lg:leading-[36px] flex-1 min-w-0 pr-2">
+          {questionText}
+        </Title24>
 
-          {/* Rating Stars + 20px font-medium Status Label */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              {[1, 2, 3, 4, 5].map((starNum) => {
-                const isFilled = starNum <= currentRating
-                return (
+        {/* 5 Star SVGs & Customized Tooltip / Mobile Label Container */}
+        <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-center">
+          <div
+            className="flex items-center gap-1.5"
+            onMouseLeave={() => setHoveredStar(0)}
+          >
+            {[1, 2, 3, 4, 5].map((starNum) => {
+              const isFilled = starNum <= activeRating
+              return (
+                <div key={starNum} className="relative flex items-center justify-center">
                   <button
-                    key={starNum}
                     type="button"
                     onClick={() => handleStarClick(starNum)}
-                    className="cursor-pointer transition-transform hover:scale-110 focus:outline-none"
+                    onMouseEnter={() => setHoveredStar(starNum)}
+                    className="cursor-pointer transition-transform hover:scale-110 focus:outline-none p-0.5"
                   >
-                    <StarIconSvg
-                      className={`w-7 h-7 ${isFilled
-                        ? "fill-primary stroke-primary text-primary"
-                        : "fill-transparent stroke-primary/50 text-primary/50 hover:stroke-primary"
-                        }`}
-                    />
+                    <UserStarSvg isFilled={isFilled} />
                   </button>
-                )
-              })}
-            </div>
 
-            <Title16
-              className={`text-[16px] font-normal transition-colors ${currentRating > 0 ? "text-foreground" : "text-muted-foreground/70"
-                }`}
-            >
-              {getRatingLabel(currentRating)}
-            </Title16>
+                  {/* Desktop Floating Tooltip Above Hovered Star */}
+                  {hoveredStar === starNum && (
+                    <div className="hidden sm:flex absolute -top-10 left-1/2 bg-white -translate-x-1/2 border text-textBlack border-textPrimary  text-xs font-medium px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap z-20 animate-fadeIn pointer-events-none items-center justify-center">
+                      {getStarHoverTitle(starNum)}
+
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
 
-          {/* Question Text */}
-          <p className="lg:text-[20px] max-w-[500px] text-base font-medium text-foreground leading-snug pt-1">
-            {questionText}
-          </p>
+          {/* Mobile-Only Rating Label Badge (Visible on Right side when star is clicked/rated) */}
+          {currentRating > 0 && (
+            <span className="block sm:hidden bg-white text-xs font-semibold border text-textBlack border-textPrimary px-2.5 py-1 rounded-full animate-fadeIn whitespace-nowrap shadow-2xs">
+              {getStarHoverTitle(currentRating)}
+            </span>
+          )}
         </div>
-
-        {/* Tags selector when rated */}
-        {currentRating > 0 && (
-          <div className="md:w-[280px] shrink-0 bg-white p-0 space-y-2">
-            {showInstruction && (
-              <p className="text-[12px] text-muted-foreground font-normal">
-                Choose one or more of these to continue:
-              </p>
-            )}
-            <div className="flex flex-wrap gap-2">
-              {availableTags.map((tagObj) => {
-                const isSelected = selectedTags.includes(tagObj.value)
-                return (
-                  <button
-                    key={tagObj.id || tagObj.value}
-                    type="button"
-                    onClick={() => handleTagToggle(tagObj.value)}
-                    className={`text-[14px] px-3.5 py-1 rounded-full border transition-all cursor-pointer ${isSelected
-                      ? "border-black font-medium text-foreground bg-muted/20"
-                      : "border-border/80 font-normal text-muted-foreground hover:border-foreground/50 hover:text-foreground bg-white"
-                      }`}
-                  >
-                    {tagObj.value}
-                  </button>
-                )
-              })}
-              {(() => {
-                const isSelected = selectedTags.includes("Something else")
-                return (
-                  <button
-                    type="button"
-                    onClick={() => handleTagToggle("Something else")}
-                    className={`text-[14px] px-3.5 py-1 rounded-full border transition-all cursor-pointer ${isSelected
-                      ? "border-black font-medium text-foreground bg-muted/20"
-                      : "border-border/80 font-normal text-muted-foreground hover:border-foreground/50 hover:text-foreground bg-white"
-                      }`}
-                  >
-                    Something else
-                  </button>
-                )
-              })()}
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Details Text Input */}
+      {/* Tags Section (Appears below Question when rating > 0) */}
       {currentRating > 0 && (
-        <div className="pt-2">
-          <input
-            type="text"
-            placeholder="Details"
-            value={details}
-            onChange={(e) => handleDetailsChange(e.target.value)}
-            className="w-full h-11 px-4 text-sm border border-border/70 rounded-xl bg-background text-foreground placeholder:text-[#5A5A5A] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-          />
+        <div className="pt-2 animate-fadeIn space-y-3">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {availableTags.map((tagText, idx) => {
+              const isSelected = selectedTags.includes(tagText)
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => handleTagToggle(tagText)}
+                  className={`text-[14px] leading-[20px] rounded-[48px] px-4 py-2 transition-all cursor-pointer ${isSelected
+                    ? "text-[#080808] border border-[#080808] bg-white font-semibold shadow-2xs"
+                    : "text-[#1F1F21] border border-[#EAEAEA] bg-white font-medium hover:border-[#080808]"
+                    }`}
+                >
+                  {tagText}
+                </button>
+              )
+            })}
+
+            {/* "Something else" Tag Button */}
+            {(() => {
+              const isSelected = selectedTags.includes("Something else")
+              return (
+                <button
+                  type="button"
+                  onClick={() => handleTagToggle("Something else")}
+                  className={`text-[14px] leading-5 rounded-[48px] px-4 py-2 transition-all cursor-pointer ${isSelected
+                    ? "text-[#080808] border  border-[#0088f7] bg-white font-semibold shadow-2xs"
+                    : "text-[#1F1F21] border border-[#B1DBFD]  bg-white font-medium hover:border-[#0088f7]"
+                    }`}
+                >
+                  Something else
+                </button>
+              )
+            })()}
+          </div>
+
+          {/* Details Input Text Box (Automatic Debounce Suggestion Modal Trigger) */}
+          {showDetailsInput && (
+            <div className="pt-1 animate-fadeIn">
+              <input
+                type="text"
+                placeholder="Details"
+                value={details}
+                onChange={(e) => handleDetailsChange(e.target.value)}
+                className="w-full h-11 px-4 text-sm sm:text-base border border-[#EAEAEA] rounded-xl bg-white text-[#1F1F21] placeholder:text-[#5A5A5A] focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all font-urbanist shadow-2xs"
+              />
+            </div>
+          )}
         </div>
       )}
+
+      {/* Overlay Suggestion Modal */}
+      <SuggestionModal
+        isOpen={isSuggestionModalOpen}
+        onClose={() => setIsSuggestionModalOpen(false)}
+        originalText={details || "This class moves way too fast and it's really annoying. I don't understand half of what's being taught and it feels impossible to keep up."}
+        suggestedText="I find it difficult when teachers are not available for additional support. More one-on-one time would be very helpful."
+        onUseSuggestion={handleUseSuggestion}
+      />
     </div>
   )
 }

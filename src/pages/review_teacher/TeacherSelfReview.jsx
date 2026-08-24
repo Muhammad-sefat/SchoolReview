@@ -100,18 +100,18 @@ const TeacherSelfReview = () => {
           )}
 
           {currentStep === 3 && (
-            <StepTeachingFeedback
-              feedbackData={teachingFeedback}
-              updateFeedback={updateTeachingFeedback}
-            />
-          )}
-
-          {currentStep === 4 && (
             <StepCategoryReview
               categoryTitle="Professional Practice"
               ratings={ratings}
               updateRating={updateRating}
               role="teacher"
+            />
+          )}
+
+          {currentStep === 4 && (
+            <StepTeachingFeedback
+              feedbackData={teachingFeedback}
+              updateFeedback={updateTeachingFeedback}
             />
           )}
 

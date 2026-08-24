@@ -20,11 +20,10 @@ const WhatHappenedInput = ({ value, onChange, attachedFile, onFileChange }) => {
   }
 
   return (
-    /* Gap between label & input: 16px on mobile, 24px on desktop */
     <div className="space-y-4 md:space-y-[24px]">
       {/* Title + Info Icon Popover */}
       <div className="flex items-center gap-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">What happened?</h3>
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">What happened?</h3>
 
         <Popover open={infoOpen} onOpenChange={setInfoOpen}>
           <PopoverTrigger asChild>
@@ -44,21 +43,18 @@ const WhatHappenedInput = ({ value, onChange, attachedFile, onFileChange }) => {
             onMouseEnter={() => setInfoOpen(true)}
             onMouseLeave={() => setInfoOpen(false)}
           >
-            {/* Popover Title: 16px text-[#080808] (text-textBlack) */}
+            {/* Popover Title */}
             <h4 className="text-[16px] font-semibold text-[#080808]">Information</h4>
 
-            {/* Popover Subtitle / List: 12px text-secondary */}
-            <ul className="space-y-1.5 text-[12px] font-normal text-secondary leading-snug">
+            {/* Popover Subtitle / List */}
+            <ul className="space-y-1.5 text-[12px] font-normal text-textPrimary leading-snug">
               <li className="flex items-start gap-1.5">
-                <span className="text-secondary shrink-0">•</span>
                 <span>Be specific about the who, what, and when</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-secondary shrink-0">•</span>
                 <span>Use clear, factual language</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-secondary shrink-0">•</span>
                 <span>Only include names if necessary</span>
               </li>
             </ul>
@@ -74,13 +70,13 @@ const WhatHappenedInput = ({ value, onChange, attachedFile, onFileChange }) => {
         className="hidden"
       />
 
-      {/* Textarea Box with icons */}
+      {/* Textarea Box with icons at bottom */}
       <div className="w-full rounded-xl border border-border/80 bg-background p-4 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all space-y-3">
         <textarea
           rows={4}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Add any information y..."
+          placeholder="Add any information you think may help..."
           className="w-full bg-transparent text-sm md:text-base text-foreground placeholder:text-muted-foreground/70 resize-none focus:outline-none"
         />
 
@@ -102,7 +98,7 @@ const WhatHappenedInput = ({ value, onChange, attachedFile, onFileChange }) => {
           </div>
         )}
 
-        {/* Attachment & Voice Icons */}
+        {/* Attachment & Voice Icons at Bottom */}
         <div className="flex items-center gap-2 pt-1 border-t border-border/30 text-muted-foreground">
           <button
             type="button"

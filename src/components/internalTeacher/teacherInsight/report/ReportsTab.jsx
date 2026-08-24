@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import TopCardsSection from "@/components/leaderDashboard/report/TopCardsSection"
+import TeacherTopCardsSection from "./TeacherTopCardsSection"
 import TeacherPreviousReportsTable from "./TeacherPreviousReportsTable"
 import ExecutiveSummaryModal from "@/components/leaderDashboard/report/ExecutiveSummaryModal"
 
@@ -8,8 +8,8 @@ const ReportsTab = ({ reports, onDownloadReport }) => {
 
   return (
     <div className="w-full space-y-6 font-urbanist">
-      {/* Top 3 Cards Section */}
-      <TopCardsSection onOpenModal={() => setIsModalOpen(true)} />
+      {/* Top 3 Cards & Page Header Section */}
+      <TeacherTopCardsSection onOpenModal={() => setIsModalOpen(true)} />
 
       {/* Previous Reports Table Section with ALL download icons */}
       <TeacherPreviousReportsTable

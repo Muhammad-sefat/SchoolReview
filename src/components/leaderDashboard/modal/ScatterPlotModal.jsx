@@ -30,7 +30,7 @@ const ScatterPlotModal = ({ isOpen, onClose, metric, hideBottomBars = false }) =
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose && onClose()}>
-            <DialogContent className="max-w-[1000px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl space-y-5 font-urbanist">
+            <DialogContent className="max-w-[1000px] w-[95%] sm:w-full rounded-3xl bg-white p-6 sm:p-8 border border-gray-100 shadow-2xl  font-urbanist">
                 {/* Modal Header */}
                 <DialogHeader className="space-y-0 text-left">
                     <div className="flex items-start justify-between gap-4 pr-6">
@@ -79,10 +79,10 @@ const ScatterPlotModal = ({ isOpen, onClose, metric, hideBottomBars = false }) =
                 </DialogHeader>
 
                 {/* Faint Dotted Divider Line */}
-                <div className="border-b border-dashed border-gray-200 my-1" />
+                <div className="border-b border-dashed border-gray-200 my-2" />
 
                 {/* Section 1: Key Insights */}
-                <div className="space-y-3">
+                <div className="space-y-3 mt-3">
                     <h4 className="text-[18px] font-medium text-[#080808] font-urbanist leading-snug">
                         Key Insights
                     </h4>
@@ -101,7 +101,7 @@ const ScatterPlotModal = ({ isOpen, onClose, metric, hideBottomBars = false }) =
                 </div>
 
                 {/* Section 2: Suggested Approaches */}
-                <div className="space-y-3">
+                <div className="space-y-3 mt-6">
                     <h4 className="text-[18px] font-medium text-[#080808] font-urbanist leading-snug">
                         Suggested Approaches
                     </h4>

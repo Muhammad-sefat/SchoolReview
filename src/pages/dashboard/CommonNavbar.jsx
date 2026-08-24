@@ -35,7 +35,7 @@ const CommonNavbar = ({ open, setOpen }) => {
   }
 
   return (
-    <header className="flex h-16 w-full items-center justify-between border-b border-border bg-card px-4 md:px-8 shrink-0">
+    <header className="flex h-[68px] min-h-[68px] w-full items-center justify-between border-b border-gray-100 bg-white px-4 md:px-8 shrink-0 sticky top-0 z-30 font-urbanist">
       {/* Left side: Mobile Toggle & Breadcrumbs */}
       <div className="flex items-center gap-4 min-w-0">
         <Button
@@ -112,7 +112,7 @@ const CommonNavbar = ({ open, setOpen }) => {
               <span className="sr-only">Notifications</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80 p-0">
+          <DropdownMenuContent align="end" className="w-80 p-0 font-urbanist">
             <DropdownMenuLabel className="p-4 font-semibold text-sm">Notifications</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="max-h-[300px] overflow-y-auto">
@@ -157,7 +157,7 @@ const CommonNavbar = ({ open, setOpen }) => {
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56 font-urbanist">
             <DropdownMenuLabel className="font-normal flex flex-col p-3">
               <span className="font-semibold text-sm text-foreground">Setu Lal</span>
               <span className="text-xs text-muted-foreground mt-0.5">setu@example.com</span>

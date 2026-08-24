@@ -48,17 +48,24 @@ const Onboarding = () => {
           style={{ borderRadius: "32px" }}
           className="bg-white border border-[#EAEAEA] p-6 md:p-8 lg:p-10 space-y-6 sm:space-y-8 shadow-xs"
         >
-          {/* Quick Setup Progress Bar Bar */}
+          {/* Quick Setup Progress Bar Header */}
           <div className="w-full space-y-2">
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-base font-normal text-[#080808] shrink-0">Quick Setup</span>
-              <div className="flex-1 mx-4 bg-gray-100 rounded-full h-3 overflow-hidden">
+            <div className="flex items-center justify-between gap-4 sm:gap-6">
+              {/* Left Label */}
+              <span className="text-base sm:text-lg font-semibold text-[#080808] shrink-0">
+                Quick Setup
+              </span>
+
+              {/* Reduced Width Middle Progress Bar */}
+              <div className="flex-1 max-w-[850px] mx-auto bg-gray-100 rounded-full h-3 overflow-hidden">
                 <div
                   className="bg-[#038AF9] h-full transition-all duration-300 rounded-full"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
-              <span className="bg-[#038AF9] text-white text-xs font-medium px-2.5 py-0.5 rounded-full shrink-0">
+
+              {/* Right Step Indicator Badge (1/4) - Bigger Text */}
+              <span className="bg-[#038AF9] text-white text-sm sm:text-base font-semibold px-3.5 py-1 rounded-full shrink-0 shadow-2xs">
                 {currentStep}/{TOTAL_STEPS}
               </span>
             </div>

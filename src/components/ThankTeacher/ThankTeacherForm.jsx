@@ -1,7 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import TeacherSchoolSelectDropdown from "@/components/auth/teacher/TeacherSchoolSelectDropdown"
 import TeacherSelectDropdown from "@/components/auth/teacher/TeacherSelectDropdown"
-import CustomInput from "@/components/common/CustomInput"
 import VoiceInputButton from "@/components/common/VoiceInputButton"
 import { Info } from "lucide-react"
 
@@ -23,9 +22,13 @@ const COMPLIMENT_OPTIONS = [
 ]
 
 const ThankTeacherForm = ({ formData, updateFormData }) => {
+  const [isCodeSent, setIsCodeSent] = useState(!!formData.verificationCode && formData.verificationCode !== "2026")
   const [codeDigits, setCodeDigits] = useState(
-    formData.verificationCode ? formData.verificationCode.split("") : ["2", "0", "2", "6"]
+    formData.verificationCode ? formData.verificationCode.split("") : ["", "", "", ""]
   )
+  const actionContentRef = useRef(null)
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((formData.email || "").trim())
 
   const handleDigitChange = (index, value) => {
     if (!/^\d*$/.test(value)) return
@@ -35,8 +38,23 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
     updateFormData({ verificationCode: newDigits.join("") })
   }
 
+  const handleSendCode = () => {
+    if (!isValidEmail) return
+    setIsCodeSent(true)
+    console.log("[ThankTeacherForm] Verification code sent to email:", formData.email)
+  }
+
   const handleActionSelect = (actionType) => {
     updateFormData({ actionType })
+    // Auto scroll down smoothly to newly revealed content for better UX
+    setTimeout(() => {
+      if (actionContentRef.current) {
+        actionContentRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    }, 120)
   }
 
   const handleComplimentSelect = (complimentId) => {
@@ -50,8 +68,8 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
   return (
     <div className="space-y-6 font-urbanist w-full">
       {/* 1. School Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">School</h3>
+      <div className="space-y-3">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">School</h3>
         <TeacherSchoolSelectDropdown
           value={formData.school}
           onChange={(schoolName) => updateFormData({ school: schoolName })}
@@ -59,52 +77,72 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
       </div>
 
       {/* 2. Email Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Email</h3>
+      <div className="space-y-3">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">Email</h3>
 
         {/* Info Banner */}
-        <div className="bg-[#EBF5FF] border border-[#BEE0FF] text-[#1E40AF] px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
-          <Info className="w-4 h-4 shrink-0 text-[#2563EB]" />
+        <div className="bg-[#E8F4FE] border border-[#BEE0FF] text-textPrimary px-4 py-3 rounded-xl text-xs md:text-sm flex items-center gap-2.5">
+          <Info className="w-4 h-4 shrink-0 text-textPrimary" />
           <span>
             Used only to confirm your teacher(s). Your name and email are <strong>never</strong> shared with the teacher.
           </span>
         </div>
 
-        <CustomInput
-          type="email"
-          placeholder="Enter your email"
-          value={formData.email || ""}
-          onChange={(e) => updateFormData({ email: e.target.value })}
-        />
-      </div>
-
-      {/* 3. Verification Code Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Verification code</h3>
-        <div className="flex items-center gap-3">
-          {codeDigits.map((digit, idx) => (
-            <input
-              key={idx}
-              type="text"
-              maxLength={1}
-              value={digit}
-              onChange={(e) => handleDigitChange(idx, e.target.value)}
-              className="w-12 h-12 text-center text-lg font-semibold border border-border/80 rounded-xl bg-background text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-            />
-          ))}
+        {/* Email Input Box with Send Code Button Inside (Image 2 design) */}
+        <div className="relative flex my-4 py-2 items-center w-full bg-white border border-[#EAEAEA] rounded-xl p-1.5 focus-within:border-[#038AF9] focus-within:ring-1 focus-within:ring-[#038AF9] transition-all shadow-2xs">
           <button
             type="button"
-            className="text-sm font-medium text-primary hover:underline ml-2 cursor-pointer"
-            onClick={() => console.log("Resend code clicked")}
+            onClick={handleSendCode}
+            disabled={!isValidEmail}
+            className={`px-4 h-9 rounded-lg font-medium text-xs sm:text-sm shrink-0 transition-all ${isValidEmail
+              ? "bg-[#038AF9] hover:bg-[#0270ce] text-white cursor-pointer active:scale-95 shadow-2xs"
+              : "bg-[#038AF9] opacity-70 text-white cursor-not-allowed"
+              }`}
           >
-            Resend code
+            {isCodeSent ? "Resend" : "Send Code"}
           </button>
+
+          <div className="h-5 w-[1px] bg-gray-200 mx-2.5 shrink-0" />
+
+          <input
+            type="email"
+            placeholder="Enter your email..."
+            value={formData.email || ""}
+            onChange={(e) => updateFormData({ email: e.target.value })}
+            className="w-full h-9 px-1 text-sm sm:text-base text-[#1F1F21] placeholder:text-[#5A5A5A] bg-transparent focus:outline-none font-urbanist"
+          />
         </div>
       </div>
 
+      {/* 3. Verification Code Field (HIDDEN BY DEFAULT, REVEALED WHEN SEND CODE IS CLICKED) */}
+      {isCodeSent && (
+        <div className="space-y-2 animate-fadeIn pt-1">
+          <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Verification code</h3>
+          <div className="flex items-center gap-3 flex-wrap">
+            {codeDigits.map((digit, idx) => (
+              <input
+                key={idx}
+                type="text"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleDigitChange(idx, e.target.value)}
+                className="w-12 h-12 text-center text-lg font-semibold border border-[#EAEAEA] rounded-xl bg-white text-[#1F1F21] focus:outline-none focus:border-[#038AF9] focus:ring-1 focus:ring-[#038AF9] transition-all shadow-2xs"
+              />
+            ))}
+            <button
+              type="button"
+              className="text-sm font-medium text-[#038AF9] hover:underline ml-2 cursor-pointer"
+              onClick={handleSendCode}
+            >
+              Resend code
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 4. Select a Teacher Field */}
-      <div className="space-y-2">
-        <h3 className="text-xl md:text-2xl font-bold text-[#080808]">Select a teacher</h3>
+      <div className="space-y-3">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">Select a teacher</h3>
         <TeacherSelectDropdown
           value={formData.teacherId || ""}
           onChange={(val) => updateFormData({ teacherId: val })}
@@ -114,20 +152,19 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 5. What would you like to do ? */}
       <div className="space-y-4 pt-2">
-        <h3 className="text-[20px] font-semibold text-[#080808]">
+        <h3 className="text-xl md:text-2xl font-semibold text-[#080808]">
           What would you like to do ?
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
           {/* Card 1: Give a compliment */}
           <button
             type="button"
             onClick={() => handleActionSelect("compliment")}
-            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-              formData.actionType === "compliment"
-                ? "border-[#080808] border-2 bg-white shadow-xs"
-                : "border-border/80 bg-background hover:bg-muted/30"
-            }`}
+            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${formData.actionType === "compliment"
+              ? "border-[#080808] border-2 bg-white shadow-xs"
+              : "border-border/80 bg-background hover:bg-muted/30"
+              }`}
           >
             <img src={thumbsUpImg} alt="Give a compliment" className="w-7 h-7 object-contain shrink-0" />
             <span className="text-[18px] font-medium text-[#080808]">Give a compliment</span>
@@ -137,11 +174,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
           <button
             type="button"
             onClick={() => handleActionSelect("feedback")}
-            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-              formData.actionType === "feedback"
-                ? "border-[#080808] border-2 bg-white shadow-xs"
-                : "border-border/80 bg-background hover:bg-muted/30"
-            }`}
+            className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${formData.actionType === "feedback"
+              ? "border-[#080808] border-2 bg-white shadow-xs"
+              : "border-border/80 bg-background hover:bg-muted/30"
+              }`}
           >
             <img src={thumbsDownImg} alt="Send feedback" className="w-7 h-7 object-contain shrink-0" />
             <span className="text-[18px] font-medium text-[#080808]">Send feedback</span>
@@ -151,13 +187,16 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 6A. If "Give a compliment" is selected */}
       {formData.actionType === "compliment" && (
-        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-          <h3 className="text-[20px] font-semibold text-[#080808]">
+        <div
+          ref={actionContentRef}
+          className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300 scroll-mt-6"
+        >
+          <h3 className="text-[20px] font-semibold text-[#080808] mt-3">
             Why do you want to thank your teacher?
           </h3>
 
           {/* Compliment Pills */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             {COMPLIMENT_OPTIONS.map((opt) => {
               const isSelected = formData.complimentId === opt.id
               return (
@@ -165,11 +204,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
                   key={opt.id}
                   type="button"
                   onClick={() => handleComplimentSelect(opt.id)}
-                  className={`px-4 py-2.5 rounded-full text-base flex items-center gap-2 transition-all cursor-pointer ${
-                    isSelected
-                      ? "border-[#080808] border-2 bg-white font-medium shadow-xs"
-                      : "border border-border/80 text-[#080808] bg-background hover:bg-muted/40 font-normal"
-                  }`}
+                  className={`px-4 py-2.5 rounded-full text-base flex items-center gap-2 transition-all cursor-pointer ${isSelected
+                    ? "border-[#080808] border-2 bg-white font-medium shadow-xs"
+                    : "border border-border/80 text-[#080808] bg-background hover:bg-muted/40 font-normal"
+                    }`}
                 >
                   {opt.icon ? (
                     <img src={opt.icon} alt="" className="w-5 h-5 object-contain shrink-0" />
@@ -207,7 +245,10 @@ const ThankTeacherForm = ({ formData, updateFormData }) => {
 
       {/* 6B. If "Send feedback" is selected */}
       {formData.actionType === "feedback" && (
-        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div
+          ref={actionContentRef}
+          className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-2 duration-300 scroll-mt-6"
+        >
           {/* Textarea Input Box */}
           <div className="relative w-full">
             <textarea

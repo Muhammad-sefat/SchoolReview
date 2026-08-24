@@ -17,14 +17,16 @@ const ExternalStudentFeedback = ({ data }) => {
         </p>
       </div>
 
-      {/* Row 1: What Students Appreciate About You */}
-      <WhatStudentsAppreciate data={data?.appreciate} />
 
       {/* Row 2: Student Recognition Carousel */}
       <StudentRecognitionSlider data={data?.recognition} />
 
       {/* Row 3: Feedback Suggestions Carousel */}
       <FeedbackSuggestionsSlider data={data?.suggestions} />
+
+
+      {/* Row 1: What Students Appreciate About You */}
+      <WhatStudentsAppreciate data={data?.appreciate} />
     </div>
   )
 }

@@ -18,8 +18,8 @@ const SpeakUp = () => {
     school: "",
     topic: "",
     description: "",
-    updatePreference: "email",
-    accessCodeDelivery: "email",
+    updatePreference: "",
+    accessCodeDelivery: "",
     email: "",
   })
 
@@ -29,7 +29,7 @@ const SpeakUp = () => {
 
   const handleNext = () => {
     if (currentStep === 1) {
-      // Step 1 -> Open Suggestion Modal (Image 3)
+      // Step 1 -> Open Suggestion Modal
       setIsSuggestionModalOpen(true)
     } else if (currentStep === 2) {
       // Step 2 -> Open Report Submitted Confirmation Modal
@@ -50,8 +50,8 @@ const SpeakUp = () => {
       school: "",
       topic: "",
       description: "",
-      updatePreference: "email",
-      accessCodeDelivery: "email",
+      updatePreference: "",
+      accessCodeDelivery: "",
       email: "",
     })
     setAttachedFile(null)

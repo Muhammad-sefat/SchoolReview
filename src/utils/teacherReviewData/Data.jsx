@@ -84,7 +84,7 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Often feel negative"
+              "value": "Don’t feel good"
             }
           ]
         },
@@ -94,7 +94,7 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Sometimes feel negative"
+              "value": "Sometimes don’t feel good"
             }
           ]
         },
@@ -104,7 +104,7 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Feel okay most days"
+              "value": "Feel okay"
             }
           ]
         },
@@ -124,7 +124,7 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Always feel good in this class"
+              "value": "Always feel good"
             }
           ]
         }
@@ -141,7 +141,7 @@ export default [
     "has_teacher_question": true,
     "has_observer_question": true,
     "student": {
-      "question": "My teacher explains things clearly and checks we understand",
+      "question": "My teacher explains things clearly and checks we understand ",
       "code": "TQ_CLA_S",
       "star_based_review": [
         {
@@ -150,18 +150,14 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Very hard to understand"
-            },
-            {
-              "id": 2,
               "value": "Instructions unclear"
             },
             {
-              "id": 3,
-              "value": "Few or no examples"
+              "id": 2,
+              "value": "No examples"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Rarely checks understanding"
             }
           ]
@@ -172,18 +168,14 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Sometimes hard to understand"
-            },
-            {
-              "id": 2,
               "value": "Some unclear instructions"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Few examples"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Sometimes checks understanding"
             }
           ]
@@ -194,18 +186,14 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Mostly clear"
-            },
-            {
-              "id": 2,
               "value": "Instructions usually clear"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Some helpful examples"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Usually checks understanding"
             }
           ]
@@ -216,18 +204,14 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Easy to understand"
-            },
-            {
-              "id": 2,
               "value": "Clear instructions"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Good examples"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Often checks understanding"
             }
           ]
@@ -238,18 +222,14 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Very easy to understand"
-            },
-            {
-              "id": 2,
               "value": "Very clear instructions"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Excellent examples"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Always checks understanding"
             }
           ]
@@ -284,19 +264,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Goal unclear"
+              "value": "Don’t know why"
             },
             {
               "id": 2,
-              "value": "Purpose not explained"
-            },
-            {
-              "id": 3,
-              "value": "No real-world link"
-            },
-            {
-              "id": 4,
-              "value": "Hard to see the point"
+              "value": "Not used in real life"
             }
           ]
         },
@@ -306,19 +278,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Goal sometimes unclear"
+              "value": "Sometimes know why"
             },
             {
               "id": 2,
-              "value": "Purpose partly explained"
-            },
-            {
-              "id": 3,
-              "value": "Real-world link unclear"
-            },
-            {
-              "id": 4,
-              "value": "Doesn’t always feel meaningful"
+              "value": "Not clear how it’s used"
             }
           ]
         },
@@ -328,19 +292,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Goal usually clear"
+              "value": "Usually know why"
             },
             {
               "id": 2,
-              "value": "Some explanation of purpose"
-            },
-            {
-              "id": 3,
-              "value": "Some real-world link"
-            },
-            {
-              "id": 4,
-              "value": "Sometimes meaningful"
+              "value": "Sometimes used in real life"
             }
           ]
         },
@@ -350,19 +306,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Clear learning goal"
+              "value": "Teacher explains why"
             },
             {
               "id": 2,
-              "value": "Explains why it matters"
-            },
-            {
-              "id": 3,
-              "value": "Shows real-world use"
-            },
-            {
-              "id": 4,
-              "value": "Feels useful"
+              "value": "Shows how it’s used"
             }
           ]
         },
@@ -372,19 +320,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Very clear learning goal"
+              "value": "Very clear why"
             },
             {
               "id": 2,
-              "value": "Clear reason for learning"
-            },
-            {
-              "id": 3,
-              "value": "Real-life application obvious"
-            },
-            {
-              "id": 4,
-              "value": "Feels important and relevant"
+              "value": "Easy to see how it’s used"
             }
           ]
         }
@@ -422,15 +362,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Level not right"
-            },
-            {
-              "id": 3,
-              "value": "Hard to keep up"
-            },
-            {
-              "id": 4,
-              "value": "Feels disconnected"
+              "value": "Hard to follow"
             }
           ]
         },
@@ -444,14 +376,6 @@ export default [
             },
             {
               "id": 2,
-              "value": "Pace uneven"
-            },
-            {
-              "id": 3,
-              "value": "Level not always right"
-            },
-            {
-              "id": 4,
               "value": "Sometimes hard to follow"
             }
           ]
@@ -471,10 +395,6 @@ export default [
             {
               "id": 3,
               "value": "Can usually keep up"
-            },
-            {
-              "id": 4,
-              "value": "Learning makes sense"
             }
           ]
         },
@@ -492,10 +412,6 @@ export default [
             },
             {
               "id": 3,
-              "value": "Level right for me"
-            },
-            {
-              "id": 4,
               "value": "I can see progress"
             }
           ]
@@ -514,10 +430,6 @@ export default [
             },
             {
               "id": 3,
-              "value": "Level always right"
-            },
-            {
-              "id": 4,
               "value": "Clear progress over time"
             }
           ]
@@ -556,15 +468,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Mostly recall tasks"
-            },
-            {
-              "id": 3,
-              "value": "Little deep thinking"
-            },
-            {
-              "id": 4,
-              "value": "Not challenging"
+              "value": "No thinking required"
             }
           ]
         },
@@ -574,15 +478,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Some challenge"
+              "value": "A bit easy"
             },
             {
               "id": 2,
-              "value": "Mostly straightforward tasks"
-            },
-            {
-              "id": 3,
-              "value": "Limited deep thinking"
+              "value": "Not much thinking"
             }
           ]
         },
@@ -592,19 +492,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Mix of easy and hard"
+              "value": "Some thinking"
             },
             {
               "id": 2,
-              "value": "Some problem-solving"
-            },
-            {
-              "id": 3,
-              "value": "Some deeper thinking"
-            },
-            {
-              "id": 4,
-              "value": "Level feels right"
+              "value": "Sometimes challenging"
             }
           ]
         },
@@ -614,19 +506,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Often challenging"
+              "value": "Makes me think"
             },
             {
               "id": 2,
-              "value": "Requires explaining thinking"
-            },
-            {
-              "id": 3,
-              "value": "Varied task types"
-            },
-            {
-              "id": 4,
-              "value": "Demanding in a good way"
+              "value": "Quite challenging"
             }
           ]
         },
@@ -636,19 +520,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Deep thinking required"
+              "value": "Really makes me think"
             },
             {
               "id": 2,
-              "value": "Hard but manageable"
-            },
-            {
-              "id": 3,
-              "value": "Solve problems in new ways"
-            },
-            {
-              "id": 4,
-              "value": "Strong intellectual challenge"
+              "value": "Challenging but doable"
             }
           ]
         }
@@ -686,15 +562,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Low interaction"
-            },
-            {
-              "id": 3,
-              "value": "Limited participation"
-            },
-            {
-              "id": 4,
-              "value": "Hard to stay focused"
+              "value": "Hard to focus"
             }
           ]
         },
@@ -708,15 +576,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Attention not steady"
-            },
-            {
-              "id": 3,
-              "value": "Some interaction"
-            },
-            {
-              "id": 4,
-              "value": "Involvement uneven"
+              "value": "Hard to focus"
             }
           ]
         },
@@ -726,19 +586,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Regular participation"
+              "value": "I sometimes take part"
             },
             {
               "id": 2,
-              "value": "Mostly focused"
-            },
-            {
-              "id": 3,
-              "value": "Many contribute"
-            },
-            {
-              "id": 4,
-              "value": "Encouraged to join in"
+              "value": "Usually focused"
             }
           ]
         },
@@ -748,19 +600,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Frequent participation"
+              "value": "I often take part"
             },
             {
               "id": 2,
-              "value": "Strong attention"
-            },
-            {
-              "id": 3,
-              "value": "Most actively involved"
-            },
-            {
-              "id": 4,
-              "value": "Positive learning atmosphere"
+              "value": "I stay focused"
             }
           ]
         },
@@ -774,15 +618,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Strong focus throughout"
-            },
-            {
-              "id": 3,
-              "value": "High participation"
-            },
-            {
-              "id": 4,
-              "value": "Active learning environment"
+              "value": "Strong focus"
             }
           ]
         }
@@ -820,15 +656,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Feedback unclear"
-            },
-            {
-              "id": 3,
               "value": "No clear next steps"
-            },
-            {
-              "id": 4,
-              "value": "Not helpful"
             }
           ]
         },
@@ -842,11 +670,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Feedback general"
-            },
-            {
-              "id": 3,
-              "value": "Some advice given"
+              "value": "Feedback not clear"
             }
           ]
         },
@@ -861,14 +685,6 @@ export default [
             {
               "id": 2,
               "value": "Clear advice"
-            },
-            {
-              "id": 3,
-              "value": "Explains what to improve"
-            },
-            {
-              "id": 4,
-              "value": "Mostly helpful"
             }
           ]
         },
@@ -878,19 +694,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Clearly told progress"
+              "value": "Specific helpful advice"
             },
             {
               "id": 2,
-              "value": "Specific advice"
-            },
-            {
-              "id": 3,
               "value": "Clear next steps"
-            },
-            {
-              "id": 4,
-              "value": "Helpful feedback"
             }
           ]
         },
@@ -905,14 +713,6 @@ export default [
             {
               "id": 2,
               "value": "Very specific advice"
-            },
-            {
-              "id": 3,
-              "value": "Clear next steps"
-            },
-            {
-              "id": 4,
-              "value": "Helps me improve"
             }
           ]
         }
@@ -946,14 +746,10 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Pace not right"
-            },
-            {
-              "id": 2,
               "value": "Hard to keep up"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Not enough thinking time"
             }
           ]
@@ -964,15 +760,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Pace inconsistent"
-            },
-            {
-              "id": 2,
               "value": "Sometimes rushed"
             },
             {
-              "id": 3,
-              "value": "Thinking time uneven"
+              "id": 2,
+              "value": "Not always enough time"
             }
           ]
         },
@@ -982,14 +774,10 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Pace usually works"
+              "value": "Usually enough time"
             },
             {
               "id": 2,
-              "value": "Usually enough thinking time"
-            },
-            {
-              "id": 3,
               "value": "Occasionally rushed or slow"
             }
           ]
@@ -1000,14 +788,10 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Good pace"
-            },
-            {
-              "id": 2,
               "value": "Enough thinking time"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Rarely rushed or slow"
             }
           ]
@@ -1023,10 +807,6 @@ export default [
             {
               "id": 2,
               "value": "Right amount of thinking time"
-            },
-            {
-              "id": 3,
-              "value": "Feels balanced throughout"
             }
           ]
         }
@@ -1069,10 +849,6 @@ export default [
             {
               "id": 3,
               "value": "Explanations unclear"
-            },
-            {
-              "id": 4,
-              "value": "Help comes too late"
             }
           ]
         },
@@ -1082,14 +858,10 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Help available sometimes"
+              "value": "Sometimes get help"
             },
             {
               "id": 2,
-              "value": "Limited question time"
-            },
-            {
-              "id": 3,
               "value": "Explanations sometimes unclear"
             }
           ]
@@ -1104,15 +876,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Questions mostly answered"
-            },
-            {
-              "id": 3,
               "value": "Explanations clear"
-            },
-            {
-              "id": 4,
-              "value": "Help when needed"
             }
           ]
         },
@@ -1126,15 +890,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Questions answered clearly"
-            },
-            {
-              "id": 3,
-              "value": "Helpful explanations"
-            },
-            {
-              "id": 4,
-              "value": "Support when needed"
+              "value": "Clear explanations"
             }
           ]
         },
@@ -1149,14 +905,6 @@ export default [
             {
               "id": 2,
               "value": "Clear explanations"
-            },
-            {
-              "id": 3,
-              "value": "Help given quickly"
-            },
-            {
-              "id": 4,
-              "value": "Support always available"
             }
           ]
         }
@@ -1194,14 +942,10 @@ export default [
             },
             {
               "id": 2,
-              "value": "Little discussion"
-            },
-            {
-              "id": 3,
               "value": "Same students speak"
             },
             {
-              "id": 4,
+              "id": 3,
               "value": "Ideas not explored"
             }
           ]
@@ -1212,14 +956,10 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Some discussion"
-            },
-            {
-              "id": 2,
               "value": "Only some students speak"
             },
             {
-              "id": 3,
+              "id": 2,
               "value": "Ideas partly explored"
             }
           ]
@@ -1230,15 +970,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Regular discussion"
-            },
-            {
-              "id": 2,
               "value": "Many contribute"
             },
             {
-              "id": 3,
-              "value": "Ideas explored"
+              "id": 2,
+              "value": "Ideas sometimes explored"
             }
           ]
         },
@@ -1248,19 +984,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Frequent discussion"
+              "value": "Most students share ideas"
             },
             {
               "id": 2,
-              "value": "Most share ideas"
-            },
-            {
-              "id": 3,
               "value": "Different views explored"
-            },
-            {
-              "id": 4,
-              "value": "Teacher builds on ideas"
             }
           ]
         },
@@ -1270,19 +998,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Open discussion"
+              "value": "Everyone shares ideas"
             },
             {
               "id": 2,
-              "value": "Everyone encouraged"
-            },
-            {
-              "id": 3,
               "value": "Different views respected"
-            },
-            {
-              "id": 4,
-              "value": "Teacher deepens thinking"
             }
           ]
         }
@@ -1320,15 +1040,11 @@ export default [
             },
             {
               "id": 2,
-              "value": "Some students treated better than others"
-            },
-            {
-              "id": 3,
               "value": "Decisions not explained"
             },
             {
-              "id": 4,
-              "value": "Respect inconsistent"
+              "id": 3,
+              "value": "Not always respectful"
             }
           ]
         },
@@ -1342,11 +1058,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Decisions sometimes explained"
-            },
-            {
-              "id": 3,
-              "value": "Respect not always consistent"
+              "value": "Not always respectful"
             }
           ]
         },
@@ -1356,15 +1068,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Students treated mostly equally"
+              "value": "Most students treated the same"
             },
             {
               "id": 2,
               "value": "Decisions usually explained"
-            },
-            {
-              "id": 3,
-              "value": "Mostly respectful"
             }
           ]
         },
@@ -1379,10 +1087,6 @@ export default [
             {
               "id": 2,
               "value": "Decisions clearly explained"
-            },
-            {
-              "id": 3,
-              "value": "Respectful classroom"
             }
           ]
         },
@@ -1396,11 +1100,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Decisions fair and explained"
-            },
-            {
-              "id": 3,
-              "value": "Strong culture of respect"
+              "value": "Decisions fair and clearly explained"
             }
           ]
         }
@@ -1439,14 +1139,6 @@ export default [
             {
               "id": 2,
               "value": "Hard to feel part of the class"
-            },
-            {
-              "id": 3,
-              "value": "Not included"
-            },
-            {
-              "id": 4,
-              "value": "Few chances to share"
             }
           ]
         },
@@ -1457,14 +1149,6 @@ export default [
             {
               "id": 1,
               "value": "Sometimes feel left out"
-            },
-            {
-              "id": 2,
-              "value": "Not always part of the group"
-            },
-            {
-              "id": 3,
-              "value": "Limited chances to share"
             }
           ]
         },
@@ -1478,11 +1162,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Part of the group"
-            },
-            {
-              "id": 3,
-              "value": "Comfortable sharing ideas"
+              "value": "Feel part of the group"
             }
           ]
         },
@@ -1496,11 +1176,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Accepted in class"
-            },
-            {
-              "id": 3,
-              "value": "Opportunities to contribute"
+              "value": "Feel accepted"
             }
           ]
         },
@@ -1510,19 +1186,15 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Strong sense of belonging"
-            },
-            {
-              "id": 2,
               "value": "Everyone included"
             },
             {
-              "id": 3,
-              "value": "Ideas welcomed"
+              "id": 2,
+              "value": "Feel like I belong"
             },
             {
-              "id": 4,
-              "value": "Confident being myself"
+              "id": 3,
+              "value": "Can be myself"
             }
           ]
         }
@@ -1560,15 +1232,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Expectations change"
-            },
-            {
-              "id": 3,
-              "value": "Consequences unpredictable"
-            },
-            {
-              "id": 4,
-              "value": "Hard to know what happens"
+              "value": "Not fair"
             }
           ]
         },
@@ -1578,15 +1242,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Some rules unclear"
+              "value": "Some rules not clear"
             },
             {
               "id": 2,
-              "value": "Expectations inconsistent"
-            },
-            {
-              "id": 3,
-              "value": "Consequences vary"
+              "value": "Not always fair"
             }
           ]
         },
@@ -1596,15 +1256,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Rules mostly clear"
+              "value": "Most rules clear"
             },
             {
               "id": 2,
-              "value": "Expectations usually consistent"
-            },
-            {
-              "id": 3,
-              "value": "Consequences mostly consistent"
+              "value": "Usually fair"
             }
           ]
         },
@@ -1618,15 +1274,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Expectations consistent"
-            },
-            {
-              "id": 3,
-              "value": "Fair consequences"
-            },
-            {
-              "id": 4,
-              "value": "Calm learning environment"
+              "value": "Fair for everyone"
             }
           ]
         },
@@ -1640,15 +1288,7 @@ export default [
             },
             {
               "id": 2,
-              "value": "Expectations always consistent"
-            },
-            {
-              "id": 3,
-              "value": "Consequences predictable"
-            },
-            {
-              "id": 4,
-              "value": "Calm and focused classroom"
+              "value": "Always fair"
             }
           ]
         }
@@ -1801,6 +1441,10 @@ export default [
             {
               "id": 1,
               "value": "Often confused"
+            },
+            {
+              "id": 2,
+              "value": "Hard to understand"
             }
           ]
         },
@@ -1811,6 +1455,10 @@ export default [
             {
               "id": 1,
               "value": "Sometimes confused"
+            },
+            {
+              "id": 2,
+              "value": "Not always clear"
             }
           ]
         },
@@ -1821,6 +1469,10 @@ export default [
             {
               "id": 1,
               "value": "Understand some parts"
+            },
+            {
+              "id": 2,
+              "value": "Sometimes clear"
             }
           ]
         },
@@ -1831,6 +1483,10 @@ export default [
             {
               "id": 1,
               "value": "Mostly understand"
+            },
+            {
+              "id": 2,
+              "value": "Usually clear"
             }
           ]
         },
@@ -1841,6 +1497,10 @@ export default [
             {
               "id": 1,
               "value": "Understand very well"
+            },
+            {
+              "id": 2,
+              "value": "Very clear"
             }
           ]
         }
@@ -1867,6 +1527,10 @@ export default [
             {
               "id": 1,
               "value": "Not improving"
+            },
+            {
+              "id": 2,
+              "value": "Don’t see progress"
             }
           ]
         },
@@ -1877,6 +1541,10 @@ export default [
             {
               "id": 1,
               "value": "Improving slowly"
+            },
+            {
+              "id": 2,
+              "value": "Progress not always clear"
             }
           ]
         },
@@ -1887,6 +1555,10 @@ export default [
             {
               "id": 1,
               "value": "Some improvement"
+            },
+            {
+              "id": 2,
+              "value": "Can see some progress"
             }
           ]
         },
@@ -1897,6 +1569,10 @@ export default [
             {
               "id": 1,
               "value": "Clearly improving"
+            },
+            {
+              "id": 2,
+              "value": "Can see progress"
             }
           ]
         },
@@ -1907,6 +1583,10 @@ export default [
             {
               "id": 1,
               "value": "Improving a lot"
+            },
+            {
+              "id": 2,
+              "value": "Strong progress"
             }
           ]
         }
@@ -1932,7 +1612,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Not confident"
+              "value": "Don’t think I can do it"
+            },
+            {
+              "id": 2,
+              "value": "Feel stuck"
             }
           ]
         },
@@ -1942,7 +1626,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Low confidence"
+              "value": "Not sure I can do it"
+            },
+            {
+              "id": 2,
+              "value": "Need a lot of help"
             }
           ]
         },
@@ -1952,7 +1640,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Sometimes confident"
+              "value": "Sometimes feel I can do it"
+            },
+            {
+              "id": 2,
+              "value": "Still need help"
             }
           ]
         },
@@ -1962,7 +1654,11 @@ export default [
           "tag": [
             {
               "id": 1,
-              "value": "Mostly confident"
+              "value": "Feel I can do it"
+            },
+            {
+              "id": 2,
+              "value": "Can usually work it out"
             }
           ]
         },
@@ -1973,10 +1669,14 @@ export default [
             {
               "id": 1,
               "value": "Very confident"
+            },
+            {
+              "id": 2,
+              "value": "Can do it on my own"
             }
           ]
         }
       ]
     }
   }
-]
+];

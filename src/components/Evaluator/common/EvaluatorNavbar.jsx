@@ -14,7 +14,7 @@ const EvaluatorNavbar = ({ open, setOpen, user }) => {
   }
 
   return (
-    <header className="w-full bg-white border-b border-gray-100 px-4 md:px-8 py-3.5 flex items-center justify-between gap-4 sticky top-0 z-30 font-urbanist">
+    <header className="w-full h-[68px] min-h-[68px] bg-white border-b border-gray-100 px-4 md:px-8 flex items-center justify-between gap-4 sticky top-0 z-30 font-urbanist shrink-0">
       {/* Mobile Drawer Hamburger Button */}
       <button
         type="button"

@@ -77,6 +77,16 @@ import PrivacyPolicy from "../pages/sites/PrivacyPolicy";
 import CommunityGuidelines from "../pages/sites/CommunityGuidelines";
 import FAQ from "../pages/sites/FAQ";
 import Pricing from "../pages/sites/Pricing";
+import ExternalObserverLayout from "../layout/ExternalObserverLayout"
+import ExternalObserverActiveTasks from "../pages/externalObserver/ExternalObserverActiveTasks"
+import ExternalObserverMyActivity from "../pages/externalObserver/ExternalObserverMyActivity"
+import ExternalObserverSchoolAccess from "../pages/externalObserver/ExternalObserverSchoolAccess"
+
+import ReviewDashboardLayout from "../layout/ReviewDashboardLayout"
+import MyFeedbackPage from "../pages/reviewDashboard/MyFeedbackPage"
+import MyProfilePage from "../pages/reviewDashboard/MyProfilePage"
+import FollowedSchoolsPage from "../pages/reviewDashboard/FollowedSchoolsPage"
+import ReviewSettingsPage from "../pages/reviewDashboard/ReviewSettingsPage"
 
 const router = createBrowserRouter([
   // 1. Review & Feedback Forms
@@ -223,6 +233,21 @@ const router = createBrowserRouter([
     ],
   },
 
+  // 7. External Observer Dashboard
+  {
+    path: "/external-observer",
+    element: <ExternalObserverLayout />,
+    children: [
+      { path: "", element: <ExternalObserverActiveTasks /> },
+      { path: "my-work/active-task", element: <ExternalObserverActiveTasks /> },
+      { path: "my-work/my-activity", element: <ExternalObserverMyActivity /> },
+      { path: "school-access", element: <ExternalObserverSchoolAccess /> },
+      { path: "setting/general", element: <TeacherGeneral /> },
+      { path: "setting/followed-schools", element: <TeacherFollowedSchool /> },
+      { path: "*", element: <Navigate to="/external-observer" replace /> },
+    ],
+  },
+
   // 4. Auth Pages
   {
     path: "/auth",
@@ -242,7 +267,22 @@ const router = createBrowserRouter([
     ],
   },
 
-  // 5. Main Site & Admin Dashboard
+  // 5. Review Dashboard Routes
+  {
+    path: "/review-dashboard",
+    element: <ReviewDashboardLayout />,
+    children: [
+      { path: "", element: <MyFeedbackPage /> },
+      { path: "my-feedback", element: <MyFeedbackPage /> },
+      { path: "my-profile", element: <MyProfilePage /> },
+      { path: "followed-schools", element: <FollowedSchoolsPage /> },
+      { path: "setting", element: <ReviewSettingsPage /> },
+      { path: "setting/general", element: <ReviewSettingsPage /> },
+      { path: "setting/followed-schools", element: <FollowedSchoolsPage /> },
+    ],
+  },
+
+  // 6. Main Site & Admin Dashboard
   {
     path: "/",
     element: <Layout />,
