@@ -131,11 +131,11 @@ const HomeBanner = () => {
             <input
               type="text"
               placeholder="Search for your school..."
-              className="w-full h-12 sm:h-[52px] pl-5 pr-28 bg-white border border-gray-200 rounded-full text-sm placeholder:text-secondary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all font-medium"
+              className="w-full h-12 sm:h-[52px] pl-5 pr-28 bg-white border border-gray-200 rounded-xl text-sm placeholder:text-secondary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-xs transition-all font-medium"
             />
             <button
               type="submit"
-              className="absolute right-1.5 top-1.5 bottom-1.5 bg-primary hover:bg-primary/95 text-white text-xs sm:text-sm px-6 rounded-full cursor-pointer transition-colors shadow-xs"
+              className="absolute right-1.5 top-1.5 bottom-1.5 bg-primary hover:bg-primary/95 text-white text-xs sm:text-sm px-6 rounded-xl cursor-pointer transition-colors shadow-xs"
             >
               Search
             </button>
