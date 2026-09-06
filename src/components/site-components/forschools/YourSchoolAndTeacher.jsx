@@ -43,7 +43,7 @@ function YourSchoolAndTeacher() {
       <div className="section-padding-x w-full flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 lg:mb-14">
         {/* Left Side: Category Pill & Section Title */}
         <div className="flex flex-col items-start gap-3">
-          <div className="flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-xs font-semibold text-primary">
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-xs font-medium text-primary">
             <Users className="w-3.5 h-3.5 text-primary shrink-0" />
             <span>Students • Parents • Teachers</span>
           </div>
